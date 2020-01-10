@@ -1,0 +1,10 @@
+Debug/*
+packages/*
+x64/*
+*.vcxproj*
+.vs/*
+.idea/*
+build/*
+out/*
+cmake-build-debug/*
+/CMakeSettings.json
