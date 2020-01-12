@@ -4,7 +4,18 @@
 
 #include <GL/glew.h>
 
-class Texture2D
+struct Texture2D
+{
+  s32 mWidth;
+  s32 mHeight;
+  u32 *mData;
+  Texture2D(const s32 width, const s32 height, u32 *data) :
+      mWidth(width), mHeight(height), mData(data)
+  {
+  }
+};
+
+class GLTexture2D
 {
   u32 mHandle;
 

@@ -5,10 +5,10 @@
 
 class TextureLibrary
 {
-  std::unordered_map<std::string, Texture2D> mTextures;
+  std::unordered_map<std::string, GLTexture2D> mTextures;
 
 public:
-  inline void Add(const std::string &name, Texture2D texture)
+  inline void Add(const std::string &name, GLTexture2D texture)
   {
     mTextures.insert(std::make_pair(name, texture));
   }
@@ -19,7 +19,7 @@ public:
     mTextures.erase(name);
   }
 
-  inline Texture2D GetProgram(const std::string &name)
+  inline GLTexture2D GetProgram(const std::string &name)
   {
     return mTextures[name];
   }

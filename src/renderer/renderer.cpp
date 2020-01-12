@@ -13,8 +13,9 @@ void Renderer::Draw()
     {
     case CommandType::DrawSolid:
     {
-      auto *shader = mShaderLibrary.GetProgram("flatColorShader");
+      auto *shader = GetShader(command.mType);
       shader->Bind();
+      shader->SetUniform3F("color", command.mColor);
     }
 
     break;
@@ -33,4 +34,21 @@ void Renderer::Draw()
 void Renderer::UpdateScreen()
 {
   glfwSwapBuffers(mWindow->mGLFWWindow);
+}
+
+Shader *Renderer::GetShader(const CommandType type)
+{
+  switch (type)
+  {
+  case CommandType::DrawSolid:
+    return mShaderLibrary.GetProgram("flatColorShader");
+  case CommandType::DrawLine:
+    return mShaderLibrary.GetProgram("lineShader");
+  case CommandType::DrawPoints:
+    return mShaderLibrary.GetProgram("pointShader");
+  case CommandType::DrawTextured:
+    return mShaderLibrary.GetProgram("texturedShader");
+  default:
+    assert(0);
+  }
 }
