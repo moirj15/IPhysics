@@ -20,6 +20,10 @@ class GLTexture2D
   u32 mHandle;
 
 public:
+  inline void Create(const Texture2D *texture2D)
+  {
+    Create(texture2D->mWidth, texture2D->mHeight, texture2D->mData);
+  }
   // TODO: consider adding more parameters for options like wrapping and data layout.
   inline void Create(const s32 width, const s32 height, const void *data)
   {

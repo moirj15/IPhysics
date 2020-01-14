@@ -2,30 +2,31 @@
 
 #include "mesh.h"
 
-#include <GLFW/glfw3.h>
-
 u32 MeshLibrary::CURRENT_HANDLE = 0;
 
 MeshLibrary::~MeshLibrary()
 {
   for (auto &pair : mMeshes)
   {
-    pair.second.Destroy();
+    auto [vbo, ibo] = pair.second;
+    vbo.Destroy();
+    ibo.Destroy();
   }
 }
 
 u32 MeshLibrary::Insert(Mesh *mesh)
 {
   CURRENT_HANDLE++;
-  auto vao = VAOFromMesh(mesh);
-  mMeshes.emplace(CURRENT_HANDLE, vao);
+  auto [vao, ibo] = VAOFromMesh(mesh);
+  mMeshes.emplace(CURRENT_HANDLE, std::make_pair(vao, ibo));
   return CURRENT_HANDLE;
 }
 
 void MeshLibrary::Remove(const u32 handle)
 {
-  auto vao = mMeshes[handle];
+  auto [vao, ibo] = mMeshes[handle];
   vao.Destroy();
+  ibo.Destroy();
   mMeshes.erase(handle);
 }
 
@@ -33,13 +34,14 @@ void MeshLibrary::Update(Mesh *mesh, const u32 handle)
 {
   // TODO: there's probably a better way to do this without constantly reconstructing and sending
   // the data to the gpu.
-  auto vao = VAOFromMesh(mesh);
-  auto destroying = mMeshes[handle];
-  destroying.Destroy();
-  mMeshes[handle] = vao;
+  auto [vao, ibo] = VAOFromMesh(mesh);
+  auto [removedVAO, removedIBO] = mMeshes[handle];
+  removedVAO.Destroy();
+  removedIBO.Destroy();
+  mMeshes[handle] = std::make_pair(vao, ibo);
 }
 
-VertexArray MeshLibrary::VAOFromMesh(Mesh *mesh)
+MeshPair MeshLibrary::VAOFromMesh(Mesh *mesh)
 {
   VertexArray vao;
   vao.Create();
@@ -63,5 +65,5 @@ VertexArray MeshLibrary::VAOFromMesh(Mesh *mesh)
         mesh->mTextureCoords.data(), mesh->mTextureCoords.size(),
         BufferLayout("UVs", 2, 0, 2, GL_FLOAT)));
   }
-  return vao;
+  return {vao, ibo};
 }

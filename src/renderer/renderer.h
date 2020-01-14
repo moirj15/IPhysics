@@ -2,6 +2,7 @@
 #pragma once
 
 #include "../common.h"
+#include "indexBufferObject.h"
 
 #include <glm/vec3.hpp>
 #include <memory>
@@ -10,6 +11,7 @@
 
 struct Mesh;
 struct Window;
+struct Texture2D;
 class Shader;
 class ShaderLibrary;
 class TextureLibrary;
@@ -22,6 +24,7 @@ enum class CommandType : u32
   DrawPoints,
   AddTexture,
   DrawTextured,
+  AddMesh,
   UpdateMesh,
 };
 
@@ -32,31 +35,16 @@ struct Command
   u32 mTextureHandle = 0;
   Mesh *mMesh = nullptr;
   glm::vec3 mColor = {0.0f, 0.0f, 0.0f};
+  Texture2D *mTexture2D = nullptr;
   Command(
       const CommandType type, const u32 meshHandle = 0, const u32 textureHandle = 0,
-      Mesh *mesh = nullptr, const glm::vec3 &color = {0.0f, 0.0f, 0.0f}) :
+      Mesh *mesh = nullptr, const glm::vec3 &color = {0.0f, 0.0f, 0.0f},
+      Texture2D *texture2D = nullptr) :
       mType(type),
       mMeshHandle(meshHandle), mTextureHandle(textureHandle), mMesh(mesh), mColor(color)
   {
   }
 };
-
-// struct Command
-//{
-//  CommandType mType;
-//  Mesh *mMesh;
-//  Texture2D *mTexture;
-//  std::string mTextureName;
-//  glm::vec3 mColor;
-
-//  Command(
-//      const CommandType type, Mesh *mesh = nullptr, Texture2D *texture = nullptr,
-//      const std::string textureName = "", const glm::vec3 &color = glm::vec3(0.0f)) :
-//      mType(type),
-//      mMesh(mesh), mTexture(texture), mTextureName(textureName), mColor(color)
-//  {
-//  }
-//};
 
 class Renderer
 {
@@ -80,5 +68,6 @@ public:
   void UpdateScreen();
 
 private:
-  Shader *GetShader(const CommandType type);
+  Shader *GetShader(const CommandType type, bool bind = false);
+  IndexBuffer GetBuffersAndBind(const u32 handle);
 };

@@ -7,9 +7,11 @@
 
 struct Mesh;
 
+using MeshPair = std::pair<VertexArray, IndexBuffer>;
+
 class MeshLibrary
 {
-  std::unordered_map<u32, VertexArray> mMeshes;
+  std::unordered_map<u32, MeshPair> mMeshes;
   static u32 CURRENT_HANDLE;
 
 public:
@@ -20,6 +22,11 @@ public:
   void Remove(const u32 handle);
   void Update(Mesh *mesh, const u32 handle);
 
+  inline MeshPair operator[](const u32 i)
+  {
+    return mMeshes[i];
+  }
+
 private:
-  VertexArray VAOFromMesh(Mesh *mesh);
+  MeshPair VAOFromMesh(Mesh *mesh);
 };

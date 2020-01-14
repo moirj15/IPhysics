@@ -4,6 +4,7 @@
 #include "meshLibrary.h"
 #include "shader.h"
 #include "shaderLibrary.h"
+#include "texture.h"
 #include "textureLibrary.h"
 
 #include <GLFW/glfw3.h>
@@ -22,19 +23,41 @@ void Renderer::Draw()
     {
     case CommandType::DrawSolid:
     {
-      auto *shader = GetShader(command.mType);
-      shader->Bind();
+      auto *shader = GetShader(command.mType, true);
       shader->SetUniform3F("color", command.mColor);
+      auto ibo = GetBuffersAndBind(command.mMeshHandle);
+      glDrawElements(GL_TRIANGLES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
-
     break;
     case CommandType::DrawLine:
-      break;
+    {
+      auto *shader = GetShader(command.mType, true);
+      shader->Bind();
+      auto ibo = GetBuffersAndBind(command.mMeshHandle);
+      glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
+    }
+    break;
     case CommandType::DrawPoints:
-      break;
+    {
+      auto *shader = GetShader(command.mType, true);
+      shader->Bind();
+      auto ibo = GetBuffersAndBind(command.mMeshHandle);
+      glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
+    }
+    break;
     case CommandType::AddTexture:
-      break;
+    {
+      GLTexture2D glTexture2D;
+      glTexture2D.Create(command.mTexture2D);
+      mTextureLibrary->Add("Texture, cause I lazy", glTexture2D);
+    }
+    break;
     case CommandType::DrawTextured:
+      break;
+    case CommandType::AddMesh:
+      mMeshLibrary->Insert(command.mMesh);
+      break;
+    case CommandType::UpdateMesh:
       break;
     }
   }
@@ -45,19 +68,32 @@ void Renderer::UpdateScreen()
   glfwSwapBuffers(mWindow->mGLFWWindow);
 }
 
-Shader *Renderer::GetShader(const CommandType type)
+Shader *Renderer::GetShader(const CommandType type, bool bind)
 {
+  Shader *shader = nullptr;
   switch (type)
   {
   case CommandType::DrawSolid:
-    return mShaderLibrary->GetProgram("flatColorShader");
+    shader = mShaderLibrary->GetProgram("flatColorShader");
   case CommandType::DrawLine:
-    return mShaderLibrary->GetProgram("lineShader");
+    shader = mShaderLibrary->GetProgram("lineShader");
   case CommandType::DrawPoints:
-    return mShaderLibrary->GetProgram("pointShader");
+    shader = mShaderLibrary->GetProgram("pointShader");
   case CommandType::DrawTextured:
-    return mShaderLibrary->GetProgram("texturedShader");
+    shader = mShaderLibrary->GetProgram("texturedShader");
   default:
     assert(0);
   }
+  if (bind)
+  {
+    shader->Bind();
+  }
+  return shader;
+}
+IndexBuffer Renderer::GetBuffersAndBind(const u32 handle)
+{
+  auto [vao, ibo] = (*mMeshLibrary)[handle];
+  vao.Bind();
+  ibo.Bind();
+  return ibo;
 }
