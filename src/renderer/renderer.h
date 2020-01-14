@@ -67,9 +67,7 @@ class Renderer
   std::unique_ptr<MeshLibrary> mMeshLibrary;
 
 public:
-  explicit Renderer(Window *window) : mWindow(window)
-  {
-  }
+  explicit Renderer(Window *window);
   inline void SubmitCommand(Command &command)
   {
     mCommandQueue.emplace_back(command);

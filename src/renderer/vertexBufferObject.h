@@ -33,6 +33,11 @@ class VertexBuffer
   std::vector<BufferLayout> mLayout;
 
 public:
+  VertexBuffer(const f32 *vertexes, const u32 len, const BufferLayout &layout)
+  {
+    mLayout.emplace_back(layout);
+    mHandle = CreateBuffer(GL_ARRAY_BUFFER, (void *)vertexes, len * sizeof(f32));
+  }
   VertexBuffer(const f32 *vertexes, const u32 len, const std::vector<BufferLayout> &layout) :
       mLayout(layout)
   {

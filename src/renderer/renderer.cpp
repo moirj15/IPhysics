@@ -1,9 +1,18 @@
 #include "renderer.h"
 
 #include "../window.h"
+#include "meshLibrary.h"
 #include "shader.h"
+#include "shaderLibrary.h"
+#include "textureLibrary.h"
 
 #include <GLFW/glfw3.h>
+
+Renderer::Renderer(Window *window) :
+    mWindow(window), mShaderLibrary(new ShaderLibrary()), mTextureLibrary(new TextureLibrary()),
+    mMeshLibrary(new MeshLibrary())
+{
+}
 
 void Renderer::Draw()
 {
@@ -41,13 +50,13 @@ Shader *Renderer::GetShader(const CommandType type)
   switch (type)
   {
   case CommandType::DrawSolid:
-    return mShaderLibrary.GetProgram("flatColorShader");
+    return mShaderLibrary->GetProgram("flatColorShader");
   case CommandType::DrawLine:
-    return mShaderLibrary.GetProgram("lineShader");
+    return mShaderLibrary->GetProgram("lineShader");
   case CommandType::DrawPoints:
-    return mShaderLibrary.GetProgram("pointShader");
+    return mShaderLibrary->GetProgram("pointShader");
   case CommandType::DrawTextured:
-    return mShaderLibrary.GetProgram("texturedShader");
+    return mShaderLibrary->GetProgram("texturedShader");
   default:
     assert(0);
   }

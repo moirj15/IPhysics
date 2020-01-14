@@ -15,6 +15,7 @@ class VertexArray
   std::vector<VertexBuffer> mVertexBuffers;
 
 public:
+  VertexArray() = default;
   inline void Create()
   {
     glGenVertexArrays(1, &mHandle);
