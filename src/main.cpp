@@ -5,13 +5,17 @@
 #include "../imgui/imgui_impl_glfw.h"
 #include "../imgui/imgui_impl_opengl3.h"
 #include "common.h"
+#include "renderer/camera.h"
+#include "renderer/mesh.h"
+#include "renderer/renderer.h"
 #include "window.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/gtx/transform.hpp>
 
-constexpr s32 width = 1920;
-constexpr s32 height = 1080;
+constexpr s32 width = 720;
+constexpr s32 height = 480;
 
 void ErrorCallback(
     GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const char *message,
@@ -27,7 +31,12 @@ Window *InitGL()
     fprintf(stderr, "Failed to init GLFW\n");
     exit(EXIT_FAILURE);
   }
-
+  glfwWindowHint(GLFW_SAMPLES, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+  //   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,
+  //      GL_TRUE); // To make MacOS happy; should not be needed
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   Window *window = new Window(width, height);
 
   glfwMakeContextCurrent(window->mGLFWWindow);
@@ -69,9 +78,25 @@ int main(int argc, char **argv)
   glEnable(GL_DEBUG_OUTPUT);
   f64 lastTime = glfwGetTime();
 
+  Renderer renderer(window);
+
+  Mesh mesh;
+  mesh.mVertecies.assign({-1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, -1.0f});
+  mesh.mIndecies.assign({0, 1, 2});
+  auto handle = renderer.SubmitMesh(&mesh);
+
+  Camera camera;
+
+  Command command(CommandType::DrawSolid, handle);
+  command.mColor = {1.0f, 1.0f, 1.0f};
+  renderer.SubmitCommand(command);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
   while (!window->ShouldClose())
   {
     glfwPollEvents();
+    renderer.Draw(&camera, glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.5f, 100.0f));
+    renderer.UpdateScreen();
     f64 currentTime = glfwGetTime();
     f64 delta = (currentTime - lastTime);
     lastTime = glfwGetTime();

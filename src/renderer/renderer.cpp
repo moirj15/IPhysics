@@ -1,6 +1,7 @@
 #include "renderer.h"
 
 #include "../window.h"
+#include "camera.h"
 #include "meshLibrary.h"
 #include "shader.h"
 #include "shaderLibrary.h"
@@ -13,9 +14,23 @@ Renderer::Renderer(Window *window) :
     mWindow(window), mShaderLibrary(new ShaderLibrary()), mTextureLibrary(new TextureLibrary()),
     mMeshLibrary(new MeshLibrary())
 {
+  std::vector<std::string> shaderPaths(
+      {"../shaders/flatColorShader.vert", "../shaders/flatColorShader.frag"});
+  mShaderLibrary->Add(shaderPaths);
 }
 
-void Renderer::Draw()
+u32 Renderer::SubmitMesh(Mesh *mesh)
+{
+  return mMeshLibrary->Insert(mesh);
+}
+u32 Renderer::SubmitTexture(Texture2D *texture)
+{
+  GLTexture2D glTexture2D;
+  glTexture2D.Create(texture);
+  return mTextureLibrary->Add(glTexture2D);
+}
+
+void Renderer::Draw(Camera *camera, const glm::mat4 &projection)
 {
   for (const auto &command : mCommandQueue)
   {
@@ -25,6 +40,7 @@ void Renderer::Draw()
     {
       auto *shader = GetShader(command.mType, true);
       shader->SetUniform3F("color", command.mColor);
+      shader->SetUniformMat4("camera", camera->CalculateMatrix());
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_TRIANGLES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -32,6 +48,7 @@ void Renderer::Draw()
     case CommandType::DrawLine:
     {
       auto *shader = GetShader(command.mType, true);
+      shader->SetUniformMat4("camera", camera->CalculateMatrix());
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -39,6 +56,7 @@ void Renderer::Draw()
     case CommandType::DrawPoints:
     {
       auto *shader = GetShader(command.mType, true);
+      shader->SetUniformMat4("camera", camera->CalculateMatrix());
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -46,10 +64,12 @@ void Renderer::Draw()
     case CommandType::DrawTextured:
     {
       auto *shader = GetShader(command.mType, true);
+      shader->SetUniformMat4("camera", camera->CalculateMatrix());
       auto texture = mTextureLibrary->GetProgram(command.mTextureHandle);
       texture.Bind();
     }
     break;
+    // TODO: consider removing this command and adding a member function instead
     case CommandType::UpdateMesh:
       mMeshLibrary->Update(command.mMesh, command.mMeshHandle);
       break;
@@ -69,12 +89,16 @@ Shader *Renderer::GetShader(const CommandType type, bool bind)
   {
   case CommandType::DrawSolid:
     shader = mShaderLibrary->GetProgram("flatColorShader");
+    break;
   case CommandType::DrawLine:
     shader = mShaderLibrary->GetProgram("lineShader");
+    break;
   case CommandType::DrawPoints:
     shader = mShaderLibrary->GetProgram("pointShader");
+    break;
   case CommandType::DrawTextured:
     shader = mShaderLibrary->GetProgram("texturedShader");
+    break;
   default:
     assert(0);
   }
@@ -90,14 +114,4 @@ IndexBuffer Renderer::GetBuffersAndBind(const u32 handle)
   vao.Bind();
   ibo.Bind();
   return ibo;
-}
-u32 Renderer::SubmitMesh(Mesh *mesh)
-{
-  return mMeshLibrary->Insert(mesh);
-}
-u32 Renderer::SubmitTexture(Texture2D *texture)
-{
-  GLTexture2D glTexture2D;
-  glTexture2D.Create(texture);
-  return mTextureLibrary->Add(glTexture2D);
 }

@@ -4,14 +4,15 @@
 #include "../common.h"
 #include "indexBufferObject.h"
 
+#include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
-#include <memory>
 #include <string>
 #include <vector>
 
 struct Mesh;
 struct Window;
 struct Texture2D;
+class Camera;
 class Shader;
 class ShaderLibrary;
 class TextureLibrary;
@@ -48,9 +49,9 @@ class Renderer
 {
   Window *mWindow;
   std::vector<Command> mCommandQueue;
-  std::unique_ptr<ShaderLibrary> mShaderLibrary;
-  std::unique_ptr<TextureLibrary> mTextureLibrary;
-  std::unique_ptr<MeshLibrary> mMeshLibrary;
+  ShaderLibrary *mShaderLibrary;
+  TextureLibrary *mTextureLibrary;
+  MeshLibrary *mMeshLibrary;
 
 public:
   explicit Renderer(Window *window);
@@ -64,7 +65,7 @@ public:
   }
   u32 SubmitMesh(Mesh *mesh);
   u32 SubmitTexture(Texture2D *texture);
-  void Draw();
+  void Draw(Camera *camera, const glm::mat4 &projection);
   void UpdateScreen();
 
 private:
