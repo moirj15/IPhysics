@@ -1,26 +1,30 @@
 #pragma once
+#include "../common.h"
 #include "texture.h"
 
 #include <unordered_map>
 
 class TextureLibrary
 {
-  std::unordered_map<std::string, GLTexture2D> mTextures;
+  std::unordered_map<u32, GLTexture2D> mTextures;
 
 public:
-  inline void Add(const std::string &name, GLTexture2D texture)
+  inline u32 Add(GLTexture2D texture)
   {
-    mTextures.insert(std::make_pair(name, texture));
+    static u32 CURRENT_HANDLE = 0;
+    CURRENT_HANDLE++;
+    mTextures.insert(std::make_pair(CURRENT_HANDLE, texture));
+    return CURRENT_HANDLE;
   }
-  void Remove(const std::string &name)
+  void Remove(const u32 handle)
   {
-    auto texture = mTextures[name];
+    auto texture = mTextures[handle];
     texture.Destroy();
-    mTextures.erase(name);
+    mTextures.erase(handle);
   }
 
-  inline GLTexture2D GetProgram(const std::string &name)
+  inline GLTexture2D GetProgram(const u32 handle)
   {
-    return mTextures[name];
+    return mTextures[handle];
   }
 };

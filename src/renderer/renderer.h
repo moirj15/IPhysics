@@ -22,9 +22,7 @@ enum class CommandType : u32
   DrawSolid,
   DrawLine,
   DrawPoints,
-  AddTexture,
   DrawTextured,
-  AddMesh,
   UpdateMesh,
 };
 
@@ -64,6 +62,8 @@ public:
   {
     mCommandQueue.clear();
   }
+  u32 SubmitMesh(Mesh *mesh);
+  u32 SubmitTexture(Texture2D *texture);
   void Draw();
   void UpdateScreen();
 

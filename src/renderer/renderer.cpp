@@ -32,7 +32,6 @@ void Renderer::Draw()
     case CommandType::DrawLine:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->Bind();
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -40,24 +39,19 @@ void Renderer::Draw()
     case CommandType::DrawPoints:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->Bind();
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
     break;
-    case CommandType::AddTexture:
+    case CommandType::DrawTextured:
     {
-      GLTexture2D glTexture2D;
-      glTexture2D.Create(command.mTexture2D);
-      mTextureLibrary->Add("Texture, cause I lazy", glTexture2D);
+      auto *shader = GetShader(command.mType, true);
+      auto texture = mTextureLibrary->GetProgram(command.mTextureHandle);
+      texture.Bind();
     }
     break;
-    case CommandType::DrawTextured:
-      break;
-    case CommandType::AddMesh:
-      mMeshLibrary->Insert(command.mMesh);
-      break;
     case CommandType::UpdateMesh:
+      mMeshLibrary->Update(command.mMesh, command.mMeshHandle);
       break;
     }
   }
@@ -96,4 +90,14 @@ IndexBuffer Renderer::GetBuffersAndBind(const u32 handle)
   vao.Bind();
   ibo.Bind();
   return ibo;
+}
+u32 Renderer::SubmitMesh(Mesh *mesh)
+{
+  return mMeshLibrary->Insert(mesh);
+}
+u32 Renderer::SubmitTexture(Texture2D *texture)
+{
+  GLTexture2D glTexture2D;
+  glTexture2D.Create(texture);
+  return mTextureLibrary->Add(glTexture2D);
 }
