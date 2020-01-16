@@ -90,11 +90,11 @@ int main(int argc, char **argv)
   Command command(CommandType::DrawSolid, handle);
   command.mColor = {1.0f, 1.0f, 1.0f};
   renderer.SubmitCommand(command);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   while (!window->ShouldClose())
   {
     glfwPollEvents();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     renderer.Draw(&camera, glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.5f, 100.0f));
     renderer.UpdateScreen();
     f64 currentTime = glfwGetTime();
