@@ -7,4 +7,6 @@ x64/*
 build/*
 out/*
 cmake-build-debug/*
+x64-Debug/*
 /CMakeSettings.json
+CMakeLists.txt.user

@@ -14,9 +14,14 @@ Renderer::Renderer(Window *window) :
     mWindow(window), mShaderLibrary(new ShaderLibrary()), mTextureLibrary(new TextureLibrary()),
     mMeshLibrary(new MeshLibrary())
 {
+  glEnable(GL_PROGRAM_POINT_SIZE);
   std::vector<std::string> shaderPaths(
       {"../shaders/flatColorShader.vert", "../shaders/flatColorShader.frag"});
   mShaderLibrary->Add(shaderPaths);
+  mShaderLibrary->Add(
+      std::vector<std::string>({"../shaders/pointShader.vert", "../shaders/pointShader.frag"}));
+  mShaderLibrary->Add(
+      std::vector<std::string>({"../shaders/textureShader.vert", "../shaders/textureShader.frag"}));
 }
 
 u32 Renderer::SubmitMesh(Mesh *mesh)
@@ -73,6 +78,9 @@ void Renderer::Draw(Camera *camera, const glm::mat4 &projection)
     case CommandType::UpdateMesh:
       mMeshLibrary->Update(command.mMesh, command.mMeshHandle);
       break;
+    case CommandType::ClearDepthBuffer:
+      glClear(GL_DEPTH_BUFFER_BIT);
+      break;
     }
   }
 }
@@ -88,10 +96,8 @@ Shader *Renderer::GetShader(const CommandType type, bool bind)
   switch (type)
   {
   case CommandType::DrawSolid:
-    shader = mShaderLibrary->GetProgram("flatColorShader");
-    break;
   case CommandType::DrawLine:
-    shader = mShaderLibrary->GetProgram("lineShader");
+    shader = mShaderLibrary->GetProgram("flatColorShader");
     break;
   case CommandType::DrawPoints:
     shader = mShaderLibrary->GetProgram("pointShader");

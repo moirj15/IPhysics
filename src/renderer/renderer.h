@@ -25,6 +25,7 @@ enum class CommandType : u32
   DrawPoints,
   DrawTextured,
   UpdateMesh,
+  ClearDepthBuffer,
 };
 
 struct Command

@@ -1,6 +1,4 @@
-#ifndef COMMON_H
-#define COMMON_H
-
+#pragma once
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,17 +20,20 @@ typedef size_t Size;
 
 #define ArraySize(X) (sizeof(X) / sizeof(X[0]))
 
-inline FILE *OpenFile(const char *file, const char *perm) {
+inline FILE *OpenFile(const char *file, const char *perm)
+{
   FILE *ret = NULL;
   ret = fopen(file, perm);
-  if (!ret) {
+  if (!ret)
+  {
     printf("FAILED TO OPEN FILE: %s\n", file);
     exit(EXIT_FAILURE);
   }
   return ret;
 }
 
-inline std::tuple<char *, Size> ReadFile(const char *filename) {
+inline std::tuple<char *, Size> ReadFile(const char *filename)
+{
   FILE *fp = OpenFile(filename, "r");
   char *data = nullptr;
   Size len = 0;
@@ -41,7 +42,8 @@ inline std::tuple<char *, Size> ReadFile(const char *filename) {
   len = ftell(fp);
   rewind(fp);
 
-  if (len == 0) {
+  if (len == 0)
+  {
     printf("failed to get file size");
   }
 
@@ -52,5 +54,3 @@ inline std::tuple<char *, Size> ReadFile(const char *filename) {
 
   return {data, len};
 }
-
-#endif

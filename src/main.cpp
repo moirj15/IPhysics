@@ -81,15 +81,18 @@ int main(int argc, char **argv)
   Renderer renderer(window);
 
   Mesh mesh;
-  mesh.mVertecies.assign({-1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, -1.0f});
+  mesh.mVertecies.assign({-0.8f, 0.0f, -0.8f, 0.8f, 0.0f, -0.0f, 0.8f, 0.8f, -0.8f});
   mesh.mIndecies.assign({0, 1, 2});
   auto handle = renderer.SubmitMesh(&mesh);
 
   Camera camera;
 
   Command command(CommandType::DrawSolid, handle);
-  command.mColor = {1.0f, 1.0f, 1.0f};
+  command.mColor = {1.0f, 0.0f, 1.0f};
   renderer.SubmitCommand(command);
+  renderer.SubmitCommand(Command(CommandType::ClearDepthBuffer));
+  Command commandPoint(CommandType::DrawPoints, handle);
+  renderer.SubmitCommand(commandPoint);
 
   while (!window->ShouldClose())
   {
