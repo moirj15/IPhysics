@@ -70,7 +70,7 @@ void Renderer::Draw(Camera *camera, const glm::mat4 &projection)
     {
       auto *shader = GetShader(command.mType, true);
       shader->SetUniformMat4("camera", camera->CalculateMatrix());
-      auto texture = mTextureLibrary->GetProgram(command.mTextureHandle);
+      auto texture = mTextureLibrary->GetTexture(command.mTextureHandle);
       texture.Bind();
     }
     break;

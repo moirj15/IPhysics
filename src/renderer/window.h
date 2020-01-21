@@ -9,5 +9,11 @@ struct Window
   s32 mHeight;
   GLFWwindow *mGLWindow;
 
+  /**
+   * \brief: Construct a window
+   * \param width: The width of the window in pixels.
+   * \param height: The height of the window in pixels.
+   * \param title: The title of the window.
+   */
   Window(s32 width, s32 height, const char *title);
 };

@@ -16,11 +16,18 @@ class VertexArray
 
 public:
   VertexArray() = default;
+
+  /**
+   * \brief: Create a VertexArray.
+   */
   inline void Create()
   {
     glGenVertexArrays(1, &mHandle);
   }
 
+  /**
+   * \brief: Destroy the VertexArray and any associated IndexBuffers and VertexBuffers.
+   */
   inline void Destroy()
   {
     glDeleteVertexArrays(1, &mHandle);
@@ -30,17 +37,29 @@ public:
       vb.Destroy();
     }
   }
+
+  /**
+   * \brief: Bind the VertexArray.
+   */
   inline void Bind() const
   {
     glBindVertexArray(mHandle);
     mIndexBuffer.Bind();
   }
+
+  /**
+   * \brief: Unbind all VertexArrays.
+   */
   inline void Unbind() const
   {
     glBindVertexArray(0);
     mIndexBuffer.Unbind();
   }
 
+  /**
+   * \brief: Add a VertexBuffer to the VertexArray.
+   * \param vbo: The VertexBuffer.
+   */
   inline void AddVBO(const VertexBuffer &vbo)
   {
     glBindVertexArray(mHandle);
@@ -55,6 +74,10 @@ public:
     mVertexBuffers.emplace_back(vbo);
   }
 
+  /**
+   * \brief: Add a IndexBuffer to the VertexArray.
+   * \param ibo: The IndexBuffer.
+   */
   inline void AddIBO(const IndexBuffer &ibo)
   {
     glBindVertexArray(mHandle);
