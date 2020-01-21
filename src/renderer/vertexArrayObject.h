@@ -11,6 +11,7 @@
 class VertexArray
 {
   u32 mHandle;
+  // TODO: add an accessor for the index buffer
   IndexBuffer mIndexBuffer;
   std::vector<VertexBuffer> mVertexBuffers;
 
