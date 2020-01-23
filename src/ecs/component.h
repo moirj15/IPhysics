@@ -2,25 +2,35 @@
 
 #include "../common.h"
 
-#include <string>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+#include <glm/vec3.hpp>
+
+struct Mesh;
 
 namespace ecs
 {
-struct Component
-{
-};
+
+constexpr u64 RENDERABLE_BIT = 1 << 32;
+constexpr u64 TRANSFORM_BIT = 1 << 33;
+constexpr u64 PHYSICS_BIT = 1 << 34;
 
 struct Renderable
 {
-  std::string m_meshName;
-  u64 m_meshHandle;
-  std::string m_shaderName;
-  u64 m_shaderHandle;
-  std::string m_textureName;
-  u64 m_textureHandle;
+  u32 mMeshHandle;
+  u32 mTextureHandle;
+  Mesh *mMesh;
+};
+
+struct Transform
+{
+  glm::quat mRotation;
+  glm::vec3 mPosition;
 };
 
 struct Physics
 {
+  bool mCollision;
+  // TODO: rest of the members
 };
 } // namespace ecs

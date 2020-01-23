@@ -1,5 +1,6 @@
 #pragma once
 
+#include "component.h"
 #include "system.h"
 
 class Renderer;
@@ -12,6 +13,8 @@ class RenerableSystem final : public System
 {
   World *mWorld;
   Renderer *mRenderer;
+
+  static constexpr u64 RENDERABLE_TUPLE_BIT_SET = RENDERABLE_BIT | TRANSFORM_BIT | PHYSICS_BIT;
 
 public:
   explicit RenerableSystem(World *world, Window *window);

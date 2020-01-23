@@ -5,6 +5,7 @@
 #include "../imgui/imgui_impl_glfw.h"
 #include "../imgui/imgui_impl_opengl3.h"
 #include "common.h"
+#include "ecs/ecs.h"
 #include "renderer/camera.h"
 #include "renderer/mesh.h"
 #include "renderer/renderer.h"

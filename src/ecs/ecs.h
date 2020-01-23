@@ -14,11 +14,11 @@ class System;
 
 class World
 {
-  ComponentPool m_components;
-  std::vector<System *> m_systems;
-  std::unordered_map<EntityID, Entity> m_entities;
-  std::vector<std::array<EntityID, ComponentPool::POOL_SIZE>> m_freeIDs;
-  u64 m_nextFreeIDIndex;
+  ComponentPool mComponents;
+  std::vector<System *> mSystems;
+  std::unordered_map<EntityID, Entity> mEntities;
+  std::vector<std::array<EntityID, ComponentPool::POOL_SIZE>> mFreeIDs;
+  u64 mNextFreeIDIndex;
 
 public:
   World();
@@ -29,11 +29,13 @@ public:
   template<typename T>
   void AddComponent(const EntityID id, T data)
   {
-    auto *component = m_components.GetComponent<T>(id);
+    auto *component = mComponents.GetComponent<T>(id);
     *component = data;
-    auto *entity = m_entities[id];
+    auto *entity = mEntities[id];
     entity->m_components.insert({typeid(component), data});
   }
+
+  inline std::vector<Entity *> GetEntitiesOfType(const u64 type);
 
   void DestroyEntity(const EntityID id);
   Entity *GetEntity(const EntityID id);

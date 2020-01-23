@@ -3,7 +3,7 @@
 namespace ecs
 {
 
-World::World() : m_components(1), m_freeIDs(1)
+World::World() : mComponents(1), mFreeIDs(1)
 {
 }
 
@@ -14,19 +14,33 @@ World::~World()
 EntityID World::CreateEntity()
 {
   auto id = GetNextFreeID();
-  // m_entities.insert({id, Entity(id)});
+  // mEntities.insert({id, Entity(id)});
   return id;
+}
+
+std::vector<Entity *> World::GetEntitiesOfType(const u64 type)
+{
+  std::vector<Entity *> ret;
+  for (const auto &entityPair : mEntities)
+  {
+    auto *entity = entityPair.second;
+    if (entity->mID & type)
+    {
+      ret.emplace_back(entity);
+    }
+  }
+  return ret;
 }
 
 void World::DestroyEntity(const EntityID id)
 {
-  m_entities.erase(id);
+  mEntities.erase(id);
   MarkIDAsFree(id);
 }
 
 Entity *World::GetEntity(const EntityID id)
 {
-  return &m_entities[id];
+  return &mEntities[id];
 }
 
 bool World::IsIDValid(const EntityID id)
@@ -40,7 +54,7 @@ EntityID World::GetNextFreeID()
 {
   // TODO: this is a lazy and inefficient way to do this, make it more efficient when it becomes
   // a problem
-  for (auto &page : m_freeIDs)
+  for (auto &page : mFreeIDs)
   {
     for (u64 i = 0; i < page.size(); i++)
     {
@@ -57,13 +71,13 @@ void World::MarkIDAsFree(const EntityID id)
 {
   // TODO: this is a lazy and inefficient way to do this, make it more efficient when it becomes
   // a problem
-  for (u64 pageIndex = 0; pageIndex < m_freeIDs.size(); pageIndex++)
+  for (u64 pageIndex = 0; pageIndex < mFreeIDs.size(); pageIndex++)
   {
-    for (u64 i = 0; i < m_freeIDs[pageIndex].size(); i++)
+    for (u64 i = 0; i < mFreeIDs[pageIndex].size(); i++)
     {
       if ((i * pageIndex) == (id & 0xffff))
       {
-        m_freeIDs[pageIndex][i] = FREE_MASK;
+        mFreeIDs[pageIndex][i] = FREE_MASK;
       }
     }
   }
