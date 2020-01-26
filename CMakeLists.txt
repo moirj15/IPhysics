@@ -39,7 +39,8 @@ elseif (WIN32)
     include_directories(
         D:/libraries/glm;
         D:/libraries/glfw-3.2.1.bin.WIN64/include;
-        D:/libraries/glew-2.1.0/include
+        D:/libraries/glew-2.1.0/include;
+        D:/libraries/ReactPHysics3D/src
     )
   set(CMAKE_CXX_FLAGS "/std:c++17  /MP /GS /TP /W3 -D_CRT_SECURE_NO_WARNINGS")
 	#set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
@@ -49,6 +50,7 @@ elseif (WIN32)
         ${OPENGL_LIBRARY}
         D:/libraries/glew-2.1.0/lib/Release/x64/glew32.lib
         D:/libraries/glfw-3.3.bin.WIN64/lib-vc2019/glfw3.lib
+        D:/libraries/ReactPHysics3D/Debug/reacphysics3d.lib
         )
 else()
 message("not windows hit me")
