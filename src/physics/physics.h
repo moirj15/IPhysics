@@ -47,6 +47,10 @@ public:
   {
     return mCollisionOccuring;
   }
+
+private:
+  void CollectVoxelsWithBadPositions();
+  void CorrectVoxelPositions();
 };
 
 } // namespace pye

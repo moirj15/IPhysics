@@ -16,5 +16,8 @@ void PhysicsEngine::Update(f32 t)
     // TODO: prevent voxels from drifting apart
   }
 }
+void PhysicsEngine::CorrectVoxelPositions()
+{
+}
 
 } // namespace pye

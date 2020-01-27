@@ -54,14 +54,17 @@ elseif (WIN32)
         )
 else()
 message("not windows hit me")
-	set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
-    target_link_libraries(
-           IPhysics
-
+set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
+include_directories(
+        ~/libraries/reactphysics3d/src
+)
+target_link_libraries(
+        IPhysics
         GL
         GLEW
         glfw
-	)
+        ~/libraries/reactphysics3d/lib/reactphysics3d.a
+)
 endif ()
 
 
