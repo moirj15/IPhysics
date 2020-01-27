@@ -11,9 +11,9 @@ struct Mesh;
 namespace ecs
 {
 
-constexpr u64 RENDERABLE_BIT = 1 << 32;
-constexpr u64 TRANSFORM_BIT = 1 << 33;
-constexpr u64 PHYSICS_BIT = 1 << 34;
+constexpr u64 RENDERABLE_BIT = 1ll << 32;
+constexpr u64 TRANSFORM_BIT = 1ll << 33;
+constexpr u64 PHYSICS_BIT = 1ll << 34;
 
 struct Renderable
 {

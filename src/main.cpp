@@ -91,7 +91,8 @@ int main(int argc, char **argv)
   Command command(CommandType::DrawSolid, handle);
   command.mColor = {1.0f, 0.0f, 1.0f};
   renderer.SubmitCommand(command);
-  renderer.SubmitCommand(Command(CommandType::ClearDepthBuffer));
+  Command clearCommand(CommandType::ClearDepthBuffer);
+  renderer.SubmitCommand(clearCommand);
   Command commandPoint(CommandType::DrawPoints, handle);
   renderer.SubmitCommand(commandPoint);
 

@@ -6,6 +6,9 @@
 #include <reactphysics3d.h>
 #include <vector>
 
+class Object;
+class Voxel;
+
 namespace pye
 {
 
@@ -42,6 +45,8 @@ public:
   }
 
   void Update(f32 t);
+
+  void SubmitObject(Object *object);
 
   inline bool CollisionOccuring() const
   {

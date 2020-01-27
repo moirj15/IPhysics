@@ -17,4 +17,8 @@ void PhysicsEngine::Update(f32 t)
   }
 }
 
+void PhysicsEngine::SubmitObject(Object *object)
+{
+}
+
 } // namespace pye
