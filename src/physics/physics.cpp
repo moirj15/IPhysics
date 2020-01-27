@@ -16,6 +16,9 @@ void PhysicsEngine::Update(f32 t)
     // TODO: prevent voxels from drifting apart
   }
 }
+void PhysicsEngine::CorrectVoxelPositions()
+{
+}
 
 void PhysicsEngine::SubmitObject(Object *object)
 {

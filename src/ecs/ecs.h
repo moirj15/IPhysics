@@ -31,8 +31,9 @@ public:
   {
     auto *component = mComponents.GetComponent<T>(id);
     *component = data;
-    auto *entity = mEntities[id];
-    entity->m_components.insert({typeid(component), data});
+    // TODO: fix this if I end up using the ecs
+    //    auto *entity = mEntities[id];
+    //    entity->m_components.insert({typeid(component), data});
   }
 
   inline std::vector<Entity *> GetEntitiesOfType(const u64 type);
