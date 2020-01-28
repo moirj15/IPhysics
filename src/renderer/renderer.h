@@ -18,6 +18,12 @@ class ShaderLibrary;
 class TextureLibrary;
 class MeshLibrary;
 
+namespace ren
+{
+Window *InitAPI(s32 width, s32 height, const char *windowName);
+void InitUI(Window *window);
+} // namespace ren
+
 enum class CommandType : u32
 {
   DrawSolid,

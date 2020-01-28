@@ -16,3 +16,13 @@ Window::Window(s32 width, s32 height, const char *title) :
   glfwMakeContextCurrent(mGLWindow);
   glViewport(0, 0, mWidth, mHeight);
 }
+
+Window::~Window()
+{
+  glfwDestroyWindow(mGLWindow);
+}
+
+bool Window::ShouldClose()
+{
+  return glfwWindowShouldClose(mGLWindow);
+}

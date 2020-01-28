@@ -16,4 +16,7 @@ struct Window
    * \param title: The title of the window.
    */
   Window(s32 width, s32 height, const char *title);
+  ~Window();
+
+  bool ShouldClose();
 };

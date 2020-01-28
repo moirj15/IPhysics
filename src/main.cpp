@@ -9,7 +9,7 @@
 #include "renderer/camera.h"
 #include "renderer/mesh.h"
 #include "renderer/renderer.h"
-#include "window.h"
+#include "renderer/window.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -25,54 +25,12 @@ void ErrorCallback(
   printf("%s\n", message);
 }
 
-Window *InitGL()
-{
-  if (!glfwInit())
-  {
-    fprintf(stderr, "Failed to init GLFW\n");
-    exit(EXIT_FAILURE);
-  }
-  glfwWindowHint(GLFW_SAMPLES, 4);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-  //   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT,
-  //      GL_TRUE); // To make MacOS happy; should not be needed
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  Window *window = new Window(width, height);
-
-  glfwMakeContextCurrent(window->mGLFWWindow);
-  GLenum err = glewInit();
-  if (err != GLEW_OK)
-  {
-    fprintf(stderr, "glew error: %s\n", glewGetErrorString(err));
-    glfwTerminate();
-    exit(EXIT_FAILURE);
-  }
-  glfwSwapInterval(1);
-  glEnable(GL_DEPTH_TEST);
-  //  glCullFace(GL_BACK);
-  glClearColor(0.0, 0.0, 0.0, 1.0);
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-  glClearDepth(4.0);
-  glDepthFunc(GL_LESS);
-  return window;
-}
-
-void InitIMGUI(Window *window)
-{
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
-  ImGuiIO &io = ImGui::GetIO();
-  ImGui_ImplGlfw_InitForOpenGL(window->mGLFWWindow, true);
-  ImGui_ImplOpenGL3_Init("#version 150");
-}
-
 int main(int argc, char **argv)
 {
   (void)argc;
   (void)argv;
 
-  Window *window = InitGL();
+  Window *window = ren::InitAPI(width, height, "IPhysics");
   // InitIMGUI(window);
   printf("%s\n", glGetString(GL_VERSION));
   glDebugMessageCallback(ErrorCallback, nullptr);

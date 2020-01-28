@@ -1,14 +1,62 @@
 #include "renderer.h"
 
-#include "../window.h"
+#define IMGUI_IMPL_OPENGL_LOADER_GLEW
+#include "../../imgui/imgui.h"
+#include "../../imgui/imgui_impl_glfw.h"
+#include "../../imgui/imgui_impl_opengl3.h"
 #include "camera.h"
 #include "meshLibrary.h"
 #include "shader.h"
 #include "shaderLibrary.h"
 #include "texture.h"
 #include "textureLibrary.h"
+#include "window.h"
 
 #include <GLFW/glfw3.h>
+
+namespace ren
+{
+Window *InitAPI(s32 width, s32 height, const char *windowName)
+{
+  if (!glfwInit())
+  {
+    fprintf(stderr, "Failed to init GLFW\n");
+    exit(EXIT_FAILURE);
+  }
+  glfwWindowHint(GLFW_SAMPLES, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  Window *window = new Window(width, height, windowName);
+
+  glfwMakeContextCurrent(window->mGLWindow);
+  GLenum err = glewInit();
+  if (err != GLEW_OK)
+  {
+    fprintf(stderr, "glew error: %s\n", glewGetErrorString(err));
+    glfwTerminate();
+    exit(EXIT_FAILURE);
+  }
+  glfwSwapInterval(1);
+  glEnable(GL_DEPTH_TEST);
+  //  glCullFace(GL_BACK);
+  glClearColor(0.0, 0.0, 0.0, 1.0);
+  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+  glClearDepth(4.0);
+  glDepthFunc(GL_LESS);
+  return window;
+}
+
+void InitUI(Window *window)
+{
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+  ImGuiIO &io = ImGui::GetIO();
+  ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);
+  ImGui_ImplOpenGL3_Init("#version 150");
+}
+
+} // namespace ren
 
 Renderer::Renderer(Window *window) :
     mWindow(window), mShaderLibrary(new ShaderLibrary()), mTextureLibrary(new TextureLibrary()),
@@ -87,7 +135,7 @@ void Renderer::Draw(Camera *camera, const glm::mat4 &projection)
 
 void Renderer::UpdateScreen()
 {
-  glfwSwapBuffers(mWindow->mGLFWWindow);
+  glfwSwapBuffers(mWindow->mGLWindow);
 }
 
 Shader *Renderer::GetShader(const CommandType type, bool bind)
