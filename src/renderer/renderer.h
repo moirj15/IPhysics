@@ -118,6 +118,10 @@ public:
    */
   void UpdateScreen();
 
+  void SetClearColor(const glm::vec4 &color);
+
+  void ClearScreen();
+
 private:
   /**
    * \brief: Get the shader that will be used with the given CommandType, and optionally bind it.

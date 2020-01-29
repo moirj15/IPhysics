@@ -1,13 +1,16 @@
-#ifndef OBJ_H
-#define OBJ_H
+#pragma once
 
-#include "common.h"
+#include "../common.h"
 
 #include <memory>
 #include <string>
 #include <vector>
 
-struct Mesh {
+namespace vg
+{
+
+struct Mesh
+{
   std::vector<f32> vertecies = {};
   std::vector<u32> connections = {};
   std::vector<f32> normals = {};
@@ -16,20 +19,24 @@ struct Mesh {
   Mesh() = default;
   Mesh(Mesh &&m) :
       vertecies(std::move(m.vertecies)), connections(std::move(m.connections)),
-      normals(std::move(m.normals)), vertexSize(m.vertexSize) {}
+      normals(std::move(m.normals)), vertexSize(m.vertexSize)
+  {
+  }
 };
 
-class ObjReader {
-  std::string m_filename;
-  // std::vector<char> m_data;
-  std::unique_ptr<char[]> m_data;
-  Size m_dataLen;
+class ObjReader
+{
+  std::string mFilename;
+  // std::vector<char> mData;
+  std::unique_ptr<char[]> mData;
+  Size mDataLen;
 
-  Size m_pos;
+  Size mPos;
 
-  Mesh m_mesh;
+  Mesh mMesh;
 
-  enum class DataType {
+  enum class DataType
+  {
     Vertex,
     TextureCoord,
     VertexNormal,
@@ -47,20 +54,27 @@ public:
    * Constructor.
    * @param filename: The obj filename that will be parsed.
    */
-  ObjReader(char *filename);
+  ObjReader() : mFilename(), mDataLen(0), mPos(0)
+  {
+  }
 
   /// Parses the obj file and returns a mesh
-  Mesh *Parse();
+  Mesh *Parse(const char *filename);
 
   /// Clears the parser.
   void Clear();
 
 private:
+  void LoadOBJFile(const char *filename);
+
   /// Determines the parse type of the current token.
   DataType ParseType();
 
   /// Getter for the current token.
-  inline char Token() { return m_data[m_pos]; }
+  inline char Token()
+  {
+    return mData[mPos];
+  }
 
   /// Parses a vertex from the file.
   void ParseVertex();
@@ -86,4 +100,4 @@ private:
   void ReplaceChars(std::string *str, char toReplace, char replacement);
 };
 
-#endif // OBJ_H
+} // namespace vg
