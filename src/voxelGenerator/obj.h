@@ -6,34 +6,35 @@
 #include <string>
 #include <vector>
 
+struct Mesh;
+
 namespace vg
 {
 
-struct Mesh
-{
-  std::vector<f32> vertecies = {};
-  std::vector<u32> connections = {};
-  std::vector<f32> normals = {};
-  u32 vertexSize = 3;
-
-  Mesh() = default;
-  Mesh(Mesh &&m) :
-      vertecies(std::move(m.vertecies)), connections(std::move(m.connections)),
-      normals(std::move(m.normals)), vertexSize(m.vertexSize)
-  {
-  }
-};
+// struct Mesh
+// {
+//   std::vector<f32> vertecies = {};
+//   std::vector<u32> connections = {};
+//   std::vector<f32> normals = {};
+//   u32 vertexSize = 3;
+//
+//   Mesh() = default;
+//   Mesh(Mesh &&m) :
+//       vertecies(std::move(m.vertecies)), connections(std::move(m.connections)),
+//       normals(std::move(m.normals)), vertexSize(m.vertexSize)
+//   {
+//   }
+// };
 
 class ObjReader
 {
   std::string mFilename;
-  // std::vector<char> mData;
   std::unique_ptr<char[]> mData;
   Size mDataLen;
 
   Size mPos;
 
-  Mesh mMesh;
+  Mesh *mMesh;
 
   enum class DataType
   {
@@ -54,10 +55,7 @@ public:
    * Constructor.
    * @param filename: The obj filename that will be parsed.
    */
-  ObjReader() : mFilename(), mDataLen(0), mPos(0)
-  {
-  }
-
+  ObjReader();
   /// Parses the obj file and returns a mesh
   Mesh *Parse(const char *filename);
 

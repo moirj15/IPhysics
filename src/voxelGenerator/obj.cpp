@@ -1,10 +1,15 @@
 #include "obj.h"
 
+#include "../renderer/mesh.h"
+
 #include <cstdio>
 #include <sstream>
 
 namespace vg
 {
+ObjReader::ObjReader() : mFilename(), mDataLen(0), mPos(0), mMesh(new Mesh)
+{
+}
 
 Mesh *ObjReader::Parse(const char *filename)
 {
@@ -50,7 +55,7 @@ Mesh *ObjReader::Parse(const char *filename)
   }
   Clear();
   // This should clear out mMesh
-  return new Mesh{std::move(mMesh)};
+  return mMesh;
 }
 
 void ObjReader::Clear()
@@ -142,7 +147,7 @@ void ObjReader::ParseVertex()
   for (s32 i = 0; i < 3; i++)
   {
     line >> val;
-    mMesh.vertecies.emplace_back(val);
+    mMesh->mVertecies.emplace_back(val);
   }
 }
 
@@ -153,7 +158,7 @@ void ObjReader::ParseNormal()
   for (s32 i = 0; i < 3; i++)
   {
     line >> val;
-    mMesh.normals.emplace_back(val);
+    mMesh->mNormals.emplace_back(val);
   }
 }
 
@@ -167,7 +172,7 @@ void ObjReader::ParseFace()
     u32 val = 0.0f;
     u32 junk = 0.0f;
     line >> val >> junk;
-    mMesh.connections.emplace_back(val - 1);
+    mMesh->mIndecies.emplace_back(val - 1);
   }
 }
 
