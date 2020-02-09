@@ -19,6 +19,7 @@ typedef double f64;
 typedef size_t Size;
 
 #define ArraySize(X) (sizeof(X) / sizeof(X[0]))
+#define NODISCARD    [[nodiscard]]
 
 inline FILE *OpenFile(const char *file, const char *perm)
 {

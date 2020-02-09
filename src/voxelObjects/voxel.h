@@ -2,6 +2,7 @@
 
 #include "../common.h"
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 #include <glm/vec3.hpp>
 #include <vector>

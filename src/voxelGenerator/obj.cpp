@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <sstream>
 
-namespace vg
+namespace VoxGen
 {
 ObjReader::ObjReader() : mFilename(), mDataLen(0), mPos(0), mMesh(new Mesh)
 {

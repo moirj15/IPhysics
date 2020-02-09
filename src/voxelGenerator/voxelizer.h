@@ -8,7 +8,7 @@
 
 struct Mesh;
 
-namespace vg
+namespace VoxGen
 {
 
 class Voxelizer

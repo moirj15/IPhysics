@@ -2,7 +2,7 @@
 
 #include "../renderer/mesh.h"
 
-namespace vg
+namespace VoxGen
 {
 std::vector<vx::Voxel> Voxelizer::Voxelize(Mesh *mesh, f32 size, bool isHollow)
 {
