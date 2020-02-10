@@ -9,6 +9,7 @@
 #include "VoxelizerUI.h"
 
 #include <GLFW/glfw3.h>
+#include <cstdio>
 
 namespace VoxGen
 {
@@ -17,9 +18,7 @@ System::System() : mWindow(ren::InitAPI(1980, 1080, "Voxel Generator")), mUI(new
 {
   mUI->Init(mWindow.get());
 }
-System::~System()
-{
-}
+System::~System() = default;
 
 void System::Run()
 {
@@ -28,6 +27,22 @@ void System::Run()
   {
     glfwPollEvents();
     mUI->Update();
+    auto meshPath = mUI->LoadMeshClicked();
+    if (meshPath)
+    {
+      printf("have path of %s\n", meshPath->c_str());
+    }
+    bool generate = mUI->GenerateVoxelsClicked();
+    if (generate)
+    {
+      printf("generating\n");
+    }
+    auto voxelPath = mUI->SaveClicked();
+    if (voxelPath)
+    {
+      printf("have path of %s\n", voxelPath->c_str());
+    }
+    fflush(stdout);
 
     glfwSwapBuffers(mWindow->mGLWindow);
   }

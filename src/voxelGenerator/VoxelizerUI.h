@@ -31,9 +31,16 @@ private:
   std::string mMeshFileName;
   std::string mVoxelMeshFileName;
   Parameters mParameters;
+  bool mSaveClicked;
+  bool mGenerateVoxelsClicked;
+  bool mLoadMeshClicked;
 
 public:
-  VoxelizerUI() = default;
+  VoxelizerUI() :
+      mMeshFileName(256, 0), mVoxelMeshFileName(256, 0), mSaveClicked(false),
+      mGenerateVoxelsClicked(false), mLoadMeshClicked(false)
+  {
+  }
   ~VoxelizerUI();
 
   // TODO: these two functions should go in a base class
@@ -41,10 +48,15 @@ public:
 
   void Update();
 
-  NODISCARD std::optional<std::string> LoadMeshClicked() const;
+  NODISCARD std::optional<std::string> LoadMeshClicked();
 
-  NODISCARD bool SaveClicked() const;
+  NODISCARD std::optional<std::string> SaveClicked();
 
-  NODISCARD Parameters GetParameters() const;
+  NODISCARD bool GenerateVoxelsClicked();
+
+  NODISCARD inline Parameters GetParameters() const
+  {
+    return mParameters;
+  }
 };
 } // namespace VoxGen

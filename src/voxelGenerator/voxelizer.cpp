@@ -8,6 +8,7 @@ std::vector<vx::Voxel> Voxelizer::Voxelize(Mesh *mesh, f32 size, bool isHollow)
 {
   auto meshAABB = FindMeshAABB(mesh);
   auto triangleAABBs = FindTriangleAABBs(mesh);
+  return {};
 }
 
 rp3d::AABB Voxelizer::FindMeshAABB(Mesh *mesh)
@@ -54,4 +55,4 @@ std::vector<rp3d::AABB> Voxelizer::FindTriangleAABBs(Mesh *mesh)
   }
   return AABBs;
 }
-} // namespace vg
+} // namespace VoxGen

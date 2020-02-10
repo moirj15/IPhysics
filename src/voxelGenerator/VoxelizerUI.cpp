@@ -7,6 +7,8 @@
 #include "../../imgui/imgui.h"
 #include "../../imgui/imgui_impl_glfw.h"
 #include "../../imgui/imgui_impl_opengl3.h"
+#include "../common.h"
+//#include "../../imgui/cpp/imgui_stdlib.h"
 #include "../renderer/window.h"
 
 #include <GL/glew.h>
@@ -26,6 +28,7 @@ void VoxelizerUI::Init(Window *window)
   ImGui::CreateContext();
   ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);
   ImGui_ImplOpenGL3_Init("#version 150");
+  ImGui::StyleColorsClassic();
 }
 
 void VoxelizerUI::Update()
@@ -34,7 +37,27 @@ void VoxelizerUI::Update()
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
   // Define the UI layout
-  ImGui::Begin("Hello boi");
+  ImGui::Begin("Hello boi", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
+  {
+    if (ImGui::Button("Load Mesh"))
+    {
+      mLoadMeshClicked = true;
+    }
+    ImGui::SameLine();
+    ImGui::InputText("Mesh File Name", mMeshFileName.data(), mMeshFileName.size());
+    ImGui::InputFloat("Voxel Size", &mParameters.mVoxelSize);
+    ImGui::Checkbox("Generate Hollow", &mParameters.mHollow);
+    if (ImGui::Button("Generate Voxels"))
+    {
+      mGenerateVoxelsClicked = true;
+    }
+    if (ImGui::Button("Save"))
+    {
+      mSaveClicked = true;
+    }
+    ImGui::SameLine();
+    ImGui::InputText("Voxel Mesh File Name", mVoxelMeshFileName.data(), mVoxelMeshFileName.size());
+  }
 
   ImGui::End();
 
@@ -44,19 +67,33 @@ void VoxelizerUI::Update()
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-std::optional<std::string> VoxelizerUI::LoadMeshClicked() const
+std::optional<std::string> VoxelizerUI::LoadMeshClicked()
 {
-  return std::optional<std::string>();
+  if (mLoadMeshClicked)
+  {
+    mLoadMeshClicked = false;
+    return {mMeshFileName};
+  }
+  return {};
 }
 
-bool VoxelizerUI::SaveClicked() const
+std::optional<std::string> VoxelizerUI::SaveClicked()
 {
+  if (mSaveClicked)
+  {
+    mSaveClicked = false;
+    return {mVoxelMeshFileName};
+  }
+  return {};
+}
+bool VoxelizerUI::GenerateVoxelsClicked(){
+  if (mGenerateVoxelsClicked)
+  {
+    mGenerateVoxelsClicked = false;
+    return true;
+  }
   return false;
 }
 
-VoxelizerUI::Parameters VoxelizerUI::GetParameters() const
-{
-  return VoxelizerUI::Parameters();
-}
 
 } // namespace VoxGen
