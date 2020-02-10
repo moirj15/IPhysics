@@ -67,6 +67,7 @@ void VoxelizerUI::Update()
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
+// TODO: might be a good idea to somehow register functions that occur when a ui element is clicked
 std::optional<std::string> VoxelizerUI::LoadMeshClicked()
 {
   if (mLoadMeshClicked)
