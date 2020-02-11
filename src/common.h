@@ -20,6 +20,9 @@ typedef size_t Size;
 
 #define ArraySize(X) (sizeof(X) / sizeof(X[0]))
 #define NODISCARD    [[nodiscard]]
+#define IMPLEMENTME                                                                                \
+  printf("IMPLEMENT %s %s %d\n", __FUNCTION__, __FILE__, __LINE__);                                \
+  assert(0);
 
 inline FILE *OpenFile(const char *file, const char *perm)
 {

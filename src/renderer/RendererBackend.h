@@ -18,11 +18,9 @@ class ShaderLibrary;
 class TextureLibrary;
 class MeshLibrary;
 
-namespace ren
+namespace Renderer
 {
 Window *InitAPI(s32 width, s32 height, const char *windowName);
-void InitUI(Window *window);
-} // namespace ren
 
 enum class CommandType : u32
 {
@@ -34,7 +32,7 @@ enum class CommandType : u32
   ClearDepthBuffer,
 };
 
-struct Command
+struct DrawCommand
 {
   CommandType mType;
   u32 mMeshHandle = 0;
@@ -44,7 +42,7 @@ struct Command
   Texture2D *mTexture2D = nullptr;
 
   /**
-   * \brief: Construct a Command object.
+   * \brief: Construct a DrawCommand object.
    * \param type: The CommandType, the only required member.
    * \param meshHandle: A handle to some mesh.
    * \param textureHandle: A handle to some texture.
@@ -52,7 +50,7 @@ struct Command
    * \param color: A color.
    * \param texture2D: A pointer to a Texture2D object.
    */
-  Command(
+  DrawCommand(
       const CommandType type, const u32 meshHandle = 0, const u32 textureHandle = 0,
       Mesh *mesh = nullptr, const glm::vec3 &color = {0.0f, 0.0f, 0.0f},
       Texture2D *texture2D = nullptr) :
@@ -62,26 +60,26 @@ struct Command
   }
 };
 
-class Renderer
+class RendererBackend
 {
   Window *mWindow;
-  std::vector<Command> mCommandQueue;
+  std::vector<DrawCommand> mCommandQueue;
   ShaderLibrary *mShaderLibrary;
   TextureLibrary *mTextureLibrary;
   MeshLibrary *mMeshLibrary;
 
 public:
   /**
-   * \brief: Construct a Renderer object.
+   * \brief: Construct a RendererBackend object.
    * \param window: Pointer to a window which the renderer will render to.
    */
-  explicit Renderer(Window *window);
+  explicit RendererBackend(Window *window);
 
   /**
    * \brief: Submit a RenderCommand to the command queue.
    * \param command: The RenderCommand object that will be submitted.
    */
-  inline void SubmitCommand(Command &command)
+  inline void SubmitCommand(DrawCommand &command)
   {
     mCommandQueue.emplace_back(command);
   }
@@ -140,3 +138,5 @@ private:
    */
   IndexBuffer GetBuffersAndBind(const u32 handle);
 };
+
+} // namespace Renderer

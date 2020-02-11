@@ -6,9 +6,9 @@
 #include "../imgui/imgui_impl_opengl3.h"
 #include "common.h"
 #include "ecs/ecs.h"
+#include "renderer/RendererBackend.h"
 #include "renderer/camera.h"
 #include "renderer/mesh.h"
-#include "renderer/renderer.h"
 #include "renderer/window.h"
 
 #include <GL/glew.h>
@@ -30,14 +30,14 @@ int main(int argc, char **argv)
   (void)argc;
   (void)argv;
 
-  Window *window = ren::InitAPI(width, height, "IPhysics");
+  Window *window = Renderer::InitAPI(width, height, "IPhysics");
   // InitIMGUI(window);
   printf("%s\n", glGetString(GL_VERSION));
   glDebugMessageCallback(ErrorCallback, nullptr);
   glEnable(GL_DEBUG_OUTPUT);
   f64 lastTime = glfwGetTime();
 
-  Renderer renderer(window);
+  Renderer::RendererBackend renderer(window);
 
   Mesh mesh;
   mesh.mVertecies.assign({-0.8f, 0.0f, -0.8f, 0.8f, 0.0f, -0.0f, 0.8f, 0.8f, -0.8f});
@@ -46,12 +46,12 @@ int main(int argc, char **argv)
 
   Camera camera;
 
-  Command command(CommandType::DrawSolid, handle);
+  Renderer::DrawCommand command(Renderer::CommandType::DrawSolid, handle);
   command.mColor = {1.0f, 0.0f, 1.0f};
   renderer.SubmitCommand(command);
-  Command clearCommand(CommandType::ClearDepthBuffer);
+  Renderer::DrawCommand clearCommand(Renderer::CommandType::ClearDepthBuffer);
   renderer.SubmitCommand(clearCommand);
-  Command commandPoint(CommandType::DrawPoints, handle);
+  Renderer::DrawCommand commandPoint(Renderer::CommandType::DrawPoints, handle);
   renderer.SubmitCommand(commandPoint);
 
   while (!window->ShouldClose())

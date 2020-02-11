@@ -1,4 +1,4 @@
-#include "renderer.h"
+#include "RendererBackend.h"
 
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include "../../imgui/imgui.h"
@@ -14,7 +14,7 @@
 
 #include <GLFW/glfw3.h>
 
-namespace ren
+namespace Renderer
 {
 Window *InitAPI(s32 width, s32 height, const char *windowName)
 {
@@ -47,18 +47,7 @@ Window *InitAPI(s32 width, s32 height, const char *windowName)
   return window;
 }
 
-void InitUI(Window *window)
-{
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
-  ImGuiIO &io = ImGui::GetIO();
-  ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);
-  ImGui_ImplOpenGL3_Init("#version 150");
-}
-
-} // namespace ren
-
-Renderer::Renderer(Window *window) :
+RendererBackend::RendererBackend(Window *window) :
     mWindow(window), mShaderLibrary(new ShaderLibrary()), mTextureLibrary(new TextureLibrary()),
     mMeshLibrary(new MeshLibrary())
 {
@@ -72,18 +61,18 @@ Renderer::Renderer(Window *window) :
       std::vector<std::string>({"../shaders/textureShader.vert", "../shaders/textureShader.frag"}));
 }
 
-u32 Renderer::SubmitMesh(Mesh *mesh)
+u32 RendererBackend::SubmitMesh(Mesh *mesh)
 {
   return mMeshLibrary->Insert(mesh);
 }
-u32 Renderer::SubmitTexture(Texture2D *texture)
+u32 RendererBackend::SubmitTexture(Texture2D *texture)
 {
   GLTexture2D glTexture2D;
   glTexture2D.Create(texture);
   return mTextureLibrary->Add(glTexture2D);
 }
 
-void Renderer::Draw(Camera *camera, const glm::mat4 &projection)
+void RendererBackend::Draw(Camera *camera, const glm::mat4 &projection)
 {
   for (const auto &command : mCommandQueue)
   {
@@ -133,22 +122,22 @@ void Renderer::Draw(Camera *camera, const glm::mat4 &projection)
   }
 }
 
-void Renderer::UpdateScreen()
+void RendererBackend::UpdateScreen()
 {
   glfwSwapBuffers(mWindow->mGLWindow);
 }
 
-void Renderer::SetClearColor(const glm::vec4 &color)
+void RendererBackend::SetClearColor(const glm::vec4 &color)
 {
   glClearColor(color.r, color.g, color.b, color.a);
 }
 
-void Renderer::ClearScreen()
+void RendererBackend::ClearScreen()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-Shader *Renderer::GetShader(const CommandType type, bool bind)
+Shader *RendererBackend::GetShader(const CommandType type, bool bind)
 {
   Shader *shader = nullptr;
   switch (type)
@@ -172,10 +161,12 @@ Shader *Renderer::GetShader(const CommandType type, bool bind)
   }
   return shader;
 }
-IndexBuffer Renderer::GetBuffersAndBind(const u32 handle)
+IndexBuffer RendererBackend::GetBuffersAndBind(const u32 handle)
 {
   auto [vao, ibo] = (*mMeshLibrary)[handle];
   vao.Bind();
   ibo.Bind();
   return ibo;
 }
+
+} // namespace Renderer

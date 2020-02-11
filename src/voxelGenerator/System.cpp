@@ -4,7 +4,7 @@
 
 #include "System.h"
 
-#include "../renderer/renderer.h"
+#include "../renderer/RendererBackend.h"
 #include "../renderer/window.h"
 #include "VoxelizerUI.h"
 
@@ -14,7 +14,7 @@
 namespace VoxGen
 {
 
-System::System() : mWindow(ren::InitAPI(1980, 1080, "Voxel Generator")), mUI(new VoxelizerUI())
+System::System() : mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator")), mUI(new VoxelizerUI())
 {
   mUI->Init(mWindow.get());
 }

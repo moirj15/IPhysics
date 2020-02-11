@@ -1,11 +1,11 @@
 #include "renderableSystem.h"
 
-#include "../renderer/renderer.h"
+#include "../renderer/RendererBackend.h"
 #include "ecs.h"
 namespace ecs
 {
 RenerableSystem::RenerableSystem(World *world, Window *window) :
-    mWorld(world), mRenderer(new Renderer(window))
+    mWorld(world), mRenderer(new RendererBackend(window))
 {
 }
 
