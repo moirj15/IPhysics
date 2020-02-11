@@ -3,19 +3,21 @@ project(IPhysics)
 
 file(GLOB IMGUI_FILES "imgui/*")
 file(GLOB SRC_FILES "src/*")
+file(GLOB SRC_UTILS_FILES "src/utils/*")
 file(GLOB SRC_RENDERER_FILES "src/renderer/*")
 file(GLOB SRC_PHYSICS_FILES "src/physics/*")
 file(GLOB SRC_VOXEL_GENERATOR "src/voxelGenerator/*")
 
 
 set(SOURCE_LIST_MAIN_PROJECT
-	${SRC_FILES}
+	${SRC_UTILS_FILES}
 	${SRC_RENDERER_FILES}
 	${SRC_PHYSICS_FILES}
 	${IMGUI_FILES}
 )
 
 set(SOURCE_LIST_VOXEL_GENERATOR
+    ${SRC_UTILS_FILES}
     ${SRC_VOXEL_GENERATOR}
 	${SRC_RENDERER_FILES}
 	${IMGUI_FILES}

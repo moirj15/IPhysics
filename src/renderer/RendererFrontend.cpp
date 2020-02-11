@@ -2,6 +2,7 @@
 #include "RendererFrontend.h"
 
 #include "RendererBackend.h"
+#include "window.h"
 
 namespace Renderer
 {
@@ -15,19 +16,19 @@ RendererFrontend::~RendererFrontend() = default;
 
 u32 RendererFrontend::RegisterMeshHandle(const u32 meshHandle)
 {
-  IMPLEMENTME;
+  IMPLEMENTME();
   return 0;
 }
 
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
 {
-  IMPLEMENTME;
+  IMPLEMENTME();
   return 0;
 }
 
 u32 RendererFrontend::RegisterVoxelMesh(VoxelMesh *vm)
 {
-  IMPLEMENTME;
+  IMPLEMENTME();
   return 0;
 }
 

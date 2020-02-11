@@ -5,13 +5,13 @@
 #include <glm/mat4x4.hpp>
 #include <memory>
 
+struct Window;
 class VoxelMesh;
 namespace Renderer
 {
 
 class RendererBackend;
 struct Mesh;
-struct Window;
 
 class RendererFrontend
 {
@@ -20,7 +20,7 @@ class RendererFrontend
   glm::mat4 mProjection;
 
 public:
-  RendererFrontend(Window *window);
+  explicit RendererFrontend(Window *window);
   ~RendererFrontend();
 
   NODISCARD u32 RegisterMeshHandle(const u32 meshHandle);

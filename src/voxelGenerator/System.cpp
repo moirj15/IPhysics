@@ -6,6 +6,7 @@
 
 #include "../renderer/RendererBackend.h"
 #include "../renderer/window.h"
+#include "../utils/VoxelMeshManager.h"
 #include "VoxelizerUI.h"
 
 #include <GLFW/glfw3.h>

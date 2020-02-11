@@ -3,6 +3,8 @@
 
 struct GLFWwindow;
 
+
+
 struct Window
 {
   s32 mWidth;
