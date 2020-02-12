@@ -3,6 +3,7 @@
 
 #include "RendererBackend.h"
 #include "window.h"
+#include "../voxelObjects/voxel.h"
 
 namespace Renderer
 {
@@ -14,22 +15,25 @@ RendererFrontend::RendererFrontend(Window *window) :
 
 RendererFrontend::~RendererFrontend() = default;
 
-u32 RendererFrontend::RegisterMeshHandle(const u32 meshHandle)
+u32 RendererFrontend::RegisterMeshHandle(const VMeshHandle meshHandle)
 {
-  IMPLEMENTME();
-  return 0;
+  auto &meshManager = VoxelMeshManager::Get();
+  auto *voxelMesh = meshManager.GetMesh(meshHandle);
+  return RegisterMesh(voxelMesh->GetMesh());
 }
 
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
 {
-  IMPLEMENTME();
-  return 0;
+  return mBackend->SubmitMesh(mesh);
 }
 
 u32 RendererFrontend::RegisterVoxelMesh(VoxelMesh *vm)
 {
   IMPLEMENTME();
   return 0;
+}
+void RendererFrontend::Draw(VMeshHandle handle)
+{
 }
 
 } // namespace Renderer

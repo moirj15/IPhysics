@@ -41,6 +41,7 @@ struct DrawCommand
   glm::vec3 mColor = {0.0f, 0.0f, 0.0f};
   Texture2D *mTexture2D = nullptr;
 
+  DrawCommand() = default;
   /**
    * \brief: Construct a DrawCommand object.
    * \param type: The CommandType, the only required member.
@@ -136,7 +137,7 @@ private:
    * \param handle: A handle to the buffers.
    * \return: The buffers.
    */
-  IndexBuffer GetBuffersAndBind(const u32 handle);
+  IndexBuffer GetBuffersAndBind(u32 handle);
 };
 
 } // namespace Renderer

@@ -11,6 +11,7 @@
 #include "texture.h"
 #include "textureLibrary.h"
 #include "window.h"
+#include "mesh.h"
 
 #include <GLFW/glfw3.h>
 

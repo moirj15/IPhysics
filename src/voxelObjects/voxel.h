@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../common.h"
+#include "../renderer/mesh.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
@@ -37,6 +38,13 @@ struct Voxel
       mPrevRotation(mRotation)
   {
   }
+};
+
+class VoxelMesh
+{
+  Mesh *mMesh;
+public:
+  Mesh *GetMesh() const { return mMesh; }
 };
 
 } // namespace vx
