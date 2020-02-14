@@ -49,4 +49,9 @@ void RendererFrontend::Clear()
   mBackend->ClearCommandQueue();
   mBackend->ClearScreen();
 }
+
+void RendererFrontend::RemoveMesh(u32 handle)
+{
+  mBackend->RemoveMesh(handle);
+}
 } // namespace Renderer

@@ -39,6 +39,7 @@ public:
   void DrawMesh(const u32 handle);
   void Draw();
   void Clear();
+  void RemoveMesh(u32 handle);
 };
 
 } // namespace Renderer

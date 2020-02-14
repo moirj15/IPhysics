@@ -24,6 +24,10 @@ u32 MeshLibrary::Insert(Mesh *mesh)
 
 void MeshLibrary::Remove(const u32 handle)
 {
+  if (handle == 0)
+  {
+    return;
+  }
   auto [vao, ibo] = mMeshes[handle];
   vao.Destroy();
   ibo.Destroy();

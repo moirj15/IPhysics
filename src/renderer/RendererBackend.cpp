@@ -138,6 +138,12 @@ void RendererBackend::ClearScreen()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+void RendererBackend::RemoveMesh(u32 handle)
+{
+  mMeshLibrary->Remove(handle);
+}
+
+// Private
 Shader *RendererBackend::GetShader(const CommandType type, bool bind)
 {
   Shader *shader = nullptr;

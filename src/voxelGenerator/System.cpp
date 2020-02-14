@@ -39,6 +39,7 @@ void System::Run()
       {
         VoxGen::ObjReader objReader;
         std::unique_ptr<Mesh> mesh(objReader.Parse(meshPath->c_str()));
+        mRenderer->RemoveMesh(mCurrentMeshHandle);
         mCurrentMeshHandle = mRenderer->RegisterMesh(mesh.get());
       }
       else

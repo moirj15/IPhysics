@@ -120,6 +120,7 @@ public:
   void SetClearColor(const glm::vec4 &color);
 
   void ClearScreen();
+  void RemoveMesh(u32 handle);
 
 private:
   /**
