@@ -60,9 +60,10 @@ void VoxelizerUI::Update()
   }
 
   ImGui::End();
+  ImGui::EndFrame();
 
   // Render the UI
-  glClear(GL_COLOR_BUFFER_BIT);
+  // glClear(GL_COLOR_BUFFER_BIT);
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
@@ -87,7 +88,8 @@ std::optional<std::string> VoxelizerUI::SaveClicked()
   }
   return {};
 }
-bool VoxelizerUI::GenerateVoxelsClicked(){
+bool VoxelizerUI::GenerateVoxelsClicked()
+{
   if (mGenerateVoxelsClicked)
   {
     mGenerateVoxelsClicked = false;
@@ -95,6 +97,5 @@ bool VoxelizerUI::GenerateVoxelsClicked(){
   }
   return false;
 }
-
 
 } // namespace VoxGen

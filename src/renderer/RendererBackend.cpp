@@ -5,13 +5,13 @@
 #include "../../imgui/imgui_impl_glfw.h"
 #include "../../imgui/imgui_impl_opengl3.h"
 #include "camera.h"
+#include "mesh.h"
 #include "meshLibrary.h"
 #include "shader.h"
 #include "shaderLibrary.h"
 #include "texture.h"
 #include "textureLibrary.h"
 #include "window.h"
-#include "mesh.h"
 
 #include <GLFW/glfw3.h>
 
@@ -73,7 +73,7 @@ u32 RendererBackend::SubmitTexture(Texture2D *texture)
   return mTextureLibrary->Add(glTexture2D);
 }
 
-void RendererBackend::Draw(Camera *camera, const glm::mat4 &projection)
+void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
 {
   for (const auto &command : mCommandQueue)
   {
@@ -83,7 +83,7 @@ void RendererBackend::Draw(Camera *camera, const glm::mat4 &projection)
     {
       auto *shader = GetShader(command.mType, true);
       shader->SetUniform3F("color", command.mColor);
-      shader->SetUniformMat4("camera", camera->CalculateMatrix());
+      shader->SetUniformMat4("camera", camera);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_TRIANGLES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -91,7 +91,7 @@ void RendererBackend::Draw(Camera *camera, const glm::mat4 &projection)
     case CommandType::DrawLine:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->SetUniformMat4("camera", camera->CalculateMatrix());
+      shader->SetUniformMat4("camera", camera);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -99,7 +99,7 @@ void RendererBackend::Draw(Camera *camera, const glm::mat4 &projection)
     case CommandType::DrawPoints:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->SetUniformMat4("camera", camera->CalculateMatrix());
+      shader->SetUniformMat4("camera", camera);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -107,7 +107,7 @@ void RendererBackend::Draw(Camera *camera, const glm::mat4 &projection)
     case CommandType::DrawTextured:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->SetUniformMat4("camera", camera->CalculateMatrix());
+      shader->SetUniformMat4("camera", camera);
       auto texture = mTextureLibrary->GetTexture(command.mTextureHandle);
       texture.Bind();
     }

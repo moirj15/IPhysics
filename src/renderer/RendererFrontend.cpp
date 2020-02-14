@@ -1,9 +1,9 @@
 
 #include "RendererFrontend.h"
 
+#include "../voxelObjects/voxel.h"
 #include "RendererBackend.h"
 #include "window.h"
-#include "../voxelObjects/voxel.h"
 
 namespace Renderer
 {
@@ -32,8 +32,21 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxelMesh *vm)
   IMPLEMENTME();
   return 0;
 }
-void RendererFrontend::Draw(VMeshHandle handle)
+
+void RendererFrontend::DrawMesh(const u32 handle)
 {
+  DrawCommand dc(CommandType::DrawSolid, handle, 0, nullptr, glm::vec3(1.0f, 0.0f, 0.0f));
+  mBackend->SubmitCommand(dc);
 }
 
+void RendererFrontend::Draw()
+{
+  mBackend->Draw(mCamera, mProjection);
+}
+
+void RendererFrontend::Clear()
+{
+  mBackend->ClearCommandQueue();
+  mBackend->ClearScreen();
+}
 } // namespace Renderer

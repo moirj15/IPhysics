@@ -18,7 +18,6 @@ class RendererBackend;
 class RendererFrontend
 {
   std::unique_ptr<RendererBackend> mBackend;
-  std::unique_ptr<SceneList> mSceneList;
   glm::mat4 mCamera;
   glm::mat4 mProjection;
 
@@ -37,7 +36,9 @@ public:
   {
     mProjection = projection;
   }
-  void Draw(VMeshHandle handle);
+  void DrawMesh(const u32 handle);
+  void Draw();
+  void Clear();
 };
 
 } // namespace Renderer

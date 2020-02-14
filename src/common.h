@@ -1,4 +1,5 @@
 #pragma once
+#include <filesystem>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,9 +19,11 @@ typedef float f32;
 typedef double f64;
 typedef size_t Size;
 
+namespace fs = std::filesystem;
+
 #define ArraySize(X) (sizeof(X) / sizeof(X[0]))
 #define NODISCARD    [[nodiscard]]
-#define IMPLEMENTME()                                                                                \
+#define IMPLEMENTME()                                                                              \
   printf("IMPLEMENT %s %s %d\n", __FUNCTION__, __FILE__, __LINE__);                                \
   assert(0);
 

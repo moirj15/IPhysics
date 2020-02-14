@@ -111,7 +111,7 @@ public:
    * \param camera: The camera that will be used to draw the scene. \param projection: The
    * projection that will be used when drawing the scene.
    */
-  void Draw(Camera *camera, const glm::mat4 &projection);
+  void Draw(const glm::mat4 &camera, const glm::mat4 &projection);
   /**
    * \brief: Updates the screen with the results of a Draw() call.
    */

@@ -11,7 +11,7 @@
 
 namespace vx
 {
-struct VoxelMesh;
+class VoxelMesh;
 }
 
 struct ObjectSettings;
