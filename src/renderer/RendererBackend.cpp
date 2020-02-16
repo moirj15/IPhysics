@@ -17,7 +17,7 @@
 
 namespace Renderer
 {
-Window *InitAPI(s32 width, s32 height, const char *windowName)
+Window *InitAPI(const s32 width, const s32 height, const char *windowName)
 {
   if (!glfwInit())
   {
@@ -42,7 +42,7 @@ Window *InitAPI(s32 width, s32 height, const char *windowName)
   glEnable(GL_DEPTH_TEST);
   //  glCullFace(GL_BACK);
   glClearColor(0.0, 0.0, 0.0, 1.0);
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+  glPolygonMode(GL_FRONT, GL_FILL);
   glClearDepth(4.0);
   glDepthFunc(GL_LESS);
   return window;
@@ -84,6 +84,7 @@ void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
       auto *shader = GetShader(command.mType, true);
       shader->SetUniform3F("color", command.mColor);
       shader->SetUniformMat4("camera", camera);
+      shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_TRIANGLES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -92,6 +93,7 @@ void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
     {
       auto *shader = GetShader(command.mType, true);
       shader->SetUniformMat4("camera", camera);
+      shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -100,6 +102,7 @@ void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
     {
       auto *shader = GetShader(command.mType, true);
       shader->SetUniformMat4("camera", camera);
+      shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -108,6 +111,7 @@ void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
     {
       auto *shader = GetShader(command.mType, true);
       shader->SetUniformMat4("camera", camera);
+      shader->SetUniformMat4("projection", projection);
       auto texture = mTextureLibrary->GetTexture(command.mTextureHandle);
       texture.Bind();
     }

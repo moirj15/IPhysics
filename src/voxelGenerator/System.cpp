@@ -6,6 +6,7 @@
 
 #include "../renderer/RendererBackend.h"
 #include "../renderer/RendererFrontend.h"
+#include "../renderer/camera.h"
 #include "../renderer/mesh.h"
 #include "../renderer/window.h"
 #include "../utils/VoxelMeshManager.h"
@@ -23,13 +24,18 @@ System::System() :
     mRenderer(new Renderer::RendererFrontend(mWindow.get())), mCurrentMeshHandle(0)
 {
   mUI->Init(mWindow.get());
+  mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
 }
 System::~System() = default;
 
 void System::Run()
 {
+  Camera camera(
+      glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
   while (!mWindow->ShouldClose())
   {
+    mRenderer->SetCamera(camera.CalculateMatrix());
     mRenderer->Clear();
     glfwPollEvents();
     auto meshPath = mUI->LoadMeshClicked();
@@ -37,7 +43,7 @@ void System::Run()
     {
       if (fs::exists(*meshPath))
       {
-        VoxGen::ObjReader objReader;
+        ObjReader objReader;
         std::unique_ptr<Mesh> mesh(objReader.Parse(meshPath->c_str()));
         mRenderer->RemoveMesh(mCurrentMeshHandle);
         mCurrentMeshHandle = mRenderer->RegisterMesh(mesh.get());

@@ -20,7 +20,7 @@ class MeshLibrary;
 
 namespace Renderer
 {
-Window *InitAPI(s32 width, s32 height, const char *windowName);
+Window *InitAPI(const s32 width, const s32 height, const char *windowName);
 
 enum class CommandType : u32
 {
