@@ -1,7 +1,7 @@
 
 #include "RendererFrontend.h"
 
-#include "../voxelObjects/voxel.h"
+#include "../voxelObjects/VoxelMesh.h"
 #include "RendererBackend.h"
 #include "window.h"
 

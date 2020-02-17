@@ -8,8 +8,7 @@
 
 #include <memory>
 #include <unordered_map>
-
-namespace vx
+namespace VoxObj
 {
 class VoxelMesh;
 }
@@ -20,14 +19,14 @@ using VMeshHandle = u32;
 
 class VoxelMeshManager
 {
-  std::unordered_map<VMeshHandle , std::unique_ptr<vx::VoxelMesh>> mMeshes;
-  std::unordered_map<VMeshHandle , std::unique_ptr<ObjectSettings>> mSettings;
+  std::unordered_map<VMeshHandle, std::unique_ptr<VoxObj::VoxelMesh>> mMeshes;
+  std::unordered_map<VMeshHandle, std::unique_ptr<ObjectSettings>> mSettings;
 
 public:
   static VoxelMeshManager &Get();
-  VMeshHandle SubmitMesh(vx::VoxelMesh *mesh);
+  VMeshHandle SubmitMesh(VoxObj::VoxelMesh *mesh);
   void SubmitSettings(VMeshHandle handle, ObjectSettings *settings);
-  vx::VoxelMesh *GetMesh(VMeshHandle handle);
+  VoxObj::VoxelMesh *GetMesh(VMeshHandle handle);
   ObjectSettings *GetSettings(VMeshHandle handle);
 
   // Delete these to prevent copies

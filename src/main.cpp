@@ -30,44 +30,44 @@ int main(int argc, char **argv)
   (void)argc;
   (void)argv;
 
-  Window *window = Renderer::InitAPI(width, height, "IPhysics");
-  // InitIMGUI(window);
-  printf("%s\n", glGetString(GL_VERSION));
-  glDebugMessageCallback(ErrorCallback, nullptr);
-  glEnable(GL_DEBUG_OUTPUT);
-  f64 lastTime = glfwGetTime();
-
-  Renderer::RendererBackend renderer(window);
-
-  Mesh mesh;
-  mesh.mVertecies.assign({-0.8f, 0.0f, -0.8f, 0.8f, 0.0f, -0.0f, 0.8f, 0.8f, -0.8f});
-  mesh.mIndecies.assign({0, 1, 2});
-  auto handle = renderer.SubmitMesh(&mesh);
-
-  Camera camera;
-
-  Renderer::DrawCommand command(Renderer::CommandType::DrawSolid, handle);
-  command.mColor = {1.0f, 0.0f, 1.0f};
-  renderer.SubmitCommand(command);
-  Renderer::DrawCommand clearCommand(Renderer::CommandType::ClearDepthBuffer);
-  renderer.SubmitCommand(clearCommand);
-  Renderer::DrawCommand commandPoint(Renderer::CommandType::DrawPoints, handle);
-  renderer.SubmitCommand(commandPoint);
-
-  while (!window->ShouldClose())
-  {
-    glfwPollEvents();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    renderer.Draw(&camera, glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.5f, 100.0f));
-    renderer.UpdateScreen();
-    f64 currentTime = glfwGetTime();
-    f64 delta = (currentTime - lastTime);
-    lastTime = glfwGetTime();
-  }
-
-  // ImGui_ImplOpenGL3_Shutdown();
-  // ImGui_ImplGlfw_Shutdown();
-  // ImGui::DestroyContext();
+  // Window *window = Renderer::InitAPI(width, height, "IPhysics");
+  // // InitIMGUI(window);
+  // printf("%s\n", glGetString(GL_VERSION));
+  // glDebugMessageCallback(ErrorCallback, nullptr);
+  // glEnable(GL_DEBUG_OUTPUT);
+  // f64 lastTime = glfwGetTime();
+  //
+  // Renderer::RendererBackend renderer(window);
+  //
+  // Mesh mesh;
+  // mesh.mVertecies.assign({-0.8f, 0.0f, -0.8f, 0.8f, 0.0f, -0.0f, 0.8f, 0.8f, -0.8f});
+  // mesh.mIndecies.assign({0, 1, 2});
+  // auto handle = renderer.SubmitMesh(&mesh);
+  //
+  // Camera camera;
+  //
+  // Renderer::DrawCommand command(Renderer::CommandType::DrawSolid, handle);
+  // command.mColor = {1.0f, 0.0f, 1.0f};
+  // renderer.SubmitCommand(command);
+  // Renderer::DrawCommand clearCommand(Renderer::CommandType::ClearDepthBuffer);
+  // renderer.SubmitCommand(clearCommand);
+  // Renderer::DrawCommand commandPoint(Renderer::CommandType::DrawPoints, handle);
+  // renderer.SubmitCommand(commandPoint);
+  //
+  // while (!window->ShouldClose())
+  // {
+  //   glfwPollEvents();
+  //   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  //   renderer.Draw(&camera, glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.5f, 100.0f));
+  //   renderer.UpdateScreen();
+  //   f64 currentTime = glfwGetTime();
+  //   f64 delta = (currentTime - lastTime);
+  //   lastTime = glfwGetTime();
+  // }
+  //
+  // // ImGui_ImplOpenGL3_Shutdown();
+  // // ImGui_ImplGlfw_Shutdown();
+  // // ImGui::DestroyContext();
 
   return 0;
 }

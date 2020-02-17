@@ -17,6 +17,13 @@
 
 namespace Renderer
 {
+static void ErrorCallback(
+    GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const char *message,
+    const void *userParam)
+{
+  printf("%s\n", message);
+}
+
 Window *InitAPI(const s32 width, const s32 height, const char *windowName)
 {
   if (!glfwInit())
@@ -45,6 +52,9 @@ Window *InitAPI(const s32 width, const s32 height, const char *windowName)
   glPolygonMode(GL_FRONT, GL_FILL);
   glClearDepth(4.0);
   glDepthFunc(GL_LESS);
+
+  glDebugMessageCallback(ErrorCallback, nullptr);
+  glEnable(GL_DEBUG_OUTPUT);
   return window;
 }
 

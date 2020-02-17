@@ -8,43 +8,51 @@
 #include <glm/vec3.hpp>
 #include <vector>
 
-namespace vx
+namespace VoxObj
 {
 
 struct Voxel;
 
-struct VoxelNeighbor
-{
-  Voxel *mNeighbor;
-  glm::vec3 mAllowedRange;
-  glm::quat mAllowedRotation;
-
-  VoxelNeighbor(Voxel *neighbor, const glm::vec3 &allowedRange, const glm::quat &allowedRotation) :
-      mNeighbor(neighbor), mAllowedRange(allowedRange), mAllowedRotation(allowedRotation)
-  {
-  }
-};
+// struct VoxelNeighbor
+// {
+//   Voxel *mNeighbor;
+//   glm::vec3 mAllowedRange;
+//   glm::quat mAllowedRotation;
+//
+//   VoxelNeighbor(Voxel *neighbor, const glm::vec3 &allowedRange, const glm::quat &allowedRotation)
+//   :
+//       mNeighbor(neighbor), mAllowedRange(allowedRange), mAllowedRotation(allowedRotation)
+//   {
+//   }
+// };
 
 struct Voxel
 {
-  std::vector<VoxelNeighbor> mNeighbors;
-  glm::vec3 mPosition;
-  glm::quat mRotation;
-  glm::vec3 mPrevPosition;
-  glm::quat mPrevRotation;
+  glm::vec3 mDimensions;
+  std::vector<glm::vec3> mNeighbors;
+  std::vector<u32> mMeshVerteciess;
 
-  Voxel(const glm::vec3 &position) :
-      mNeighbors(), mPosition(position), mRotation(), mPrevPosition(position),
-      mPrevRotation(mRotation)
+  Voxel() = default;
+
+  explicit Voxel(const f32 dimmensions) : mDimensions(dimmensions)
+  {
+  }
+
+  explicit Voxel(const Voxel &v) :
+      mDimensions(v.mDimensions), mNeighbors(v.mNeighbors), mMeshVerteciess(v.mMeshVerteciess)
   {
   }
 };
 
-class VoxelMesh
-{
-  Mesh *mMesh;
-public:
-  Mesh *GetMesh() const { return mMesh; }
-};
+// class VoxelMesh
+// {
+//   Mesh *mMesh;
+//
+// public:
+//   Mesh *GetMesh() const
+//   {
+//     return mMesh;
+//   }
+// };
 
-} // namespace vx
+} // namespace VoxObj

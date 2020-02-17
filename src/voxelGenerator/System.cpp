@@ -10,6 +10,7 @@
 #include "../renderer/mesh.h"
 #include "../renderer/window.h"
 #include "../utils/VoxelMeshManager.h"
+#include "Voxelizer.h"
 #include "VoxelizerUI.h"
 #include "obj.h"
 
@@ -21,7 +22,8 @@ namespace VoxGen
 
 System::System() :
     mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator")), mUI(new VoxelizerUI()),
-    mRenderer(new Renderer::RendererFrontend(mWindow.get())), mCurrentMeshHandle(0)
+    mRenderer(new Renderer::RendererFrontend(mWindow.get())), mVoxelizer(new Voxelizer()),
+    mCurrentMeshHandle(0)
 {
   mUI->Init(mWindow.get());
   mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
@@ -35,27 +37,35 @@ void System::Run()
 
   while (!mWindow->ShouldClose())
   {
+    // TODO: add camera movement features
     mRenderer->SetCamera(camera.CalculateMatrix());
     mRenderer->Clear();
     glfwPollEvents();
     auto meshPath = mUI->LoadMeshClicked();
     if (meshPath)
     {
+      // Load our mesh if we got a good path
       if (fs::exists(*meshPath))
       {
         ObjReader objReader;
-        std::unique_ptr<Mesh> mesh(objReader.Parse(meshPath->c_str()));
+        mMesh.reset(objReader.Parse(meshPath->c_str()));
         mRenderer->RemoveMesh(mCurrentMeshHandle);
-        mCurrentMeshHandle = mRenderer->RegisterMesh(mesh.get());
+        mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
       }
       else
       {
         // TODO: pop-up or something
       }
     }
+    // Only draw if we have a mesh
     if (mCurrentMeshHandle != 0)
     {
       mRenderer->DrawMesh(mCurrentMeshHandle);
+      if (mUI->GenerateVoxelsClicked())
+      {
+        mVoxelizer->SetParameters(mUI->GetParameters());
+        mVoxelizer->Voxelize(mMesh.get());
+      }
     }
 
     mRenderer->Draw();

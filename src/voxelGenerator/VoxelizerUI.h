@@ -5,6 +5,7 @@
 #pragma once
 
 #include "../common.h"
+#include "VoxelizerParameters.h"
 
 #include <optional>
 #include <string>
@@ -17,16 +18,6 @@ namespace VoxGen
 class VoxelizerUI
 {
 public:
-  struct Parameters
-  {
-    f32 mVoxelSize;
-    bool mHollow;
-
-    Parameters() : mVoxelSize(1.0f), mHollow(false)
-    {
-    }
-  };
-
 private:
   std::string mMeshFileName;
   std::string mVoxelMeshFileName;

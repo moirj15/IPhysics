@@ -3,22 +3,20 @@
 //
 
 #include "VoxelMeshManager.h"
-#include "../voxelObjects/voxel.h"
+
+#include "../voxelObjects/VoxelMesh.h"
 
 struct ObjectSettings
 {
 };
 
-struct VoxelMesh
-{
-};
 VoxelMeshManager &VoxelMeshManager::Get()
 {
   static VoxelMeshManager meshManager;
   return meshManager;
 }
 
-VMeshHandle VoxelMeshManager::SubmitMesh(vx::VoxelMesh *mesh)
+VMeshHandle VoxelMeshManager::SubmitMesh(VoxObj::VoxelMesh *mesh)
 {
   static VMeshHandle h = 0;
   h++;
@@ -31,7 +29,7 @@ void VoxelMeshManager::SubmitSettings(VMeshHandle handle, ObjectSettings *settin
   mSettings.emplace(handle, settings);
 }
 
-vx::VoxelMesh *VoxelMeshManager::GetMesh(const VMeshHandle handle)
+VoxObj::VoxelMesh *VoxelMeshManager::GetMesh(const VMeshHandle handle)
 {
   return mMeshes[handle].get();
 }
