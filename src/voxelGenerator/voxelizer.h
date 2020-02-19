@@ -35,7 +35,7 @@ private:
   std::vector<std::array<rp3d::Vector3, 3>> FindTriangleAABBs(Mesh *mesh);
 
   VoxObj::VoxelMesh GenerateVoxels(
-      const std::vector<std::array<rp3d::Vector3, 3>> &triangleAABBs, const rp3d::AABB &meshAABB,
+      const std::vector<std::array<rp3d::Vector3, 3>> &meshTriangles, const rp3d::AABB &meshAABB,
       Mesh *mesh);
 };
 

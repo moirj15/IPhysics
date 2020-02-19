@@ -81,30 +81,32 @@ std::vector<std::array<rp3d::Vector3, 3>> Voxelizer::FindTriangleAABBs(Mesh *mes
 }
 
 VoxObj::VoxelMesh Voxelizer::GenerateVoxels(
-    const std::vector<std::array<rp3d::Vector3, 3>> &triangleAABBs, const rp3d::AABB &meshAABB,
+    const std::vector<std::array<rp3d::Vector3, 3>> &meshTriangles, const rp3d::AABB &meshAABB,
     Mesh *mesh)
 {
   glm::vec3 aabbExtents(
       glm::ceil(glm::vec3(meshAABB.getExtent().x, meshAABB.getExtent().y, meshAABB.getExtent().z)));
+  // Calculate the extents of the voxel mesh in discrete voxel space
   glm::ivec3 voxelMeshExtents(aabbExtents / mParameters.mVoxelSize);
   VoxObj::VoxelMesh voxelMesh(voxelMeshExtents, aabbExtents, mesh);
   const auto &minCoords = meshAABB.getMin();
-  for (u32 x = 0; x < voxelMeshExtents.x; x++)
+  for (s32 x = 0; x < voxelMeshExtents.x; x++)
   {
-    for (u32 y = 0; y < voxelMeshExtents.y; y++)
+    for (s32 y = 0; y < voxelMeshExtents.y; y++)
     {
-      for (u32 z = 0; z < voxelMeshExtents.z; z++)
+      for (s32 z = 0; z < voxelMeshExtents.z; z++)
       {
-        // TODO: there's something wrong with this offset, cuases the (1, 1, 1) voxel to have
-        // min=max
+        // Calculate the offset used to create the AABB used to represent the voxel
         rp3d::Vector3 offset(
             f32(x) * mParameters.mVoxelSize, f32(y) * mParameters.mVoxelSize,
             f32(z) * mParameters.mVoxelSize);
         rp3d::AABB voxel(
             minCoords + offset,
-            rp3d::Vector3(mParameters.mVoxelSize, mParameters.mVoxelSize, mParameters.mVoxelSize)
-                + minCoords);
-        for (const auto &aabb : triangleAABBs)
+            minCoords
+                + (offset
+                   + rp3d::Vector3(
+                       mParameters.mVoxelSize, mParameters.mVoxelSize, mParameters.mVoxelSize)));
+        for (const auto &aabb : meshTriangles)
         {
           if (voxel.testCollisionTriangleAABB(aabb.data()))
           {
