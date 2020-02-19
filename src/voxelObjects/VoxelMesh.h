@@ -48,22 +48,25 @@ namespace VoxObj
 
 class VoxelMesh
 {
-  glm::ivec3 mExtents;
+  glm::ivec3 mExtentsVoxelSpace;
+  glm::vec3 mExtentsObjectSpace;
   std::unordered_map<glm::ivec3, Voxel> mVoxels;
-  Mesh *mMesh; // TODO: maybe replace this with a MeshID
+  Mesh *mMesh;
+
 public:
-  VoxelMesh(const glm::ivec3 extents, Mesh *mesh) : mExtents(extents), mMesh(mesh)
+  VoxelMesh(const glm::ivec3 extentsVoxelSpace, const glm::vec3 &extentsObjectSpace, Mesh *mesh) :
+      mExtentsVoxelSpace(extentsVoxelSpace), mExtentsObjectSpace(extentsObjectSpace), mMesh(mesh)
   {
   }
 
   NODISCARD inline const Voxel &GetVoxel(const glm::ivec3 &position)
   {
-    assert(glm::all(glm::lessThan(position, mExtents)));
+    assert(glm::all(glm::lessThan(position, mExtentsVoxelSpace)));
     return mVoxels[position];
   }
   inline void SetVoxel(const glm::ivec3 &position, const Voxel &voxel)
   {
-    assert(glm::all(glm::lessThan(position, mExtents)));
+    assert(glm::all(glm::lessThan(position, mExtentsVoxelSpace)));
     mVoxels.emplace(position, voxel);
   }
 

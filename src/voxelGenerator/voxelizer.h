@@ -5,6 +5,7 @@
 #include "../voxelObjects/voxel.h"
 #include "VoxelizerParameters.h"
 
+#include <array>
 #include <reactphysics3d.h>
 #include <vector>
 
@@ -31,10 +32,11 @@ public:
 
 private:
   rp3d::AABB FindMeshAABB(Mesh *mesh);
-  std::vector<rp3d::AABB> FindTriangleAABBs(Mesh *mesh);
+  std::vector<std::array<rp3d::Vector3, 3>> FindTriangleAABBs(Mesh *mesh);
 
   VoxObj::VoxelMesh GenerateVoxels(
-      const std::vector<rp3d::AABB> &triangleAABBs, const rp3d::AABB &meshAABB, Mesh *mesh);
+      const std::vector<std::array<rp3d::Vector3, 3>> &triangleAABBs, const rp3d::AABB &meshAABB,
+      Mesh *mesh);
 };
 
 } // namespace VoxGen
