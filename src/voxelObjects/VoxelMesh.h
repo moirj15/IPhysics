@@ -48,23 +48,23 @@ namespace VoxObj
 
 class VoxelMesh
 {
-  glm::ivec3 mExtentsVoxelSpace;
+  glm::uvec3 mExtentsVoxelSpace;
   glm::vec3 mExtentsObjectSpace;
-  std::unordered_map<glm::ivec3, Voxel> mVoxels;
+  std::unordered_map<glm::uvec3, Voxel> mVoxels;
   Mesh *mMesh;
 
 public:
-  VoxelMesh(const glm::ivec3 extentsVoxelSpace, const glm::vec3 &extentsObjectSpace, Mesh *mesh) :
+  VoxelMesh(const glm::uvec3 extentsVoxelSpace, const glm::vec3 &extentsObjectSpace, Mesh *mesh) :
       mExtentsVoxelSpace(extentsVoxelSpace), mExtentsObjectSpace(extentsObjectSpace), mMesh(mesh)
   {
   }
 
-  NODISCARD inline const Voxel &GetVoxel(const glm::ivec3 &position)
+  NODISCARD inline const Voxel &GetVoxel(const glm::uvec3 &position)
   {
     assert(glm::all(glm::lessThan(position, mExtentsVoxelSpace)));
     return mVoxels[position];
   }
-  inline void SetVoxel(const glm::ivec3 &position, const Voxel &voxel)
+  inline void SetVoxel(const glm::uvec3 &position, const Voxel &voxel)
   {
     assert(glm::all(glm::lessThan(position, mExtentsVoxelSpace)));
     mVoxels.emplace(position, voxel);
@@ -73,6 +73,14 @@ public:
   NODISCARD inline Mesh *GetMesh() const
   {
     return mMesh;
+  }
+  NODISCARD inline const glm::uvec3 &GetExtentsVoxelSpace() const
+  {
+    return mExtentsVoxelSpace;
+  }
+  NODISCARD inline bool IsVoxelPresent(const glm::ivec3 &position) const
+  {
+    return mVoxels.find(position) != mVoxels.end();
   }
 };
 

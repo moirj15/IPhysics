@@ -19,7 +19,7 @@ class Voxelizer
   Parameters mParameters;
 
 public:
-  std::vector<VoxObj::Voxel> Voxelize(Mesh *mesh);
+  VoxObj::VoxelMesh Voxelize(Mesh *mesh);
 
   inline void SetParameters(const Parameters &parameters)
   {
@@ -37,6 +37,7 @@ private:
   VoxObj::VoxelMesh GenerateVoxels(
       const std::vector<std::array<rp3d::Vector3, 3>> &meshTriangles, const rp3d::AABB &meshAABB,
       Mesh *mesh);
+  void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);
 };
 
 } // namespace VoxGen
