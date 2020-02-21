@@ -19,7 +19,7 @@ class Voxelizer
   Parameters mParameters;
 
 public:
-  VoxObj::VoxelMesh Voxelize(Mesh *mesh);
+  NODISCARD VoxObj::VoxelMesh Voxelize(Mesh *mesh);
 
   inline void SetParameters(const Parameters &parameters)
   {
@@ -31,10 +31,10 @@ public:
   }
 
 private:
-  rp3d::AABB FindMeshAABB(Mesh *mesh);
-  std::vector<std::array<rp3d::Vector3, 3>> FindTriangleAABBs(Mesh *mesh);
+  NODISCARD rp3d::AABB FindMeshAABB(Mesh *mesh);
+  NODISCARD std::vector<std::array<rp3d::Vector3, 3>> FindTriangleAABBs(Mesh *mesh);
 
-  VoxObj::VoxelMesh GenerateVoxels(
+  NODISCARD VoxObj::VoxelMesh GenerateVoxels(
       const std::vector<std::array<rp3d::Vector3, 3>> &meshTriangles, const rp3d::AABB &meshAABB,
       Mesh *mesh);
   void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);

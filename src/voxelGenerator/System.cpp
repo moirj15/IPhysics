@@ -10,6 +10,7 @@
 #include "../renderer/mesh.h"
 #include "../renderer/window.h"
 #include "../utils/VoxelMeshManager.h"
+#include "../voxelObjects/VoxelMesh.h"
 #include "Voxelizer.h"
 #include "VoxelizerUI.h"
 #include "obj.h"
@@ -23,7 +24,7 @@ namespace VoxGen
 System::System() :
     mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator")), mUI(new VoxelizerUI()),
     mRenderer(new Renderer::RendererFrontend(mWindow.get())), mVoxelizer(new Voxelizer()),
-    mCurrentMeshHandle(0)
+    mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
   mUI->Init(mWindow.get());
   mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
@@ -64,8 +65,14 @@ void System::Run()
       if (mUI->GenerateVoxelsClicked())
       {
         mVoxelizer->SetParameters(mUI->GetParameters());
-        mVoxelizer->Voxelize(mMesh.get());
+        mVoxelMesh.reset(new VoxObj::VoxelMesh(mVoxelizer->Voxelize(mMesh.get())));
+        mRenderer->RemoveMesh(mCurrentVoxelMeshHandle);
+        mCurrentVoxelMeshHandle = mRenderer->RegisterVoxelMesh(mVoxelMesh.get());
       }
+    }
+    if (mCurrentVoxelMeshHandle != 0)
+    {
+      mRenderer->DrawMesh(mCurrentVoxelMeshHandle);
     }
 
     mRenderer->Draw();

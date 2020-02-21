@@ -11,21 +11,6 @@
 namespace VoxObj
 {
 
-struct Voxel;
-
-// struct VoxelNeighbor
-// {
-//   Voxel *mNeighbor;
-//   glm::vec3 mAllowedRange;
-//   glm::quat mAllowedRotation;
-//
-//   VoxelNeighbor(Voxel *neighbor, const glm::vec3 &allowedRange, const glm::quat &allowedRotation)
-//   :
-//       mNeighbor(neighbor), mAllowedRange(allowedRange), mAllowedRotation(allowedRotation)
-//   {
-//   }
-// };
-
 struct Voxel
 {
   glm::vec3 mDimensions;
@@ -43,16 +28,5 @@ struct Voxel
   {
   }
 };
-
-// class VoxelMesh
-// {
-//   Mesh *mMesh;
-//
-// public:
-//   Mesh *GetMesh() const
-//   {
-//     return mMesh;
-//   }
-// };
 
 } // namespace VoxObj

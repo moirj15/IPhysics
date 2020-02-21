@@ -11,9 +11,13 @@ struct Mesh;
 struct Window;
 
 namespace Renderer
-
 {
 class RendererFrontend;
+}
+
+namespace VoxObj
+{
+class VoxelMesh;
 }
 
 namespace VoxGen
@@ -28,7 +32,9 @@ class System
   std::unique_ptr<Renderer::RendererFrontend> mRenderer;
   std::unique_ptr<Voxelizer> mVoxelizer;
   std::unique_ptr<Mesh> mMesh;
+  std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;
   u32 mCurrentMeshHandle;
+  u32 mCurrentVoxelMeshHandle;
 
 public:
   System();

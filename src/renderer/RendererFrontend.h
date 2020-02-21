@@ -7,9 +7,12 @@
 #include <memory>
 
 struct Window;
-class VoxelMesh;
 struct Mesh;
-class SceneList;
+
+namespace VoxObj
+{
+class VoxelMesh;
+}
 namespace Renderer
 {
 
@@ -27,7 +30,7 @@ public:
 
   NODISCARD u32 RegisterMeshHandle(VMeshHandle meshHandle);
   NODISCARD u32 RegisterMesh(Mesh *mesh);
-  NODISCARD u32 RegisterVoxelMesh(VoxelMesh *vm);
+  NODISCARD u32 RegisterVoxelMesh(VoxObj::VoxelMesh *vm);
   inline void SetCamera(const glm::mat4 &camera)
   {
     mCamera = camera;

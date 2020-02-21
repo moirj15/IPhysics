@@ -14,38 +14,6 @@ struct Mesh;
 namespace VoxObj
 {
 
-// class VoxelPlane
-// {
-//   u32 mWidth;
-//   u32 mHeight;
-//   std::vector<std::vector<Voxel>> mVoxels;
-//
-// public:
-//   VoxelPlane(const u32 width, const u32 height) :
-//       mWidth(width), mHeight(height), mVoxels(mWidth, std::vector<Voxel>(mHeight, Voxel()))
-//   {
-//   }
-//
-//   NODISCARD inline Voxel GetVoxel(const glm::ivec2 &position) const
-//   {
-//     return mVoxels[position.x][position.y];
-//   }
-//
-//   NODISCARD inline u32 GetWidth() const
-//   {
-//     return mWidth;
-//   }
-//   NODISCARD inline u32 GetHeight() const
-//   {
-//     return mHeight;
-//   }
-//
-//   NODISCARD inline std::vector<Voxel> &operator[](const u32 index)
-//   {
-//     return mVoxels[index];
-//   }
-// };
-
 class VoxelMesh
 {
   glm::uvec3 mExtentsVoxelSpace;
@@ -58,11 +26,22 @@ public:
       mExtentsVoxelSpace(extentsVoxelSpace), mExtentsObjectSpace(extentsObjectSpace), mMesh(mesh)
   {
   }
+  VoxelMesh(VoxelMesh &&v) :
+      mExtentsVoxelSpace(std::move(v.mExtentsVoxelSpace)),
+      mExtentsObjectSpace(std::move(v.mExtentsObjectSpace)), mVoxels(std::move(v.mVoxels)),
+      mMesh(std::move(v.mMesh))
+  {
+  }
 
   NODISCARD inline const Voxel &GetVoxel(const glm::uvec3 &position)
   {
     assert(glm::all(glm::lessThan(position, mExtentsVoxelSpace)));
     return mVoxels[position];
+  }
+
+  NODISCARD inline std::unordered_map<glm::uvec3, Voxel> GetVoxels() const
+  {
+    return mVoxels;
   }
   inline void SetVoxel(const glm::uvec3 &position, const Voxel &voxel)
   {
@@ -78,6 +57,12 @@ public:
   {
     return mExtentsVoxelSpace;
   }
+
+  NODISCARD inline glm::vec3 GetVoxelSize() const
+  {
+    return mExtentsObjectSpace / glm::vec3(mExtentsVoxelSpace);
+  }
+
   NODISCARD inline bool IsVoxelPresent(const glm::ivec3 &position) const
   {
     return mVoxels.find(position) != mVoxels.end();
