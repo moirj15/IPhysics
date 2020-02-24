@@ -59,11 +59,11 @@ void System::CollectInput()
   }
   if (io.KeysDown[GLFW_KEY_W] && !io.WantCaptureKeyboard)
   {
-    mCamera.Move(glm::vec3(0.0f, 0.0f, -1.0f) * boost * io.DeltaTime);
+    mCamera.Move(glm::vec3(0.0f, 0.0f, 1.0f) * boost * io.DeltaTime);
   }
   if (io.KeysDown[GLFW_KEY_S] && !io.WantCaptureKeyboard)
   {
-    mCamera.Move(glm::vec3(0.0f, 0.0f, 1.0f) * boost * io.DeltaTime);
+    mCamera.Move(glm::vec3(0.0f, 0.0f, -1.0f) * boost * io.DeltaTime);
   }
   if (io.KeysDown[GLFW_KEY_A] && !io.WantCaptureKeyboard)
   {
@@ -73,11 +73,20 @@ void System::CollectInput()
   {
     mCamera.Move(glm::vec3(1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
   }
+  if (io.KeysDown[GLFW_KEY_E] && !io.WantCaptureKeyboard)
+  {
+    mCamera.Move(glm::vec3(0.0f, 1.0f, 0.0f) * boost * io.DeltaTime);
+  }
+  if (io.KeysDown[GLFW_KEY_Q] && !io.WantCaptureKeyboard)
+  {
+    mCamera.Move(glm::vec3(0.0f, -1.0f, 0.0f) * boost * io.DeltaTime);
+  }
   if (!io.WantCaptureMouse && io.MouseDown[0])
   {
     f32 screenWidth = f32(mWindow->GetWidth());
     f32 screenHeight = f32(mWindow->GetHeight());
-    glm::vec2 mouseDelta((screenWidth) - (io.MousePos.x), (screenHeight / 2.0f) - (io.MousePos.y));
+    glm::vec2 mouseDelta(
+        (screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
     // glm::vec2 mouseDelta(io.MouseDelta.x, io.MouseDelta.y);
     mCamera.Rotate(mouseDelta);
   }

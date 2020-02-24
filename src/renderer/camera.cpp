@@ -7,14 +7,13 @@
 void Camera::Move(const glm::vec3 &velocity)
 {
   mRecalculate = true;
-  mPosition += mTarget * velocity.z;
-  mPosition += mStrafe * velocity.x;
+  mPosition += (mStrafe * velocity.x) + (mUp * velocity.y) + (mTarget * velocity.z);
 }
 
 void Camera::Rotate(glm::vec2 angle)
 {
   mRecalculate = true;
-  mAngles += glm::radians(angle * 0.05f);
+  mAngles += glm::radians(angle * 0.005f);
   if (mAngles.y > glm::radians(89.0f))
   {
     mAngles.y = glm::radians(89.0f);
@@ -24,12 +23,9 @@ void Camera::Rotate(glm::vec2 angle)
     mAngles.y = glm::radians(-89.0f);
   }
 
-  // mTarget.x = glm::cos(glm::radians(mAngles.x)) * glm::cos(glm::radians(mAngles.y));
-  // mTarget.y = glm::sin(glm::radians(mAngles.y));
-  // mTarget.z = glm::sin(glm::radians(mAngles.x)) * glm::cos(glm::radians(mAngles.y));
-  mTarget =
-      glm::rotate(glm::rotate(mAngles.x, X_AXIS), mAngles.y, Y_AXIS) * glm::vec4(mTarget, 1.0f);
-  mTarget = glm::normalize(mTarget);
+  mTarget = glm::normalize(
+      glm::vec3(cos(mAngles.y) * sin(mAngles.x), sin(mAngles.y), cos(mAngles.y) * cos(mAngles.x)));
+  mStrafe = glm::cross(mTarget, mUp);
 }
 
 glm::mat4 Camera::CalculateMatrix()
