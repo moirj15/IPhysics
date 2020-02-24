@@ -3,8 +3,6 @@
 
 struct GLFWwindow;
 
-
-
 struct Window
 {
   s32 mWidth;
@@ -21,4 +19,12 @@ struct Window
   ~Window();
 
   bool ShouldClose();
+  NODISCARD s32 GetWidth() const
+  {
+    return mWidth;
+  }
+  NODISCARD s32 GetHeight() const
+  {
+    return mHeight;
+  }
 };

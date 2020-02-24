@@ -7,6 +7,7 @@ file(GLOB SRC_UTILS_FILES "src/utils/*")
 file(GLOB SRC_RENDERER_FILES "src/renderer/*")
 file(GLOB SRC_PHYSICS_FILES "src/physics/*")
 file(GLOB SRC_VOXEL_GENERATOR "src/voxelGenerator/*")
+file(GLOB SRC_INPUT_FILES "src/Input/*")
 
 
 set(SOURCE_LIST_MAIN_PROJECT
@@ -14,6 +15,7 @@ set(SOURCE_LIST_MAIN_PROJECT
 	${SRC_RENDERER_FILES}
 	${SRC_PHYSICS_FILES}
 	${IMGUI_FILES}
+	${SRC_INPUT_FILES}
   src/main.cpp
 )
 
@@ -22,6 +24,7 @@ set(SOURCE_LIST_VOXEL_GENERATOR
     ${SRC_VOXEL_GENERATOR}
 	${SRC_RENDERER_FILES}
 	${IMGUI_FILES}
+	${SRC_INPUT_FILES}
 )
 
 

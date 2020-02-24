@@ -4,6 +4,7 @@
 
 #pragma once
 #include "../common.h"
+#include "../renderer/camera.h"
 
 #include <memory>
 
@@ -33,6 +34,8 @@ class System
   std::unique_ptr<Voxelizer> mVoxelizer;
   std::unique_ptr<Mesh> mMesh;
   std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;
+
+  Camera mCamera;
   u32 mCurrentMeshHandle;
   u32 mCurrentVoxelMeshHandle;
 
@@ -41,6 +44,12 @@ public:
   ~System();
 
   void Run();
+
+private:
+  void CollectInput();
+  void LoadMesh();
+  void GenerateVoxels();
+  void Render();
 };
 
 } // namespace VoxGen
