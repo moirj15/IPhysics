@@ -2,6 +2,7 @@
 #pragma once
 
 #include "../common.h"
+#include "ShaderData.h"
 #include "indexBufferObject.h"
 
 #include <glm/mat4x4.hpp>
@@ -25,6 +26,7 @@ Window *InitAPI(const s32 width, const s32 height, const char *windowName);
 enum class CommandType : u32
 {
   DrawSolid,
+  DrawSolidFlatShade,
   DrawLine,
   DrawPoints,
   DrawTextured,
@@ -38,8 +40,8 @@ struct DrawCommand
   u32 mMeshHandle = 0;
   u32 mTextureHandle = 0;
   Mesh *mMesh = nullptr;
-  glm::vec3 mColor = {0.0f, 0.0f, 0.0f};
   Texture2D *mTexture2D = nullptr;
+  std::vector<ShaderData> mShaderData;
 
   DrawCommand() = default;
   /**
@@ -51,12 +53,17 @@ struct DrawCommand
    * \param color: A color.
    * \param texture2D: A pointer to a Texture2D object.
    */
-  DrawCommand(
+  explicit DrawCommand(
       const CommandType type, const u32 meshHandle = 0, const u32 textureHandle = 0,
-      Mesh *mesh = nullptr, const glm::vec3 &color = {0.0f, 0.0f, 0.0f},
-      Texture2D *texture2D = nullptr) :
+      Mesh *mesh = nullptr, Texture2D *texture2D = nullptr) :
       mType(type),
-      mMeshHandle(meshHandle), mTextureHandle(textureHandle), mMesh(mesh), mColor(color)
+      mMeshHandle(meshHandle), mTextureHandle(textureHandle), mMesh(mesh)
+  {
+  }
+  explicit DrawCommand(
+      const CommandType type, const u32 meshHandle, std::vector<ShaderData> &shaderData) :
+      mType(type),
+      mMeshHandle(meshHandle), mShaderData(shaderData)
   {
   }
 };
@@ -105,13 +112,7 @@ public:
    * \return: A handle for accessing the texture.
    */
   u32 SubmitTexture(Texture2D *texture);
-  /**
-   * \brief: Draw the scene using the given camera, projection, and the contents of the command
-   * queue.
-   * \param camera: The camera that will be used to draw the scene. \param projection: The
-   * projection that will be used when drawing the scene.
-   */
-  void Draw(const glm::mat4 &camera, const glm::mat4 &projection);
+  void Draw();
   /**
    * \brief: Updates the screen with the results of a Draw() call.
    */

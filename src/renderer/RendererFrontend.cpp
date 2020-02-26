@@ -3,14 +3,16 @@
 
 #include "../voxelObjects/VoxelMesh.h"
 #include "RendererBackend.h"
+#include "ShaderData.h"
+#include "camera.h"
 #include "window.h"
 
 #include <glm/gtx/transform.hpp>
 namespace Renderer
 {
 
-RendererFrontend::RendererFrontend(Window *window) :
-    mBackend(new RendererBackend(window)), mCamera(1.0f), mProjection(1.0f)
+RendererFrontend::RendererFrontend(Window *window, Camera *camera) :
+    mBackend(new RendererBackend(window)), mCamera(camera), mProjection(1.0f)
 {
 }
 
@@ -82,13 +84,18 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
 
 void RendererFrontend::DrawMesh(const u32 handle)
 {
-  DrawCommand dc(CommandType::DrawSolid, handle, 0, nullptr, glm::vec3(1.0f, 0.0f, 0.0f));
+  std::vector<ShaderData> shaderData = {
+      ShaderData("camera", mCamera->CalculateMatrix()),
+      ShaderData("projection", mProjection),
+      ShaderData("lightPosition", mCamera->GetPosition()),
+  };
+  DrawCommand dc(CommandType::DrawSolidFlatShade, handle, shaderData);
   mBackend->SubmitCommand(dc);
 }
 
 void RendererFrontend::Draw()
 {
-  mBackend->Draw(mCamera, mProjection);
+  mBackend->Draw();
 }
 
 void RendererFrontend::Clear()

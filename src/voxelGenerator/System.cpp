@@ -24,10 +24,10 @@ namespace VoxGen
 {
 
 System::System() :
-    mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator")), mUI(new VoxelizerUI()),
-    mRenderer(new Renderer::RendererFrontend(mWindow.get())), mVoxelizer(new Voxelizer()),
     mCamera(
         glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+    mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator")), mUI(new VoxelizerUI()),
+    mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)), mVoxelizer(new Voxelizer()),
     mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
   mUI->Init(mWindow.get());
@@ -125,7 +125,6 @@ void System::GenerateVoxels()
 
 void System::Render()
 {
-  mRenderer->SetCamera(mCamera.CalculateMatrix());
   mRenderer->Clear();
 
   if (mCurrentMeshHandle != 0)

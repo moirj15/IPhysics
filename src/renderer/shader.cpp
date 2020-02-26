@@ -132,19 +132,19 @@ void Shader::SetShaderData(const ShaderData &shaderData)
 {
   switch (shaderData.type)
   {
-  case ShaderData::Vec2:
+  case ShaderData::DataType::Vec2:
     SetUniform2F(shaderData.name, shaderData.v2);
     break;
-  case ShaderData::Vec3:
+  case ShaderData::DataType::Vec3:
     SetUniform3F(shaderData.name, shaderData.v3);
     break;
-  case ShaderData::Vec4:
+  case ShaderData::DataType::Vec4:
     SetUniform4F(shaderData.name, shaderData.v4);
     break;
-  case ShaderData::Mat3:
+  case ShaderData::DataType::Mat3:
     SetUniformMat3(shaderData.name, shaderData.m3);
     break;
-  case ShaderData::Mat4:
+  case ShaderData::DataType::Mat4:
     SetUniformMat4(shaderData.name, shaderData.m4);
     break;
   }

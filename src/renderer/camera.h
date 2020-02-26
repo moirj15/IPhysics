@@ -33,4 +33,8 @@ public:
   void Rotate(glm::vec2 angle);
 
   NODISCARD glm::mat4 CalculateMatrix();
+  NODISCARD inline const glm::vec3 &GetPosition() const
+  {
+    return mPosition;
+  }
 };

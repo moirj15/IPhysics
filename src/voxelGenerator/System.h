@@ -28,6 +28,7 @@ class Voxelizer;
 
 class System
 {
+  Camera mCamera;
   std::unique_ptr<Window> mWindow;
   std::unique_ptr<VoxelizerUI> mUI;
   std::unique_ptr<Renderer::RendererFrontend> mRenderer;
@@ -35,7 +36,6 @@ class System
   std::unique_ptr<Mesh> mMesh;
   std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;
 
-  Camera mCamera;
   u32 mCurrentMeshHandle;
   u32 mCurrentVoxelMeshHandle;
 

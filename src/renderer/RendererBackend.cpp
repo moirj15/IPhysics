@@ -70,6 +70,8 @@ RendererBackend::RendererBackend(Window *window) :
       std::vector<std::string>({"../shaders/pointShader.vert", "../shaders/pointShader.frag"}));
   mShaderLibrary->Add(
       std::vector<std::string>({"../shaders/textureShader.vert", "../shaders/textureShader.frag"}));
+  mShaderLibrary->Add(
+      std::vector<std::string>({"../shaders/flatShader.vert", "../shaders/flatShader.frag"}));
 }
 
 u32 RendererBackend::SubmitMesh(Mesh *mesh)
@@ -83,18 +85,23 @@ u32 RendererBackend::SubmitTexture(Texture2D *texture)
   return mTextureLibrary->Add(glTexture2D);
 }
 
-void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
+void RendererBackend::Draw()
 {
   for (const auto &command : mCommandQueue)
   {
+
+    auto *shader = GetShader(command.mType, true);
+    shader->SetShaderData(command.mShaderData);
     switch (command.mType)
     {
     case CommandType::DrawSolid:
+    case CommandType::DrawSolidFlatShade:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->SetUniform3F("color", command.mColor);
-      shader->SetUniformMat4("camera", camera);
-      shader->SetUniformMat4("projection", projection);
+
+      // shader->SetUniform3F("color", command.mColor);
+      // shader->SetUniformMat4("camera", camera);
+      // shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_TRIANGLES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -102,8 +109,8 @@ void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
     case CommandType::DrawLine:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->SetUniformMat4("camera", camera);
-      shader->SetUniformMat4("projection", projection);
+      // shader->SetUniformMat4("camera", camera);
+      // shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -111,8 +118,8 @@ void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
     case CommandType::DrawPoints:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->SetUniformMat4("camera", camera);
-      shader->SetUniformMat4("projection", projection);
+      // shader->SetUniformMat4("camera", camera);
+      // shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
       glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
     }
@@ -120,8 +127,8 @@ void RendererBackend::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
     case CommandType::DrawTextured:
     {
       auto *shader = GetShader(command.mType, true);
-      shader->SetUniformMat4("camera", camera);
-      shader->SetUniformMat4("projection", projection);
+      // shader->SetUniformMat4("camera", camera);
+      // shader->SetUniformMat4("projection", projection);
       auto texture = mTextureLibrary->GetTexture(command.mTextureHandle);
       texture.Bind();
     }
@@ -166,6 +173,9 @@ Shader *RendererBackend::GetShader(const CommandType type, bool bind)
   case CommandType::DrawSolid:
   case CommandType::DrawLine:
     shader = mShaderLibrary->GetProgram("flatColorShader");
+    break;
+  case CommandType::DrawSolidFlatShade:
+    shader = mShaderLibrary->GetProgram("flatShader");
     break;
   case CommandType::DrawPoints:
     shader = mShaderLibrary->GetProgram("pointShader");
