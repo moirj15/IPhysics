@@ -7,6 +7,7 @@
 #include "camera.h"
 #include "window.h"
 
+#include <glm/gtx/norm.hpp>
 #include <glm/gtx/transform.hpp>
 namespace Renderer
 {
@@ -58,6 +59,17 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
       glm::vec3(-1.0f, -1.0f, -1.0f), // 6
       glm::vec3(1.0f, -1.0f, -1.0f),  // 7
   };
+  const glm::vec3 voxelNormals[] = {
+      glm::normalize(glm::vec3(1.0f, 1.0f, 1.0f)),   // 0 Front
+      glm::normalize(glm::vec3(-1.0f, 1.0f, 1.0f)),  // 1
+      glm::normalize(glm::vec3(-1.0f, -1.0f, 1.0f)), // 2
+      glm::normalize(glm::vec3(1.0f, -1.0f, 1.0f)),  // 3
+
+      glm::normalize(glm::vec3(1.0f, 1.0f, -1.0f)),   // 4 Back
+      glm::normalize(glm::vec3(-1.0f, 1.0f, -1.0f)),  // 5
+      glm::normalize(glm::vec3(-1.0f, -1.0f, -1.0f)), // 6
+      glm::normalize(glm::vec3(1.0f, -1.0f, -1.0f)),  // 7
+  };
   // do this super inefficiently
   const auto voxelSize = vm->GetVoxelSize();
   for (const auto &[key, voxel] : vm->GetVoxels())
@@ -70,12 +82,16 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
     }
     glm::vec3 vertOffset(position * voxelSize);
     auto transform = glm::translate(glm::scale(voxelSize), position);
-    for (const auto &vert : voxelVerts)
+    for (u32 i = 0; i < ArraySize(voxelVerts); i++)
     {
+      const auto &vert = voxelVerts[i];
       auto transformedVert = transform * glm::vec4(vert, 1.0f);
       mesh.mVertecies.push_back(transformedVert.x);
       mesh.mVertecies.push_back(transformedVert.y);
       mesh.mVertecies.push_back(transformedVert.z);
+      mesh.mNormals.push_back(voxelNormals[i].x);
+      mesh.mNormals.push_back(voxelNormals[i].y);
+      mesh.mNormals.push_back(voxelNormals[i].z);
     }
   }
 

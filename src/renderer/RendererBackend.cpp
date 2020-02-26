@@ -97,7 +97,7 @@ void RendererBackend::Draw()
     case CommandType::DrawSolid:
     case CommandType::DrawSolidFlatShade:
     {
-      auto *shader = GetShader(command.mType, true);
+      // auto *shader = GetShader(command.mType, true);
 
       // shader->SetUniform3F("color", command.mColor);
       // shader->SetUniformMat4("camera", camera);
@@ -108,7 +108,7 @@ void RendererBackend::Draw()
     break;
     case CommandType::DrawLine:
     {
-      auto *shader = GetShader(command.mType, true);
+      // auto *shader = GetShader(command.mType, true);
       // shader->SetUniformMat4("camera", camera);
       // shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
@@ -117,7 +117,7 @@ void RendererBackend::Draw()
     break;
     case CommandType::DrawPoints:
     {
-      auto *shader = GetShader(command.mType, true);
+      // auto *shader = GetShader(command.mType, true);
       // shader->SetUniformMat4("camera", camera);
       // shader->SetUniformMat4("projection", projection);
       auto ibo = GetBuffersAndBind(command.mMeshHandle);
@@ -126,7 +126,7 @@ void RendererBackend::Draw()
     break;
     case CommandType::DrawTextured:
     {
-      auto *shader = GetShader(command.mType, true);
+      // auto *shader = GetShader(command.mType, true);
       // shader->SetUniformMat4("camera", camera);
       // shader->SetUniformMat4("projection", projection);
       auto texture = mTextureLibrary->GetTexture(command.mTextureHandle);
