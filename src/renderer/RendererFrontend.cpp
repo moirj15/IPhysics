@@ -81,7 +81,7 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
       mesh.mIndecies.push_back(index + indexOffset);
     }
     glm::vec3 vertOffset(position * voxelSize);
-    auto transform = glm::translate(glm::scale(voxelSize), position);
+    auto transform = glm::translate(glm::scale(voxelSize), position * 2.0f);
     for (u32 i = 0; i < ArraySize(voxelVerts); i++)
     {
       const auto &vert = voxelVerts[i];
@@ -89,9 +89,10 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
       mesh.mVertecies.push_back(transformedVert.x);
       mesh.mVertecies.push_back(transformedVert.y);
       mesh.mVertecies.push_back(transformedVert.z);
-      mesh.mNormals.push_back(voxelNormals[i].x);
-      mesh.mNormals.push_back(voxelNormals[i].y);
-      mesh.mNormals.push_back(voxelNormals[i].z);
+      auto transformedNormal = glm::inverse(glm::mat3(transform)) * voxelNormals[i];
+      mesh.mNormals.push_back(transformedNormal.x);
+      mesh.mNormals.push_back(transformedNormal.y);
+      mesh.mNormals.push_back(transformedNormal.z);
     }
   }
 

@@ -60,7 +60,8 @@ public:
 
   NODISCARD inline glm::vec3 GetVoxelSize() const
   {
-    return mExtentsObjectSpace / glm::vec3(mExtentsVoxelSpace);
+    auto extents = glm::vec3(mExtentsVoxelSpace);
+    return glm::vec3(1.0 / (extents.x));
   }
 
   NODISCARD inline bool IsVoxelPresent(const glm::ivec3 &position) const
