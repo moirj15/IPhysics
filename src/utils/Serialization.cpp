@@ -18,11 +18,6 @@ glm::uvec3 : voxel mesh extents voxel space
 glm::vec3 : voxel mesh extents object space
 mesh contents
 voxels
-
-
-
-
-
  */
 void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
 {
