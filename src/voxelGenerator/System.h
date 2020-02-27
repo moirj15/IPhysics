@@ -50,6 +50,7 @@ private:
   void LoadMesh();
   void GenerateVoxels();
   void Render();
+  void SaveVoxels();
 };
 
 } // namespace VoxGen

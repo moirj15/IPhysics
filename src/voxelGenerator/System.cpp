@@ -11,6 +11,7 @@
 #include "../renderer/camera.h"
 #include "../renderer/mesh.h"
 #include "../renderer/window.h"
+#include "../utils/Serialization.h"
 #include "../utils/VoxelMeshManager.h"
 #include "../voxelObjects/VoxelMesh.h"
 #include "Voxelizer.h"
@@ -44,6 +45,7 @@ void System::Run()
     LoadMesh();
     GenerateVoxels();
     Render();
+    SaveVoxels();
   }
 }
 
@@ -139,4 +141,14 @@ void System::Render()
   mUI->Update();
   glfwSwapBuffers(mWindow->mGLWindow);
 }
+
+void System::SaveVoxels()
+{
+  auto savePath = mUI->SaveClicked();
+  if (savePath && mCurrentVoxelMeshHandle != 0)
+  {
+    Utils::Serialize(mVoxelMesh.get(), *savePath);
+  }
+}
+
 } // namespace VoxGen

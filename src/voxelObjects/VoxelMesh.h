@@ -68,6 +68,11 @@ public:
   {
     return mVoxels.find(position) != mVoxels.end();
   }
+
+  NODISCARD inline const glm::vec3 &GetExtentsObjectSpace() const
+  {
+    return mExtentsObjectSpace;
+  }
 };
 
 } // namespace VoxObj
