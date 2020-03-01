@@ -24,7 +24,7 @@ static void ErrorCallback(
   printf("%s\n", message);
 }
 
-Window *InitAPI(const s32 width, const s32 height, const char *windowName)
+Window *InitAPI(const s32 width, const s32 height, const char *windowName, bool enableDebug)
 {
   if (!glfwInit())
   {
@@ -54,7 +54,10 @@ Window *InitAPI(const s32 width, const s32 height, const char *windowName)
   glDepthFunc(GL_LESS);
 
   glDebugMessageCallback(ErrorCallback, nullptr);
-  // glEnable(GL_DEBUG_OUTPUT);
+  if (enableDebug)
+  {
+    glEnable(GL_DEBUG_OUTPUT);
+  }
   return window;
 }
 

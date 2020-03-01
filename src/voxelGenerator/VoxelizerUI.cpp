@@ -24,6 +24,7 @@ VoxelizerUI::~VoxelizerUI()
 
 void VoxelizerUI::Init(Window *window)
 {
+  // TODO: put in base class
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);

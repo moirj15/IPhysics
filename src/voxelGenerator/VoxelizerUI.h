@@ -17,8 +17,6 @@ namespace VoxGen
 
 class VoxelizerUI
 {
-public:
-private:
   std::string mMeshFileName;
   std::string mVoxelMeshFileName;
   Parameters mParameters;
