@@ -3,6 +3,8 @@
 #include "../renderer/RendererBackend.h"
 #include "../renderer/RendererFrontend.h"
 #include "../renderer/window.h"
+#include "../utils/Serialization.h"
+#include "../voxelObjects/VoxelMesh.h"
 #include "IPhysicsUI.h"
 
 #include <GLFW/glfw3.h>
@@ -23,6 +25,7 @@ System::~System() = default;
 
 void System::Run()
 {
+  auto *vm = Utils::DeSerialize("../test-out/block-1.vmf");
   while (!mWindow->ShouldClose())
   {
     glfwPollEvents();
