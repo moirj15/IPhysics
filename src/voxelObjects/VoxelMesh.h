@@ -73,6 +73,11 @@ public:
   {
     return mExtentsObjectSpace;
   }
+
+  NODISCARD inline u64 GetVoxelCount() const
+  {
+    return mVoxels.size();
+  }
 };
 
 } // namespace VoxObj

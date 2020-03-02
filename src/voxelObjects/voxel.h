@@ -13,9 +13,9 @@ namespace VoxObj
 
 struct Voxel
 {
-  glm::vec3 mDimensions;
+  glm::vec3 mDimensions = {0, 0, 0};
   std::vector<glm::vec3> mNeighbors;
-  std::vector<u32> mMeshVerteciess;
+  std::vector<u32> mMeshVertices;
 
   Voxel() = default;
 
@@ -24,7 +24,7 @@ struct Voxel
   }
 
   explicit Voxel(const Voxel &v) :
-      mDimensions(v.mDimensions), mNeighbors(v.mNeighbors), mMeshVerteciess(v.mMeshVerteciess)
+      mDimensions(v.mDimensions), mNeighbors(v.mNeighbors), mMeshVertices(v.mMeshVertices)
   {
   }
 };

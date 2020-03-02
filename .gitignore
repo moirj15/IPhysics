@@ -11,3 +11,4 @@ x64-Debug/*
 /CMakeSettings.json
 CMakeLists.txt.user
 cmake-build-debug-visual-studio/*
+/test-out/block-1.vmf
