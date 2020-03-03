@@ -1,6 +1,7 @@
 
 #include "RendererFrontend.h"
 
+#include "../PhysicsEngine/Settings.h"
 #include "../voxelObjects/VoxelMesh.h"
 #include "RendererBackend.h"
 #include "ShaderData.h"
@@ -19,11 +20,12 @@ RendererFrontend::RendererFrontend(Window *window, Camera *camera) :
 
 RendererFrontend::~RendererFrontend() = default;
 
-u32 RendererFrontend::RegisterMeshHandle(const VMeshHandle meshHandle)
+void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
 {
   auto &meshManager = VoxelMeshManager::Get();
-  auto *voxelMesh = meshManager.GetMesh(meshHandle);
-  return RegisterMesh(voxelMesh->GetMesh());
+  auto *voxelMesh = meshManager.GetMesh(voxelMeshHandle);
+  auto meshHandle = RegisterMesh(voxelMesh->GetMesh());
+  mMeshHandles.emplace(meshHandle, voxelMeshHandle);
 }
 
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
@@ -112,6 +114,18 @@ void RendererFrontend::DrawMesh(const u32 handle)
 
 void RendererFrontend::Draw()
 {
+  for (const auto &[key, mesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
+  {
+    std::vector<ShaderData> shaderData = {
+        ShaderData("camera", mCamera->CalculateMatrix()),
+        ShaderData("projection", mProjection),
+        ShaderData("lightPosition", mCamera->GetPosition()),
+        ShaderData("color", glm::vec3(1.0f, 0.0f, 0.0f)),
+    };
+    // glm::mat4 transform = glm::translate(settings->mPosition);
+    // shaderData.push_back(ShaderData("transform", transform));
+    DrawCommand dc(CommandType::DrawSolid, mMeshHandles[key], shaderData);
+  }
   mBackend->Draw();
 }
 

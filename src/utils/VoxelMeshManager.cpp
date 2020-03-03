@@ -22,6 +22,7 @@ VMeshHandle VoxelMeshManager::SubmitMesh(VoxObj::VoxelMesh *mesh)
   static VMeshHandle h = 0;
   h++;
   mMeshes.emplace(h, mesh);
+  mActiveKeys.push_back(h);
   return h;
 }
 
@@ -38,6 +39,16 @@ VoxObj::VoxelMesh *VoxelMeshManager::GetMesh(const VMeshHandle handle)
 Physics::ObjectSettings *VoxelMeshManager::GetSettings(const VMeshHandle handle)
 {
   return mSettings[handle].get();
+}
+
+std::vector<MeshTuple> VoxelMeshManager::GetAllMeshes()
+{
+  std::vector<MeshTuple> tuples;
+  for (const auto key : mActiveKeys)
+  {
+    tuples.emplace_back(key, mMeshes[key].get()->GetMesh(), mSettings[key].get());
+  }
+  return tuples;
 }
 
 VoxelMeshManager::VoxelMeshManager() = default;

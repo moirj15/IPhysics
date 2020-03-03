@@ -17,12 +17,15 @@ namespace Physics
 struct ObjectSettings;
 }
 
-using VMeshHandle = u32;
+struct Mesh;
 
+using VMeshHandle = u32;
+using MeshTuple = std::tuple<VMeshHandle, Mesh *, Physics::ObjectSettings *>;
 class VoxelMeshManager
 {
   std::unordered_map<VMeshHandle, std::unique_ptr<VoxObj::VoxelMesh>> mMeshes;
   std::unordered_map<VMeshHandle, std::unique_ptr<Physics::ObjectSettings>> mSettings;
+  std::vector<VMeshHandle> mActiveKeys;
 
 public:
   static VoxelMeshManager &Get();
@@ -30,6 +33,7 @@ public:
   void SubmitSettings(VMeshHandle handle, Physics::ObjectSettings *settings);
   VoxObj::VoxelMesh *GetMesh(VMeshHandle handle);
   Physics::ObjectSettings *GetSettings(VMeshHandle handle);
+  std::vector<MeshTuple> GetAllMeshes();
 
   // Delete these to prevent copies
   VoxelMeshManager(VoxelMeshManager &&) = delete;

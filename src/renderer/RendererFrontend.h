@@ -24,12 +24,13 @@ class RendererFrontend
   std::unique_ptr<RendererBackend> mBackend;
   Camera *mCamera;
   glm::mat4 mProjection;
+  std::unordered_map<VMeshHandle, u32> mMeshHandles;
 
 public:
   explicit RendererFrontend(Window *window, Camera *camera);
   ~RendererFrontend();
 
-  NODISCARD u32 RegisterMeshHandle(VMeshHandle meshHandle);
+  void RegisterMeshHandle(VMeshHandle voxelMeshHandle);
   NODISCARD u32 RegisterMesh(Mesh *mesh);
   NODISCARD u32 RegisterVoxelMesh(VoxObj::VoxelMesh *vm);
   inline void SetProjection(const glm::mat4 &projection)

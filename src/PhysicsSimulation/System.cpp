@@ -16,12 +16,13 @@ namespace IPhysics
 System::System() :
     mCamera(
         glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+    mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
     mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator", false)), mUI(new IPhysicsUI()),
     mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),
     mPhysicsEngine(new Physics::PhysicsEngine())
 {
   mUI->Init(mWindow.get());
-  mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
+  mRenderer->SetProjection(mProjection);
 }
 
 System::~System() = default;
@@ -29,6 +30,9 @@ System::~System() = default;
 void System::Run()
 {
   auto *vm = Utils::DeSerialize("../test-out/block-1.vmf");
+  mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
+  mRenderer->RegisterMeshHandle(mHandle);
+
   while (!mWindow->ShouldClose())
   {
     glfwPollEvents();
