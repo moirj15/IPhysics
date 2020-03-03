@@ -5,7 +5,6 @@
 #include "System.h"
 
 #include "../../imgui/imgui.h"
-#include "../Input/InputManager.h"
 #include "../renderer/RendererBackend.h"
 #include "../renderer/RendererFrontend.h"
 #include "../renderer/camera.h"
@@ -14,9 +13,9 @@
 #include "../utils/Serialization.h"
 #include "../utils/VoxelMeshManager.h"
 #include "../voxelObjects/VoxelMesh.h"
-#include "Voxelizer.h"
 #include "VoxelizerUI.h"
 #include "obj.h"
+#include "voxelizer.h"
 
 #include <GLFW/glfw3.h>
 #include <cstdio>
@@ -33,7 +32,6 @@ System::System() :
 {
   mUI->Init(mWindow.get());
   mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
-  Input::Init(mWindow->mGLWindow);
 }
 System::~System() = default;
 

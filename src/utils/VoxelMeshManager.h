@@ -12,22 +12,24 @@ namespace VoxObj
 {
 class VoxelMesh;
 }
-
+namespace Physics
+{
 struct ObjectSettings;
+}
 
 using VMeshHandle = u32;
 
 class VoxelMeshManager
 {
   std::unordered_map<VMeshHandle, std::unique_ptr<VoxObj::VoxelMesh>> mMeshes;
-  std::unordered_map<VMeshHandle, std::unique_ptr<ObjectSettings>> mSettings;
+  std::unordered_map<VMeshHandle, std::unique_ptr<Physics::ObjectSettings>> mSettings;
 
 public:
   static VoxelMeshManager &Get();
   VMeshHandle SubmitMesh(VoxObj::VoxelMesh *mesh);
-  void SubmitSettings(VMeshHandle handle, ObjectSettings *settings);
+  void SubmitSettings(VMeshHandle handle, Physics::ObjectSettings *settings);
   VoxObj::VoxelMesh *GetMesh(VMeshHandle handle);
-  ObjectSettings *GetSettings(VMeshHandle handle);
+  Physics::ObjectSettings *GetSettings(VMeshHandle handle);
 
   // Delete these to prevent copies
   VoxelMeshManager(VoxelMeshManager &&) = delete;

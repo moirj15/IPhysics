@@ -4,6 +4,7 @@
 
 #include "VoxelMeshManager.h"
 
+#include "../PhysicsEngine/Settings.h"
 #include "../voxelObjects/VoxelMesh.h"
 
 struct ObjectSettings
@@ -24,7 +25,7 @@ VMeshHandle VoxelMeshManager::SubmitMesh(VoxObj::VoxelMesh *mesh)
   return h;
 }
 
-void VoxelMeshManager::SubmitSettings(VMeshHandle handle, ObjectSettings *settings)
+void VoxelMeshManager::SubmitSettings(VMeshHandle handle, Physics::ObjectSettings *settings)
 {
   mSettings.emplace(handle, settings);
 }
@@ -34,7 +35,7 @@ VoxObj::VoxelMesh *VoxelMeshManager::GetMesh(const VMeshHandle handle)
   return mMeshes[handle].get();
 }
 
-ObjectSettings *VoxelMeshManager::GetSettings(const VMeshHandle handle)
+Physics::ObjectSettings *VoxelMeshManager::GetSettings(const VMeshHandle handle)
 {
   return mSettings[handle].get();
 }

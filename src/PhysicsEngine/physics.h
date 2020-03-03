@@ -1,56 +1,66 @@
 #pragma once
 
 #include "../common.h"
+#include "../utils/VoxelMeshManager.h"
+#include "Settings.h"
+#include "btBulletCollisionCommon.h"
+
+#include <BulletDynamics/ConstraintSolver/btConeTwistConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h>
+#include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <BulletDynamics/Dynamics/btSimpleDynamicsWorld.h>
+
+/// Vehicle simulation, with wheel contact simulated by raycasts
+#include "BulletDynamics/Vehicle/btRaycastVehicle.h"
 
 #include <memory>
-#include <reactphysics3d.h>
+// #include <reactphysics3d.h>
 #include <vector>
 
 class Object;
 class Voxel;
 
-namespace pye
+namespace Physics
 {
-
-struct CollisionCallback final : public rp3d::CollisionCallback
-{
-  std::vector<rp3d::CollisionCallback::CollisionCallbackInfo> mCallbackInfo;
-  inline void notifyContact(const CollisionCallbackInfo &collisionCallbackInfo) override
-  {
-    mCallbackInfo.push_back(collisionCallbackInfo);
-  }
-
-  inline void Clear()
-  {
-    mCallbackInfo.clear();
-  }
-};
 
 class PhysicsEngine
 {
-  std::unique_ptr<rp3d::DynamicsWorld> mObjectWorld;
-  std::unique_ptr<rp3d::DynamicsWorld> mVoxelWorld;
-  std::unique_ptr<CollisionCallback> mObjectWorldCallback;
-  std::unique_ptr<CollisionCallback> mVoxelWorldCallback;
+  std::vector<VMeshHandle> mObjectHandles;
 
-  bool mCollisionOccuring;
+  std::unordered_map<VMeshHandle, std::unique_ptr<btCollisionShape>> mObjects;
+
+  std::unique_ptr<btDefaultCollisionConfiguration> mCollisionConfig;
+  std::unique_ptr<btCollisionDispatcher> mCollisionDispatcher;
+  std::unique_ptr<btBroadphaseInterface> mOverlappingPairCache;
+  std::unique_ptr<btSequentialImpulseConstraintSolver> mSolver;
+  std::unique_ptr<btDiscreteDynamicsWorld> mDynamicsWorld;
+
+  EngineSettings mSettings;
 
 public:
   PhysicsEngine() :
-      mObjectWorld(new rp3d::DynamicsWorld(rp3d::Vector3(0.0f, 0.0f, 0.0f))),
-      mVoxelWorld(new rp3d::DynamicsWorld(rp3d::Vector3(0.0f, 0.0f, 0.0f))),
-      mObjectWorldCallback(new CollisionCallback), mVoxelWorldCallback(new CollisionCallback),
-      mCollisionOccuring(false)
+      mCollisionConfig(new btDefaultCollisionConfiguration),
+      mCollisionDispatcher(new btCollisionDispatcher(mCollisionConfig.get())),
+      mOverlappingPairCache(new btDbvtBroadphase()),
+      mSolver(new btSequentialImpulseConstraintSolver()),
+      mDynamicsWorld(new btDiscreteDynamicsWorld(
+          mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(),
+          mCollisionConfig.get()))
   {
+    mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
   }
 
   void Update(f32 t);
 
-  void SubmitObject(Object *object);
+  void SubmitObject(const VMeshHandle handle);
+  void RemoveObject(const VMeshHandle handle);
 
-  inline bool CollisionOccuring() const
+  void CastRayWithForce(const glm::vec3 &origin, const glm::vec3 &direction, f32 force);
+
+  inline void SetEngineSettings(EngineSettings engineSettings)
   {
-    return mCollisionOccuring;
+    mSettings = engineSettings;
   }
 
 private:
@@ -58,4 +68,4 @@ private:
   void CorrectVoxelPositions();
 };
 
-} // namespace pye
+} // namespace Physics

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../common.h"
 
 #include <glm/vec3.hpp>
