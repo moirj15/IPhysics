@@ -28,7 +28,7 @@ class PhysicsEngine
 {
   std::vector<VMeshHandle> mObjectHandles;
 
-  std::unordered_map<VMeshHandle, std::unique_ptr<btCollisionShape>> mObjects;
+  std::unordered_map<VMeshHandle, std::unique_ptr<btRigidBody>> mObjects;
 
   std::unique_ptr<btDefaultCollisionConfiguration> mCollisionConfig;
   std::unique_ptr<btCollisionDispatcher> mCollisionDispatcher;

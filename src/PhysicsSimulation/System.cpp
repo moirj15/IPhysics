@@ -51,7 +51,7 @@ void System::Run()
 void System::CollectInput()
 {
   auto &io = ImGui::GetIO();
-  if (!io.WantCaptureMouse && io.MouseDown[0])
+  if (!io.WantCaptureMouse && io.MouseReleased[0])
   {
     f32 screenWidth = f32(mWindow->GetWidth());
     f32 screenHeight = f32(mWindow->GetHeight());

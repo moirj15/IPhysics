@@ -116,14 +116,12 @@ void RendererFrontend::Draw()
 {
   for (const auto &[key, mesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
   {
+    glm::mat4 transform = glm::translate(settings->mPosition);
     std::vector<ShaderData> shaderData = {
-        ShaderData("camera", mCamera->CalculateMatrix()),
-        ShaderData("projection", mProjection),
-        ShaderData("lightPosition", mCamera->GetPosition()),
+        ShaderData("camera", mCamera->CalculateMatrix()),    ShaderData("projection", mProjection),
+        ShaderData("lightPosition", mCamera->GetPosition()), ShaderData("transform", transform),
         ShaderData("color", glm::vec3(1.0f, 0.0f, 0.0f)),
     };
-    glm::mat4 transform = glm::translate(settings->mPosition);
-    // shaderData.push_back(ShaderData("transform", transform));
     DrawCommand dc(CommandType::DrawSolid, mMeshHandles[key], shaderData);
     mBackend->SubmitCommand(dc);
   }

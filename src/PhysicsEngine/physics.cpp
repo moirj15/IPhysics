@@ -7,7 +7,16 @@ namespace Physics
 
 void PhysicsEngine::Update(f32 t)
 {
-  mDynamicsWorld->stepSimulation(t);
+  mDynamicsWorld->stepSimulation(t, 10);
+  for (const auto handle : mObjectHandles)
+  {
+    // Update our object position in its settings, so we can render it in the right spot
+    auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
+    btRigidBody *rb = (btRigidBody *)mObjects[handle].get();
+    const auto &transform = rb->getWorldTransform();
+    const auto &position = transform.getOrigin();
+    objectSettings->mPosition = glm::vec3(position.x(), position.y(), position.z());
+  }
 }
 
 void PhysicsEngine::SubmitObject(const VMeshHandle handle)
@@ -17,7 +26,8 @@ void PhysicsEngine::SubmitObject(const VMeshHandle handle)
   auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
   auto extentsObjectSpace = vMesh->GetExtentsObjectSpace();
 
-  btCollisionShape *objectCollisionShape = new btBoxShape(btVector3(1.0f, 1.0f, 1.0f));
+  btCollisionShape *objectCollisionShape = new btBoxShape(btVector3(
+      extentsObjectSpace.x / 2.0f, extentsObjectSpace.y / 2.0f, extentsObjectSpace.z / 2.0f));
 
   f32 mass = 1.0f;
   btVector3 localInteria(0.0f, 0.0f, 0.0f);
@@ -35,6 +45,7 @@ void PhysicsEngine::SubmitObject(const VMeshHandle handle)
   rigidBody->setUserIndex(handle);
 
   mDynamicsWorld->addRigidBody(rigidBody);
+  mObjects.emplace(handle, rigidBody);
 }
 
 void PhysicsEngine::RemoveObject(const VMeshHandle handle)
@@ -52,8 +63,7 @@ void PhysicsEngine::CastRayWithForce(const glm::vec3 &origin, const glm::vec3 &d
   if (rayCallback.hasHit())
   {
     auto *rigidBody = (btRigidBody *)rayCallback.m_collisionObject;
-    rigidBody->applyCentralForce(rayDirection * force);
-    printf("OUCH\n");
+    rigidBody->applyCentralImpulse(rayDirection * force);
   }
 }
 
