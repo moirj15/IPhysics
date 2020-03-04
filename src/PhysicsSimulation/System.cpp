@@ -31,14 +31,48 @@ void System::Run()
 {
   auto *vm = Utils::DeSerialize("../test-out/block-1.vmf");
   mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
+  auto *os = new Physics::ObjectSettings();
+  VoxelMeshManager::Get().SubmitSettings(mHandle, os);
+  mPhysicsEngine->SubmitObject(mHandle);
+
   mRenderer->RegisterMeshHandle(mHandle);
 
   while (!mWindow->ShouldClose())
   {
     glfwPollEvents();
-    auto io = ImGui::GetIO();
+
+    auto &io = ImGui::GetIO();
+    CollectInput();
     mPhysicsEngine->Update(io.DeltaTime);
     Render();
+  }
+}
+
+void System::CollectInput()
+{
+  auto &io = ImGui::GetIO();
+  if (!io.WantCaptureMouse && io.MouseDown[0])
+  {
+    f32 screenWidth = f32(mWindow->GetWidth());
+    f32 screenHeight = f32(mWindow->GetHeight());
+    glm::vec3 rayStartNDC(
+        ((io.MousePos.x / screenWidth) - 0.5f) * 2.0f, (io.MousePos.y / screenHeight - 0.5f) * 2.0f,
+        -1.0);
+    glm::vec3 rayEndNDC(
+        ((io.MousePos.x / screenWidth) - 0.5f) * 2.0f, (io.MousePos.y / screenHeight - 0.5f) * 2.0f,
+        0.0);
+
+    auto invProjCamera = glm::inverse(mProjection * mCamera.CalculateMatrix());
+
+    auto rayStartWorld = invProjCamera * glm::vec4(rayStartNDC, 1.0f);
+    rayStartWorld /= rayStartWorld.w;
+
+    auto rayEndWorld = invProjCamera * glm::vec4(rayEndNDC, 1.0f);
+    rayEndWorld /= rayEndWorld.w;
+
+    auto rayDirWorld = glm::normalize(rayEndWorld - rayStartWorld);
+
+    mPhysicsEngine->CastRayWithForce(rayStartWorld, rayDirWorld, 1.0f);
   }
 }
 

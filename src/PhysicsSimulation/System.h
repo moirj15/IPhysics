@@ -43,6 +43,7 @@ public:
   void Run();
 
 private:
+  void CollectInput();
   void Render();
 };
 
