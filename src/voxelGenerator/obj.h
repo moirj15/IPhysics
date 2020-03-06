@@ -2,6 +2,7 @@
 
 #include "../common.h"
 
+#include <glm/vec3.hpp>
 #include <memory>
 #include <string>
 #include <vector>
@@ -11,25 +12,18 @@ struct Mesh;
 namespace VoxGen
 {
 
-// struct Mesh
-// {
-//   std::vector<f32> vertecies = {};
-//   std::vector<u32> connections = {};
-//   std::vector<f32> normals = {};
-//   u32 vertexSize = 3;
-//
-//   Mesh() = default;
-//   Mesh(Mesh &&m) :
-//       vertecies(std::move(m.vertecies)), connections(std::move(m.connections)),
-//       normals(std::move(m.normals)), vertexSize(m.vertexSize)
-//   {
-//   }
-// };
-
 class ObjReader
 {
+  enum class Present : u32
+  {
+    Vertex = 1 << 0,
+    Texture = 1 << 1,
+    Normal = 1 << 2,
+  };
+  u32 mPresentBitSet;
   std::string mFilename;
   std::unique_ptr<char[]> mData;
+  std::vector<glm::vec3> mTempNormals;
   Size mDataLen;
 
   Size mPos;
@@ -98,4 +92,4 @@ private:
   void ReplaceChars(std::string *str, char toReplace, char replacement);
 };
 
-} // namespace vg
+} // namespace VoxGen

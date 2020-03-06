@@ -27,6 +27,7 @@ enum class CommandType : u32
 {
   DrawSolid,
   DrawSolidFlatShade,
+  DrawSolidPhong,
   DrawLine,
   DrawPoints,
   DrawTextured,

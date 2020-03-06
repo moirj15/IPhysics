@@ -7,7 +7,7 @@
 
 namespace VoxGen
 {
-ObjReader::ObjReader() : mFilename(), mDataLen(0), mPos(0), mMesh(new Mesh)
+ObjReader::ObjReader() : mPresentBitSet(0), mDataLen(0), mPos(0), mMesh(new Mesh)
 {
 }
 
@@ -60,6 +60,8 @@ Mesh *ObjReader::Parse(const char *filename)
 
 void ObjReader::Clear()
 {
+  mPresentBitSet = 0;
+  mTempNormals.clear();
   mData.reset();
   mDataLen = 0;
   mPos = 0;
@@ -114,11 +116,13 @@ ObjReader::DataType ObjReader::ParseType()
     if (Token() == ' ')
     {
       mPos++;
+      mPresentBitSet |= (u32)Present::Vertex;
       return DataType::Vertex;
     }
     else if (Token() == 't')
     {
       mPos += 2;
+      mPresentBitSet |= (u32)Present::Texture;
       return DataType::TextureCoord;
     }
     else if (Token() == 'p')
@@ -129,6 +133,7 @@ ObjReader::DataType ObjReader::ParseType()
     else if (Token() == 'n')
     {
       mPos += 2;
+      mPresentBitSet |= (u32)Present::Normal;
       return DataType::VertexNormal;
     }
   }
@@ -155,11 +160,12 @@ void ObjReader::ParseNormal()
 {
   std::stringstream line{ReadLine()};
   f32 val = 0.0f;
+  glm::vec3 normal;
   for (s32 i = 0; i < 3; i++)
   {
-    line >> val;
-    mMesh->mNormals.emplace_back(val);
+    line >> normal[i];
   }
+  mTempNormals.emplace_back(normal);
 }
 
 void ObjReader::ParseFace()
@@ -167,6 +173,9 @@ void ObjReader::ParseFace()
   std::string lineStr{ReadLine()};
   ReplaceChars(&lineStr, '/', ' ');
   std::stringstream line{lineStr};
+  u32 index = 0;
+  u32 texCoord = 0;
+  u32 normal = 0;
   for (s32 i = 0; i < 3; i++)
   {
     u32 val = 0.0f;
@@ -208,4 +217,4 @@ void ObjReader::ReplaceChars(std::string *str, char toReplace, char replacement)
   }
 }
 
-} // namespace vg
+} // namespace VoxGen

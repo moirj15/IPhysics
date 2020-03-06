@@ -117,12 +117,29 @@ void RendererFrontend::Draw()
   for (const auto &[key, mesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
   {
     glm::mat4 transform = glm::translate(settings->mPosition);
+    auto modelView = mCamera->CalculateMatrix() * transform;
+    auto projModelView = mProjection * modelView;
+    auto normalMat = glm::inverse(glm::transpose(glm::mat3(modelView)));
+    // auto eye_lightPosition = mCamera->CalculateMatrix() *
+    // std::vector<ShaderData> shaderData = {
+    //    ShaderData("camera", mCamera->CalculateMatrix()),    ShaderData("projection",
+    //    mProjection), ShaderData("lightPosition", mCamera->GetPosition()), ShaderData("transform",
+    //    transform), ShaderData("color", glm::vec3(1.0f, 0.0f, 0.0f)),
+    //};
     std::vector<ShaderData> shaderData = {
-        ShaderData("camera", mCamera->CalculateMatrix()),    ShaderData("projection", mProjection),
-        ShaderData("lightPosition", mCamera->GetPosition()), ShaderData("transform", transform),
-        ShaderData("color", glm::vec3(1.0f, 0.0f, 0.0f)),
+        ShaderData("camera", mCamera->CalculateMatrix()),
+        ShaderData("projModelView", projModelView),
+        ShaderData("normalMat", normalMat),
+        ShaderData("lightPosition", mCamera->GetPosition()),
+        ShaderData("transform", transform),
+        ShaderData("lightColor", glm::vec3(1.0f)),
+        ShaderData("ambientLight", glm::vec3(0.3f, 0.5f, 0.0f)),
+        ShaderData("ambientColor", glm::vec3(0.3f, 0.5f, 0.0f)),
+        ShaderData("diffuseColor", glm::vec3(0.7f, 0.8f, 0.0f)),
+        ShaderData("specularColor", glm::vec3(0.0f, 1.0f, 1.0f)),
+        ShaderData("coeff", glm::vec4(0.5f, 0.2f, 0.8f, 10.0f)),
     };
-    DrawCommand dc(CommandType::DrawSolid, mMeshHandles[key], shaderData);
+    DrawCommand dc(CommandType::DrawSolidPhong, mMeshHandles[key], shaderData);
     mBackend->SubmitCommand(dc);
   }
   mBackend->Draw();

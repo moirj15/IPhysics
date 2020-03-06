@@ -63,6 +63,7 @@ void PhysicsEngine::CastRayWithForce(const glm::vec3 &origin, const glm::vec3 &d
   if (rayCallback.hasHit())
   {
     auto *rigidBody = (btRigidBody *)rayCallback.m_collisionObject;
+    rigidBody->activate(true);
     rigidBody->applyCentralImpulse(rayDirection * force);
   }
 }
