@@ -41,6 +41,7 @@ public:
   void Draw();
   void Clear();
   void RemoveMesh(u32 handle);
+  RendererBackend *GetBackend() { return mBackend.get(); }
 };
 
 } // namespace Renderer

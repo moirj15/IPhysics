@@ -6,6 +6,7 @@
 #include "RendererBackend.h"
 #include "ShaderData.h"
 #include "camera.h"
+#include "mesh.h"
 #include "window.h"
 
 #include <glm/gtx/norm.hpp>
@@ -137,7 +138,7 @@ void RendererFrontend::Draw()
         ShaderData("ambientColor", glm::vec3(0.3f, 0.5f, 0.0f)),
         ShaderData("diffuseColor", glm::vec3(0.7f, 0.8f, 0.0f)),
         ShaderData("specularColor", glm::vec3(0.0f, 1.0f, 1.0f)),
-        ShaderData("coeff", glm::vec4(0.5f, 0.2f, 0.8f, 10.0f)),
+        ShaderData("coeff", glm::vec4(0.5f, 0.5f, 0.5f, 10.0f)),
     };
     DrawCommand dc(CommandType::DrawSolidPhong, mMeshHandles[key], shaderData);
     mBackend->SubmitCommand(dc);

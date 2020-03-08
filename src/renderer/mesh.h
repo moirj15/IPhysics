@@ -12,4 +12,13 @@ struct Mesh
   std::vector<f32> mTextureCoords;
   std::vector<u32> mIndecies;
   std::vector<glm::mat4> mTransforms;
+
+  void Clear()
+  {
+    mVertecies.clear();
+    mNormals.clear();
+    mTextureCoords.clear();
+    mIndecies.clear();
+    mTransforms.clear();
+  }
 };

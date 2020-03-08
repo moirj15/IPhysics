@@ -87,7 +87,8 @@ VoxObj::VoxelMesh Voxelizer::GenerateVoxels(
           if (voxel.testCollisionTriangleAABB(aabb.data()))
           {
             glm::ivec3 position(x, y, z);
-            voxelMesh.SetVoxel(position, VoxObj::Voxel(mParameters.mVoxelSize));
+            // TODO: add voxel position
+            voxelMesh.SetVoxel(position, VoxObj::Voxel(mParameters.mVoxelSize, {}));
             // TODO: probably a better idea to add the point, edge, or triangle that the voxel
             // contains here
             break;

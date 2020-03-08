@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../common.h"
+#include "../renderer/DebugDrawer.h"
 #include "../utils/VoxelMeshManager.h"
 #include "Settings.h"
 #include "btBulletCollisionCommon.h"
@@ -29,26 +30,41 @@ class PhysicsEngine
   std::vector<VMeshHandle> mObjectHandles;
 
   std::unordered_map<VMeshHandle, std::unique_ptr<btRigidBody>> mObjects;
+  std::unordered_map<VMeshHandle, std::vector<std::unique_ptr<btRigidBody>>> mVoxels;
 
-  std::unique_ptr<btDefaultCollisionConfiguration> mCollisionConfig;
-  std::unique_ptr<btCollisionDispatcher> mCollisionDispatcher;
-  std::unique_ptr<btBroadphaseInterface> mOverlappingPairCache;
-  std::unique_ptr<btSequentialImpulseConstraintSolver> mSolver;
-  std::unique_ptr<btDiscreteDynamicsWorld> mDynamicsWorld;
+  // TODO: Do i really need two Dynamics worlds?
+  // may be possible to do everything with only one world and it may be faster
+  struct PhysicsWorld
+  {
+    std::unique_ptr<btDefaultCollisionConfiguration> mCollisionConfig;
+    std::unique_ptr<btCollisionDispatcher> mCollisionDispatcher;
+    std::unique_ptr<btBroadphaseInterface> mOverlappingPairCache;
+    std::unique_ptr<btSequentialImpulseConstraintSolver> mSolver;
+    std::unique_ptr<btDiscreteDynamicsWorld> mDynamicsWorld;
+
+    PhysicsWorld() :
+        mCollisionConfig(new btDefaultCollisionConfiguration),
+        mCollisionDispatcher(new btCollisionDispatcher(mCollisionConfig.get())),
+        mOverlappingPairCache(new btDbvtBroadphase()),
+        mSolver(new btSequentialImpulseConstraintSolver()),
+        mDynamicsWorld(new btDiscreteDynamicsWorld(
+            mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(),
+            mCollisionConfig.get()))
+    {
+    }
+    ~PhysicsWorld() = default;
+
+  } mObjectWorld, mVoxelWorld;
 
   EngineSettings mSettings;
 
 public:
-  PhysicsEngine() :
-      mCollisionConfig(new btDefaultCollisionConfiguration),
-      mCollisionDispatcher(new btCollisionDispatcher(mCollisionConfig.get())),
-      mOverlappingPairCache(new btDbvtBroadphase()),
-      mSolver(new btSequentialImpulseConstraintSolver()),
-      mDynamicsWorld(new btDiscreteDynamicsWorld(
-          mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(),
-          mCollisionConfig.get()))
+  PhysicsEngine(Renderer::DebugDrawer *db)
   {
-    mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
+    mObjectWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
+    mVoxelWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
+    mVoxelWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)db);
+    mObjectWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)db);
   }
 
   void Update(f32 t);
@@ -64,6 +80,8 @@ public:
   }
 
 private:
+  void AddObject(const VMeshHandle handle);
+  void AddVoxels(const VMeshHandle handle);
   void CollectVoxelsWithBadPositions();
   void CorrectVoxelPositions();
 };

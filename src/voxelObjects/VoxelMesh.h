@@ -27,9 +27,8 @@ public:
   {
   }
   VoxelMesh(VoxelMesh &&v) :
-      mExtentsVoxelSpace(std::move(v.mExtentsVoxelSpace)),
-      mExtentsObjectSpace(std::move(v.mExtentsObjectSpace)), mVoxels(std::move(v.mVoxels)),
-      mMesh(std::move(v.mMesh))
+      mExtentsVoxelSpace(v.mExtentsVoxelSpace), mExtentsObjectSpace(v.mExtentsObjectSpace),
+      mVoxels(v.mVoxels), mMesh(v.mMesh)
   {
   }
 

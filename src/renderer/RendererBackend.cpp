@@ -47,6 +47,7 @@ Window *InitAPI(const s32 width, const s32 height, const char *windowName, bool 
   }
   glfwSwapInterval(1);
   glEnable(GL_DEPTH_TEST);
+  glLineWidth(3.0f);
   //  glCullFace(GL_BACK);
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

@@ -12,7 +12,8 @@ struct Window;
 namespace Renderer
 {
 class RendererFrontend;
-}
+class DebugDrawer;
+} // namespace Renderer
 
 namespace Physics
 {
@@ -34,6 +35,7 @@ class System
   std::unique_ptr<Window> mWindow;
   std::unique_ptr<IPhysicsUI> mUI;
   std::unique_ptr<Renderer::RendererFrontend> mRenderer;
+  Renderer::DebugDrawer *mDB;
   std::unique_ptr<Physics::PhysicsEngine> mPhysicsEngine;
 
 public:

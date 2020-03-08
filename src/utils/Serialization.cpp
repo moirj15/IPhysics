@@ -1,5 +1,6 @@
 #include "Serialization.h"
 
+#include "../renderer/mesh.h"
 #include "../voxelObjects/VoxelMesh.h"
 
 #include <fstream>
