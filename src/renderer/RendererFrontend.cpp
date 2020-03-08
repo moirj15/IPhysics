@@ -74,7 +74,7 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
       glm::normalize(glm::vec3(1.0f, -1.0f, -1.0f)),  // 7
   };
   // do this super inefficiently
-  const auto voxelSize = vm->GetVoxelSize();
+  const auto voxelSize = vm->GetInitialVoxelSize();
   for (const auto &[key, voxel] : vm->GetVoxels())
   {
     glm::vec3 position(key);
@@ -83,8 +83,8 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
     {
       mesh.mIndecies.push_back(index + indexOffset);
     }
-    glm::vec3 vertOffset(position * voxelSize);
-    auto transform = glm::translate(glm::scale(voxelSize), position * 2.0f);
+    glm::vec3 vertOffset(position * (voxelSize / 2.0f));
+    auto transform = glm::translate(glm::scale(voxelSize / 2.0f), position * 2.0f);
     for (u32 i = 0; i < ArraySize(voxelVerts); i++)
     {
       const auto &vert = voxelVerts[i];

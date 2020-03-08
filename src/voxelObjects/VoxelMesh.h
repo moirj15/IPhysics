@@ -18,17 +18,21 @@ class VoxelMesh
 {
   glm::uvec3 mExtentsVoxelSpace;
   glm::vec3 mExtentsObjectSpace;
+  glm::vec3 mInitialVoxelSize;
   std::unordered_map<glm::uvec3, Voxel> mVoxels;
   Mesh *mMesh;
 
 public:
-  VoxelMesh(const glm::uvec3 extentsVoxelSpace, const glm::vec3 &extentsObjectSpace, Mesh *mesh) :
-      mExtentsVoxelSpace(extentsVoxelSpace), mExtentsObjectSpace(extentsObjectSpace), mMesh(mesh)
+  VoxelMesh(
+      const glm::uvec3 extentsVoxelSpace, const glm::vec3 &extentsObjectSpace,
+      const glm::vec3 initialVoxelSize, Mesh *mesh) :
+      mExtentsVoxelSpace(extentsVoxelSpace),
+      mExtentsObjectSpace(extentsObjectSpace), mInitialVoxelSize(initialVoxelSize), mMesh(mesh)
   {
   }
   VoxelMesh(VoxelMesh &&v) :
       mExtentsVoxelSpace(v.mExtentsVoxelSpace), mExtentsObjectSpace(v.mExtentsObjectSpace),
-      mVoxels(v.mVoxels), mMesh(v.mMesh)
+      mVoxels(v.mVoxels), mInitialVoxelSize(v.mInitialVoxelSize), mMesh(v.mMesh)
   {
   }
 
@@ -57,10 +61,9 @@ public:
     return mExtentsVoxelSpace;
   }
 
-  NODISCARD inline glm::vec3 GetVoxelSize() const
+  NODISCARD inline glm::vec3 GetInitialVoxelSize() const
   {
-    auto extents = glm::vec3(mExtentsVoxelSpace);
-    return glm::vec3(1.0 / (extents.x));
+    return mInitialVoxelSize;
   }
 
   NODISCARD inline bool IsVoxelPresent(const glm::ivec3 &position) const

@@ -110,7 +110,8 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
   mesh->mIndecies.resize(indexCount);
   mesh->mNormals.resize(normalCount);
 
-  auto vm = new VoxObj::VoxelMesh(extentsVoxelSpace, extentsObjectSpace, mesh);
+  // TODO: add size in serialization
+  auto vm = new VoxObj::VoxelMesh(extentsVoxelSpace, extentsObjectSpace, {}, mesh);
 
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

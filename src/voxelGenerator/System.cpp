@@ -88,7 +88,6 @@ void System::CollectInput()
     f32 screenHeight = f32(mWindow->GetHeight());
     glm::vec2 mouseDelta(
         (screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
-    // glm::vec2 mouseDelta(io.MouseDelta.x, io.MouseDelta.y);
     mCamera.Rotate(mouseDelta);
   }
 }
@@ -124,7 +123,6 @@ void System::LoadMesh()
         mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index) + 2]);
       }
 
-      // mMesh.reset(objReader.Parse(meshPath->c_str()));
       mRenderer->RemoveMesh(mCurrentMeshHandle);
       mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
     }

@@ -29,6 +29,8 @@ public:
       mMeshFileName(256, 0), mVoxelMeshFileName(256, 0), mSaveClicked(false),
       mGenerateVoxelsClicked(false), mLoadMeshClicked(false)
   {
+    // mMeshFileName = "../testfiles/block.obj";
+    // mVoxelMeshFileName = "../test-out/bock-1.vmf";
   }
   ~VoxelizerUI();
 

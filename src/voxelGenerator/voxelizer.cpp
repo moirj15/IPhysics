@@ -63,7 +63,8 @@ VoxObj::VoxelMesh Voxelizer::GenerateVoxels(
       glm::ceil(glm::vec3(meshAABB.getExtent().x, meshAABB.getExtent().y, meshAABB.getExtent().z)));
   // Calculate the extents of the voxel mesh in discrete voxel space
   glm::uvec3 voxelMeshExtents(aabbExtents / mParameters.mVoxelSize);
-  VoxObj::VoxelMesh voxelMesh(voxelMeshExtents, aabbExtents, mesh);
+  VoxObj::VoxelMesh voxelMesh(
+      voxelMeshExtents, aabbExtents, glm::vec3(mParameters.mVoxelSize), mesh);
   const auto &minCoords = meshAABB.getMin();
   for (u32 x = 0; x < voxelMeshExtents.x; x++)
   {
