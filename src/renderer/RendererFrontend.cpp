@@ -46,17 +46,6 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm) {
         6, 7, 3, // Bottom
         6, 3, 2, //
     };
-    // const glm::vec3 voxelVerts[] = {
-    //     glm::vec3(1.0f, 1.0f, 1.0f),   // 0 Front
-    //     glm::vec3(-1.0f, 1.0f, 1.0f),  // 1
-    //     glm::vec3(-1.0f, -1.0f, 1.0f), // 2
-    //     glm::vec3(1.0f, -1.0f, 1.0f),  // 3
-    //
-    //     glm::vec3(1.0f, 1.0f, -1.0f),   // 4 Back
-    //     glm::vec3(-1.0f, 1.0f, -1.0f),  // 5
-    //     glm::vec3(-1.0f, -1.0f, -1.0f), // 6
-    //     glm::vec3(1.0f, -1.0f, -1.0f),  // 7
-    // };
     const glm::vec3 voxelNormals[] = {
         glm::normalize(glm::vec3(1.0f, 1.0f, 1.0f)),   // 0 Front
         glm::normalize(glm::vec3(-1.0f, 1.0f, 1.0f)),  // 1
@@ -70,7 +59,6 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm) {
     };
     // do this super inefficiently
     const auto voxelSize = vm->GetInitialVoxelSize();
-    auto center = glm::vec3(vm->GetExtentsVoxelSpace()) / 2.0f;
     for (const auto &[key, voxel] : vm->GetVoxels()) {
         const glm::vec3 voxelVerts[] = {
             voxel.mPosition + (glm::vec3(1.0f, 1.0f, 1.0f) * (voxelSize / 2.0f)),   // 0 Front
@@ -83,16 +71,13 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm) {
             voxel.mPosition + (glm::vec3(-1.0f, -1.0f, -1.0f) * (voxelSize / 2.0f)), // 6
             voxel.mPosition + (glm::vec3(1.0f, -1.0f, -1.0f) * (voxelSize / 2.0f)),  // 7
         };
-        glm::vec3 position(key);
         u32 indexOffset = mesh.mVertecies.size() / 3;
         for (u32 index : faceIndecies) {
             mesh.mIndecies.push_back(index + indexOffset);
         }
-        glm::vec3 vertOffset(position);
         auto transform = glm::translate((voxel.mPosition));
         for (u32 i = 0; i < ArraySize(voxelVerts); i++) {
             const auto &vert = voxelVerts[i];
-            // auto transformedVert = transform * glm::vec4(vert, 1.0f);
             mesh.mVertecies.push_back(voxelVerts[i].x);
             mesh.mVertecies.push_back(voxelVerts[i].y);
             mesh.mVertecies.push_back(voxelVerts[i].z);

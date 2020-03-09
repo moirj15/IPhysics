@@ -32,11 +32,12 @@ public:
 
 private:
   NODISCARD rp3d::AABB FindMeshAABB(Mesh *mesh);
-  NODISCARD std::vector<std::array<rp3d::Vector3, 3>> FindTriangleAABBs(Mesh *mesh);
+  using MeshInfo = std::vector<std::pair<std::array<rp3d::Vector3, 3>, std::array<u32, 3>>>;
 
-  NODISCARD VoxObj::VoxelMesh GenerateVoxels(
-      const std::vector<std::array<rp3d::Vector3, 3>> &meshTriangles, const rp3d::AABB &meshAABB,
-      Mesh *mesh);
+  NODISCARD MeshInfo FindTriangleAABBs(Mesh *mesh);
+
+  NODISCARD VoxObj::VoxelMesh
+  GenerateVoxels(const MeshInfo &meshTriangles, const rp3d::AABB &meshAABB, Mesh *mesh);
   void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);
 };
 
