@@ -13,6 +13,7 @@ namespace Physics
 void PhysicsEngine::Update(f32 t)
 {
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
+  mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
   for (const auto handle : mObjectHandles)
   {
     // Update our object position in its settings, so we can render it in the right spot

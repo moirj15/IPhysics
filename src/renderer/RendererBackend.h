@@ -98,7 +98,7 @@ public:
    */
   inline void ClearCommandQueue()
   {
-    mCommandQueue.clear();
+    // mCommandQueue.clear();
   }
 
   /**

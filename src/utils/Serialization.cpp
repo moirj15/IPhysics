@@ -95,14 +95,21 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
   u64 normalCount = 0;
   u64 voxelCount = 0;
 
+  // Load in the number of mesh vertices
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file >> vertCount;
+
+  // Load in the number of mesh indices
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file >> indexCount;
+
+  // Load in the number of mesh normals
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file >> normalCount;
+
+  // Load in the number of voxels
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file >> voxelCount;
@@ -128,27 +135,30 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
   mesh->mIndecies.resize(indexCount);
   mesh->mNormals.resize(normalCount);
 
-  // TODO: add size in serialization
   auto vm = new VoxObj::VoxelMesh(extentsVoxelSpace, extentsObjectSpace, initialVoxelSize, mesh);
 
+  // Load in teh mesh vertices
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < vertCount; i++)
   {
     file >> mesh->mVertecies[i];
   }
+  // Load in the mesh indices
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < indexCount; i++)
   {
     file >> mesh->mIndecies[i];
   }
+  // Load in the mesh normals
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < normalCount; i++)
   {
     file >> mesh->mNormals[i];
   }
+  // Start loading in the voxels
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < voxelCount; i++)
   {

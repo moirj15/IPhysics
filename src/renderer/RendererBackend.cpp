@@ -92,9 +92,11 @@ u32 RendererBackend::SubmitTexture(Texture2D *texture)
 
 void RendererBackend::Draw()
 {
-  for (const auto &command : mCommandQueue)
+  // for (const auto &command : mCommandQueue)
+  while (!mCommandQueue.empty())
   {
-
+    auto command = mCommandQueue.back();
+    mCommandQueue.pop_back();
     auto *shader = GetShader(command.mType, true);
     shader->SetShaderData(command.mShaderData);
     switch (command.mType)

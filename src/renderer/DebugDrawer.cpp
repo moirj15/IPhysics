@@ -20,12 +20,13 @@ void DebugDrawer::drawLine(const btVector3 &from, const btVector3 &to, const btV
 
 void DebugDrawer::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
 {
-  mBackend->ClearCommandQueue();
+  // mBackend->ClearCommandQueue();
   auto handle = mBackend->SubmitMesh(&mMesh);
-  mBackend->SubmitCommand(DrawCommand(
-      CommandType::DrawLine, handle,
-      std::vector<ShaderData>({ShaderData("color", {1.0, 1.0, 1.0}), ShaderData("camera", camera),
-                               ShaderData("projection", projection)})));
+  std::vector<ShaderData> shaderData({ShaderData("color", {1.0, 1.0, 1.0}),
+                                      ShaderData("camera", camera),
+                                      ShaderData("projection", projection)});
+  DrawCommand dc(CommandType::DrawLine, handle, shaderData);
+  mBackend->SubmitCommand(dc);
   mBackend->Draw();
   mBackend->RemoveMesh(handle);
   mMesh.Clear();
