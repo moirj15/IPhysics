@@ -14,7 +14,8 @@ struct Mesh;
 namespace VoxObj
 {
 
-class VoxelMesh
+// TODO: Refractor, since the accessors aren't needed anymore
+struct VoxelMesh
 {
   glm::uvec3 mExtentsVoxelSpace;
   glm::vec3 mExtentsObjectSpace;
@@ -22,7 +23,6 @@ class VoxelMesh
   std::unordered_map<glm::uvec3, Voxel> mVoxels;
   Mesh *mMesh;
 
-public:
   VoxelMesh(
       const glm::uvec3 extentsVoxelSpace, const glm::vec3 &extentsObjectSpace,
       const glm::vec3 initialVoxelSize, Mesh *mesh) :

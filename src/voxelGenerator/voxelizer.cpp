@@ -13,6 +13,7 @@ VoxObj::VoxelMesh Voxelizer::Voxelize(Mesh *mesh)
   {
     FillVoxelMesh(&voxelMesh);
   }
+  AddNeighbors(&voxelMesh);
 
   return voxelMesh;
 }
@@ -145,6 +146,27 @@ void Voxelizer::FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh)
     {
       // TODO: should also update the voxel neighbors.
       voxelMesh->SetVoxel(glm::uvec3(x, start.y, start.z), VoxObj::Voxel());
+    }
+  }
+}
+
+void Voxelizer::AddNeighbors(VoxObj::VoxelMesh *voxelMesh)
+{
+  for (auto &[key, voxel] : voxelMesh->mVoxels)
+  {
+    glm::uvec3 keys[] = {
+        glm::uvec3(key.x - 1, key.y, key.z), glm::uvec3(key.x + 1, key.y, key.z),
+
+        glm::uvec3(key.x, key.y - 1, key.z), glm::uvec3(key.x, key.y + 1, key.z),
+
+        glm::uvec3(key.x, key.y, key.z - 1), glm::uvec3(key.x, key.y, key.z + 1),
+    };
+    for (const auto &k : keys)
+    {
+      if (voxelMesh->mVoxels.find(k) != voxelMesh->mVoxels.end())
+      {
+        voxel.mNeighbors.emplace_back(k);
+      }
     }
   }
 }

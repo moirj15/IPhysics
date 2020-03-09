@@ -39,6 +39,7 @@ private:
   NODISCARD VoxObj::VoxelMesh
   GenerateVoxels(const MeshInfo &meshTriangles, const rp3d::AABB &meshAABB, Mesh *mesh);
   void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);
+  void AddNeighbors(VoxObj::VoxelMesh *voxelMesh);
 };
 
 } // namespace VoxGen

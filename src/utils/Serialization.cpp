@@ -58,6 +58,8 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
   {
     file << n << " ";
   }
+
+  // Begin serializing the voxels
   file << "\n[Voxels]\n";
   for (const auto &[key, value] : voxelMesh->GetVoxels())
   {
@@ -69,14 +71,18 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
     file << "[Neighbor Count]\n" << value.mNeighbors.size() << "\n";
     for (const auto &n : value.mNeighbors)
     {
-      file << n.x << " " << n.y << " " << n.z << "\n";
+      file << n.x << " " << n.y << " " << n.z << " ";
     }
+    file << "\n";
     file << "[Contained Mesh Vertex Count]\n" << value.mMeshVertices.size() << "\n";
     for (const auto &v : value.mMeshVertices)
     {
       file << v << " ";
     }
-    // file << "\n";
+    if (!value.mMeshVertices.empty())
+    {
+      file << "\n";
+    }
   }
 }
 
@@ -170,11 +176,10 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
     file >> neighborCount;
 
     // Load all the voxel neighbor keys
-    voxel.mNeighbors.reserve(neighborCount / 3);
-    for (u64 n = 0; n < neighborCount; n += 3)
+    voxel.mNeighbors.resize(neighborCount);
+    for (u64 n = 0; n < neighborCount; n++)
     {
-      u64 index = n / 3;
-      file >> voxel.mNeighbors[index].x >> voxel.mNeighbors[index].y >> voxel.mNeighbors[index].z;
+      file >> voxel.mNeighbors[n].x >> voxel.mNeighbors[n].y >> voxel.mNeighbors[n].z;
     }
 
     // Load in the number of contained vertices
