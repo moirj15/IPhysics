@@ -38,6 +38,11 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
        << extentsObjectSpace.x << " " << extentsObjectSpace.y << " " << extentsObjectSpace.z
        << "\n";
 
+  file << "[Initial Voxel Size]\n"
+       << voxelMesh->GetInitialVoxelSize().x << " " << voxelMesh->GetInitialVoxelSize().y << " "
+       << voxelMesh->GetInitialVoxelSize().z << " "
+       << "\n";
+
   file << "[Vertices]\n";
   for (const auto &v : mesh->mVertecies)
   {
@@ -59,6 +64,8 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
     file << "[Key]\n" << key.x << " " << key.y << " " << key.z << "\n";
     file << "[Dimensions]\n"
          << value.mDimensions.x << " " << value.mDimensions.y << " " << value.mDimensions.z << "\n";
+    file << "[Position]\n"
+         << value.mPosition.x << " " << value.mPosition.y << " " << value.mPosition.z << "\n";
     file << "[Neighbor Count]\n" << value.mNeighbors.size() << "\n";
     for (const auto &n : value.mNeighbors)
     {
@@ -105,13 +112,18 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file >> extentsObjectSpace.x >> extentsObjectSpace.y >> extentsObjectSpace.z;
 
+  glm::vec3 initialVoxelSize(0.0f);
+  file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  file >> initialVoxelSize.x >> initialVoxelSize.y >> initialVoxelSize.z;
+
   Mesh *mesh = new Mesh;
   mesh->mVertecies.resize(vertCount);
   mesh->mIndecies.resize(indexCount);
   mesh->mNormals.resize(normalCount);
 
   // TODO: add size in serialization
-  auto vm = new VoxObj::VoxelMesh(extentsVoxelSpace, extentsObjectSpace, {}, mesh);
+  auto vm = new VoxObj::VoxelMesh(extentsVoxelSpace, extentsObjectSpace, initialVoxelSize, mesh);
 
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -136,26 +148,42 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
   {
     VoxObj::Voxel voxel;
     glm::uvec3 key;
+    // Load the voxel key (also its position in voxel space)
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file >> key.x >> key.y >> key.z;
+
+    // Load in the voxel dimensions
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file >> voxel.mDimensions.x >> voxel.mDimensions.y >> voxel.mDimensions.z;
+
+    // Load in the voxel position
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    file >> voxel.mPosition.x >> voxel.mPosition.y >> voxel.mPosition.z;
+
+    // Load in the number of neighbors this voxel has
     u64 neighborCount = 0;
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file >> neighborCount;
+
+    // Load all the voxel neighbor keys
     voxel.mNeighbors.reserve(neighborCount / 3);
     for (u64 n = 0; n < neighborCount; n += 3)
     {
       u64 index = n / 3;
       file >> voxel.mNeighbors[index].x >> voxel.mNeighbors[index].y >> voxel.mNeighbors[index].z;
     }
+
+    // Load in the number of contained vertices
     u64 containedVertCount = 0;
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     file >> containedVertCount;
+
+    // Load in the contained vertices
     voxel.mMeshVertices.resize(containedVertCount);
     for (u64 v = 0; v < containedVertCount; v++)
     {
