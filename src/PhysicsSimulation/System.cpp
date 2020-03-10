@@ -37,7 +37,7 @@ void System::Run()
   auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
   auto *os = new Physics::ObjectSettings();
   auto *os2 = new Physics::ObjectSettings();
-  os->mPosition = {-2.0, 0.0, 0.0};
+  os->mPosition = {-2.0, 1.0, 0.0};
   os2->mPosition = {2.0, 0.0, 0.0};
   VoxelMeshManager::Get().SubmitSettings(mHandle, os);
   VoxelMeshManager::Get().SubmitSettings(handle, os2);

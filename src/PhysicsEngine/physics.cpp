@@ -23,22 +23,36 @@ void PhysicsEngine::Update(f32 t)
     const auto &position = transform.getOrigin();
     objectSettings->mPosition = glm::vec3(position.x(), position.y(), position.z());
   }
+  // for (u32 i = 0; i < mObjectWorld.mCollisionDispatcher->getNumManifolds(); i++)
+  // {
+  //   auto *contactManifold = mVoxelWorld.mCollisionDispatcher->getManifoldByIndexInternal(i);
+  //   const auto *objA = contactManifold->getBody0();
+  //   const auto *objB = contactManifold->getBody1();
+  //   auto handleA = (VMeshHandle)objA->getUserIndex();
+  //
+  //   auto positionA = objA->getWorldTransform().getOrigin();
+  //   for (const auto &voxelRB : mVoxels[handleA])
+  //   {
+  //     auto vPos = voxelRB->getWorldTransform().getOrigin();
+  //     voxelRB->getWorldTransform().setOrigin(vPos + positionA);
+  //   }
+  // }
   // Find all the colliding bodies in the voxel world
-  u32 manifoldCount = mVoxelWorld.mCollisionDispatcher->getNumManifolds();
-  for (u32 i = 0; i < manifoldCount; i++)
-  {
-    auto *contactManifold = mVoxelWorld.mCollisionDispatcher->getManifoldByIndexInternal(i);
-    const auto *objA = contactManifold->getBody0();
-    const auto *objB = contactManifold->getBody1();
-    auto positionA = objA->getWorldTransform().getOrigin();
-    auto positionB = objB->getWorldTransform().getOrigin();
-
-    auto voxelA = (VoxObj::Voxel *)objA->getUserPointer();
-    auto voxelB = (VoxObj::Voxel *)objB->getUserPointer();
-
-    voxelA->mPosition = glm::vec3(positionA.x(), positionA.y(), positionA.z());
-    voxelB->mPosition = glm::vec3(positionB.x(), positionB.y(), positionB.z());
-  }
+  // u32 manifoldCount = mVoxelWorld.mCollisionDispatcher->getNumManifolds();
+  // for (u32 i = 0; i < manifoldCount; i++)
+  // {
+  //   auto *contactManifold = mVoxelWorld.mCollisionDispatcher->getManifoldByIndexInternal(i);
+  //   const auto *objA = contactManifold->getBody0();
+  //   const auto *objB = contactManifold->getBody1();
+  //   auto positionA = objA->getWorldTransform().getOrigin();
+  //   auto positionB = objB->getWorldTransform().getOrigin();
+  //
+  //   auto voxelA = (VoxObj::Voxel *)objA->getUserPointer();
+  //   auto voxelB = (VoxObj::Voxel *)objB->getUserPointer();
+  //
+  //   voxelA->mPosition = glm::vec3(positionA.x(), positionA.y(), positionA.z());
+  //   voxelB->mPosition = glm::vec3(positionB.x(), positionB.y(), positionB.z());
+  // }
   // mObjectWorld.mDynamicsWorld->debugDrawWorld();
   mVoxelWorld.mDynamicsWorld->debugDrawWorld();
 }
@@ -68,6 +82,13 @@ void PhysicsEngine::CastRayWithForce(const glm::vec3 &origin, const glm::vec3 &d
     rigidBody->activate(true);
     // rigidBody->applyCentralImpulse(rayDirection * force);
     rigidBody->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
+
+    auto handle = (VMeshHandle)rigidBody->getUserIndex();
+    for (auto &voxelRB : mVoxels[handle])
+    {
+      voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
+      voxelRB->activate(true);
+    }
   }
 }
 
@@ -104,6 +125,7 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle)
   auto *vMesh = VoxelMeshManager::Get().GetMesh(handle);
   auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
   mVoxels.emplace(handle, std::vector<std::unique_ptr<btRigidBody>>());
+  std::unordered_map<glm::uvec3, btRigidBody *> neighbors;
   for (auto &[key, voxel] : vMesh->GetVoxels())
   {
     // Update the initial voxel position
@@ -134,6 +156,31 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle)
     // Add the object to the voxel world so it will only interact with other voxels
     mVoxelWorld.mDynamicsWorld->addRigidBody(rigidBody);
     mVoxels[handle].emplace_back(rigidBody);
+    neighbors.emplace(key, rigidBody);
+  }
+  for (auto &[key, voxel] : vMesh->GetVoxels())
+  {
+    auto size = voxel.mDimensions;
+    // TODO: don't create double constraints
+    for (const auto &n : voxel.mNeighbors)
+    {
+      glm::vec3 ap(glm::abs(glm::vec3(n) - glm::vec3(key)));
+      glm::vec3 bp(-ap);
+      auto *voxelRB = neighbors[key];
+      auto *neighbor = neighbors[n];
+      auto a = btTransform::getIdentity();
+      // a.setOrigin(btVector3(ap.x, ap.y, ap.z));
+      auto b = btTransform::getIdentity();
+      // b.setOrigin(btVector3(bp.x, bp.y, bp.z));
+      auto *constraint = new btGeneric6DofSpringConstraint(*voxelRB, *neighbor, a, b, true);
+      // TODO: fix limits so they're relative to the voxel's initials size
+      constraint->setLinearLowerLimit(
+          btVector3(-size.x, -size.y, -size.z) + btVector3(ap.x, ap.y, ap.z));
+      constraint->setLinearUpperLimit(
+          btVector3(size.x, size.y, size.z) - btVector3(ap.x, ap.y, ap.z));
+      // constraint->setLimit(2, 0.0, 1.0);
+      mVoxelWorld.mDynamicsWorld->addConstraint(constraint, false);
+    }
   }
 }
 
