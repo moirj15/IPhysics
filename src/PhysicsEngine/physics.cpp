@@ -166,14 +166,12 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
       auto b = btTransform::getIdentity();
       // b.setOrigin(btVector3(bp.x, bp.y, bp.z));
       auto *constraint = new btGeneric6DofSpringConstraint(*voxelRB, *neighbor, a, b, true);
-      // TODO: fix limits so they're relative to the voxel's initials size
       constraint->setLinearLowerLimit(
           btVector3(-size.x, -size.y, -size.z) + btVector3(ap.x, ap.y, ap.z));
       constraint->setLinearUpperLimit(
           btVector3(size.x, size.y, size.z) - btVector3(ap.x, ap.y, ap.z));
       // constraint->setLimit(2, 0.0, 1.0);
-      // mVoxelWorld.mDynamicsWorld->addConstraint(constraint, false);
-      mObjectWorld.mDynamicsWorld->addConstraint(constraint, false);
+      mVoxelWorld.mDynamicsWorld->addConstraint(constraint, false);
     }
   }
 }
