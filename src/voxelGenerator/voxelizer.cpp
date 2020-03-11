@@ -87,13 +87,15 @@ Voxelizer::GenerateVoxels(const MeshInfo &meshTriangles, const rp3d::AABB &meshA
                    + rp3d::Vector3(
                        mParameters.mVoxelSize, mParameters.mVoxelSize, mParameters.mVoxelSize)));
         // Find the triangles that the voxel intersects
+        glm::ivec3 key(x, y, z);
+        glm::vec3 position(voxel.getCenter().x, voxel.getCenter().y, voxel.getCenter().z);
+        VoxObj::Voxel generatedVoxel(mParameters.mVoxelSize, position);
+        bool keep = false;
         for (const auto &triangle : meshTriangles)
         {
           if (voxel.testCollisionTriangleAABB(triangle.first.data()))
           {
-            glm::ivec3 key(x, y, z);
-            glm::vec3 position(voxel.getCenter().x, voxel.getCenter().y, voxel.getCenter().z);
-            VoxObj::Voxel generatedVoxel(mParameters.mVoxelSize, position);
+            keep = true;
             for (u32 i = 0; i < triangle.first.size(); i++)
             {
               if (voxel.contains(triangle.first[i]))
@@ -101,9 +103,12 @@ Voxelizer::GenerateVoxels(const MeshInfo &meshTriangles, const rp3d::AABB &meshA
                 generatedVoxel.mMeshVertices.push_back(triangle.second[i]);
               }
             }
-            voxelMesh.SetVoxel(key, generatedVoxel);
-            break;
+            // voxelMesh.SetVoxel(key, generatedVoxel);
           }
+        }
+        if (keep)
+        {
+          voxelMesh.SetVoxel(key, generatedVoxel);
         }
       }
     }

@@ -20,7 +20,7 @@ struct ObjectSettings;
 struct Mesh;
 
 using VMeshHandle = u32;
-using MeshTuple = std::tuple<VMeshHandle, Mesh *, Physics::ObjectSettings *>;
+using MeshTuple = std::tuple<VMeshHandle, VoxObj::VoxelMesh *, Physics::ObjectSettings *>;
 class VoxelMeshManager
 {
   std::unordered_map<VMeshHandle, std::unique_ptr<VoxObj::VoxelMesh>> mMeshes;

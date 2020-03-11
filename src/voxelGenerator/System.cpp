@@ -14,8 +14,8 @@
 #include "../utils/VoxelMeshManager.h"
 #include "../voxelObjects/VoxelMesh.h"
 #include "VoxelizerUI.h"
+#include "obj.h"
 #include "tiny_obj_loader.h"
-// #include "obj.h"
 #include "voxelizer.h"
 
 #include <GLFW/glfw3.h>
@@ -101,6 +101,10 @@ void System::LoadMesh()
     if (fs::exists(*meshPath))
     {
       // ObjReader objReader;
+      // mMesh.reset(objReader.Parse(meshPath->c_str()));
+      // mRenderer->RemoveMesh(mCurrentMeshHandle);
+      // mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
+      // // ObjReader objReader;
       tinyobj::attrib_t attrib;
       std::vector<tinyobj::shape_t> shapes;
       std::vector<tinyobj::material_t> materials;

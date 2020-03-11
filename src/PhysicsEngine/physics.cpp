@@ -18,42 +18,26 @@ void PhysicsEngine::Update(f32 t)
   {
     // Update our object position in its settings, so we can render it in the right spot
     auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
-    btRigidBody *rb = (btRigidBody *)mObjects[handle].get();
+    auto *rb = (btRigidBody *)mObjects[handle].get();
     const auto &transform = rb->getWorldTransform();
     const auto &position = transform.getOrigin();
     objectSettings->mPosition = glm::vec3(position.x(), position.y(), position.z());
   }
-  // for (u32 i = 0; i < mObjectWorld.mCollisionDispatcher->getNumManifolds(); i++)
-  // {
-  //   auto *contactManifold = mVoxelWorld.mCollisionDispatcher->getManifoldByIndexInternal(i);
-  //   const auto *objA = contactManifold->getBody0();
-  //   const auto *objB = contactManifold->getBody1();
-  //   auto handleA = (VMeshHandle)objA->getUserIndex();
-  //
-  //   auto positionA = objA->getWorldTransform().getOrigin();
-  //   for (const auto &voxelRB : mVoxels[handleA])
-  //   {
-  //     auto vPos = voxelRB->getWorldTransform().getOrigin();
-  //     voxelRB->getWorldTransform().setOrigin(vPos + positionA);
-  //   }
-  // }
-  // Find all the colliding bodies in the voxel world
-  // u32 manifoldCount = mVoxelWorld.mCollisionDispatcher->getNumManifolds();
-  // for (u32 i = 0; i < manifoldCount; i++)
-  // {
-  //   auto *contactManifold = mVoxelWorld.mCollisionDispatcher->getManifoldByIndexInternal(i);
-  //   const auto *objA = contactManifold->getBody0();
-  //   const auto *objB = contactManifold->getBody1();
-  //   auto positionA = objA->getWorldTransform().getOrigin();
-  //   auto positionB = objB->getWorldTransform().getOrigin();
-  //
-  //   auto voxelA = (VoxObj::Voxel *)objA->getUserPointer();
-  //   auto voxelB = (VoxObj::Voxel *)objB->getUserPointer();
-  //
-  //   voxelA->mPosition = glm::vec3(positionA.x(), positionA.y(), positionA.z());
-  //   voxelB->mPosition = glm::vec3(positionB.x(), positionB.y(), positionB.z());
-  // }
-  // mObjectWorld.mDynamicsWorld->debugDrawWorld();
+  for (const auto &[key, voxelRBs] : mVoxels)
+  {
+    auto *objectSettings = VoxelMeshManager::Get().GetSettings(key);
+    for (auto &voxelRB : voxelRBs)
+    {
+      const auto &origin = voxelRB->getWorldTransform().getOrigin();
+      glm::vec3 voxelCurrPosition(origin.x(), origin.y(), origin.z());
+      auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
+      voxel->mPosition = voxelCurrPosition;
+      voxel->mRelativePositionDelta =
+          (voxel->mPosition - objectSettings->mPosition) - voxel->mPositionRelativeToCenter;
+      voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
+    }
+  }
+  mObjectWorld.mDynamicsWorld->debugDrawWorld();
   mVoxelWorld.mDynamicsWorld->debugDrawWorld();
 }
 
@@ -126,10 +110,11 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle)
   auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
   mVoxels.emplace(handle, std::vector<std::unique_ptr<btRigidBody>>());
   std::unordered_map<glm::uvec3, btRigidBody *> neighbors;
-  for (auto &[key, voxel] : vMesh->GetVoxels())
+  for (auto &[key, voxel] : vMesh->mVoxels)
   {
     // Update the initial voxel position
     voxel.mPosition += objectSettings->mPosition;
+    voxel.mPositionRelativeToCenter = voxel.mPosition - objectSettings->mPosition;
 
     // Do all the bullet object creation stuff
     btCollisionShape *objectCollisionShape = new btBoxShape(btVector3(
@@ -151,14 +136,14 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle)
     // set the user index so we can get this voxel at a later time
     rigidBody->setUserIndex(handle);
     rigidBody->setUserIndex2(mVoxels[handle].size());
-    rigidBody->setUserPointer((void *)&voxel);
+    rigidBody->setUserPointer((void *)&vMesh->mVoxels[key]);
 
     // Add the object to the voxel world so it will only interact with other voxels
     mVoxelWorld.mDynamicsWorld->addRigidBody(rigidBody);
     mVoxels[handle].emplace_back(rigidBody);
     neighbors.emplace(key, rigidBody);
   }
-  for (auto &[key, voxel] : vMesh->GetVoxels())
+  for (auto &[key, voxel] : vMesh->mVoxels)
   {
     auto size = voxel.mDimensions;
     // TODO: don't create double constraints

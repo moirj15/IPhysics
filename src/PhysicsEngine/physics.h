@@ -22,7 +22,10 @@
 #include <vector>
 
 class Object;
+namespace VoxObj
+{
 class Voxel;
+}
 
 namespace Physics
 {

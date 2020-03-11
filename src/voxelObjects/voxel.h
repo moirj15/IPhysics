@@ -12,8 +12,10 @@ namespace VoxObj
 
 struct Voxel
 {
-  glm::vec3 mDimensions{0, 0, 0};
-  glm::vec3 mPosition{0.0, 0.0, 0.0};
+  glm::vec3 mDimensions{0.0f};
+  glm::vec3 mPosition{0.0f};
+  glm::vec3 mPositionRelativeToCenter{0.0f};
+  glm::vec3 mRelativePositionDelta{0.0f};
   std::vector<glm::vec3> mNeighbors;
   std::vector<u32> mMeshVertices;
 

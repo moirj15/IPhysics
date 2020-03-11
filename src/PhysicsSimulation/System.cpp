@@ -31,9 +31,9 @@ System::~System() = default;
 
 void System::Run()
 {
-  auto *vm = Utils::DeSerialize("../test-out/block-1.vmf");
+  auto *vm = Utils::DeSerialize("../test-out/sphere-0p5.vmf");
   mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
-  auto *vm2 = Utils::DeSerialize("../test-out/block-1.vmf");
+  auto *vm2 = Utils::DeSerialize("../test-out/sphere-0p5.vmf");
   auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
   auto *os = new Physics::ObjectSettings();
   auto *os2 = new Physics::ObjectSettings();
@@ -54,6 +54,20 @@ void System::Run()
     CollectInput();
     mPhysicsEngine->Update(io.DeltaTime);
     Render();
+    for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
+    {
+      for (const auto &[key, voxel] : vMesh->mVoxels)
+      {
+        for (auto index : voxel.mMeshVertices)
+        {
+          // glm::vec3 offset = voxel.mPosition - settings->mPosition;
+          vMesh->mMesh->mVertecies[(index * 3)] += voxel.mRelativePositionDelta.x;
+          vMesh->mMesh->mVertecies[(index * 3) + 1] += voxel.mRelativePositionDelta.y;
+          vMesh->mMesh->mVertecies[(index * 3) + 2] += voxel.mRelativePositionDelta.z;
+        }
+      }
+      mRenderer->UpdateMesh(handle, vMesh->mMesh->mIndecies);
+    }
   }
 }
 

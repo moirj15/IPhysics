@@ -2,6 +2,7 @@
 #pragma once
 
 #include "../common.h"
+#include "../utils/VoxelMeshManager.h"
 #include "ShaderData.h"
 #include "indexBufferObject.h"
 
@@ -123,6 +124,7 @@ public:
 
   void ClearScreen();
   void RemoveMesh(u32 handle);
+  void UpdateMesh(const u32 handle, const std::vector<u32> &verts, Mesh *mesh);
 
 private:
   /**

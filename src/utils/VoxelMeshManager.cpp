@@ -46,7 +46,7 @@ std::vector<MeshTuple> VoxelMeshManager::GetAllMeshes()
   std::vector<MeshTuple> tuples;
   for (const auto key : mActiveKeys)
   {
-    tuples.emplace_back(key, mMeshes[key].get()->GetMesh(), mSettings[key].get());
+    tuples.emplace_back(key, mMeshes[key].get(), mSettings[key].get());
   }
   return tuples;
 }

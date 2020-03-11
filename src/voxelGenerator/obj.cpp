@@ -3,6 +3,8 @@
 #include "../renderer/mesh.h"
 
 #include <cstdio>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/normal.hpp>
 #include <sstream>
 
 namespace VoxGen
@@ -52,6 +54,32 @@ Mesh *ObjReader::Parse(const char *filename)
       SkipLine();
       break;
     }
+  }
+  mMesh->mNormals.resize(mMesh->mIndecies.size() * 3);
+  for (u32 i = 0; i < mMesh->mIndecies.size(); i += 3)
+  {
+    u32 i0 = mMesh->mIndecies[i];
+    u32 i1 = mMesh->mIndecies[i + 1];
+    u32 i2 = mMesh->mIndecies[i + 2];
+    glm::vec3 t0(mMesh->mVertecies[i0], mMesh->mVertecies[i0 + 1], mMesh->mVertecies[i0 + 2]);
+    glm::vec3 t1(mMesh->mVertecies[i1], mMesh->mVertecies[i1 + 1], mMesh->mVertecies[i1 + 2]);
+    glm::vec3 t2(mMesh->mVertecies[i2], mMesh->mVertecies[i2 + 1], mMesh->mVertecies[i2 + 2]);
+    auto normal = glm::triangleNormal(t0, t1, t2);
+    mMesh->mNormals[i0] += normal.x;
+    mMesh->mNormals[i0 + 1] += normal.y;
+    mMesh->mNormals[i0 + 2] += normal.z;
+
+    mMesh->mNormals[i1] += normal.x;
+    mMesh->mNormals[i1 + 1] += normal.y;
+    mMesh->mNormals[i1 + 2] += normal.z;
+
+    mMesh->mNormals[i2] += normal.x;
+    mMesh->mNormals[i2 + 1] += normal.y;
+    mMesh->mNormals[i2 + 2] += normal.z;
+  }
+  for (u32 i = 0; i < mMesh->mNormals.size(); i++)
+  {
+    mMesh->mNormals[i] /= 3.0f;
   }
   Clear();
   // This should clear out mMesh

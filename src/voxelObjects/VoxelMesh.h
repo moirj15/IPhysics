@@ -42,10 +42,6 @@ struct VoxelMesh
     return mVoxels[position];
   }
 
-  NODISCARD inline std::unordered_map<glm::uvec3, Voxel> GetVoxels() const
-  {
-    return mVoxels;
-  }
   inline void SetVoxel(const glm::uvec3 &position, const Voxel &voxel)
   {
     assert(glm::all(glm::lessThan(position, mExtentsVoxelSpace)));

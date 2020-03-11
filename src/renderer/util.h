@@ -20,6 +20,7 @@ inline u32 CreateBuffer(GLenum bufferType, void *data, u32 len)
   u32 handle = 0;
   glGenBuffers(1, &handle);
   glBindBuffer(bufferType, handle);
-  glBufferData(bufferType, len, data, GL_STATIC_DRAW);
+  // glBufferData(bufferType, len, data, GL_STATIC_DRAW);
+  glBufferData(bufferType, len, data, GL_DYNAMIC_DRAW);
   return handle;
 }

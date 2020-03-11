@@ -61,7 +61,7 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
 
   // Begin serializing the voxels
   file << "\n[Voxels]\n";
-  for (const auto &[key, value] : voxelMesh->GetVoxels())
+  for (const auto &[key, value] : voxelMesh->mVoxels)
   {
     file << "[Key]\n" << key.x << " " << key.y << " " << key.z << "\n";
     file << "[Dimensions]\n"

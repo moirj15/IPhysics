@@ -64,7 +64,7 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
   };
   // do this super inefficiently
   const auto voxelSize = vm->GetInitialVoxelSize();
-  for (const auto &[key, voxel] : vm->GetVoxels())
+  for (const auto &[key, voxel] : vm->mVoxels)
   {
     const glm::vec3 voxelVerts[] = {
         voxel.mPosition + (glm::vec3(1.0f, 1.0f, 1.0f) * (voxelSize / 2.0f)),   // 0 Front
@@ -152,5 +152,10 @@ void RendererFrontend::Clear()
 void RendererFrontend::RemoveMesh(u32 handle)
 {
   mBackend->RemoveMesh(handle);
+}
+
+void RendererFrontend::UpdateMesh(const VMeshHandle handle, std::vector<u32> &verts)
+{
+  mBackend->UpdateMesh(mMeshHandles[handle], verts, VoxelMeshManager::Get().GetMesh(handle)->mMesh);
 }
 } // namespace Renderer

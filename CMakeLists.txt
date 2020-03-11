@@ -66,7 +66,6 @@ if (MSYS OR MINGW)
     D:/libraries/ReactPhysics3D/lib/libreactphysics3d.a
   )
 
-
 elseif (WIN32)
   message("WINDOWS")
   include_directories(
@@ -76,7 +75,8 @@ elseif (WIN32)
     D:/libraries/ReactPhysics3D/src
     D:/libraries/bullet/include;
   )
-  set(CMAKE_CXX_FLAGS "/std:c++17 -MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC")
+  set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC")
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
   target_link_libraries(
     IPhysics
     ${OPENGL_LIBRARY}

@@ -18,6 +18,11 @@ class VertexArray
 public:
   VertexArray() = default;
 
+  inline const std::vector<VertexBuffer> &GetVertexBuffers() const
+  {
+    return mVertexBuffers;
+  }
+
   /**
    * \brief: Create a VertexArray.
    */
