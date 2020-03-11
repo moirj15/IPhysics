@@ -85,8 +85,8 @@ public:
   }
 
 private:
-  void AddObject(const VMeshHandle handle);
-  void AddVoxels(const VMeshHandle handle);
+  btCompoundShape *AddObject(const VMeshHandle handle);
+  void AddVoxels(const VMeshHandle handle, btCompoundShape *collisionShape);
   void CollectVoxelsWithBadPositions();
   void CorrectVoxelPositions();
 };

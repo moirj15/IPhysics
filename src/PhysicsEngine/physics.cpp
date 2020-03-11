@@ -38,14 +38,14 @@ void PhysicsEngine::Update(f32 t)
     }
   }
   mObjectWorld.mDynamicsWorld->debugDrawWorld();
-  mVoxelWorld.mDynamicsWorld->debugDrawWorld();
+  // mVoxelWorld.mDynamicsWorld->debugDrawWorld();
 }
 
 void PhysicsEngine::SubmitObject(const VMeshHandle handle)
 {
   mObjectHandles.emplace_back(handle);
-  AddObject(handle);
-  AddVoxels(handle);
+  auto *collisionShape = AddObject(handle);
+  AddVoxels(handle, collisionShape);
 }
 
 void PhysicsEngine::RemoveObject(const VMeshHandle handle)
@@ -76,18 +76,19 @@ void PhysicsEngine::CastRayWithForce(const glm::vec3 &origin, const glm::vec3 &d
   }
 }
 
-void PhysicsEngine::AddObject(const VMeshHandle handle)
+btCompoundShape *PhysicsEngine::AddObject(const VMeshHandle handle)
 {
   auto *vMesh = VoxelMeshManager::Get().GetMesh(handle);
   auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
   auto extentsObjectSpace = vMesh->GetExtentsObjectSpace();
 
-  btCollisionShape *objectCollisionShape = new btBoxShape(btVector3(
-      extentsObjectSpace.x / 2.0f, extentsObjectSpace.y / 2.0f, extentsObjectSpace.z / 2.0f));
+  // auto *collisionShape = new btCompoundShape(btVector3(
+  //     extentsObjectSpace.x / 2.0f, extentsObjectSpace.y / 2.0f, extentsObjectSpace.z / 2.0f));
+  auto *collisionShape = new btCompoundShape(true, vMesh->mVoxels.size());
 
   f32 mass = 1.0f;
   btVector3 localInteria(0.0f, 0.0f, 0.0f);
-  objectCollisionShape->calculateLocalInertia(1.0f, localInteria);
+  collisionShape->calculateLocalInertia(1.0f, localInteria);
 
   auto *motionState = new btDefaultMotionState(btTransform(
       btQuaternion(),
@@ -95,16 +96,17 @@ void PhysicsEngine::AddObject(const VMeshHandle handle)
           objectSettings->mPosition.x, objectSettings->mPosition.y, objectSettings->mPosition.z)));
 
   btRigidBody::btRigidBodyConstructionInfo rigidBodyInfo(
-      1.0f, motionState, objectCollisionShape, btVector3(0.0f, 0.0f, 0.0f));
+      1.0f, motionState, collisionShape, btVector3(0.0f, 0.0f, 0.0f));
 
   auto rigidBody = new btRigidBody(rigidBodyInfo);
   rigidBody->setUserIndex(handle);
 
   mObjectWorld.mDynamicsWorld->addRigidBody(rigidBody);
   mObjects.emplace(handle, rigidBody);
+  return collisionShape;
 }
 
-void PhysicsEngine::AddVoxels(const VMeshHandle handle)
+void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisionShape)
 {
   auto *vMesh = VoxelMeshManager::Get().GetMesh(handle);
   auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
@@ -112,23 +114,28 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle)
   std::unordered_map<glm::uvec3, btRigidBody *> neighbors;
   for (auto &[key, voxel] : vMesh->mVoxels)
   {
+
+    // Do all the bullet object creation stuff
+    btCollisionShape *voxelCollisionShape = new btBoxShape(btVector3(
+        voxel.mDimensions.x / 2.0f, voxel.mDimensions.y / 2.0f, voxel.mDimensions.z / 2.0f));
+    // Add the voxel to the btCompundShape
+    collisionShape->addChildShape(
+        btTransform(
+            btQuaternion(), btVector3(voxel.mPosition.x, voxel.mPosition.y, voxel.mPosition.z)),
+        voxelCollisionShape);
     // Update the initial voxel position
     voxel.mPosition += objectSettings->mPosition;
     voxel.mPositionRelativeToCenter = voxel.mPosition - objectSettings->mPosition;
 
-    // Do all the bullet object creation stuff
-    btCollisionShape *objectCollisionShape = new btBoxShape(btVector3(
-        voxel.mDimensions.x / 2.0f, voxel.mDimensions.y / 2.0f, voxel.mDimensions.z / 2.0f));
-
     f32 mass = 1.0f;
     btVector3 localInteria(0.0f, 0.0f, 0.0f);
-    objectCollisionShape->calculateLocalInertia(1.0f, localInteria);
+    voxelCollisionShape->calculateLocalInertia(1.0f, localInteria);
 
     auto *motionState = new btDefaultMotionState(btTransform(
         btQuaternion(), btVector3(voxel.mPosition.x, voxel.mPosition.y, voxel.mPosition.z)));
 
     btRigidBody::btRigidBodyConstructionInfo rigidBodyInfo(
-        1.0f, motionState, objectCollisionShape, btVector3(0.0f, 0.0f, 0.0f));
+        1.0f, motionState, voxelCollisionShape, btVector3(0.0f, 0.0f, 0.0f));
 
     auto rigidBody = new btRigidBody(rigidBodyInfo);
     rigidBody->setUserIndex(handle);
@@ -140,6 +147,7 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle)
 
     // Add the object to the voxel world so it will only interact with other voxels
     mVoxelWorld.mDynamicsWorld->addRigidBody(rigidBody);
+
     mVoxels[handle].emplace_back(rigidBody);
     neighbors.emplace(key, rigidBody);
   }
@@ -164,7 +172,8 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle)
       constraint->setLinearUpperLimit(
           btVector3(size.x, size.y, size.z) - btVector3(ap.x, ap.y, ap.z));
       // constraint->setLimit(2, 0.0, 1.0);
-      mVoxelWorld.mDynamicsWorld->addConstraint(constraint, false);
+      // mVoxelWorld.mDynamicsWorld->addConstraint(constraint, false);
+      mObjectWorld.mDynamicsWorld->addConstraint(constraint, false);
     }
   }
 }
