@@ -14,15 +14,6 @@ void PhysicsEngine::Update(f32 t)
 {
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
   mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
-  for (const auto handle : mObjectHandles)
-  {
-    // Update our object position in its settings, so we can render it in the right spot
-    auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
-    auto *rb = (btRigidBody *)mObjects[handle].get();
-    const auto &transform = rb->getWorldTransform();
-    const auto &position = transform.getOrigin();
-    objectSettings->mPosition = glm::vec3(position.x(), position.y(), position.z());
-  }
   for (const auto &[key, voxelRBs] : mVoxels)
   {
     auto *objectSettings = VoxelMeshManager::Get().GetSettings(key);
@@ -37,8 +28,30 @@ void PhysicsEngine::Update(f32 t)
       voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
     }
   }
+  for (const auto handle : mObjectHandles)
+  {
+    // Update our object position in its settings, so we can render it in the right spot
+    auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
+    auto *rb = (btRigidBody *)mObjects[handle].get();
+    const auto &transform = rb->getWorldTransform();
+    const auto &position = transform.getOrigin();
+    objectSettings->mPosition = glm::vec3(position.x(), position.y(), position.z());
+    auto *collisionShape = (btCompoundShape *)rb->getCollisionShape();
+    for (s32 i = 0; i < collisionShape->getNumChildShapes(); i++)
+    {
+      auto *childCollisionShape = (btBoxShape *)collisionShape->getChildShape(i);
+      auto *voxel = (VoxObj::Voxel *)childCollisionShape->getUserPointer();
+      auto tmp = collisionShape->getChildTransform(i);
+      btTransform newTransform(
+          btQuaternion(),
+          btVector3(
+              voxel->mPositionRelativeToCenter.x, voxel->mPositionRelativeToCenter.y,
+              voxel->mPositionRelativeToCenter.z));
+      collisionShape->updateChildTransform(i, newTransform);
+    }
+  }
   mObjectWorld.mDynamicsWorld->debugDrawWorld();
-  // mVoxelWorld.mDynamicsWorld->debugDrawWorld();
+  mVoxelWorld.mDynamicsWorld->debugDrawWorld();
 }
 
 void PhysicsEngine::SubmitObject(const VMeshHandle handle)
@@ -88,7 +101,7 @@ btCompoundShape *PhysicsEngine::AddObject(const VMeshHandle handle)
 
   f32 mass = 1.0f;
   btVector3 localInteria(0.0f, 0.0f, 0.0f);
-  collisionShape->calculateLocalInertia(1.0f, localInteria);
+  collisionShape->calculateLocalInertia(mass, localInteria);
 
   auto *motionState = new btDefaultMotionState(btTransform(
       btQuaternion(),
@@ -119,13 +132,14 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
     btCollisionShape *voxelCollisionShape = new btBoxShape(btVector3(
         voxel.mDimensions.x / 2.0f, voxel.mDimensions.y / 2.0f, voxel.mDimensions.z / 2.0f));
     // Add the voxel to the btCompundShape
+    voxelCollisionShape->setUserPointer((void *)&vMesh->mVoxels[key]);
     collisionShape->addChildShape(
         btTransform(
             btQuaternion(), btVector3(voxel.mPosition.x, voxel.mPosition.y, voxel.mPosition.z)),
         voxelCollisionShape);
     // Update the initial voxel position
+    voxel.mPositionRelativeToCenter = voxel.mPosition; // - objectSettings->mPosition;
     voxel.mPosition += objectSettings->mPosition;
-    voxel.mPositionRelativeToCenter = voxel.mPosition - objectSettings->mPosition;
 
     f32 mass = 1.0f;
     btVector3 localInteria(0.0f, 0.0f, 0.0f);
@@ -151,6 +165,9 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
     mVoxels[handle].emplace_back(rigidBody);
     neighbors.emplace(key, rigidBody);
   }
+  std::vector<f32> masses(vMesh->mVoxels.size(), 1.0f);
+  collisionShape->calculatePrincipalAxisTransform(
+      masses.data(), mObjects[handle]->getWorldTransform(), btVector3(0.0f, 0.0f, 0.0f));
   for (auto &[key, voxel] : vMesh->mVoxels)
   {
     auto size = voxel.mDimensions;

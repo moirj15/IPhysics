@@ -34,6 +34,7 @@ void IPhysicsUI::Update()
   // Define the UI layout
   ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
   {
+    ImGui::Text("FPS: %f", ImGui::GetIO().Framerate);
     mLoadObjectClicked = ImGui::Button("Load Object");
     ImGui::SameLine();
     ImGui::InputText("Object File Name", mObjectPath.data(), mObjectPath.size());
