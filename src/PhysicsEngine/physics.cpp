@@ -5,11 +5,6 @@
 namespace Physics
 {
 
-// void TickCallback(btDynamicsWorld *dynamicsWorld, btScalar timeStep)
-// {
-//   s32 manifoldCount = dynamicsWorld->getDispatcher()->getNumManifolds();
-// }
-
 void PhysicsEngine::Update(f32 t)
 {
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
@@ -133,13 +128,13 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
         voxel.mDimensions.x / 2.0f, voxel.mDimensions.y / 2.0f, voxel.mDimensions.z / 2.0f));
     // Add the voxel to the btCompundShape
     voxelCollisionShape->setUserPointer((void *)&vMesh->mVoxels[key]);
-    collisionShape->addChildShape(
-        btTransform(
-            btQuaternion(), btVector3(voxel.mPosition.x, voxel.mPosition.y, voxel.mPosition.z)),
-        voxelCollisionShape);
+    // collisionShape->addChildShape(
+    //     btTransform(
+    //         btQuaternion(), btVector3(voxel.mPosition.x, voxel.mPosition.y, voxel.mPosition.z)),
+    //     voxelCollisionShape);
     // Update the initial voxel position
-    voxel.mPositionRelativeToCenter = voxel.mPosition; // - objectSettings->mPosition;
     voxel.mPosition += objectSettings->mPosition;
+    voxel.mPositionRelativeToCenter = voxel.mPosition - objectSettings->mPosition;
 
     f32 mass = 1.0f;
     btVector3 localInteria(0.0f, 0.0f, 0.0f);
@@ -159,6 +154,9 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
     rigidBody->setUserIndex2(mVoxels[handle].size());
     rigidBody->setUserPointer((void *)&vMesh->mVoxels[key]);
 
+    //
+    collisionShape->addChildShape(rigidBody->getWorldTransform(), voxelCollisionShape);
+
     // Add the object to the voxel world so it will only interact with other voxels
     mVoxelWorld.mDynamicsWorld->addRigidBody(rigidBody);
 
@@ -166,8 +164,34 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
     neighbors.emplace(key, rigidBody);
   }
   std::vector<f32> masses(vMesh->mVoxels.size(), 1.0f);
-  collisionShape->calculatePrincipalAxisTransform(
-      masses.data(), mObjects[handle]->getWorldTransform(), btVector3(0.0f, 0.0f, 0.0f));
+  btTransform principal;
+  btVector3 inertia;
+  collisionShape->calculatePrincipalAxisTransform(masses.data(), principal, inertia);
+  // collisionShape->calculatePrincipalAxisTransform(
+  //     masses.data(), mObjects[handle]->getWorldTransform(), btVector3(0.0f, 0.0f, 0.0f));
+  for (s32 i = 0; i < collisionShape->getNumChildShapes(); i++)
+  {
+    collisionShape->getChildTransform(i) =
+        collisionShape->getChildTransform(i) * principal.inverse();
+  }
+  // for (auto &vrb : mVoxels[handle])
+  // {
+  //   auto &wt = vrb->getWorldTransform();
+  //   wt *= t.inverse();
+  //   // wt *= mObjects[handle]->getWorldTransform().inverse();
+  // }
+  auto &objectTransform = mObjects[handle]->getWorldTransform();
+  objectTransform = principal;
+
+  // for (s32 i = 0; i < collisionShape->getNumChildShapes(); i++)
+  // {
+  //   auto *child = collisionShape->getChildShape(i);
+  //
+  //   // auto *voxel = (VoxObj::Voxel *)child->getUserPointer();
+  //   // voxel->mPosition += objectSettings->mPosition;
+  //   // voxel->mPositionRelativeToCenter = voxel->mPositionRelativeToCenter -
+  //   // objectSettings->mPosition;
+  // }
   for (auto &[key, voxel] : vMesh->mVoxels)
   {
     auto size = voxel.mDimensions;

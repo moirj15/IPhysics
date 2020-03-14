@@ -31,9 +31,11 @@ System::~System() = default;
 
 void System::Run()
 {
-  auto *vm = Utils::DeSerialize("../test-out/block-1fixed.vmf");
+  auto *vm = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
+  // auto *vm = Utils::DeSerialize("../test-out/block-1fixed.vmf");
   mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
-  auto *vm2 = Utils::DeSerialize("../test-out/block-1fixed.vmf");
+  auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
+  // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
   auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
   auto *os = new Physics::ObjectSettings();
   auto *os2 = new Physics::ObjectSettings();
