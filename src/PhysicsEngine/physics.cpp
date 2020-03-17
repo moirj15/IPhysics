@@ -134,7 +134,7 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
     //     voxelCollisionShape);
     // Update the initial voxel position
     voxel.mPosition += objectSettings->mPosition;
-    voxel.mPositionRelativeToCenter = voxel.mPosition - objectSettings->mPosition;
+    // voxel.mPositionRelativeToCenter = voxel.mPosition - objectSettings->mPosition;
 
     f32 mass = 1.0f;
     btVector3 localInteria(0.0f, 0.0f, 0.0f);
@@ -171,27 +171,16 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
   //     masses.data(), mObjects[handle]->getWorldTransform(), btVector3(0.0f, 0.0f, 0.0f));
   for (s32 i = 0; i < collisionShape->getNumChildShapes(); i++)
   {
-    collisionShape->getChildTransform(i) =
-        collisionShape->getChildTransform(i) * principal.inverse();
+    collisionShape->getChildTransform(i) *= principal.inverse();
+    auto *child = collisionShape->getChildShape(i);
+    auto *voxel = (VoxObj::Voxel *)child->getUserPointer();
+    voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
   }
-  // for (auto &vrb : mVoxels[handle])
-  // {
-  //   auto &wt = vrb->getWorldTransform();
-  //   wt *= t.inverse();
-  //   // wt *= mObjects[handle]->getWorldTransform().inverse();
-  // }
   auto &objectTransform = mObjects[handle]->getWorldTransform();
+  // Set the basis (which is the 3x3 matrix to the left of the translation) to the identity
+  principal.getBasis().setIdentity();
   objectTransform = principal;
 
-  // for (s32 i = 0; i < collisionShape->getNumChildShapes(); i++)
-  // {
-  //   auto *child = collisionShape->getChildShape(i);
-  //
-  //   // auto *voxel = (VoxObj::Voxel *)child->getUserPointer();
-  //   // voxel->mPosition += objectSettings->mPosition;
-  //   // voxel->mPositionRelativeToCenter = voxel->mPositionRelativeToCenter -
-  //   // objectSettings->mPosition;
-  // }
   for (auto &[key, voxel] : vMesh->mVoxels)
   {
     auto size = voxel.mDimensions;

@@ -7,9 +7,6 @@
 #include "../PhysicsEngine/Settings.h"
 #include "../voxelObjects/VoxelMesh.h"
 
-struct ObjectSettings
-{
-};
 
 VoxelMeshManager &VoxelMeshManager::Get()
 {

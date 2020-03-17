@@ -48,6 +48,7 @@ Window *InitAPI(const s32 width, const s32 height, const char *windowName, bool 
   glfwSwapInterval(1);
   glEnable(GL_DEPTH_TEST);
   glLineWidth(3.0f);
+  glfwSwapInterval(0);
   //  glCullFace(GL_BACK);
   glClearColor(0.0, 0.0, 0.0, 1.0);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -160,7 +161,7 @@ void RendererBackend::RemoveMesh(u32 handle)
 
 void RendererBackend::UpdateMesh(const u32 handle, const std::vector<u32> &verts, Mesh *mesh)
 {
-  auto &[vao, ibo] = (*mMeshLibrary)[handle];
+  auto [vao, ibo] = (*mMeshLibrary)[handle];
   const auto vbos = vao.GetVertexBuffers();
   vbos[0].Bind();
   for (auto v : verts)

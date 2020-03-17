@@ -50,13 +50,17 @@ if (MSYS OR MINGW)
     D:/libraries/glfw-3.2.1.bin.WIN64/include;
     D:/libraries/glew-2.1.0/include
     D:/libraries/ReactPhysics3D/src
+    D:/libraries/bullet/include;
   )
   target_link_libraries(
     IPhysics
     ${OPENGL_LIBRARY}
     D:/libraries/glfw-3.2.1.bin.WIN64/lib-mingw-w64/libglfw3.a
     D:/libraries/glew-2.1.0/lib/Release/x64/glew32.dll
-    D:/libraries/ReactPhysics3D/lib/libreactphysics3d.a
+    #D:/libraries/ReactPhysics3D/lib/libreactphysics3d.a
+    D:/libraries/bullet/mingw/Debug/libBulletDynamics_Debug.a
+    D:/libraries/bullet/mingw/Debug/libBulletCollision_Debug.a
+    D:/libraries/bullet/mingw/Debug/libLinearMath_Debug.a
   )
   target_link_libraries(
     VoxelGenerator
