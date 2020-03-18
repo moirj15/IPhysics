@@ -179,7 +179,8 @@ void PhysicsEngine::AddVoxels(const VMeshHandle handle, btCompoundShape *collisi
   auto &objectTransform = mObjects[handle]->getWorldTransform();
   // Set the basis (which is the 3x3 matrix to the left of the translation) to the identity
   principal.getBasis().setIdentity();
-  objectTransform = principal;
+  objectTransform.getBasis().setIdentity();
+  // objectTransform = principal;
 
   for (auto &[key, voxel] : vMesh->mVoxels)
   {
