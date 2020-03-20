@@ -1,0 +1,117 @@
+[Vertex Count]
+108
+[Index Count]
+36
+[Normal Count]
+108
+[Voxel Count]
+8
+[Extents (Voxel Space)]
+2 2 2
+[Extents (Object Space)]
+2 2 2
+[Initial Voxel Size]
+1 1 1 
+[Vertices]
+1 -1 1 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 1 1 1 -1 1 1 -1 1 -1 1 1 -1 -1 1 1 1 -1 -1 1 1 -1 1 -1 -1 1 -1 1 -1 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 -1 1 -1 1 -1 -1 1 -1 -1 -1 -1 1 -1 -1 1 1 1 1 1 1 1 -1 1 1 1 1 -1 1 1 1 1 -1 1 1 -1 -1 1 -1 -1 1 -1 1 1 -1 1 -1 1 -1 -1 -1 -1 -1 -1 1 -1 
+[Indecies]
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 
+[Normals]
+0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 1 -0 0 1 -0 0 1 -0 0 0 -0 1 0 -0 1 0 -0 1 -1 -0 0 -1 -0 0 -1 -0 0 0 0 -1 0 0 -1 0 0 -1 0 -1 0 0 -1 0 0 -1 0 0 1 0 0 1 0 0 1 0 1 -0 0 1 -0 0 1 -0 0 0 -0 1 0 -0 1 0 -0 1 -1 -0 0 -1 -0 0 -1 -0 0 0 0 -1 0 0 -1 0 0 -1 
+[Voxels]
+[Key]
+0 0 0
+[Dimensions]
+1 1 1
+[Position]
+-0.5 -0.5 -0.5
+[Neighbor Count]
+3
+1 0 0 0 1 0 0 0 1 
+[Contained Mesh Vertex Count]
+4
+1 14 20 34 
+[Key]
+1 1 0
+[Dimensions]
+1 1 1
+[Position]
+0.5 0.5 -0.5
+[Neighbor Count]
+3
+0 1 0 1 0 0 1 1 1 
+[Contained Mesh Vertex Count]
+4
+5 6 17 24 
+[Key]
+0 0 1
+[Dimensions]
+1 1 1
+[Position]
+-0.5 -0.5 0.5
+[Neighbor Count]
+3
+1 0 1 0 1 1 0 0 0 
+[Contained Mesh Vertex Count]
+5
+10 12 19 29 30 
+[Key]
+0 1 0
+[Dimensions]
+1 1 1
+[Position]
+-0.5 0.5 -0.5
+[Neighbor Count]
+3
+1 1 0 0 0 0 0 1 1 
+[Contained Mesh Vertex Count]
+6
+3 13 16 21 32 35 
+[Key]
+1 0 0
+[Dimensions]
+1 1 1
+[Position]
+0.5 -0.5 -0.5
+[Neighbor Count]
+3
+0 0 0 1 1 0 1 0 1 
+[Contained Mesh Vertex Count]
+4
+2 8 15 33 
+[Key]
+0 1 1
+[Dimensions]
+1 1 1
+[Position]
+-0.5 0.5 0.5
+[Neighbor Count]
+3
+1 1 1 0 0 1 0 1 0 
+[Contained Mesh Vertex Count]
+3
+22 28 31 
+[Key]
+1 0 1
+[Dimensions]
+1 1 1
+[Position]
+0.5 -0.5 0.5
+[Neighbor Count]
+3
+0 0 1 1 1 1 1 0 0 
+[Contained Mesh Vertex Count]
+5
+0 7 11 18 26 
+[Key]
+1 1 1
+[Dimensions]
+1 1 1
+[Position]
+0.5 0.5 0.5
+[Neighbor Count]
+3
+0 1 1 1 0 1 1 1 0 
+[Contained Mesh Vertex Count]
+5
+4 9 23 25 27 

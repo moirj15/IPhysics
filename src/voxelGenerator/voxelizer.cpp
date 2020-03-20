@@ -19,57 +19,62 @@ VoxObj::VoxelMesh Voxelizer::Voxelize(Mesh *mesh)
 }
 
 // Private
-rp3d::AABB Voxelizer::FindMeshAABB(Mesh *mesh)
+btAABB Voxelizer::FindMeshAABB(Mesh *mesh)
 {
-  rp3d::Vector3 min(0.0f, 0.0f, 0.0f);
-  rp3d::Vector3 max(0.0f, 0.0f, 0.0f);
+  btVector3 min(0.0f, 0.0f, 0.0f);
+  btVector3 max(0.0f, 0.0f, 0.0f);
   for (u64 i = 0; i < mesh->mIndecies.size(); i++)
   {
     const f32 x = mesh->mVertecies[(mesh->mIndecies[i]) * 3];
     const f32 y = mesh->mVertecies[(mesh->mIndecies[i] * 3) + 1];
     const f32 z = mesh->mVertecies[(mesh->mIndecies[i] * 3) + 2];
-    rp3d::Vector3 currentPoint(x, y, z);
-    min = rp3d::Vector3::min(currentPoint, min);
-    max = rp3d::Vector3::max(currentPoint, max);
+    btVector3 currentPoint(x, y, z);
+    min.setMin(currentPoint);
+    max.setMax(currentPoint);
   }
-  return rp3d::AABB(min, max);
+  return btAABB(min, max, min);
 }
 
-std::vector<std::pair<std::array<rp3d::Vector3, 3>, std::array<u32, 3>>>
-Voxelizer::FindTriangleAABBs(Mesh *mesh)
+std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(Mesh *mesh)
 {
-  std::vector<std::pair<std::array<rp3d::Vector3, 3>, std::array<u32, 3>>> AABBs;
+  std::vector<MeshInfo> meshInfos;
   for (u64 i = 0; i < mesh->mIndecies.size(); i += 3)
   {
-    AABBs.push_back({// Add the points
-                     {{rp3d::Vector3(
-                           mesh->mVertecies[(mesh->mIndecies[i] * 3)],
-                           mesh->mVertecies[(mesh->mIndecies[i] * 3) + 1],
-                           mesh->mVertecies[(mesh->mIndecies[i] * 3) + 2]),
-                       rp3d::Vector3(
-                           mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3)],
-                           mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3) + 1],
-                           mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3) + 2]),
-                       rp3d::Vector3(
-                           mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3)],
-                           mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3) + 1],
-                           mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3) + 2])}},
-                     // Add the indices to the points
-                     {mesh->mIndecies[i], mesh->mIndecies[i + 1], mesh->mIndecies[i + 2]}});
+    btVector3 points[] = {btVector3(
+                              mesh->mVertecies[(mesh->mIndecies[i] * 3)],
+                              mesh->mVertecies[(mesh->mIndecies[i] * 3) + 1],
+                              mesh->mVertecies[(mesh->mIndecies[i] * 3) + 2]),
+                          btVector3(
+                              mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3)],
+                              mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3) + 1],
+                              mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3) + 2]),
+                          btVector3(
+                              mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3)],
+                              mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3) + 1],
+                              mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3) + 2])};
+    u32 indices[] = {mesh->mIndecies[i], mesh->mIndecies[i + 1], mesh->mIndecies[i + 2]};
+    meshInfos.push_back(MeshInfo(points, indices));
+    // Add the indices to the points
   }
-  return AABBs;
+  return meshInfos;
 }
 
 VoxObj::VoxelMesh
-Voxelizer::GenerateVoxels(const MeshInfo &meshTriangles, const rp3d::AABB &meshAABB, Mesh *mesh)
+Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, Mesh *mesh)
 {
-  glm::vec3 aabbExtents(
-      glm::ceil(glm::vec3(meshAABB.getExtent().x, meshAABB.getExtent().y, meshAABB.getExtent().z)));
+  glm::vec3 min(meshAABB.m_min.x(), meshAABB.m_min.y(), meshAABB.m_min.z());
+  glm::vec3 max(meshAABB.m_max.x(), meshAABB.m_max.y(), meshAABB.m_max.z());
+  glm::vec3 extentsOffset(-meshAABB.m_min.x(), -meshAABB.m_min.y(), -meshAABB.m_min.z());
+  // move the min and max to be centered at the origin
+  // min += extentsOffset;
+  max += extentsOffset;
+
+  // use the max of the AABB as the extents
+  glm::vec3 aabbExtents(glm::ceil(max));
   // Calculate the extents of the voxel mesh in discrete voxel space
   glm::uvec3 voxelMeshExtents(aabbExtents / mParameters.mVoxelSize);
   VoxObj::VoxelMesh voxelMesh(
       voxelMeshExtents, aabbExtents, glm::vec3(mParameters.mVoxelSize), mesh);
-  const auto &minCoords = meshAABB.getMin();
   for (u32 x = 0; x < voxelMeshExtents.x; x++)
   {
     for (u32 y = 0; y < voxelMeshExtents.y; y++)
@@ -77,30 +82,59 @@ Voxelizer::GenerateVoxels(const MeshInfo &meshTriangles, const rp3d::AABB &meshA
       for (u32 z = 0; z < voxelMeshExtents.z; z++)
       {
         // Calculate the offset used to create the AABB used to represent the voxel
-        rp3d::Vector3 offset(
+        btVector3 offset(
             f32(x) * mParameters.mVoxelSize, f32(y) * mParameters.mVoxelSize,
             f32(z) * mParameters.mVoxelSize);
-        rp3d::AABB voxel(
-            minCoords + offset,
-            minCoords
+        btVector3 btMin(min.x, min.y, min.z);
+        btAABB voxel(
+            btMin + offset,
+            btMin
                 + (offset
-                   + rp3d::Vector3(
-                       mParameters.mVoxelSize, mParameters.mVoxelSize, mParameters.mVoxelSize)));
+                   + btVector3(
+                       mParameters.mVoxelSize, mParameters.mVoxelSize, mParameters.mVoxelSize)),
+            btMin + offset, mParameters.mVoxelSize / 100.0f);
+        // btAABB testBox(voxel);
+        // testBox.setMin(
+        //     testBox.getMin()
+        //     - rp3d::Vector3(
+        //         mParameters.mVoxelSize / 100.0f, mParameters.mVoxelSize / 100.0f,
+        //         mParameters.mVoxelSize / 100.0f));
+        // testBox.setMax(
+        //     testBox.getMax()
+        //     + rp3d::Vector3(
+        //         mParameters.mVoxelSize / 100.0f, mParameters.mVoxelSize / 100.0f,
+        //         mParameters.mVoxelSize / 100.0f));
         // Find the triangles that the voxel intersects
         glm::ivec3 key(x, y, z);
-        glm::vec3 position(voxel.getCenter().x, voxel.getCenter().y, voxel.getCenter().z);
+        auto minToMaxVec = voxel.m_max - voxel.m_min;
+        auto length = minToMaxVec.length();
+        btVector3 voxelCenter(voxel.m_min + ((voxel.m_max - voxel.m_min) / 2.0f));
+        // btVector3 voxelCenter(
+        //     voxel.m_min.x() + (length / 2.0f), voxel.m_min.y() + (length / 2.0f),
+        //     voxel.m_min.z() + (length / 2.0f));
+        glm::vec3 position(voxelCenter.x(), voxelCenter.y(), voxelCenter.z());
         VoxObj::Voxel generatedVoxel(mParameters.mVoxelSize, position);
         bool keep = false;
-        for (const auto &triangle : meshTriangles)
+        for (auto &triangle : meshTriangles)
         {
-          if (voxel.testCollisionTriangleAABB(triangle.first.data()))
+          btAABB triangleAABB(triangle.mPoints[0], triangle.mPoints[1], triangle.mPoints[2]);
+          if (voxel.has_collision(triangleAABB))
+          // if (testBox.testCollisionTriangleAABB(triangle.first.data()))
           {
             keep = true;
-            for (u32 i = 0; i < triangle.first.size(); i++)
+            for (u32 i = 0; i < ArraySize(triangle.mPoints); i++)
             {
-              if (voxel.contains(triangle.first[i]))
+              if ((voxel.m_min.x() <= triangle.mPoints[i].x())
+                  && (voxel.m_min.y() <= triangle.mPoints[i].y())
+                  && (voxel.m_min.z() <= triangle.mPoints[i].z())
+                  && (triangle.mPoints[i].x() <= voxel.m_max.x())
+                  && (triangle.mPoints[i].y() <= voxel.m_max.y())
+                  && (triangle.mPoints[i].z() <= voxel.m_max.z()) && (!triangle.mInVoxel[i]))
+              // if (voxel.contains(triangle.first[i]))
+              // if (testBox.contains(triangle.first[i]))
               {
-                generatedVoxel.mMeshVertices.push_back(triangle.second[i]);
+                generatedVoxel.mMeshVertices.push_back(triangle.mIndices[i]);
+                triangle.mInVoxel[i] = true;
               }
             }
             // voxelMesh.SetVoxel(key, generatedVoxel);

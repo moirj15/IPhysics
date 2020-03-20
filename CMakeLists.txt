@@ -50,7 +50,8 @@ if (MSYS OR MINGW)
     D:/libraries/glfw-3.2.1.bin.WIN64/include;
     D:/libraries/glew-2.1.0/include
     D:/libraries/ReactPhysics3D/src
-    D:/libraries/bullet/include;
+  F:/Programs/msys2/mingw64/include/bullet;
+#    D:/libraries/bullet/include;
   )
   target_link_libraries(
     IPhysics
@@ -58,16 +59,16 @@ if (MSYS OR MINGW)
     D:/libraries/glfw-3.2.1.bin.WIN64/lib-mingw-w64/libglfw3.a
     D:/libraries/glew-2.1.0/lib/Release/x64/glew32.dll
     #D:/libraries/ReactPhysics3D/lib/libreactphysics3d.a
-    D:/libraries/bullet/mingw/Debug/libBulletDynamics_Debug.a
-    D:/libraries/bullet/mingw/Debug/libBulletCollision_Debug.a
-    D:/libraries/bullet/mingw/Debug/libLinearMath_Debug.a
+          F:/Programs/msys2/mingw64/lib/libBulletDynamics_d.dll.a
+    F:/Programs/msys2/mingw64/lib/libBulletCollision_d.dll.a
+    F:/Programs/msys2/mingw64/lib/libLinearMath_d.dll.a
   )
   target_link_libraries(
     VoxelGenerator
     ${OPENGL_LIBRARY}
     D:/libraries/glfw-3.2.1.bin.WIN64/lib-mingw-w64/libglfw3.a
     D:/libraries/glew-2.1.0/lib/Release/x64/glew32.dll
-    D:/libraries/ReactPhysics3D/lib/libreactphysics3d.a
+    #D:/libraries/ReactPhysics3D/lib/libreactphysics3d.a
   )
 
 elseif (WIN32)
@@ -76,7 +77,7 @@ elseif (WIN32)
     D:/libraries/glm;
     D:/libraries/glfw/include;
     D:/libraries/glew-2.1.0/include;
-    D:/libraries/ReactPhysics3D/src
+    #D:/libraries/ReactPhysics3D/src
     D:/libraries/bullet/include;
   )
   set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC")
@@ -103,11 +104,11 @@ elseif (WIN32)
     ${OPENGL_LIBRARY}
     D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
     D:/libraries/glfw/release/glfw3.lib
-    D:/libraries/ReactPhysics3D/Debug/reactphysics3d.lib
-    #D:/libraries/bullet/Release/Bullet3Dynamics.lib
-    #D:/libraries/bullet/Release/Bullet3Collision.lib
+    #D:/libraries/ReactPhysics3D/Debug/reactphysics3d.lib
+    D:/libraries/bullet/Debug/BulletDynamics_Debug.lib
+    D:/libraries/bullet/Debug/BulletCollision_Debug.lib
     #D:/libraries/bullet/Release/Bullet3Common.lib
-    #D:/libraries/bullet/Release/LinearMath.lib
+    D:/libraries/bullet/Debug/LinearMath_Debug.lib
     opengl32.lib
     gdi32.lib
     user32.lib

@@ -88,7 +88,7 @@ void System::CollectInput()
     f32 screenHeight = f32(mWindow->GetHeight());
     glm::vec2 mouseDelta(
         (screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
-    mCamera.Rotate(mouseDelta);
+    mCamera.Rotate(mouseDelta * io.DeltaTime * 10.0f);
   }
 }
 
