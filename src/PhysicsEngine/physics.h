@@ -85,10 +85,8 @@ public:
   }
 
 private:
-  btCompoundShape *AddObject(const VMeshHandle handle);
-  void AddVoxels(const VMeshHandle handle, btCompoundShape *collisionShape);
-  void CollectVoxelsWithBadPositions();
-  void CorrectVoxelPositions();
+  void AddObject(const VMeshHandle handle, btCompoundShape *collisionShape);
+  btCompoundShape *AddVoxels(const VMeshHandle handle);
 };
 
 } // namespace Physics

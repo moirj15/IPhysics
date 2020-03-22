@@ -80,17 +80,20 @@ void System::CollectInput()
 {
   glfwPollEvents();
   auto &io = ImGui::GetIO();
+
+  // Check if we want to apply a force with the mouse
   if (!io.WantCaptureMouse && io.MouseReleased[0] && io.KeysDown[GLFW_KEY_LEFT_CONTROL])
   {
     f32 screenWidth = f32(mWindow->GetWidth());
     f32 screenHeight = f32(mWindow->GetHeight());
-    glm::vec3 rayStartNDC(
-        ((io.MousePos.x / screenWidth) - 0.5f) * 2.0f, (io.MousePos.y / screenHeight - 0.5f) * 2.0f,
-        -1.0);
-    glm::vec3 rayEndNDC(
-        ((io.MousePos.x / screenWidth) - 0.5f) * 2.0f, (io.MousePos.y / screenHeight - 0.5f) * 2.0f,
-        0.0);
+    // Calculate the mouse position in normalized device coordinates
+    const glm::vec2 mouseNDC(
+        ((io.MousePos.x / screenWidth) - 0.5f) * 2.0f,
+        -((io.MousePos.y / screenHeight) - 0.5f) * 2.0f);
+    glm::vec3 rayStartNDC(mouseNDC, 0.0);
+    glm::vec3 rayEndNDC(mouseNDC, 1.0);
 
+    // Convert the ray start and end from NDC to world space
     auto invProjCamera = glm::inverse(mProjection * mCamera.CalculateMatrix());
 
     auto rayStartWorld = invProjCamera * glm::vec4(rayStartNDC, 1.0f);
