@@ -16,19 +16,16 @@ namespace IPhysics
 class IPhysicsUI
 {
   std::string mObjectPath;
-  // TODO: consider making the settings pointers
   std::unordered_map<u32, Physics::ObjectSettings> mObjectSettings;
-  Physics::EngineSettings mPhysicsSettings;
-  bool mLoadObjectClicked;
-  bool mStartSimulationClicked;
-  bool mStopSimulationClicked;
-  bool mResetSimulationClicked;
-  u32 mCurrentObjectSettings;
+  Physics::EngineSettings mPhysicsSettings{};
+  bool mLoadObjectClicked{false};
+  bool mStartSimulationClicked{false};
+  bool mStopSimulationClicked{false};
+  bool mResetSimulationClicked{false};
+  u32 mCurrentObjectSettingsHandle{0};
 
 public:
-  IPhysicsUI() :
-      mObjectPath(256, 0), mLoadObjectClicked(false), mStartSimulationClicked(false),
-      mStopSimulationClicked(false), mResetSimulationClicked(false), mCurrentObjectSettings(0)
+  IPhysicsUI() : mObjectPath(256, 0)
   {
   }
   ~IPhysicsUI();
@@ -40,7 +37,29 @@ public:
   NODISCARD bool StartSimulationClicked();
   NODISCARD bool StopSimulationClicked();
   NODISCARD bool ResetSimulationClicked();
-  NODISCARD u32 CurrentObject();
+  NODISCARD inline u32 CurrentObject() const
+  {
+    return mCurrentObjectSettingsHandle;
+  }
+  inline u32 SetCurrentObject(u32 handle)
+  {
+    mCurrentObjectSettingsHandle = handle;
+  }
+  NODISCARD inline Physics::ObjectSettings GetCurrentObjectsSettings()
+  {
+    return mObjectSettings[mCurrentObjectSettingsHandle];
+  }
+
+  NODISCARD inline Physics::EngineSettings GetPhysicsSettings() const
+  {
+    return mPhysicsSettings;
+  }
+
+  NODISCARD inline std::vector<std::pair<u32, Physics::ObjectSettings>> GetAllObjectSettings() const
+  {
+    return std::vector<std::pair<u32, Physics::ObjectSettings>>(
+        mObjectSettings.begin(), mObjectSettings.end());
+  }
 };
 
 } // namespace IPhysics

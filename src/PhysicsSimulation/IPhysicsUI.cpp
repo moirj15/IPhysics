@@ -27,7 +27,7 @@ void IPhysicsUI::Init(Window *window)
 
 void IPhysicsUI::Update()
 {
-  auto objectSettings = mObjectSettings[mCurrentObjectSettings];
+  auto objectSettings = mObjectSettings[mCurrentObjectSettingsHandle];
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
@@ -113,8 +113,4 @@ bool IPhysicsUI::ResetSimulationClicked()
   return false;
 }
 
-u32 IPhysicsUI::CurrentObject()
-{
-  return {};
-}
 } // namespace IPhysics

@@ -37,6 +37,7 @@ class PhysicsSimulationSystem
   std::unique_ptr<Renderer::RendererFrontend> mRenderer;
   Renderer::DebugDrawer *mDB;
   std::unique_ptr<Physics::PhysicsEngine> mPhysicsEngine;
+  bool mPhysicsSimulationRunning{false};
 
 public:
   PhysicsSimulationSystem();
@@ -45,7 +46,10 @@ public:
   void Run();
 
 private:
+  void LoadObject();
   void CollectInput();
+  void CollectUIInput();
+  void ApplyDeformations();
   void Render();
 };
 

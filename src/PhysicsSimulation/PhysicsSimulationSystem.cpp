@@ -36,7 +36,7 @@ void PhysicsSimulationSystem::Run()
   // auto *vm = Utils::DeSerialize("../test-out/block-1fixed.vmf");
   mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  auto *vm2 = Utils::DeSerialize("../test-out/teapot-0p5.vmf");
+  auto *vm2 = Utils::DeSerialize("../test-out/teapot-1p.vmf");
   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
   // auto *vm2 = Utils::DeSerialize("../test-out/block-1fixed.vmf");
   auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
@@ -54,25 +54,26 @@ void PhysicsSimulationSystem::Run()
 
   while (!mWindow->ShouldClose())
   {
-
     auto &io = ImGui::GetIO();
+    LoadObject();
     CollectInput();
-    mPhysicsEngine->Update(io.DeltaTime);
-    Render();
-    for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
+    CollectUIInput();
+    if (mPhysicsSimulationRunning)
     {
-      for (const auto &[key, voxel] : vMesh->mVoxels)
-      {
-        for (auto index : voxel.mMeshVertices)
-        {
-          // glm::vec3 offset = voxel.mPosition - settings->mPosition;
-          vMesh->mMesh->mVertecies[(index * 3)] += voxel.mRelativePositionDelta.x;
-          vMesh->mMesh->mVertecies[(index * 3) + 1] += voxel.mRelativePositionDelta.y;
-          vMesh->mMesh->mVertecies[(index * 3) + 2] += voxel.mRelativePositionDelta.z;
-        }
-      }
-      mRenderer->UpdateMesh(handle, vMesh->mMesh->mIndecies);
+      mPhysicsEngine->Update(io.DeltaTime);
+      ApplyDeformations();
     }
+    Render();
+  }
+}
+
+void PhysicsSimulationSystem::LoadObject()
+{
+  auto optionalPath = mUI->LoadObjectClicked();
+  if (optionalPath && fs::exists(*optionalPath))
+  {
+    auto *voxelMesh = Utils::DeSerialize(*optionalPath);
+    u32 handle = VoxelMeshManager::Get().SubmitMesh(voxelMesh);
   }
 }
 
@@ -134,6 +135,44 @@ void PhysicsSimulationSystem::CollectInput()
     glm::vec2 mouseDelta(
         (screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
     mCamera.Rotate(mouseDelta * 10.0f * io.DeltaTime);
+  }
+}
+
+void PhysicsSimulationSystem::CollectUIInput()
+{
+  if (mUI->StartSimulationClicked())
+  {
+    mPhysicsSimulationRunning = true;
+    mPhysicsEngine->SetEngineSettings(mUI->GetPhysicsSettings());
+    for (auto &[handle, setting] : mUI->GetAllObjectSettings())
+    {
+      VoxelMeshManager::Get().UpdateOriginalSettings(handle, setting);
+    }
+  }
+  if (mUI->StopSimulationClicked())
+  {
+    mPhysicsSimulationRunning = false;
+  }
+  if (mUI->ResetSimulationClicked())
+  {
+  }
+}
+
+void PhysicsSimulationSystem::ApplyDeformations()
+{
+  for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
+  {
+    for (const auto &[key, voxel] : vMesh->mVoxels)
+    {
+      for (auto index : voxel.mMeshVertices)
+      {
+        // glm::vec3 offset = voxel.mPosition - settings->mPosition;
+        vMesh->mMesh->mVertecies[(index * 3)] += voxel.mRelativePositionDelta.x;
+        vMesh->mMesh->mVertecies[(index * 3) + 1] += voxel.mRelativePositionDelta.y;
+        vMesh->mMesh->mVertecies[(index * 3) + 2] += voxel.mRelativePositionDelta.z;
+      }
+    }
+    mRenderer->UpdateMesh(handle, vMesh->mMesh->mIndecies);
   }
 }
 

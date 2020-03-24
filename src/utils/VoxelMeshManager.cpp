@@ -7,7 +7,6 @@
 #include "../PhysicsEngine/Settings.h"
 #include "../voxelObjects/VoxelMesh.h"
 
-
 VoxelMeshManager &VoxelMeshManager::Get()
 {
   static VoxelMeshManager meshManager;
@@ -25,7 +24,8 @@ VMeshHandle VoxelMeshManager::SubmitMesh(VoxObj::VoxelMesh *mesh)
 
 void VoxelMeshManager::SubmitSettings(VMeshHandle handle, Physics::ObjectSettings *settings)
 {
-  mSettings.emplace(handle, settings);
+  mUpdatableSettings.emplace(handle, settings);
+  mOriginalSettings.emplace(handle, settings);
 }
 
 VoxObj::VoxelMesh *VoxelMeshManager::GetMesh(const VMeshHandle handle)
@@ -35,7 +35,7 @@ VoxObj::VoxelMesh *VoxelMeshManager::GetMesh(const VMeshHandle handle)
 
 Physics::ObjectSettings *VoxelMeshManager::GetSettings(const VMeshHandle handle)
 {
-  return mSettings[handle].get();
+  return mUpdatableSettings[handle].get();
 }
 
 std::vector<MeshTuple> VoxelMeshManager::GetAllMeshes()
@@ -43,9 +43,24 @@ std::vector<MeshTuple> VoxelMeshManager::GetAllMeshes()
   std::vector<MeshTuple> tuples;
   for (const auto key : mActiveKeys)
   {
-    tuples.emplace_back(key, mMeshes[key].get(), mSettings[key].get());
+    tuples.emplace_back(key, mMeshes[key].get(), mUpdatableSettings[key].get());
   }
   return tuples;
+}
+
+void VoxelMeshManager::UpdateOriginalSettings(
+    VMeshHandle handle, const Physics::ObjectSettings &originalSettings)
+{
+  (*mOriginalSettings[handle].get()) = originalSettings;
+  (*mUpdatableSettings[handle].get()) = originalSettings;
+}
+
+void VoxelMeshManager::RestoreSettings()
+{
+  for (auto &[key, _] : mUpdatableSettings)
+  {
+    (*mUpdatableSettings[key].get()) = (*mOriginalSettings[key].get());
+  }
 }
 
 VoxelMeshManager::VoxelMeshManager() = default;
