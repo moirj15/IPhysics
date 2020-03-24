@@ -1,12 +1,12 @@
 
-#include "System.h"
+#include "PhysicsSimulationSystem.h"
 
 int main(int argc, char **argv)
 {
   (void)argc;
   (void)argv;
 
-  IPhysics::System system;
+  IPhysics::PhysicsSimulationSystem system;
   system.Run();
 
   return 0;

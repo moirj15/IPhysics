@@ -1,4 +1,4 @@
-#include "System.h"
+#include "PhysicsSimulationSystem.h"
 
 #include "../../imgui/imgui.h"
 #include "../PhysicsEngine/physics.h"
@@ -14,7 +14,7 @@
 
 namespace IPhysics
 {
-System::System() :
+PhysicsSimulationSystem::PhysicsSimulationSystem() :
     mCamera(
         glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
@@ -27,16 +27,16 @@ System::System() :
   mRenderer->SetProjection(mProjection);
 }
 
-System::~System() = default;
+PhysicsSimulationSystem::~PhysicsSimulationSystem() = default;
 
-void System::Run()
+void PhysicsSimulationSystem::Run()
 {
   // auto *vm = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
   auto *vm = Utils::DeSerialize("../test-out/test.vmf");
   // auto *vm = Utils::DeSerialize("../test-out/block-1fixed.vmf");
   mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  auto *vm2 = Utils::DeSerialize("../test-out/teapot-1p.vmf");
+  auto *vm2 = Utils::DeSerialize("../test-out/teapot-0p5.vmf");
   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
   // auto *vm2 = Utils::DeSerialize("../test-out/block-1fixed.vmf");
   auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
@@ -76,7 +76,7 @@ void System::Run()
   }
 }
 
-void System::CollectInput()
+void PhysicsSimulationSystem::CollectInput()
 {
   glfwPollEvents();
   auto &io = ImGui::GetIO();
@@ -96,15 +96,7 @@ void System::CollectInput()
     // Convert the ray start and end from NDC to world space
     auto invProjCamera = glm::inverse(mProjection * mCamera.CalculateMatrix());
 
-    auto rayStartWorld = invProjCamera * glm::vec4(rayStartNDC, 1.0f);
-    rayStartWorld /= rayStartWorld.w;
-
-    auto rayEndWorld = invProjCamera * glm::vec4(rayEndNDC, 1.0f);
-    rayEndWorld /= rayEndWorld.w;
-
-    auto rayDirWorld = glm::normalize(rayEndWorld - rayStartWorld);
-
-    mPhysicsEngine->CastRayWithForce(rayStartWorld, rayDirWorld, 1.0f);
+    mPhysicsEngine->CastRayWithForce(rayStartNDC, rayEndNDC, invProjCamera, 1.0f);
   }
   f32 boost = 1.0f;
   if (io.KeysDown[GLFW_KEY_LEFT_SHIFT] && !io.WantCaptureKeyboard)
@@ -141,12 +133,11 @@ void System::CollectInput()
     f32 screenHeight = f32(mWindow->GetHeight());
     glm::vec2 mouseDelta(
         (screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
-    // glm::vec2 mouseDelta(io.MouseDelta.x, io.MouseDelta.y);
     mCamera.Rotate(mouseDelta * 10.0f * io.DeltaTime);
   }
 }
 
-void System::Render()
+void PhysicsSimulationSystem::Render()
 {
   mRenderer->Clear();
   mRenderer->Draw();

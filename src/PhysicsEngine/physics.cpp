@@ -2,6 +2,8 @@
 
 #include "../voxelObjects/VoxelMesh.h"
 
+#include <unordered_set>
+
 namespace Physics
 {
 
@@ -61,10 +63,19 @@ void PhysicsEngine::RemoveObject(const VMeshHandle handle)
   IMPLEMENTME();
 }
 
-void PhysicsEngine::CastRayWithForce(const glm::vec3 &origin, const glm::vec3 &direction, f32 force)
+void PhysicsEngine::CastRayWithForce(
+    const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace,
+    f32 force)
 {
-  btVector3 rayOrigin(origin.x, origin.y, origin.z);
-  btVector3 rayDirection(direction.x, direction.y, direction.z);
+  auto rayStartWorld = NDCToWorldSpace * glm::vec4(rayStartNDC, 1.0f);
+  rayStartWorld /= rayStartWorld.w;
+
+  auto rayEndWorld = NDCToWorldSpace * glm::vec4(rayEndNDC, 1.0f);
+  rayEndWorld /= rayEndWorld.w;
+
+  auto rayDirWorld = glm::normalize(rayEndWorld - rayStartWorld);
+  btVector3 rayOrigin(rayStartWorld.x, rayStartWorld.y, rayStartWorld.z);
+  btVector3 rayDirection(rayEndWorld.x, rayEndWorld.y, rayEndWorld.z);
   auto rayEnd = rayOrigin + rayDirection * 1000.0f;
   btCollisionWorld::ClosestRayResultCallback rayCallback(rayOrigin, rayEnd);
   mObjectWorld.mDynamicsWorld->rayTest(rayOrigin, rayEnd, rayCallback);
@@ -161,12 +172,24 @@ btCompoundShape *PhysicsEngine::AddVoxels(const VMeshHandle handle)
     voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
   }
 
+  std::unordered_set<glm::uvec3> createdConstraints;
+  u32 originalConstraintCount = 0;
+  u32 newConstraintCount = 0;
   for (auto &[key, voxel] : vMesh->mVoxels)
   {
+
     auto size = voxel.mDimensions;
     // TODO: don't create double constraints
     for (const auto &n : voxel.mNeighbors)
     {
+      originalConstraintCount++;
+      glm::uvec3 voxelPairKey = key + n;
+      if (createdConstraints.find(voxelPairKey) != createdConstraints.end())
+      {
+        continue;
+      }
+      newConstraintCount++;
+      createdConstraints.emplace(voxelPairKey);
       glm::vec3 ap(glm::abs(glm::vec3(n) - glm::vec3(key)));
       glm::vec3 bp(-ap);
       auto *voxelRB = neighbors[key];

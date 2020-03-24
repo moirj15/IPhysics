@@ -77,7 +77,9 @@ public:
   void SubmitObject(const VMeshHandle handle);
   void RemoveObject(const VMeshHandle handle);
 
-  void CastRayWithForce(const glm::vec3 &origin, const glm::vec3 &direction, f32 force);
+  void CastRayWithForce(
+      const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace,
+      f32 force);
 
   inline void SetEngineSettings(EngineSettings engineSettings)
   {

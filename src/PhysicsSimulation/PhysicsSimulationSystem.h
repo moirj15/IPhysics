@@ -27,7 +27,7 @@ namespace IPhysics
 
 class IPhysicsUI;
 
-class System
+class PhysicsSimulationSystem
 {
   Camera mCamera;
   glm::mat4 mProjection;
@@ -39,8 +39,8 @@ class System
   std::unique_ptr<Physics::PhysicsEngine> mPhysicsEngine;
 
 public:
-  System();
-  ~System();
+  PhysicsSimulationSystem();
+  ~PhysicsSimulationSystem();
 
   void Run();
 
