@@ -26,7 +26,7 @@ void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
   auto &meshManager = VoxelMeshManager::Get();
   auto *voxelMesh = meshManager.GetMesh(voxelMeshHandle);
   auto meshHandle = RegisterMesh(voxelMesh->GetMesh());
-  mMeshHandles.emplace(meshHandle, voxelMeshHandle);
+  mMeshHandles.emplace(voxelMeshHandle, meshHandle);
 }
 
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)

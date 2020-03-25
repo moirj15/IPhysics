@@ -36,6 +36,7 @@ class PhysicsEngine
 
   std::unordered_map<VMeshHandle, std::unique_ptr<btRigidBody>> mObjects;
   std::unordered_map<VMeshHandle, std::vector<std::unique_ptr<btRigidBody>>> mVoxels;
+  Renderer::DebugDrawer *mDebugDrawer;
 
   // TODO: Do i really need two Dynamics worlds?
   // may be possible to do everything with only one world and it may be faster
@@ -59,18 +60,29 @@ class PhysicsEngine
     }
     ~PhysicsWorld() = default;
 
+    void Reset()
+    {
+      mDynamicsWorld.release();
+      mSolver.reset(new btSequentialImpulseConstraintSolver());
+      mCollisionConfig.reset(new btDefaultCollisionConfiguration);
+      mCollisionDispatcher.reset(new btCollisionDispatcher(mCollisionConfig.get()));
+      mOverlappingPairCache.reset(new btDbvtBroadphase());
+      mDynamicsWorld.reset(new btDiscreteDynamicsWorld(
+          mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(),
+          mCollisionConfig.get()));
+    }
+
   } mObjectWorld, mVoxelWorld;
 
   EngineSettings mSettings;
 
 public:
-  PhysicsEngine(Renderer::DebugDrawer *db)
+  PhysicsEngine(Renderer::DebugDrawer *db) : mDebugDrawer(db)
   {
-    mObjectWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
-    mVoxelWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
-    mVoxelWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)db);
-    mObjectWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)db);
+    Init();
   }
+
+  void Reset();
 
   void Update(f32 t);
 
@@ -87,6 +99,7 @@ public:
   }
 
 private:
+  void Init();
   void AddObject(const VMeshHandle handle, btCompoundShape *collisionShape);
   btCompoundShape *AddVoxels(const VMeshHandle handle);
 };

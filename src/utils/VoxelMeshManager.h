@@ -43,7 +43,7 @@ public:
    * \brief: Submits the given settings object that will be paired with the VoxelMesh with the same
    * handle.
    */
-  void SubmitSettings(VMeshHandle handle, Physics::ObjectSettings *settings);
+  //   void SubmitSettings(VMeshHandle handle, const Physics::ObjectSettings &settings);
   /**
    * \brief: Retrieves a pointer to the VoxelMesh with the given VMeshHandle.
    */

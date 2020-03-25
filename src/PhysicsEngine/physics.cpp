@@ -7,6 +7,13 @@
 namespace Physics
 {
 
+void PhysicsEngine::Reset()
+{
+  mObjectWorld.Reset();
+  mVoxelWorld.Reset();
+  Init();
+}
+
 void PhysicsEngine::Update(f32 t)
 {
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
@@ -93,6 +100,14 @@ void PhysicsEngine::CastRayWithForce(
       voxelRB->activate(true);
     }
   }
+}
+
+void PhysicsEngine::Init()
+{
+  mObjectWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
+  mVoxelWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
+  mVoxelWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer);
+  mObjectWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer);
 }
 
 void PhysicsEngine::AddObject(const VMeshHandle handle, btCompoundShape *collisionShape)

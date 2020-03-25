@@ -27,11 +27,10 @@ namespace IPhysics
 
 class IPhysicsUI;
 
-class PhysicsSimulationSystem
+class PhysicsSimulationApp
 {
   Camera mCamera;
   glm::mat4 mProjection;
-  VMeshHandle mHandle = 0;
   std::unique_ptr<Window> mWindow;
   std::unique_ptr<IPhysicsUI> mUI;
   std::unique_ptr<Renderer::RendererFrontend> mRenderer;
@@ -40,8 +39,8 @@ class PhysicsSimulationSystem
   bool mPhysicsSimulationRunning{false};
 
 public:
-  PhysicsSimulationSystem();
-  ~PhysicsSimulationSystem();
+  PhysicsSimulationApp();
+  ~PhysicsSimulationApp();
 
   void Run();
 

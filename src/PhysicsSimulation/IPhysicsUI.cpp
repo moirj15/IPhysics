@@ -27,7 +27,6 @@ void IPhysicsUI::Init(Window *window)
 
 void IPhysicsUI::Update()
 {
-  auto objectSettings = mObjectSettings[mCurrentObjectSettingsHandle];
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
@@ -40,6 +39,11 @@ void IPhysicsUI::Update()
     ImGui::InputText("Object File Name", mObjectPath.data(), mObjectPath.size());
     ImGui::BeginGroup();
     {
+      auto &objectSettings = Physics::ObjectSettings();
+      if (mObjectSettings.find(mCurrentObjectSettingsHandle) != mObjectSettings.end())
+      {
+        objectSettings = mObjectSettings[mCurrentObjectSettingsHandle];
+      }
       ImGui::InputFloat3("Position", glm::value_ptr(objectSettings.mPosition));
       ImGui::InputFloat3("Velocity", glm::value_ptr(objectSettings.mInitialVelocity));
       ImGui::InputFloat3("Acceleration", glm::value_ptr(objectSettings.mInitialAccleration));

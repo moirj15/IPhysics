@@ -14,7 +14,7 @@
 
 namespace IPhysics
 {
-PhysicsSimulationSystem::PhysicsSimulationSystem() :
+PhysicsSimulationApp::PhysicsSimulationApp() :
     mCamera(
         glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
@@ -27,30 +27,30 @@ PhysicsSimulationSystem::PhysicsSimulationSystem() :
   mRenderer->SetProjection(mProjection);
 }
 
-PhysicsSimulationSystem::~PhysicsSimulationSystem() = default;
+PhysicsSimulationApp::~PhysicsSimulationApp() = default;
 
-void PhysicsSimulationSystem::Run()
+void PhysicsSimulationApp::Run()
 {
-  // auto *vm = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  auto *vm = Utils::DeSerialize("../test-out/test.vmf");
-  // auto *vm = Utils::DeSerialize("../test-out/block-1fixed.vmf");
-  mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
-  // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  auto *vm2 = Utils::DeSerialize("../test-out/teapot-1p.vmf");
-  // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  // auto *vm2 = Utils::DeSerialize("../test-out/block-1fixed.vmf");
-  auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
-  auto *os = new Physics::ObjectSettings();
-  auto *os2 = new Physics::ObjectSettings();
-  os->mPosition = {-4.0, 1.0, 0.0};
-  os2->mPosition = {2.0, 0.0, 0.0};
-  VoxelMeshManager::Get().SubmitSettings(mHandle, os);
-  VoxelMeshManager::Get().SubmitSettings(handle, os2);
-  mPhysicsEngine->SubmitObject(mHandle);
-  mPhysicsEngine->SubmitObject(handle);
-
-  mRenderer->RegisterMeshHandle(mHandle);
-  mRenderer->RegisterMeshHandle(handle);
+  //   // auto *vm = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
+  //   auto *vm = Utils::DeSerialize("../test-out/test.vmf");
+  //   // auto *vm = Utils::DeSerialize("../test-out/block-1fixed.vmf");
+  //   mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
+  //   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
+  //   auto *vm2 = Utils::DeSerialize("../test-out/teapot-1p.vmf");
+  //   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
+  //   // auto *vm2 = Utils::DeSerialize("../test-out/block-1fixed.vmf");
+  //   auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
+  //   auto *os = new Physics::ObjectSettings();
+  //   auto *os2 = new Physics::ObjectSettings();
+  //   os->mPosition = {-4.0, 1.0, 0.0};
+  //   os2->mPosition = {2.0, 0.0, 0.0};
+  //   VoxelMeshManager::Get().SubmitSettings(mHandle, os);
+  //   VoxelMeshManager::Get().SubmitSettings(handle, os2);
+  //   mPhysicsEngine->SubmitObject(mHandle);
+  //   mPhysicsEngine->SubmitObject(handle);
+  //
+  //   mRenderer->RegisterMeshHandle(mHandle);
+  //   mRenderer->RegisterMeshHandle(handle);
 
   while (!mWindow->ShouldClose())
   {
@@ -67,17 +67,21 @@ void PhysicsSimulationSystem::Run()
   }
 }
 
-void PhysicsSimulationSystem::LoadObject()
+void PhysicsSimulationApp::LoadObject()
 {
   auto optionalPath = mUI->LoadObjectClicked();
   if (optionalPath && fs::exists(*optionalPath))
   {
     auto *voxelMesh = Utils::DeSerialize(*optionalPath);
     u32 handle = VoxelMeshManager::Get().SubmitMesh(voxelMesh);
+    // TODO: Modify the physics engine so it takes object setting modifications into account
+    mPhysicsEngine->SubmitObject(handle);
+    mRenderer->RegisterMeshHandle(handle);
+    mUI->SetCurrentObject(handle);
   }
 }
 
-void PhysicsSimulationSystem::CollectInput()
+void PhysicsSimulationApp::CollectInput()
 {
   glfwPollEvents();
   auto &io = ImGui::GetIO();
@@ -138,7 +142,7 @@ void PhysicsSimulationSystem::CollectInput()
   }
 }
 
-void PhysicsSimulationSystem::CollectUIInput()
+void PhysicsSimulationApp::CollectUIInput()
 {
   if (mUI->StartSimulationClicked())
   {
@@ -155,10 +159,12 @@ void PhysicsSimulationSystem::CollectUIInput()
   }
   if (mUI->ResetSimulationClicked())
   {
+    mPhysicsSimulationRunning = false;
+    mPhysicsEngine->Reset();
   }
 }
 
-void PhysicsSimulationSystem::ApplyDeformations()
+void PhysicsSimulationApp::ApplyDeformations()
 {
   for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
   {
@@ -176,7 +182,7 @@ void PhysicsSimulationSystem::ApplyDeformations()
   }
 }
 
-void PhysicsSimulationSystem::Render()
+void PhysicsSimulationApp::Render()
 {
   mRenderer->Clear();
   mRenderer->Draw();

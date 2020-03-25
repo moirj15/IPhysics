@@ -41,9 +41,13 @@ public:
   {
     return mCurrentObjectSettingsHandle;
   }
-  inline u32 SetCurrentObject(u32 handle)
+  inline void SetCurrentObject(u32 handle)
   {
     mCurrentObjectSettingsHandle = handle;
+    if (mObjectSettings.find(handle) == mObjectSettings.end())
+    {
+      mObjectSettings.emplace(handle, Physics::ObjectSettings());
+    }
   }
   NODISCARD inline Physics::ObjectSettings GetCurrentObjectsSettings()
   {
