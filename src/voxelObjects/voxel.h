@@ -26,7 +26,7 @@ struct Voxel
   {
   }
 
-  explicit Voxel(const Voxel &v) :
+  Voxel(const Voxel &v) :
       mDimensions(v.mDimensions), mPosition(v.mPosition), mNeighbors(v.mNeighbors),
       mMeshVertices(v.mMeshVertices)
   {

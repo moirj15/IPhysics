@@ -22,6 +22,7 @@ class IPhysicsUI
   bool mStartSimulationClicked{false};
   bool mStopSimulationClicked{false};
   bool mResetSimulationClicked{false};
+  bool mSettingsFieldModified{false};
   u32 mCurrentObjectSettingsHandle{0};
 
 public:
@@ -37,6 +38,17 @@ public:
   NODISCARD bool StartSimulationClicked();
   NODISCARD bool StopSimulationClicked();
   NODISCARD bool ResetSimulationClicked();
+
+  NODISCARD inline bool SettingsFieldModified()
+  {
+    if (mSettingsFieldModified)
+    {
+      mSettingsFieldModified = false;
+      return true;
+    }
+    return false;
+  }
+
   NODISCARD inline u32 CurrentObject() const
   {
     return mCurrentObjectSettingsHandle;

@@ -144,6 +144,11 @@ void PhysicsSimulationApp::CollectInput()
 
 void PhysicsSimulationApp::CollectUIInput()
 {
+  auto handle = mUI->CurrentObject();
+  if (handle != 0 && mUI->SettingsFieldModified())
+  {
+    VoxelMeshManager::Get().UpdateOriginalSettings(handle, mUI->GetCurrentObjectsSettings());
+  }
   if (mUI->StartSimulationClicked())
   {
     mPhysicsSimulationRunning = true;

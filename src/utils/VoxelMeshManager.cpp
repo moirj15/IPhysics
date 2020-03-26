@@ -17,20 +17,13 @@ VMeshHandle VoxelMeshManager::SubmitMesh(VoxObj::VoxelMesh *mesh)
 {
   static VMeshHandle h = 0;
   h++;
-  mOriginalMeshes.emplace(h, new VoxObj::VoxelMesh(*mesh));
-  mMeshes.emplace(h, mesh);
+  mOriginalMeshes.emplace(h, mesh);
+  mMeshes.emplace(h,  new VoxObj::VoxelMesh(*mesh));
   mActiveKeys.push_back(h);
   mUpdatableSettings.emplace(h, new Physics::ObjectSettings());
   mOriginalSettings.emplace(h, new Physics::ObjectSettings());
   return h;
 }
-
-// void VoxelMeshManager::SubmitSettings(VMeshHandle handle, const Physics::ObjectSettings
-// &settings)
-// {
-//   mUpdatableSettings.emplace(handle, new Physics::ObjectSettings(settings));
-//   mOriginalSettings.emplace(handle, new Physics::ObjectSettings(settings));
-// }
 
 VoxObj::VoxelMesh *VoxelMeshManager::GetMesh(const VMeshHandle handle)
 {
