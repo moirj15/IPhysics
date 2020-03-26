@@ -23,6 +23,8 @@ using VMeshHandle = u32;
 using MeshTuple = std::tuple<VMeshHandle, VoxObj::VoxelMesh *, Physics::ObjectSettings *>;
 class VoxelMeshManager
 {
+
+  std::unordered_map<VMeshHandle, std::unique_ptr<VoxObj::VoxelMesh>> mOriginalMeshes;
   std::unordered_map<VMeshHandle, std::unique_ptr<VoxObj::VoxelMesh>> mMeshes;
   std::unordered_map<VMeshHandle, std::unique_ptr<Physics::ObjectSettings>> mUpdatableSettings;
   std::unordered_map<VMeshHandle, std::unique_ptr<Physics::ObjectSettings>> mOriginalSettings;

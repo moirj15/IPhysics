@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../renderer/mesh.h"
 #include "voxel.h"
 
 #include <array>
@@ -8,8 +9,6 @@
 #include <glm/vec3.hpp>
 #include <unordered_map>
 #include <vector>
-
-struct Mesh;
 
 namespace VoxObj
 {
@@ -30,11 +29,17 @@ struct VoxelMesh
       mExtentsObjectSpace(extentsObjectSpace), mInitialVoxelSize(initialVoxelSize), mMesh(mesh)
   {
   }
-  VoxelMesh(VoxelMesh &&v) :
+  VoxelMesh(const VoxelMesh &v) :
       mExtentsVoxelSpace(v.mExtentsVoxelSpace), mExtentsObjectSpace(v.mExtentsObjectSpace),
-      mVoxels(v.mVoxels), mInitialVoxelSize(v.mInitialVoxelSize), mMesh(v.mMesh)
+      mVoxels(v.mVoxels), mInitialVoxelSize(v.mInitialVoxelSize), mMesh(new Mesh(*v.mMesh))
   {
   }
+
+  //   explicit VoxelMesh(VoxelMesh &&v) :
+  //       mExtentsVoxelSpace(v.mExtentsVoxelSpace), mExtentsObjectSpace(v.mExtentsObjectSpace),
+  //       mVoxels(std::move(v.mVoxels)), mInitialVoxelSize(v.mInitialVoxelSize), mMesh(v.mMesh)
+  //   {
+  //   }
 
   NODISCARD inline const Voxel &GetVoxel(const glm::uvec3 &position)
   {

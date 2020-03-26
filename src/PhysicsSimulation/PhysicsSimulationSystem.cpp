@@ -161,6 +161,11 @@ void PhysicsSimulationApp::CollectUIInput()
   {
     mPhysicsSimulationRunning = false;
     mPhysicsEngine->Reset();
+    VoxelMeshManager::Get().RestoreSettings();
+    for (auto &[handle, _] : mUI->GetAllObjectSettings())
+    {
+      mPhysicsEngine->SubmitObject(handle);
+    }
   }
 }
 

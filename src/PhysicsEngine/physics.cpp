@@ -11,6 +11,8 @@ void PhysicsEngine::Reset()
 {
   mObjectWorld.Reset();
   mVoxelWorld.Reset();
+  mVoxels.clear();
+  mObjects.clear();
   Init();
 }
 
@@ -90,13 +92,14 @@ void PhysicsEngine::CastRayWithForce(
   {
     auto *rigidBody = (btRigidBody *)rayCallback.m_collisionObject;
     rigidBody->activate(true);
-    // rigidBody->applyCentralImpulse(rayDirection * force);
-    rigidBody->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
+    rigidBody->applyCentralImpulse(rayDirection.normalize() * force);
+    //     rigidBody->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
 
     auto handle = (VMeshHandle)rigidBody->getUserIndex();
     for (auto &voxelRB : mVoxels[handle])
     {
-      voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
+      voxelRB->applyCentralImpulse(rayDirection.normalize() * force);
+      //       voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
       voxelRB->activate(true);
     }
   }

@@ -17,6 +17,7 @@ VMeshHandle VoxelMeshManager::SubmitMesh(VoxObj::VoxelMesh *mesh)
 {
   static VMeshHandle h = 0;
   h++;
+  mOriginalMeshes.emplace(h, new VoxObj::VoxelMesh(*mesh));
   mMeshes.emplace(h, mesh);
   mActiveKeys.push_back(h);
   mUpdatableSettings.emplace(h, new Physics::ObjectSettings());
@@ -62,6 +63,7 @@ void VoxelMeshManager::RestoreSettings()
 {
   for (auto &[key, _] : mUpdatableSettings)
   {
+    mMeshes[key].reset(new VoxObj::VoxelMesh(*mOriginalMeshes[key].get()));
     (*mUpdatableSettings[key].get()) = (*mOriginalSettings[key].get());
   }
 }
