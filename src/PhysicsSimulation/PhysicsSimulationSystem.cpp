@@ -197,7 +197,7 @@ void PhysicsSimulationApp::Render()
   mRenderer->Clear();
   mRenderer->Draw();
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-  mDB->Draw(mCamera.CalculateMatrix(), mProjection);
+  // mDB->Draw(mCamera.CalculateMatrix(), mProjection);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   mUI->Update();
   glfwSwapBuffers(mWindow->mGLWindow);

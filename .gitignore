@@ -13,3 +13,4 @@ CMakeLists.txt.user
 cmake-build-debug-visual-studio/*
 /test-out
 /tbuild
+/build-release

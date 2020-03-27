@@ -82,22 +82,37 @@ elseif (WIN32)
   )
   set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC")
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
-  target_link_libraries(
-    IPhysics
-    ${OPENGL_LIBRARY}
-    D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
-    D:/libraries/glfw/release/glfw3.lib
-    #D:/libraries/ReactPhysics3D/Debug/reactphysics3d.lib
-    D:/libraries/bullet/Debug/BulletDynamics_Debug.lib
-    D:/libraries/bullet/Debug/BulletCollision_Debug.lib
-    #D:/libraries/bullet/Release/Bullet3Common.lib
-    D:/libraries/bullet/Debug/LinearMath_Debug.lib
-    opengl32.lib
-    gdi32.lib
-    user32.lib
-    kernel32.lib
-
-  )
+  message(${CMAKE_BUILD_TYPE})
+  if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    message("DEBUG YOU FOOL!!!")
+    target_link_libraries(
+      IPhysics
+      ${OPENGL_LIBRARY}
+      D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
+      D:/libraries/glfw/release/glfw3.lib
+      D:/libraries/bullet/Debug/BulletDynamics_Debug.lib
+      D:/libraries/bullet/Debug/BulletCollision_Debug.lib
+      D:/libraries/bullet/Debug/LinearMath_Debug.lib
+      opengl32.lib
+      gdi32.lib
+      user32.lib
+      kernel32.lib
+    )
+  else()
+    target_link_libraries(
+      IPhysics
+      ${OPENGL_LIBRARY}
+      D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
+      D:/libraries/glfw/release/glfw3.lib
+      D:/libraries/bullet/Release/BulletDynamics.lib
+      D:/libraries/bullet/Release/BulletCollision.lib
+      D:/libraries/bullet/Release/LinearMath.lib
+      opengl32.lib
+      gdi32.lib
+      user32.lib
+      kernel32.lib
+    )
+  endif()
   message(${CMAKE_CXX_FLAGS})
   target_link_libraries(
     VoxelGenerator
