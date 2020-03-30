@@ -21,6 +21,10 @@ void DebugDrawer::drawLine(const btVector3 &from, const btVector3 &to, const btV
 void DebugDrawer::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
 {
   // mBackend->ClearCommandQueue();
+  if (mMesh.mVertecies.empty())
+  {
+    return;
+  }
   auto handle = mBackend->SubmitMesh(&mMesh);
   std::vector<ShaderData> shaderData({ShaderData("color", {1.0, 1.0, 1.0}),
                                       ShaderData("camera", camera),
