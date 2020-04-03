@@ -32,15 +32,17 @@ void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
 {
   // Calculate our own normals using the mesh vertex positions
-  for (u32 i = 0; i < mesh->mVertecies.size(); i += 3)
+  for (u32 i = 0; i < mesh->mVertices.CastBufferSize(); i++)
   {
-    auto &vertices = mesh->mVertecies;
+    auto &vertices = mesh->mVertices;
     auto &normals = mesh->mNormals;
-    glm::vec3 normal(vertices[i], vertices[i + 1], vertices[i + 2]);
+    auto normal = mesh->mVertices.AccessCastBuffer(i);
+    //     glm::vec3 normal(vertices[i], vertices[i + 1], vertices[i + 2]);
     normal = glm::normalize(normal);
-    normals[i] = normal.x;
-    normals[i + 1] = normal.y;
-    normals[i + 2] = normal.z;
+    normals.AccessCastBuffer(i) = normal;
+    //     normals[i] = normal.x;
+    //     normals[i + 1] = normal.y;
+    //     normals[i + 2] = normal.z;
   }
   return mBackend->SubmitMesh(mesh);
 }
@@ -88,22 +90,24 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
         voxel.mPosition + (glm::vec3(-1.0f, -1.0f, -1.0f) * (voxelSize / 2.0f)), // 6
         voxel.mPosition + (glm::vec3(1.0f, -1.0f, -1.0f) * (voxelSize / 2.0f)),  // 7
     };
-    u32 indexOffset = mesh.mVertecies.size() / 3;
+    u32 indexOffset = mesh.mVertices.BufferSize() / 3;
     for (u32 index : faceIndecies)
     {
-      mesh.mIndecies.push_back(index + indexOffset);
+      mesh.mIndices.push_back(index + indexOffset);
     }
     auto transform = glm::translate((voxel.mPosition));
     for (u32 i = 0; i < ArraySize(voxelVerts); i++)
     {
       const auto &vert = voxelVerts[i];
-      mesh.mVertecies.push_back(voxelVerts[i].x);
-      mesh.mVertecies.push_back(voxelVerts[i].y);
-      mesh.mVertecies.push_back(voxelVerts[i].z);
-
-      mesh.mNormals.push_back(voxelNormals[i].x);
-      mesh.mNormals.push_back(voxelNormals[i].y);
-      mesh.mNormals.push_back(voxelNormals[i].z);
+      mesh.mVertices.CastBufferPushBack(voxelVerts[i]);
+      mesh.mNormals.CastBufferPushBack(voxelNormals[i]);
+      //       mesh.mVertices.push_back(voxelVerts[i].x);
+      //       mesh.mVertices.push_back(voxelVerts[i].y);
+      //       mesh.mVertices.push_back(voxelVerts[i].z);
+      //
+      //       mesh.mNormals.push_back(voxelNormals[i].x);
+      //       mesh.mNormals.push_back(voxelNormals[i].y);
+      //       mesh.mNormals.push_back(voxelNormals[i].z);
     }
   }
 

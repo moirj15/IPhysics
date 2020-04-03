@@ -163,12 +163,13 @@ void PhysicsSimulationApp::ApplyDeformations()
       for (auto index : voxel.mMeshVertices)
       {
         // glm::vec3 offset = voxel.mPosition - settings->mPosition;
-        vMesh->mMesh->mVertecies[(index * 3)] += voxel.mRelativePositionDelta.x;
-        vMesh->mMesh->mVertecies[(index * 3) + 1] += voxel.mRelativePositionDelta.y;
-        vMesh->mMesh->mVertecies[(index * 3) + 2] += voxel.mRelativePositionDelta.z;
+        vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
+        //         vMesh->mMesh->mVertices[(index * 3)] += voxel.mRelativePositionDelta.x;
+        //         vMesh->mMesh->mVertices[(index * 3) + 1] += voxel.mRelativePositionDelta.y;
+        //         vMesh->mMesh->mVertices[(index * 3) + 2] += voxel.mRelativePositionDelta.z;
       }
     }
-    mRenderer->UpdateMesh(handle, vMesh->mMesh->mIndecies);
+    mRenderer->UpdateMesh(handle, vMesh->mMesh->mIndices);
   }
 }
 

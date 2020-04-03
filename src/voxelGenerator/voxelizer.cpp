@@ -27,12 +27,13 @@ btAABB Voxelizer::FindMeshAABB(Mesh *mesh)
 {
   btVector3 min(0.0f, 0.0f, 0.0f);
   btVector3 max(0.0f, 0.0f, 0.0f);
-  for (u64 i = 0; i < mesh->mIndecies.size(); i++)
+  for (u64 i = 0; i < mesh->mIndices.size(); i++)
   {
-    const f32 x = mesh->mVertecies[(mesh->mIndecies[i]) * 3];
-    const f32 y = mesh->mVertecies[(mesh->mIndecies[i] * 3) + 1];
-    const f32 z = mesh->mVertecies[(mesh->mIndecies[i] * 3) + 2];
-    btVector3 currentPoint(x, y, z);
+    auto v = mesh->mVertices.AccessCastBuffer(mesh->mIndices[i]);
+    //     const f32 x = mesh->mVertices[(mesh->mIndices[i]) * 3];
+    //     const f32 y = mesh->mVertices[(mesh->mIndices[i] * 3) + 1];
+    //     const f32 z = mesh->mVertices[(mesh->mIndices[i] * 3) + 2];
+    btVector3 currentPoint(v.x, v.y, v.z);
     min.setMin(currentPoint);
     max.setMax(currentPoint);
   }
@@ -42,21 +43,26 @@ btAABB Voxelizer::FindMeshAABB(Mesh *mesh)
 std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(Mesh *mesh)
 {
   std::vector<MeshInfo> meshInfos;
-  for (u64 i = 0; i < mesh->mIndecies.size(); i += 3)
+  for (u64 i = 0; i < mesh->mIndices.size(); i += 3)
   {
-    btVector3 points[] = {btVector3(
-                              mesh->mVertecies[(mesh->mIndecies[i] * 3)],
-                              mesh->mVertecies[(mesh->mIndecies[i] * 3) + 1],
-                              mesh->mVertecies[(mesh->mIndecies[i] * 3) + 2]),
-                          btVector3(
-                              mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3)],
-                              mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3) + 1],
-                              mesh->mVertecies[(mesh->mIndecies[(i + 1)] * 3) + 2]),
-                          btVector3(
-                              mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3)],
-                              mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3) + 1],
-                              mesh->mVertecies[(mesh->mIndecies[(i + 2)] * 3) + 2])};
-    u32 indices[] = {mesh->mIndecies[i], mesh->mIndecies[i + 1], mesh->mIndecies[i + 2]};
+    auto v0 = mesh->mVertices.AccessCastBuffer(mesh->mIndices[i]);
+    auto v1 = mesh->mVertices.AccessCastBuffer(mesh->mIndices[i + 1]);
+    auto v2 = mesh->mVertices.AccessCastBuffer(mesh->mIndices[i + 2]);
+    btVector3 points[] = {btVector3(v0.x, v0.y, v0.z), btVector3(v1.x, v1.y, v1.z),
+                          btVector3(v2.x, v2.y, v2.z)};
+    //     btVector3 points[] = {btVector3(
+    //                               mesh->mVertices[(mesh->mIndices[i] * 3)],
+    //                               mesh->mVertices[(mesh->mIndices[i] * 3) + 1],
+    //                               mesh->mVertices[(mesh->mIndices[i] * 3) + 2]),
+    //                           btVector3(
+    //                               mesh->mVertices[(mesh->mIndices[(i + 1)] * 3)],
+    //                               mesh->mVertices[(mesh->mIndices[(i + 1)] * 3) + 1],
+    //                               mesh->mVertices[(mesh->mIndices[(i + 1)] * 3) + 2]),
+    //                           btVector3(
+    //                               mesh->mVertices[(mesh->mIndices[(i + 2)] * 3)],
+    //                               mesh->mVertices[(mesh->mIndices[(i + 2)] * 3) + 1],
+    //                               mesh->mVertices[(mesh->mIndices[(i + 2)] * 3) + 2])};
+    u32 indices[] = {mesh->mIndices[i], mesh->mIndices[i + 1], mesh->mIndices[i + 2]};
     meshInfos.push_back(MeshInfo(points, indices));
     // Add the indices to the points
   }
@@ -237,11 +243,11 @@ std::unordered_map<u32, Edge> Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelM
       edgeMap.emplace(v0, Edge(v0, v1));
     }
   };
-  for (u64 i = 0; i < voxelMesh->mMesh->mIndecies.size(); i += 3)
+  for (u64 i = 0; i < voxelMesh->mMesh->mIndices.size(); i += 3)
   {
-    u32 v0 = voxelMesh->mMesh->mIndecies[i];
-    u32 v1 = voxelMesh->mMesh->mIndecies[i + 1];
-    u32 v2 = voxelMesh->mMesh->mIndecies[i + 2];
+    u32 v0 = voxelMesh->mMesh->mIndices[i];
+    u32 v1 = voxelMesh->mMesh->mIndices[i + 1];
+    u32 v2 = voxelMesh->mMesh->mIndices[i + 2];
 
     AddEdgeNoDuplicates(v0, v1);
     AddEdgeNoDuplicates(v1, v2);

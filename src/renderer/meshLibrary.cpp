@@ -50,23 +50,24 @@ MeshPair MeshLibrary::VAOFromMesh(Mesh *mesh)
   VertexArray vao;
   vao.Create();
   IndexBuffer ibo;
-  ibo.Create(mesh->mIndecies.data(), mesh->mIndecies.size());
+  ibo.Create(mesh->mIndices.data(), mesh->mIndices.size());
   vao.AddIBO(ibo);
-  if (!mesh->mVertecies.empty())
+  if (!mesh->mVertices.IsEmpty())
   {
     vao.AddVBO(VertexBuffer(
-        mesh->mVertecies.data(), mesh->mVertecies.size(),
+        mesh->mVertices.BufferPtr(), mesh->mVertices.BufferSize(),
         BufferLayout("Vertexes", 3, 0, 0, GL_FLOAT)));
   }
-  if (!mesh->mNormals.empty())
+  if (!mesh->mNormals.IsEmpty())
   {
     vao.AddVBO(VertexBuffer(
-        mesh->mNormals.data(), mesh->mNormals.size(), BufferLayout("Normals", 3, 0, 1, GL_FLOAT)));
+        mesh->mNormals.BufferPtr(), mesh->mNormals.BufferSize(),
+        BufferLayout("Normals", 3, 0, 1, GL_FLOAT)));
   }
-  if (!mesh->mVertecies.empty())
+  if (!mesh->mVertices.IsEmpty())
   {
     vao.AddVBO(VertexBuffer(
-        mesh->mTextureCoords.data(), mesh->mTextureCoords.size(),
+        mesh->mTextureCoords.BufferPtr(), mesh->mTextureCoords.BufferSize(),
         BufferLayout("UVs", 2, 0, 2, GL_FLOAT)));
   }
   return {vao, ibo};

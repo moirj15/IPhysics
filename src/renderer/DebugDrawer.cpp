@@ -6,22 +6,22 @@ namespace Renderer
 {
 void DebugDrawer::drawLine(const btVector3 &from, const btVector3 &to, const btVector3 &color)
 {
-  mMesh.mVertecies.push_back(from.x());
-  mMesh.mVertecies.push_back(from.y());
-  mMesh.mVertecies.push_back(from.z());
+  mMesh.mVertices.BufferPushBack(from.x());
+  mMesh.mVertices.BufferPushBack(from.y());
+  mMesh.mVertices.BufferPushBack(from.z());
 
-  mMesh.mVertecies.push_back(to.x());
-  mMesh.mVertecies.push_back(to.y());
-  mMesh.mVertecies.push_back(to.z());
+  mMesh.mVertices.BufferPushBack(to.x());
+  mMesh.mVertices.BufferPushBack(to.y());
+  mMesh.mVertices.BufferPushBack(to.z());
 
-  mMesh.mIndecies.push_back(mMesh.mIndecies.size());
-  mMesh.mIndecies.push_back(mMesh.mIndecies.size());
+  mMesh.mIndices.push_back(mMesh.mIndices.size());
+  mMesh.mIndices.push_back(mMesh.mIndices.size());
 }
 
 void DebugDrawer::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
 {
   // mBackend->ClearCommandQueue();
-  if (mMesh.mVertecies.empty())
+  if (mMesh.mVertices.IsEmpty())
   {
     return;
   }

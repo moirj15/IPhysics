@@ -24,9 +24,9 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
 {
   std::ofstream file(path, std::ios::trunc | std::ios::out);
   auto *mesh = voxelMesh->GetMesh();
-  file << "[Vertex Count]\n" << mesh->mVertecies.size() << "\n";
-  file << "[Index Count]\n" << mesh->mIndecies.size() << "\n";
-  file << "[Normal Count]\n" << mesh->mNormals.size() << "\n";
+  file << "[Vertex Count]\n" << mesh->mVertices.BufferSize() << "\n";
+  file << "[Index Count]\n" << mesh->mIndices.size() << "\n";
+  file << "[Normal Count]\n" << mesh->mNormals.BufferSize() << "\n";
   file << "[Voxel Count]\n" << voxelMesh->GetVoxelCount() << "\n";
 
   const auto extentsVoxelSpace = voxelMesh->GetExtentsVoxelSpace();
@@ -44,17 +44,17 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
        << "\n";
 
   file << "[Vertices]\n";
-  for (const auto &v : mesh->mVertecies)
+  for (const auto &v : mesh->mVertices.GetBuffer())
   {
     file << v << " ";
   }
   file << "\n[Indecies]\n";
-  for (const auto &i : mesh->mIndecies)
+  for (const auto &i : mesh->mIndices)
   {
     file << i << " ";
   }
   file << "\n[Normals]\n";
-  for (const auto &n : mesh->mNormals)
+  for (const auto &n : mesh->mNormals.GetBuffer())
   {
     file << n << " ";
   }
@@ -131,9 +131,9 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
   file >> initialVoxelSize.x >> initialVoxelSize.y >> initialVoxelSize.z;
 
   Mesh *mesh = new Mesh;
-  mesh->mVertecies.resize(vertCount);
-  mesh->mIndecies.resize(indexCount);
-  mesh->mNormals.resize(normalCount);
+  mesh->mVertices.SetBufferSize(vertCount);
+  mesh->mIndices.resize(indexCount);
+  mesh->mNormals.SetBufferSize(normalCount);
 
   auto vm = new VoxObj::VoxelMesh(extentsVoxelSpace, extentsObjectSpace, initialVoxelSize, mesh);
 
@@ -142,21 +142,21 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < vertCount; i++)
   {
-    file >> mesh->mVertecies[i];
+    file >> mesh->mVertices.AccessBuffer(i);
   }
   // Load in the mesh indices
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < indexCount; i++)
   {
-    file >> mesh->mIndecies[i];
+    file >> mesh->mIndices[i];
   }
   // Load in the mesh normals
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < normalCount; i++)
   {
-    file >> mesh->mNormals[i];
+    file >> mesh->mNormals.AccessBuffer(i);
   }
   // Start loading in the voxels
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

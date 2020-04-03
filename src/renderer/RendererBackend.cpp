@@ -167,7 +167,8 @@ void RendererBackend::UpdateMesh(const u32 handle, const std::vector<u32> &verts
   for (auto v : verts)
   {
     glBufferSubData(
-        GL_ARRAY_BUFFER, (v * 3) * sizeof(f32), 3 * sizeof(f32), &mesh->mVertecies[v * 3]);
+        GL_ARRAY_BUFFER, (v * 3) * sizeof(f32), 3 * sizeof(f32),
+        &mesh->mVertices.AccessBuffer(v * 3)); // TODO: Replace this with a helper method
   }
 }
 
