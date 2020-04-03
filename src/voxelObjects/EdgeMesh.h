@@ -25,7 +25,7 @@ struct Edge
   Edge(u32 startVert, u32 endVert) : mStartVert(startVert), mEndVert(endVert)
   {
   }
-  explicit Edge(const Edge &e) : mStartVert(e.mStartVert), mEndVert(e.mEndVert)
+  Edge(const Edge &e) : mStartVert(e.mStartVert), mEndVert(e.mEndVert)
   {
   }
 
@@ -36,25 +36,25 @@ struct Edge
   //   }
 };
 
-class EdgeMesh
-{
-  Mesh *mMesh;
-  std::unordered_map<u32, Edge> mEdges;
-
-public:
-  explicit EdgeMesh(Mesh *mesh) : mMesh(mesh)
-  {
-    //     PopulateFromMesh();
-  }
-  inline void Insert(const Edge &e)
-  {
-    mEdges.emplace(e.mStartVert, e);
-  }
-  NODISCARD inline const Edge &GetEdge(const u32 startVert)
-  {
-    return mEdges[startVert];
-  }
-
-private:
-  void PopulateFromMesh();
-};
+// class EdgeMesh
+// {
+//   Mesh *mMesh;
+//   std::unordered_map<u32, Edge> mEdges;
+//
+// public:
+//   explicit EdgeMesh(Mesh *mesh) : mMesh(mesh)
+//   {
+//     //     PopulateFromMesh();
+//   }
+//   inline void Insert(const Edge &e)
+//   {
+//     mEdges.emplace(e.mStartVert, e);
+//   }
+//   NODISCARD inline const Edge &GetEdge(const u32 startVert)
+//   {
+//     return mEdges[startVert];
+//   }
+//
+// private:
+//   void PopulateFromMesh();
+// };

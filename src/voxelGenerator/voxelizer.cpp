@@ -1,5 +1,6 @@
 #include "voxelizer.h"
 
+#include "../PhysicsEngine/RayCastWorld.h"
 #include "../renderer/mesh.h"
 #include "../voxelObjects/EdgeMesh.h"
 
@@ -205,7 +206,48 @@ void Voxelizer::AddNeighbors(VoxObj::VoxelMesh *voxelMesh)
 
 void Voxelizer::AddBezierCurves(VoxObj::VoxelMesh *voxelMesh)
 {
-  EdgeMesh edgeMesh(voxelMesh->mMesh);
+  auto edgeMap = CreateEdgeMap(voxelMesh);
+  RayCastWorld rayCastWorld;
+  std::vector<Box> boxes;
+  for (const auto &[_, voxel] : voxelMesh->mVoxels)
+  {
+    boxes.emplace_back(voxel.mPosition, voxel.mDimensions);
+  }
+  rayCastWorld.AddBoxes(boxes);
+  for (const auto &[_, voxel] : voxelMesh->mVoxels)
+  {
+    for (u32 index : voxel.mMeshVertices)
+    {
+      auto edge = edgeMap[index];
+      //       auto intersections = rayCastWorld.CastRay(Ray())
+    }
+  }
+}
+
+std::unordered_map<u32, Edge> Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh)
+{
+  std::unordered_map<u32, Edge> edgeMap;
+  auto &AddEdgeNoDuplicates = [&edgeMap](const u32 v0, const u32 v1) {
+    if (edgeMap.find(v0) != edgeMap.end())
+    {
+      edgeMap.emplace(v1, Edge(v1, v0));
+    }
+    else
+    {
+      edgeMap.emplace(v0, Edge(v0, v1));
+    }
+  };
+  for (u64 i = 0; i < voxelMesh->mMesh->mIndecies.size(); i += 3)
+  {
+    u32 v0 = voxelMesh->mMesh->mIndecies[i];
+    u32 v1 = voxelMesh->mMesh->mIndecies[i + 1];
+    u32 v2 = voxelMesh->mMesh->mIndecies[i + 2];
+
+    AddEdgeNoDuplicates(v0, v1);
+    AddEdgeNoDuplicates(v1, v2);
+    AddEdgeNoDuplicates(v2, v0);
+  }
+  return edgeMap;
 }
 
 } // namespace VoxGen

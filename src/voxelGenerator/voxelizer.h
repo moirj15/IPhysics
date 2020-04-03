@@ -1,12 +1,14 @@
 #pragma once
 
 #include "../common.h"
+#include "../voxelObjects/EdgeMesh.h"
 #include "../voxelObjects/VoxelMesh.h"
 #include "../voxelObjects/voxel.h"
 #include "VoxelizerParameters.h"
 
 #include <BulletCollision/Gimpact/btBoxCollision.h>
 #include <array>
+#include <unordered_map>
 #include <vector>
 
 struct Mesh;
@@ -51,6 +53,7 @@ private:
   void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);
   void AddNeighbors(VoxObj::VoxelMesh *voxelMesh);
   void AddBezierCurves(VoxObj::VoxelMesh *voxelMesh);
+  NODISCARD std::unordered_map<u32, Edge> CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh);
 };
 
 } // namespace VoxGen
