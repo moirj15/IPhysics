@@ -1,5 +1,5 @@
 
-#include "PhysicsSimulationSystem.h"
+#include "PhysicsSimulationApp.h"
 
 int main(int argc, char **argv)
 {

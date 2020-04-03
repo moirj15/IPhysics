@@ -55,32 +55,33 @@ Mesh *ObjReader::Parse(const char *filename)
       break;
     }
   }
-  mMesh->mNormals.resize(mMesh->mIndecies.size() * 3);
-  for (u32 i = 0; i < mMesh->mIndecies.size(); i += 3)
-  {
-    u32 i0 = mMesh->mIndecies[i];
-    u32 i1 = mMesh->mIndecies[i + 1];
-    u32 i2 = mMesh->mIndecies[i + 2];
-    glm::vec3 t0(mMesh->mVertecies[i0], mMesh->mVertecies[i0 + 1], mMesh->mVertecies[i0 + 2]);
-    glm::vec3 t1(mMesh->mVertecies[i1], mMesh->mVertecies[i1 + 1], mMesh->mVertecies[i1 + 2]);
-    glm::vec3 t2(mMesh->mVertecies[i2], mMesh->mVertecies[i2 + 1], mMesh->mVertecies[i2 + 2]);
-    auto normal = glm::triangleNormal(t0, t1, t2);
-    mMesh->mNormals[i0] += normal.x;
-    mMesh->mNormals[i0 + 1] += normal.y;
-    mMesh->mNormals[i0 + 2] += normal.z;
-
-    mMesh->mNormals[i1] += normal.x;
-    mMesh->mNormals[i1 + 1] += normal.y;
-    mMesh->mNormals[i1 + 2] += normal.z;
-
-    mMesh->mNormals[i2] += normal.x;
-    mMesh->mNormals[i2 + 1] += normal.y;
-    mMesh->mNormals[i2 + 2] += normal.z;
-  }
-  for (u32 i = 0; i < mMesh->mNormals.size(); i++)
-  {
-    mMesh->mNormals[i] /= 3.0f;
-  }
+  mMesh->mNormals.resize(mTempNormals.size() * 3);
+  //   mMesh->mNormals.resize(mMesh->mIndecies.size() * 3);
+  //   for (u32 i = 0; i < mMesh->mIndecies.size(); i += 3)
+  //   {
+  //     u32 i0 = mMesh->mIndecies[i];
+  //     u32 i1 = mMesh->mIndecies[i + 1];
+  //     u32 i2 = mMesh->mIndecies[i + 2];
+  //     glm::vec3 t0(mMesh->mVertecies[i0], mMesh->mVertecies[i0 + 1], mMesh->mVertecies[i0 + 2]);
+  //     glm::vec3 t1(mMesh->mVertecies[i1], mMesh->mVertecies[i1 + 1], mMesh->mVertecies[i1 + 2]);
+  //     glm::vec3 t2(mMesh->mVertecies[i2], mMesh->mVertecies[i2 + 1], mMesh->mVertecies[i2 + 2]);
+  //     auto normal = glm::triangleNormal(t0, t1, t2);
+  //     mMesh->mNormals[i0] += normal.x;
+  //     mMesh->mNormals[i0 + 1] += normal.y;
+  //     mMesh->mNormals[i0 + 2] += normal.z;
+  //
+  //     mMesh->mNormals[i1] += normal.x;
+  //     mMesh->mNormals[i1 + 1] += normal.y;
+  //     mMesh->mNormals[i1 + 2] += normal.z;
+  //
+  //     mMesh->mNormals[i2] += normal.x;
+  //     mMesh->mNormals[i2 + 1] += normal.y;
+  //     mMesh->mNormals[i2 + 2] += normal.z;
+  //   }
+  //   for (u32 i = 0; i < mMesh->mNormals.size(); i++)
+  //   {
+  //     mMesh->mNormals[i] /= 3.0f;
+  //   }
   Clear();
   // This should clear out mMesh
   return mMesh;
@@ -198,18 +199,27 @@ void ObjReader::ParseNormal()
 
 void ObjReader::ParseFace()
 {
+  if (mMesh->mNormals.empty())
+  {
+    mMesh->mNormals.resize(mTempNormals.size() * 3);
+  }
   std::string lineStr{ReadLine()};
   ReplaceChars(&lineStr, '/', ' ');
   std::stringstream line{lineStr};
-  u32 index = 0;
-  u32 texCoord = 0;
-  u32 normal = 0;
+  //   u32 index = 0;
+  //   u32 texCoord = 0;
+  //   u32 normal = 0;
   for (s32 i = 0; i < 3; i++)
   {
-    u32 val = 0.0f;
-    u32 junk = 0.0f;
-    line >> val >> junk;
-    mMesh->mIndecies.emplace_back(val - 1);
+    // TODO: only support vertex-normal pairs for obj files at the moment
+    u32 index = 0.0;
+    u32 normal = 0.0;
+    line >> index >> normal;
+    index--;
+    mMesh->mIndecies.emplace_back(index);
+    mMesh->mNormals[(index * 3)] = mTempNormals[index].x;
+    mMesh->mNormals[(index * 3) + 1] = mTempNormals[index].y;
+    mMesh->mNormals[(index * 3) + 2] = mTempNormals[index].z;
   }
 }
 

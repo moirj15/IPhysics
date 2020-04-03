@@ -19,6 +19,6 @@ void main()
   gl_Position = projModelView * position;
   eye_vPosition = vec3(camera * position);
   eye_LightPosition = vec3(camera * vec4(lightPosition, 1.0));
-  eye_normal = normalMat * vNormal;
+  eye_normal = normalMat * normalize(vNormal);
 
 }

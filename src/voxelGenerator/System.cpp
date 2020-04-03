@@ -100,35 +100,36 @@ void System::LoadMesh()
     // Load our mesh if we got a good path
     if (fs::exists(*meshPath))
     {
-      // ObjReader objReader;
-      // mMesh.reset(objReader.Parse(meshPath->c_str()));
-      // mRenderer->RemoveMesh(mCurrentMeshHandle);
-      // mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
-      // // ObjReader objReader;
-      tinyobj::attrib_t attrib;
-      std::vector<tinyobj::shape_t> shapes;
-      std::vector<tinyobj::material_t> materials;
-      std::string warn;
-      std::string err;
-      bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, meshPath->c_str());
-
-      mMesh.reset(new Mesh());
-      const auto &indices = shapes[0].mesh.indices;
-      for (u64 i = 0; i < indices.size(); i++)
-      {
-        mMesh->mIndecies.push_back(i);
-
-        mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index)]);
-        mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index) + 1]);
-        mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index) + 2]);
-
-        mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index)]);
-        mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index) + 1]);
-        mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index) + 2]);
-      }
-
+      ObjReader objReader;
+      mMesh.reset(objReader.Parse(meshPath->c_str()));
       mRenderer->RemoveMesh(mCurrentMeshHandle);
       mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
+      // ObjReader objReader;
+      //       tinyobj::attrib_t attrib;
+      //       std::vector<tinyobj::shape_t> shapes;
+      //       std::vector<tinyobj::material_t> materials;
+      //       std::string warn;
+      //       std::string err;
+      //       bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err,
+      //       meshPath->c_str());
+      //
+      //       mMesh.reset(new Mesh());
+      //       const auto &indices = shapes[0].mesh.indices;
+      //       for (u64 i = 0; i < indices.size(); i++)
+      //       {
+      //         mMesh->mIndecies.push_back(i);
+      //
+      //         mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index)]);
+      //         mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index) + 1]);
+      //         mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index) + 2]);
+      //
+      //         mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index)]);
+      //         mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index) + 1]);
+      //         mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index) + 2]);
+      //       }
+
+      //       mRenderer->RemoveMesh(mCurrentMeshHandle);
+      //       mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
     }
     else
     {
@@ -143,6 +144,7 @@ void System::GenerateVoxels()
   {
     mVoxelizer->SetParameters(mUI->GetParameters());
     mVoxelMesh.reset(new VoxObj::VoxelMesh(mVoxelizer->Voxelize(mMesh.get())));
+    // TODO: remove duplicate vertices
     mRenderer->RemoveMesh(mCurrentVoxelMeshHandle);
     mCurrentVoxelMeshHandle = mRenderer->RegisterVoxelMesh(mVoxelMesh.get());
   }

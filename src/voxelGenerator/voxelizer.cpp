@@ -1,6 +1,9 @@
 #include "voxelizer.h"
 
 #include "../renderer/mesh.h"
+#include "../voxelObjects/EdgeMesh.h"
+
+#include <unordered_set>
 
 namespace VoxGen
 {
@@ -66,7 +69,6 @@ Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &me
   glm::vec3 max(meshAABB.m_max.x(), meshAABB.m_max.y(), meshAABB.m_max.z());
   glm::vec3 extentsOffset(-meshAABB.m_min.x(), -meshAABB.m_min.y(), -meshAABB.m_min.z());
   // move the min and max to be centered at the origin
-  // min += extentsOffset;
   max += extentsOffset;
 
   // use the max of the AABB as the extents
@@ -93,27 +95,14 @@ Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &me
                    + btVector3(
                        mParameters.mVoxelSize, mParameters.mVoxelSize, mParameters.mVoxelSize)),
             btMin + offset, mParameters.mVoxelSize / 100.0f);
-        // btAABB testBox(voxel);
-        // testBox.setMin(
-        //     testBox.getMin()
-        //     - rp3d::Vector3(
-        //         mParameters.mVoxelSize / 100.0f, mParameters.mVoxelSize / 100.0f,
-        //         mParameters.mVoxelSize / 100.0f));
-        // testBox.setMax(
-        //     testBox.getMax()
-        //     + rp3d::Vector3(
-        //         mParameters.mVoxelSize / 100.0f, mParameters.mVoxelSize / 100.0f,
-        //         mParameters.mVoxelSize / 100.0f));
         // Find the triangles that the voxel intersects
         glm::ivec3 key(x, y, z);
         auto minToMaxVec = voxel.m_max - voxel.m_min;
         auto length = minToMaxVec.length();
         btVector3 voxelCenter(voxel.m_min + ((voxel.m_max - voxel.m_min) / 2.0f));
-        // btVector3 voxelCenter(
-        //     voxel.m_min.x() + (length / 2.0f), voxel.m_min.y() + (length / 2.0f),
-        //     voxel.m_min.z() + (length / 2.0f));
         glm::vec3 position(voxelCenter.x(), voxelCenter.y(), voxelCenter.z());
         VoxObj::Voxel generatedVoxel(mParameters.mVoxelSize, position);
+        std::unordered_set<u32> voxelVertices;
         bool keep = false;
         for (auto &triangle : meshTriangles)
         {
@@ -133,15 +122,19 @@ Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &me
               // if (voxel.contains(triangle.first[i]))
               // if (testBox.contains(triangle.first[i]))
               {
-                generatedVoxel.mMeshVertices.push_back(triangle.mIndices[i]);
+                //                 generatedVoxel.mMeshVertices.push_back(triangle.mIndices[i]);
+                voxelVertices.emplace(triangle.mIndices[i]);
                 triangle.mInVoxel[i] = true;
               }
             }
-            // voxelMesh.SetVoxel(key, generatedVoxel);
           }
         }
         if (keep)
         {
+          for (u32 v : voxelVertices)
+          {
+            generatedVoxel.mMeshVertices.emplace_back(v);
+          }
           voxelMesh.SetVoxel(key, generatedVoxel);
         }
       }
@@ -209,4 +202,10 @@ void Voxelizer::AddNeighbors(VoxObj::VoxelMesh *voxelMesh)
     }
   }
 }
+
+void Voxelizer::AddBezierCurves(VoxObj::VoxelMesh *voxelMesh)
+{
+  EdgeMesh edgeMesh(voxelMesh->mMesh);
+}
+
 } // namespace VoxGen

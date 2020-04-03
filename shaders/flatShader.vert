@@ -28,7 +28,7 @@ void main()
   vec3 lightEyeSpace = vec3(modelView * vec4(lightPosition, 1.0));
 
   mat3 normalTransform = inverse(transpose(mat3(modelView)));
-  vec3 N = normalize(normalTransform * vNormal);
+  vec3 N = normalize(normalTransform * normalize(vNormal));
 
   vec3 L = normalize(lightPositionEyeSpace - vPosEyeSpace);
 
@@ -39,10 +39,11 @@ void main()
 	// calculate components in the vertex shader so it looks flat
   vec3 ambient = ambientColor * ambientLight;
   vec3 diffuse = lightColor * diffuseColor * max(dot(N,L),0.0);
-  float specDot = pow( max(dot(R,V),0.0), /*specExp*/ 1.0 );
+  float specDot = pow( max(dot(R,V),0.0), /*specExp*/ 10.0 );
   vec3 specular = lightColor.xyz * specularColor * vec3(1.0, 1.0, 1.0) * specDot;
 
   color = (0.3 * ambient) + (1.0 * diffuse);// + (0.5 * specular); 
+  // color = normalize(vNormal);
 
   gl_Position = projection * modelView * vec4(vPosition, 1.0);
 }

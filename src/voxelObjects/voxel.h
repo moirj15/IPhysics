@@ -3,6 +3,8 @@
 #include "../common.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
+#include "BezierCurve.h"
+
 #include <glm/gtx/quaternion.hpp>
 #include <glm/vec3.hpp>
 #include <vector>
@@ -18,6 +20,7 @@ struct Voxel
   glm::vec3 mRelativePositionDelta{0.0f};
   std::vector<glm::uvec3> mNeighbors;
   std::vector<u32> mMeshVertices;
+  std::vector<BezierCurve> mBezierCurves;
 
   Voxel() = default;
 
@@ -28,7 +31,7 @@ struct Voxel
 
   Voxel(const Voxel &v) :
       mDimensions(v.mDimensions), mPosition(v.mPosition), mNeighbors(v.mNeighbors),
-      mMeshVertices(v.mMeshVertices)
+      mMeshVertices(v.mMeshVertices), mBezierCurves(v.mBezierCurves)
   {
   }
 };

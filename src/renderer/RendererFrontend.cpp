@@ -31,6 +31,17 @@ void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
 
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
 {
+  // Calculate our own normals using the mesh vertex positions
+  for (u32 i = 0; i < mesh->mVertecies.size(); i += 3)
+  {
+    auto &vertices = mesh->mVertecies;
+    auto &normals = mesh->mNormals;
+    glm::vec3 normal(vertices[i], vertices[i + 1], vertices[i + 2]);
+    normal = glm::normalize(normal);
+    normals[i] = normal.x;
+    normals[i + 1] = normal.y;
+    normals[i + 2] = normal.z;
+  }
   return mBackend->SubmitMesh(mesh);
 }
 

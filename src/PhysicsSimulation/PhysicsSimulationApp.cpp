@@ -1,4 +1,4 @@
-#include "PhysicsSimulationSystem.h"
+#include "PhysicsSimulationApp.h"
 
 #include "../../imgui/imgui.h"
 #include "../PhysicsEngine/physics.h"
@@ -31,26 +31,6 @@ PhysicsSimulationApp::~PhysicsSimulationApp() = default;
 
 void PhysicsSimulationApp::Run()
 {
-  //   // auto *vm = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  //   auto *vm = Utils::DeSerialize("../test-out/test.vmf");
-  //   // auto *vm = Utils::DeSerialize("../test-out/block-1fixed.vmf");
-  //   mHandle = VoxelMeshManager::Get().SubmitMesh(vm);
-  //   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  //   auto *vm2 = Utils::DeSerialize("../test-out/teapot-1p.vmf");
-  //   // auto *vm2 = Utils::DeSerialize("../test-out/lowsphere-1p.vmf");
-  //   // auto *vm2 = Utils::DeSerialize("../test-out/block-1fixed.vmf");
-  //   auto handle = VoxelMeshManager::Get().SubmitMesh(vm2);
-  //   auto *os = new Physics::ObjectSettings();
-  //   auto *os2 = new Physics::ObjectSettings();
-  //   os->mPosition = {-4.0, 1.0, 0.0};
-  //   os2->mPosition = {2.0, 0.0, 0.0};
-  //   VoxelMeshManager::Get().SubmitSettings(mHandle, os);
-  //   VoxelMeshManager::Get().SubmitSettings(handle, os2);
-  //   mPhysicsEngine->SubmitObject(mHandle);
-  //   mPhysicsEngine->SubmitObject(handle);
-  //
-  //   mRenderer->RegisterMeshHandle(mHandle);
-  //   mRenderer->RegisterMeshHandle(handle);
 
   while (!mWindow->ShouldClose())
   {

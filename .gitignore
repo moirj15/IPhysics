@@ -14,3 +14,4 @@ cmake-build-debug-visual-studio/*
 /test-out
 /tbuild
 /build-release
+/testfiles

@@ -43,7 +43,6 @@ private:
     }
   };
   NODISCARD btAABB FindMeshAABB(Mesh *mesh);
-  // using MeshInfo = std::vector<std::pair<std::array<btVector3, 3>, std::array<u32, 3>>>;
 
   NODISCARD std::vector<MeshInfo> FindTriangleAABBs(Mesh *mesh);
 
@@ -51,6 +50,7 @@ private:
   GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, Mesh *mesh);
   void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);
   void AddNeighbors(VoxObj::VoxelMesh *voxelMesh);
+  void AddBezierCurves(VoxObj::VoxelMesh *voxelMesh);
 };
 
 } // namespace VoxGen
