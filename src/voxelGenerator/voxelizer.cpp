@@ -4,6 +4,7 @@
 #include "../renderer/mesh.h"
 #include "../voxelObjects/EdgeMesh.h"
 
+#include <glm/gtx/string_cast.hpp>
 #include <unordered_set>
 
 namespace VoxGen
@@ -18,6 +19,8 @@ VoxObj::VoxelMesh Voxelizer::Voxelize(Mesh *mesh)
     FillVoxelMesh(&voxelMesh);
   }
   AddNeighbors(&voxelMesh);
+  // TODO: add check to see if extension is enabled
+  AddBezierCurves(&voxelMesh);
 
   return voxelMesh;
 }
@@ -50,18 +53,6 @@ std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(Mesh *mesh)
     auto v2 = mesh->mVertices.AccessCastBuffer(mesh->mIndices[i + 2]);
     btVector3 points[] = {btVector3(v0.x, v0.y, v0.z), btVector3(v1.x, v1.y, v1.z),
                           btVector3(v2.x, v2.y, v2.z)};
-    //     btVector3 points[] = {btVector3(
-    //                               mesh->mVertices[(mesh->mIndices[i] * 3)],
-    //                               mesh->mVertices[(mesh->mIndices[i] * 3) + 1],
-    //                               mesh->mVertices[(mesh->mIndices[i] * 3) + 2]),
-    //                           btVector3(
-    //                               mesh->mVertices[(mesh->mIndices[(i + 1)] * 3)],
-    //                               mesh->mVertices[(mesh->mIndices[(i + 1)] * 3) + 1],
-    //                               mesh->mVertices[(mesh->mIndices[(i + 1)] * 3) + 2]),
-    //                           btVector3(
-    //                               mesh->mVertices[(mesh->mIndices[(i + 2)] * 3)],
-    //                               mesh->mVertices[(mesh->mIndices[(i + 2)] * 3) + 1],
-    //                               mesh->mVertices[(mesh->mIndices[(i + 2)] * 3) + 2])};
     u32 indices[] = {mesh->mIndices[i], mesh->mIndices[i + 1], mesh->mIndices[i + 2]};
     meshInfos.push_back(MeshInfo(points, indices));
     // Add the indices to the points
@@ -213,19 +204,32 @@ void Voxelizer::AddNeighbors(VoxObj::VoxelMesh *voxelMesh)
 void Voxelizer::AddBezierCurves(VoxObj::VoxelMesh *voxelMesh)
 {
   auto edgeMap = CreateEdgeMap(voxelMesh);
-  RayCastWorld rayCastWorld;
-  std::vector<Box> boxes;
-  for (const auto &[_, voxel] : voxelMesh->mVoxels)
-  {
-    boxes.emplace_back(voxel.mPosition, voxel.mDimensions);
-  }
-  rayCastWorld.AddBoxes(boxes);
+  //   RayCastWorld rayCastWorld;
+  //   std::vector<Box> boxes;
+  //   for (const auto &[_, voxel] : voxelMesh->mVoxels)
+  //   {
+  //     boxes.emplace_back(voxel.mPosition, voxel.mDimensions);
+  //   }
+  //   rayCastWorld.AddBoxes(boxes);
   for (const auto &[_, voxel] : voxelMesh->mVoxels)
   {
     for (u32 index : voxel.mMeshVertices)
     {
-      auto edge = edgeMap[index];
-      //       auto intersections = rayCastWorld.CastRay(Ray())
+      const auto &edge = edgeMap[index];
+      const auto &startVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mStartVert);
+      const auto &endVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mEndVert);
+      const auto ap = voxel.mPosition - startVert;
+      const auto ab = endVert - startVert;
+      const auto voxelCenterOnEdge = startVert + ((glm::dot(ap, ab) / glm::dot(ab, ab)) * ab);
+      const f32 scale = 100.0f;
+      Ray startToEnd(voxelCenterOnEdge, endVert);
+      Ray startToExtendedStart(voxelCenterOnEdge, startVert);
+      auto firstIntersection = CastRayInBox(startToEnd, Box(voxel.mPosition, voxel.mDimensions));
+      auto secondIntersection =
+          CastRayInBox(startToExtendedStart, Box(voxel.mPosition, voxel.mDimensions));
+
+      //       printf("first: %s\n", glm::to_string(firstIntersection).c_str());
+      //       printf("second: %s\n\n", glm::to_string(secondIntersection).c_str());
     }
   }
 }
@@ -254,6 +258,66 @@ std::unordered_map<u32, Edge> Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelM
     AddEdgeNoDuplicates(v2, v0);
   }
   return edgeMap;
+}
+
+glm::vec3 Voxelizer::CastRayInBox(const Ray &ray, const Box &box)
+{
+  // Ray - Box intersection test refresher from scratchapixel.com
+  const auto boxMin = box.mPos - (box.mExtents / 2.0f);
+  const auto boxMax = box.mPos + (box.mExtents / 2.0f);
+
+  auto safeTCalculation = [](f32 boxMin, f32 boxMax, f32 origin, f32 direction) {
+    f32 min = 0.0f;
+    f32 max = 0.0f;
+    if (direction == 0.0f)
+    {
+      min = INFINITY;
+      max = -INFINITY;
+    }
+    else
+    {
+      min = (boxMin - origin) / direction;
+      max = (boxMax - origin) / direction;
+    }
+
+    if (min > max)
+    {
+      std::swap(min, max);
+    }
+    return std::make_pair(min, max);
+  };
+
+  auto [tMin, tMax] = safeTCalculation(boxMin.x, boxMax.x, ray.mOrigin.x, ray.mDirection.x);
+  auto [tyMin, tyMax] = safeTCalculation(boxMin.y, boxMax.y, ray.mOrigin.y, ray.mDirection.y);
+
+  if (tyMin > tMin)
+  {
+    tMin = tyMin;
+  }
+
+  if (tyMax < tMax)
+  {
+    tMax = tyMax;
+  }
+  auto &[tzMin, tzMax] = safeTCalculation(boxMin.z, boxMax.z, ray.mOrigin.z, ray.mDirection.z);
+  if (tzMin > tzMax)
+  {
+    std::swap(tzMin, tzMax);
+  }
+
+  // Not going to do the hit check, sense this has to hit
+
+  if (tzMin > tMin)
+  {
+    tMin = tzMin;
+  }
+
+  if (tzMax < tMax)
+  {
+    tMax = tzMax;
+  }
+
+  return ray.mOrigin + (ray.mDirection * tMin);
 }
 
 } // namespace VoxGen

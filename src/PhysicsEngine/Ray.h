@@ -5,13 +5,15 @@
 
 struct Ray
 {
-  btVector3 mOrigin;
-  btVector3 mDirection;
+  //   btVector3 mOrigin;
+  //   btVector3 mDirection;
+  glm::vec3 mOrigin;
+  glm::vec3 mDirection;
 
   Ray(const glm::vec3 &start, const glm::vec3 &end) :
-      mOrigin(start.x, start.y, start.z), mDirection(btVector3(end.x, end.y, end.z) - mOrigin)
+      mOrigin(start), mDirection((end - mOrigin) * 1000.0f)
   {
-    mOrigin.normalize();
-    mDirection.normalize();
+    //     mOrigin.normalize();
+    //     mDirection.normalize();
   }
 };

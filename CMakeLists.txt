@@ -48,7 +48,7 @@ add_executable(
 )
 find_package(OpenGL REQUIRED)
 if (MSYS OR MINGW)
-  set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
+  set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG -DGLM_ENABLE_EXPERIMENTAL")
   include_directories(
     D:/libraries/glm;
     D:/libraries/glfw-3.2.1.bin.WIN64/include;
@@ -84,7 +84,7 @@ elseif (WIN32)
     #D:/libraries/ReactPhysics3D/src
     D:/libraries/bullet/include;
   )
-  set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC")
+  set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
   message(${CMAKE_BUILD_TYPE})
   if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")

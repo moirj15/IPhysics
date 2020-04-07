@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../PhysicsEngine/Box.h"
+#include "../PhysicsEngine/Ray.h"
 #include "../common.h"
 #include "../voxelObjects/EdgeMesh.h"
 #include "../voxelObjects/VoxelMesh.h"
@@ -8,6 +10,7 @@
 
 #include <BulletCollision/Gimpact/btBoxCollision.h>
 #include <array>
+#include <glm/vec3.hpp>
 #include <unordered_map>
 #include <vector>
 
@@ -54,6 +57,7 @@ private:
   void AddNeighbors(VoxObj::VoxelMesh *voxelMesh);
   void AddBezierCurves(VoxObj::VoxelMesh *voxelMesh);
   NODISCARD std::unordered_map<u32, Edge> CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh);
+  glm::vec3 CastRayInBox(const Ray &ray, const Box &box);
 };
 
 } // namespace VoxGen

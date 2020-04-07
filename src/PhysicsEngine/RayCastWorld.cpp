@@ -1,29 +1,45 @@
 #include "RayCastWorld.h"
 
-void RayCastWorld::AddBoxes(std::vector<Box> &boxes)
-{
-  for (const auto &box : boxes)
-  {
-    btCollisionShape *voxelCollisionShape = new btBoxShape(box.mExtents);
-    auto *motionState = new btDefaultMotionState(btTransform(btQuaternion(), box.mOrigin));
+#include "../utils/MathCasts.h"
 
-    btRigidBody::btRigidBodyConstructionInfo rigidBodyInfo(
-        0.0f, motionState, voxelCollisionShape, btVector3(0.0f, 0.0f, 0.0f));
-
-    mRigidBodies.emplace_back(new btRigidBody(rigidBodyInfo));
-  }
-}
-
-std::vector<glm::vec3> RayCastWorld::CastRay(const Ray &ray)
-{
-  std::vector<glm::vec3> intersections;
-  btCollisionWorld::AllHitsRayResultCallback allResults(ray.mOrigin, ray.mDirection);
-  mCollisionWorld->rayTest(ray.mOrigin, ray.mDirection, allResults);
-  for (s32 i = 0; i < allResults.m_hitPointWorld.size(); i++)
-  {
-    auto intersection = allResults.m_hitPointWorld[i];
-    intersections.emplace_back(intersection.x(), intersection.y(), intersection.z());
-  }
-
-  return intersections;
-}
+// void RayCastWorld::AddBoxes(std::vector<Box> &boxes)
+// {
+//   //   auto *voxelCollisionShape = new btBoxShape(boxes.back().mExtents / 2.0f);
+//   //   for (const auto &box : boxes)
+//   //   {
+//   //     btTransform transform;
+//   //     transform.setIdentity();
+//   //     transform.setOrigin(box.mPos);
+//   //     //     auto *motionState = new btDefaultMotionState(btTransform(btQuaternion(),
+//   box.mPos));
+//   //     auto *motionState = new btDefaultMotionState(transform);
+//   //
+//   //     btRigidBody::btRigidBodyConstructionInfo rigidBodyInfo(
+//   //         0.0f, motionState, voxelCollisionShape, btVector3(0.0f, 0.0f, 0.0f));
+//   //
+//   //     mRigidBodies.emplace_back(new btRigidBody(rigidBodyInfo));
+//   //
+//   //     mCollisionWorld->addCollisionObject(mRigidBodies.back().get());
+//   //   }
+// }
+//
+// std::unordered_set<glm::vec3> RayCastWorld::CastRay(const Ray &firstRay, const Ray &secondRay)
+// {
+//   //   std::unordered_set<glm::vec3> intersections;
+//   //
+//   //   btCollisionWorld::ClosestRayResultCallback rayCastResult(firstRay.mOrigin,
+//   //   firstRay.mDirection); mCollisionWorld->rayTest(firstRay.mOrigin, firstRay.mDirection,
+//   //   rayCastResult); if (rayCastResult.hasHit())
+//   //   {
+//   //     intersections.emplace(ToGLM(rayCastResult.m_hitPointWorld));
+//   //   }
+//   //   btCollisionWorld::ClosestRayResultCallback foo(firstRay.mOrigin, -firstRay.mDirection);
+//   //   mCollisionWorld->rayTest(firstRay.mOrigin, -firstRay.mDirection, foo);
+//   //   if (foo.hasHit())
+//   //   {
+//   //     intersections.emplace(ToGLM(foo.m_hitPointWorld));
+//   //   }
+//   //
+//   //   return intersections;
+//   return {};
+// }
