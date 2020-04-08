@@ -32,8 +32,6 @@ enum class CommandType : u32
   DrawLine,
   DrawPoints,
   DrawTextured,
-  UpdateMesh,
-  ClearDepthBuffer,
 };
 
 struct DrawCommand
@@ -41,31 +39,22 @@ struct DrawCommand
   CommandType mType;
   u32 mMeshHandle = 0;
   u32 mTextureHandle = 0;
-  Mesh *mMesh = nullptr;
-  Texture2D *mTexture2D = nullptr;
+  //   Mesh *mMesh = nullptr;
+  //   Texture2D *mTexture2D = nullptr;
   std::vector<ShaderData> mShaderData;
+  bool mPersist = false;
 
   DrawCommand() = default;
   /**
    * \brief: Construct a DrawCommand object.
    * \param type: The CommandType, the only required member.
    * \param meshHandle: A handle to some mesh.
-   * \param textureHandle: A handle to some texture.
-   * \param mesh: A pointer to a mesh.
-   * \param color: A color.
-   * \param texture2D: A pointer to a Texture2D object.
    */
-  explicit DrawCommand(
-      const CommandType type, const u32 meshHandle = 0, const u32 textureHandle = 0,
-      Mesh *mesh = nullptr, Texture2D *texture2D = nullptr) :
+  DrawCommand(
+      const CommandType type, const u32 meshHandle, std::vector<ShaderData> &shaderData,
+      bool persist = false) :
       mType(type),
-      mMeshHandle(meshHandle), mTextureHandle(textureHandle), mMesh(mesh)
-  {
-  }
-  explicit DrawCommand(
-      const CommandType type, const u32 meshHandle, std::vector<ShaderData> &shaderData) :
-      mType(type),
-      mMeshHandle(meshHandle), mShaderData(shaderData)
+      mMeshHandle(meshHandle), mShaderData(shaderData), mPersist(persist)
   {
   }
 };
@@ -74,6 +63,7 @@ class RendererBackend
 {
   Window *mWindow;
   std::vector<DrawCommand> mCommandQueue;
+  std::vector<DrawCommand> mPersistentDrawCommands;
   ShaderLibrary *mShaderLibrary;
   TextureLibrary *mTextureLibrary;
   MeshLibrary *mMeshLibrary;
@@ -91,15 +81,14 @@ public:
    */
   inline void SubmitCommand(DrawCommand &command)
   {
-    mCommandQueue.emplace_back(command);
-  }
-
-  /**
-   * \brief: Clear the command queue.
-   */
-  inline void ClearCommandQueue()
-  {
-    // mCommandQueue.clear();
+    if (command.mPersist)
+    {
+      mPersistentDrawCommands.emplace_back(command);
+    }
+    else
+    {
+      mCommandQueue.emplace_back(command);
+    }
   }
 
   /**
@@ -127,6 +116,8 @@ public:
   void UpdateMesh(const u32 handle, const std::vector<u32> &verts, Mesh *mesh);
 
 private:
+  void DrawFromCommand(const DrawCommand &command);
+
   /**
    * \brief: Get the shader that will be used with the given CommandType, and optionally bind it.
    * \param type: The CommandType.

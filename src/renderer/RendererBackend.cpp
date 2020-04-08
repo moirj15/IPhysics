@@ -98,44 +98,11 @@ void RendererBackend::Draw()
   {
     auto command = mCommandQueue.back();
     mCommandQueue.pop_back();
-    auto *shader = GetShader(command.mType, true);
-    shader->SetShaderData(command.mShaderData);
-    switch (command.mType)
-    {
-    case CommandType::DrawSolid:
-    case CommandType::DrawSolidFlatShade:
-    case CommandType::DrawSolidPhong:
-    {
-      auto ibo = GetBuffersAndBind(command.mMeshHandle);
-      glDrawElements(GL_TRIANGLES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
-    }
-    break;
-    case CommandType::DrawLine:
-    {
-      auto ibo = GetBuffersAndBind(command.mMeshHandle);
-      glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
-    }
-    break;
-    case CommandType::DrawPoints:
-    {
-      auto ibo = GetBuffersAndBind(command.mMeshHandle);
-      glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
-    }
-    break;
-    case CommandType::DrawTextured:
-    {
-      auto texture = mTextureLibrary->GetTexture(command.mTextureHandle);
-      texture.Bind();
-    }
-    break;
-    // TODO: consider removing this command and adding a member function instead
-    case CommandType::UpdateMesh:
-      mMeshLibrary->Update(command.mMesh, command.mMeshHandle);
-      break;
-    case CommandType::ClearDepthBuffer:
-      glClear(GL_DEPTH_BUFFER_BIT);
-      break;
-    }
+    DrawFromCommand(command);
+  }
+  for (const auto &command : mPersistentDrawCommands)
+  {
+    DrawFromCommand(command);
   }
 }
 
@@ -169,6 +136,41 @@ void RendererBackend::UpdateMesh(const u32 handle, const std::vector<u32> &verts
     glBufferSubData(
         GL_ARRAY_BUFFER, (v * 3) * sizeof(f32), 3 * sizeof(f32),
         &mesh->mVertices.AccessBuffer(v * 3)); // TODO: Replace this with a helper method
+  }
+}
+
+void RendererBackend::DrawFromCommand(const DrawCommand &command)
+{
+  auto *shader = GetShader(command.mType, true);
+  shader->SetShaderData(command.mShaderData);
+  switch (command.mType)
+  {
+  case CommandType::DrawSolid:
+  case CommandType::DrawSolidFlatShade:
+  case CommandType::DrawSolidPhong:
+  {
+    auto ibo = GetBuffersAndBind(command.mMeshHandle);
+    glDrawElements(GL_TRIANGLES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
+  }
+  break;
+  case CommandType::DrawLine:
+  {
+    auto ibo = GetBuffersAndBind(command.mMeshHandle);
+    glDrawElements(GL_LINES, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
+  }
+  break;
+  case CommandType::DrawPoints:
+  {
+    auto ibo = GetBuffersAndBind(command.mMeshHandle);
+    glDrawElements(GL_POINTS, ibo.IndexCount(), GL_UNSIGNED_INT, (void *)0);
+  }
+  break;
+  case CommandType::DrawTextured:
+  {
+    auto texture = mTextureLibrary->GetTexture(command.mTextureHandle);
+    texture.Bind();
+  }
+  break;
   }
 }
 
