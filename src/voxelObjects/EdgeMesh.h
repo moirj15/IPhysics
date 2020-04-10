@@ -29,12 +29,29 @@ struct Edge
   {
   }
 
+  bool operator==(const Edge &e) const
+  {
+    return (mStartVert == e.mStartVert) && (mEndVert == e.mEndVert);
+  }
+
   //   explicit Edge(const Edge &e) :
   //       mStartVert(e.mStartVert), mEndVert(e.mEndVert), mFaces{e.mFaces[0], e.mFaces[1]},
   //       mPreviousEdges(e.mPreviousEdges), mNextEdges(e.mNextEdges)
   //   {
   //   }
 };
+
+namespace std
+{
+template<>
+struct hash<Edge>
+{
+  size_t operator()(const Edge &e) const
+  {
+    return hash<u32>()(e.mStartVert) + hash<u32>()(e.mEndVert);
+  }
+};
+} // namespace std
 
 // class EdgeMesh
 // {

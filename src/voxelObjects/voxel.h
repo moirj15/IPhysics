@@ -34,6 +34,18 @@ struct Voxel
       mMeshVertices(v.mMeshVertices), mBezierCurves(v.mBezierCurves)
   {
   }
+
+  NODISCARD inline bool InVoxel(const u32 vert) const
+  {
+    for (u32 v : mMeshVertices)
+    {
+      if (v == vert)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 };
 
 } // namespace VoxObj

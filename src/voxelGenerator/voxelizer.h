@@ -12,6 +12,7 @@
 #include <array>
 #include <glm/vec3.hpp>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 struct Mesh;
@@ -56,7 +57,8 @@ private:
   void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);
   void AddNeighbors(VoxObj::VoxelMesh *voxelMesh);
   void AddBezierCurves(VoxObj::VoxelMesh *voxelMesh);
-  NODISCARD std::unordered_map<u32, Edge> CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh);
+  NODISCARD std::unordered_map<u32, std::unordered_set<Edge>>
+  CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh);
   glm::vec3 CastRayInBox(const Ray &ray, const Box &box);
 };
 

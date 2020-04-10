@@ -203,47 +203,57 @@ void Voxelizer::AddNeighbors(VoxObj::VoxelMesh *voxelMesh)
 void Voxelizer::AddBezierCurves(VoxObj::VoxelMesh *voxelMesh)
 {
   auto edgeMap = CreateEdgeMap(voxelMesh);
-  //   RayCastWorld rayCastWorld;
-  //   std::vector<Box> boxes;
-  //   for (const auto &[_, voxel] : voxelMesh->mVoxels)
-  //   {
-  //     boxes.emplace_back(voxel.mPosition, voxel.mDimensions);
-  //   }
-  //   rayCastWorld.AddBoxes(boxes);
-  for (const auto &[_, voxel] : voxelMesh->mVoxels)
+  for (const auto &[key, voxel] : voxelMesh->mVoxels)
   {
     for (u32 index : voxel.mMeshVertices)
     {
-      const auto &edge = edgeMap[index];
-      const auto &startVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mStartVert);
-      const auto &endVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mEndVert);
-      const auto ap = voxel.mPosition - startVert;
-      const auto ab = endVert - startVert;
-      const auto voxelCenterOnEdge = startVert + ((glm::dot(ap, ab) / glm::dot(ab, ab)) * ab);
-      const f32 scale = 100.0f;
-      Ray startToEnd(voxelCenterOnEdge, endVert);
-      Ray startToExtendedStart(voxelCenterOnEdge, startVert);
-      auto firstIntersection = CastRayInBox(startToEnd, Box(voxel.mPosition, voxel.mDimensions));
-      auto secondIntersection =
-          CastRayInBox(startToExtendedStart, Box(voxel.mPosition, voxel.mDimensions));
+      for (const auto &edge : edgeMap[index])
+      {
 
-      //       printf("first: %s\n", glm::to_string(firstIntersection).c_str());
-      //       printf("second: %s\n\n", glm::to_string(secondIntersection).c_str());
+        const auto &startVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mStartVert);
+        const auto &endVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mEndVert);
+        const auto ap = voxel.mPosition - startVert;
+        const auto ab = endVert - startVert;
+        const auto voxelCenterOnEdge = startVert + ((glm::dot(ap, ab) / glm::dot(ab, ab)) * ab);
+        const f32 scale = 100.0f;
+        Ray startToEnd(voxelCenterOnEdge, endVert);
+        Ray startToExtendedStart(voxelCenterOnEdge, startVert);
+        auto firstIntersection = CastRayInBox(startToEnd, Box(voxel.mPosition, voxel.mDimensions));
+        auto secondIntersection =
+            CastRayInBox(startToExtendedStart, Box(voxel.mPosition, voxel.mDimensions));
+
+        std::vector<glm::vec3> controlPoints;
+        controlPoints.emplace_back(firstIntersection);
+        controlPoints.emplace_back(startVert);
+        if (voxel.InVoxel(edge.mEndVert))
+        {
+          controlPoints.emplace_back(endVert);
+        }
+
+        controlPoints.emplace_back(secondIntersection);
+
+        voxelMesh->mVoxels[key].mBezierCurves.emplace_back(controlPoints);
+        //       printf("first: %s\n", glm::to_string(firstIntersection).c_str());
+        //       printf("second: %s\n\n", glm::to_string(secondIntersection).c_str());
+      }
     }
   }
 }
 
-std::unordered_map<u32, Edge> Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh)
+std::unordered_map<u32, std::unordered_set<Edge>>
+Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh)
 {
-  std::unordered_map<u32, Edge> edgeMap;
+  std::unordered_map<u32, std::unordered_set<Edge>> edgeMap;
   auto &AddEdgeNoDuplicates = [&edgeMap](const u32 v0, const u32 v1) {
     if (edgeMap.find(v0) != edgeMap.end())
     {
-      edgeMap.emplace(v1, Edge(v1, v0));
+      edgeMap[v0].emplace(v0, v1);
+      //       edgeMap.emplace(v1, Edge(v1, v0));
     }
     else
     {
-      edgeMap.emplace(v0, Edge(v0, v1));
+      edgeMap.emplace(v0, std::unordered_set<Edge>());
+      edgeMap[v0].emplace(v0, v1);
     }
   };
   for (u64 i = 0; i < voxelMesh->mMesh->mIndices.size(); i += 3)
@@ -255,6 +265,19 @@ std::unordered_map<u32, Edge> Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelM
     AddEdgeNoDuplicates(v0, v1);
     AddEdgeNoDuplicates(v1, v2);
     AddEdgeNoDuplicates(v2, v0);
+
+    AddEdgeNoDuplicates(v1, v0);
+    AddEdgeNoDuplicates(v2, v1);
+    AddEdgeNoDuplicates(v0, v2);
+
+    printf("Edges for triangle (%d %d %d)\n", i, i + 1, i + 2);
+    printf("\tstart: %d, end: %d\n", v0, v1);
+    printf("\tstart: %d, end: %d\n", v1, v2);
+    printf("\tstart: %d, end: %d\n", v2, v0);
+    printf("\tstart: %d, end: %d\n", v1, v0);
+    printf("\tstart: %d, end: %d\n", v2, v1);
+    printf("\tstart: %d, end: %d\n", v0, v2);
+    printf("\n");
   }
   return edgeMap;
 }
@@ -265,6 +288,7 @@ glm::vec3 Voxelizer::CastRayInBox(const Ray &ray, const Box &box)
   const auto boxMin = box.mPos - (box.mExtents / 2.0f);
   const auto boxMax = box.mPos + (box.mExtents / 2.0f);
 
+  // Create a helper lambda so we don't have to worry about divide by zero errors
   auto safeTCalculation = [](f32 boxMin, f32 boxMax, f32 origin, f32 direction) {
     f32 min = 0.0f;
     f32 max = 0.0f;
