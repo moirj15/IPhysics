@@ -10,6 +10,7 @@
 #include "../renderer/camera.h"
 #include "../renderer/mesh.h"
 #include "../renderer/window.h"
+#include "../utils/QuickCastBuffer.h"
 #include "../utils/Serialization.h"
 #include "../utils/VoxelMeshManager.h"
 #include "../voxelObjects/VoxelMesh.h"
@@ -147,6 +148,16 @@ void System::GenerateVoxels()
     // TODO: remove duplicate vertices
     mRenderer->RemoveMesh(mCurrentVoxelMeshHandle);
     mCurrentVoxelMeshHandle = mRenderer->RegisterVoxelMesh(mVoxelMesh.get());
+    QuickCastBuffer<f32, glm::vec3> points;
+    for (auto &[key, voxel] : mVoxelMesh->mVoxels)
+    {
+      for (auto bezierCurve : voxel.mBezierCurves)
+      {
+        points.CastBufferPushBack(bezierCurve.mControlPoints);
+      }
+    }
+
+    mRenderer->DrawPoints(points);
   }
 }
 

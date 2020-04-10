@@ -95,19 +95,12 @@ u32 RendererFrontend::RegisterVoxelMesh(VoxObj::VoxelMesh *vm)
     {
       mesh.mIndices.push_back(index + indexOffset);
     }
-    auto transform = glm::translate((voxel.mPosition));
+    //     auto transform = glm::translate((voxel.mPosition));
     for (u32 i = 0; i < ArraySize(voxelVerts); i++)
     {
       const auto &vert = voxelVerts[i];
       mesh.mVertices.CastBufferPushBack(voxelVerts[i]);
       mesh.mNormals.CastBufferPushBack(voxelNormals[i]);
-      //       mesh.mVertices.push_back(voxelVerts[i].x);
-      //       mesh.mVertices.push_back(voxelVerts[i].y);
-      //       mesh.mVertices.push_back(voxelVerts[i].z);
-      //
-      //       mesh.mNormals.push_back(voxelNormals[i].x);
-      //       mesh.mNormals.push_back(voxelNormals[i].y);
-      //       mesh.mNormals.push_back(voxelNormals[i].z);
     }
   }
 
@@ -123,6 +116,25 @@ void RendererFrontend::DrawMesh(const u32 handle)
   };
   DrawCommand dc(CommandType::DrawSolidFlatShade, handle, shaderData);
   mBackend->SubmitCommand(dc);
+}
+
+void RendererFrontend::DrawPoints(const QuickCastBuffer<f32, glm::vec3> &points)
+{
+  std::vector<ShaderData> shaderData = {
+      ShaderData("camera", mCamera->CalculateMatrix()),
+      ShaderData("projection", mProjection),
+  };
+  Mesh mesh;
+  mesh.mVertices = points;
+  for (u32 i = 0; i < points.CastBufferSize(); i++)
+  {
+    mesh.mIndices.emplace_back(i);
+  }
+
+  auto handle = mBackend->SubmitMesh(&mesh);
+  mPointMeshHandles.emplace_back(handle);
+  //   DrawCommand dc(CommandType::DrawPoints, handle, shaderData, true);
+  //   mBackend->SubmitCommand(dc);
 }
 
 void RendererFrontend::Draw()
@@ -155,6 +167,15 @@ void RendererFrontend::Draw()
     DrawCommand dc(CommandType::DrawSolidPhong, mMeshHandles[key], shaderData);
     mBackend->SubmitCommand(dc);
   }
+  for (const u32 h : mPointMeshHandles)
+  {
+    std::vector<ShaderData> shaderData = {
+        ShaderData("projection", mProjection),
+        ShaderData("camera", mCamera->CalculateMatrix()),
+    };
+    DrawCommand dc(CommandType::DrawPoints, h, shaderData);
+    mBackend->SubmitCommand(dc);
+  }
   mBackend->Draw();
 }
 
@@ -173,4 +194,5 @@ void RendererFrontend::UpdateMesh(const VMeshHandle handle, std::vector<u32> &ve
 {
   mBackend->UpdateMesh(mMeshHandles[handle], verts, VoxelMeshManager::Get().GetMesh(handle)->mMesh);
 }
+
 } // namespace Renderer

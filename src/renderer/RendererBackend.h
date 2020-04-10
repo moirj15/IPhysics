@@ -81,14 +81,14 @@ public:
    */
   inline void SubmitCommand(DrawCommand &command)
   {
-    if (command.mPersist)
-    {
-      mPersistentDrawCommands.emplace_back(command);
-    }
-    else
-    {
-      mCommandQueue.emplace_back(command);
-    }
+    //     if (command.mPersist)
+    //     {
+    //       mPersistentDrawCommands.emplace_back(command);
+    //     }
+    //     else
+    //     {
+    mCommandQueue.emplace_back(command);
+    //     }
   }
 
   /**

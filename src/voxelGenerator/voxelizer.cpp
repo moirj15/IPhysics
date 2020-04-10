@@ -270,14 +270,14 @@ Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh)
     AddEdgeNoDuplicates(v2, v1);
     AddEdgeNoDuplicates(v0, v2);
 
-    printf("Edges for triangle (%d %d %d)\n", i, i + 1, i + 2);
-    printf("\tstart: %d, end: %d\n", v0, v1);
-    printf("\tstart: %d, end: %d\n", v1, v2);
-    printf("\tstart: %d, end: %d\n", v2, v0);
-    printf("\tstart: %d, end: %d\n", v1, v0);
-    printf("\tstart: %d, end: %d\n", v2, v1);
-    printf("\tstart: %d, end: %d\n", v0, v2);
-    printf("\n");
+    //     printf("Edges for triangle (%d %d %d)\n", i, i + 1, i + 2);
+    //     printf("\tstart: %d, end: %d\n", v0, v1);
+    //     printf("\tstart: %d, end: %d\n", v1, v2);
+    //     printf("\tstart: %d, end: %d\n", v2, v0);
+    //     printf("\tstart: %d, end: %d\n", v1, v0);
+    //     printf("\tstart: %d, end: %d\n", v2, v1);
+    //     printf("\tstart: %d, end: %d\n", v0, v2);
+    //     printf("\n");
   }
   return edgeMap;
 }

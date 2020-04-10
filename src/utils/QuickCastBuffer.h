@@ -100,6 +100,17 @@ public:
     }
   }
 
+  inline void CastBufferPushBack(const std::vector<CastToType> &c)
+  {
+    for (const auto &value : c)
+    {
+      for (u64 i = 0; i < (sizeof(CastToType) / sizeof(ContentType)); i++)
+      {
+        mContents.push_back(value[i]);
+      }
+    }
+  }
+
   inline void Clear()
   {
     mContents.clear();

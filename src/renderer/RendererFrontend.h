@@ -1,10 +1,12 @@
 #pragma once
 
 #include "../common.h"
+#include "../utils/QuickCastBuffer.h"
 #include "../utils/VoxelMeshManager.h"
 
 #include <glm/mat4x4.hpp>
 #include <memory>
+#include <vector>
 
 class Camera;
 struct Window;
@@ -25,6 +27,7 @@ class RendererFrontend
   Camera *mCamera;
   glm::mat4 mProjection;
   std::unordered_map<VMeshHandle, u32> mMeshHandles;
+  std::vector<u32> mPointMeshHandles;
 
 public:
   explicit RendererFrontend(Window *window, Camera *camera);
@@ -38,6 +41,7 @@ public:
     mProjection = projection;
   }
   void DrawMesh(const u32 handle);
+  void DrawPoints(const QuickCastBuffer<f32, glm::vec3> &points);
   void Draw();
   void Clear();
   void RemoveMesh(u32 handle);
