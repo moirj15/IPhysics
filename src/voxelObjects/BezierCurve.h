@@ -13,6 +13,8 @@ struct BezierCurve
   // The value of t where the line ends
   f32 mTEnd = 1.0f;
 
+  BezierCurve() = default;
+
   /**
    * \brief: Constructor for the BezierCurve.
    *
@@ -27,6 +29,10 @@ struct BezierCurve
   {
     assert((mControlPoints.size() == 3) || (mControlPoints.size() == 4));
     f32 totalLength = glm::length(controlPoints.back() - controlPoints.front());
+    if (totalLength == 0.0f)
+    {
+      totalLength = 1.0f;
+    }
     if (mControlPoints.size() == 3)
     {
       mTStart = glm::length(controlPoints[1] - controlPoints[0]) / totalLength;
@@ -37,5 +43,19 @@ struct BezierCurve
       mTStart = glm::length(controlPoints[1] - controlPoints[0]) / totalLength;
       mTEnd = glm::length(controlPoints[2] - controlPoints[3]) / totalLength;
     }
+    if (mTEnd > 1.0f)
+    {
+      mTEnd = 1.0f;
+    }
+    if (mTStart < 0.0f)
+    {
+      mTStart = 0.0f;
+    }
+    assert(!isnan(mTStart) && !isnan(mTStart) && "NAN");
+  }
+
+  explicit BezierCurve(const BezierCurve &b) :
+      mControlPoints(b.mControlPoints), mTStart(b.mTStart), mTEnd(b.mTEnd)
+  {
   }
 };

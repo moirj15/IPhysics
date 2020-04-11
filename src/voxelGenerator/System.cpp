@@ -151,7 +151,7 @@ void System::GenerateVoxels()
     QuickCastBuffer<f32, glm::vec3> points;
     for (auto &[key, voxel] : mVoxelMesh->mVoxels)
     {
-      for (auto bezierCurve : voxel.mBezierCurves)
+      for (const auto &bezierCurve : voxel.mBezierCurves)
       {
         points.CastBufferPushBack(bezierCurve.mControlPoints);
       }

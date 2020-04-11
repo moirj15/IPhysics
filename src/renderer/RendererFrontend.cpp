@@ -32,6 +32,9 @@ void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
 {
   // Calculate our own normals using the mesh vertex positions
+  auto &vertices = mesh->mVertices;
+  auto &normals = mesh->mNormals;
+  normals.SetBufferSize(vertices.BufferSize());
   for (u32 i = 0; i < mesh->mVertices.CastBufferSize(); i++)
   {
     auto &vertices = mesh->mVertices;

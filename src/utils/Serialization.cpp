@@ -20,6 +20,8 @@ glm::vec3 : voxel mesh extents object space
 mesh contents
 voxels
  */
+
+// TODO: This code is horrible, clean it up
 void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
 {
   std::ofstream file(path, std::ios::trunc | std::ios::out);
@@ -83,6 +85,20 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
     {
       file << "\n";
     }
+    // Start serializing the bezier curves
+    file << "[Bezier Curve Count]\n" << value.mBezierCurves.size() << "\n";
+    for (const auto &b : value.mBezierCurves)
+    {
+      file << "[TStart]\n" << b.mTStart << "\n";
+      file << "[TEnd]\n" << b.mTEnd << "\n";
+      file << "[Control Point Count]\n" << b.mControlPoints.size() << "\n";
+      file << "[Control Points]\n";
+      for (const auto &cp : b.mControlPoints)
+      {
+        file << cp.x << " " << cp.y << " " << cp.z << " ";
+      }
+      file << "\n";
+    }
   }
 }
 
@@ -137,7 +153,7 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
 
   auto vm = new VoxObj::VoxelMesh(extentsVoxelSpace, extentsObjectSpace, initialVoxelSize, mesh);
 
-  // Load in teh mesh vertices
+  // Load in the mesh vertices
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (u64 i = 0; i < vertCount; i++)
@@ -204,6 +220,37 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
     {
       file >> voxel.mMeshVertices[v];
     }
+
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    u64 bezierCount = 0;
+    file >> bezierCount;
+    voxel.mBezierCurves.resize(bezierCount);
+
+    for (u64 b = 0; b < bezierCount; b++)
+    {
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file >> voxel.mBezierCurves[b].mTStart;
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file >> voxel.mBezierCurves[b].mTEnd;
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      u64 controlPointCount = 0;
+      file >> controlPointCount;
+      voxel.mBezierCurves[b].mControlPoints.resize(controlPointCount);
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      for (u64 cp = 0; cp < controlPointCount; cp++)
+      {
+        file >> voxel.mBezierCurves[b].mControlPoints[cp].x
+            >> voxel.mBezierCurves[b].mControlPoints[cp].y
+            >> voxel.mBezierCurves[b].mControlPoints[cp].z;
+      }
+    }
+
     vm->SetVoxel(key, voxel);
   }
   return vm;

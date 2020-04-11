@@ -216,8 +216,9 @@ void Voxelizer::AddBezierCurves(VoxObj::VoxelMesh *voxelMesh)
         const auto ab = endVert - startVert;
         const auto voxelCenterOnEdge = startVert + ((glm::dot(ap, ab) / glm::dot(ab, ab)) * ab);
         const f32 scale = 100.0f;
-        Ray startToEnd(voxelCenterOnEdge, endVert);
-        Ray startToExtendedStart(voxelCenterOnEdge, startVert);
+        auto origin = (ab / 2.0f) + startVert;
+        Ray startToEnd(origin, endVert);
+        Ray startToExtendedStart(origin, startVert);
         auto firstIntersection = CastRayInBox(startToEnd, Box(voxel.mPosition, voxel.mDimensions));
         auto secondIntersection =
             CastRayInBox(startToExtendedStart, Box(voxel.mPosition, voxel.mDimensions));

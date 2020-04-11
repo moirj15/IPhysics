@@ -55,7 +55,7 @@ Mesh *ObjReader::Parse(const char *filename)
       break;
     }
   }
-  mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
+  //   mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
   //   mMesh->mNormals.resize(mMesh->mIndecies.size() * 3);
   //   for (u32 i = 0; i < mMesh->mIndecies.size(); i += 3)
   //   {
@@ -199,10 +199,10 @@ void ObjReader::ParseNormal()
 
 void ObjReader::ParseFace()
 {
-  if (mMesh->mNormals.IsEmpty())
-  {
-    mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
-  }
+  //   if (mMesh->mNormals.IsEmpty())
+  //   {
+  //     mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
+  //   }
   std::string lineStr{ReadLine()};
   ReplaceChars(&lineStr, '/', ' ');
   std::stringstream line{lineStr};
@@ -216,10 +216,12 @@ void ObjReader::ParseFace()
     u32 normal = 0.0;
     line >> index >> normal;
     index--;
+    normal--;
     mMesh->mIndices.emplace_back(index);
-    mMesh->mNormals.AccessBuffer((index * 3)) = mTempNormals[index].x;
-    mMesh->mNormals.AccessBuffer((index * 3) + 1) = mTempNormals[index].y;
-    mMesh->mNormals.AccessBuffer((index * 3) + 2) = mTempNormals[index].z;
+    //     mMesh->mNormals.AccessCastBuffer(index) = mTempNormals[normal];
+    //     mMesh->mNormals.AccessBuffer((index * 3)) = mTempNormals[normal].x;
+    //     mMesh->mNormals.AccessBuffer((index * 3) + 1) = mTempNormals[normal].y;
+    //     mMesh->mNormals.AccessBuffer((index * 3) + 2) = mTempNormals[normal].z;
   }
 }
 
