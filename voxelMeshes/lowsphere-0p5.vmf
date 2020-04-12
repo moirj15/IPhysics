@@ -1,0 +1,2809 @@
+[Vertex Count]
+126
+[Index Count]
+240
+[Normal Count]
+126
+[Voxel Count]
+64
+[Extents (Voxel Space)]
+4 4 4
+[Extents (Object Space)]
+2 2 2
+[Initial Voxel Size]
+0.5 0.5 0.5 
+[Vertices]
+0 -1 -0 0.425323 -0.850654 0.309011 -0.162456 -0.850654 0.499995 0.723607 -0.44722 0.525725 0.850648 -0.525736 -0 -0.52573 -0.850652 -0 -0.162456 -0.850654 -0.499995 0.425323 -0.850654 -0.309011 0.951058 -0 0.309013 -0.276388 -0.44722 0.850649 0.262869 -0.525738 0.809012 0 -0 1 -0.894426 -0.447216 -0 -0.688189 -0.525736 0.499997 -0.951058 -0 0.309013 -0.276388 -0.44722 -0.850649 -0.688189 -0.525736 -0.499997 -0.587786 0 -0.809017 0.723607 -0.44722 -0.525725 0.262869 -0.525738 -0.809012 0.587786 0 -0.809017 0.587786 -0 0.809017 -0.587786 -0 0.809017 -0.951058 0 -0.309013 0 0 -1 0.951058 0 -0.309013 0.276388 0.44722 0.850649 0.688189 0.525736 0.499997 0.162456 0.850654 0.499995 -0.723607 0.44722 0.525725 -0.262869 0.525738 0.809012 -0.425323 0.850654 0.309011 -0.723607 0.44722 -0.525725 -0.850648 0.525736 0 -0.425323 0.850654 -0.309011 0.276388 0.44722 -0.850649 -0.262869 0.525738 -0.809012 0.162456 0.850654 -0.499995 0.894426 0.447216 0 0.688189 0.525736 -0.499997 0.52573 0.850652 0 0 1 0 
+[Indecies]
+0 1 2 3 1 4 0 2 5 0 5 6 0 6 7 3 4 8 9 10 11 12 13 14 15 16 17 18 19 20 3 8 21 9 11 22 12 14 23 15 17 24 18 20 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 40 37 41 40 39 37 39 35 37 37 34 41 37 36 34 36 32 34 34 31 41 34 33 31 33 29 31 31 28 41 31 30 28 30 26 28 28 40 41 28 27 40 27 38 40 25 39 38 25 20 39 20 35 39 24 36 35 24 17 36 17 32 36 23 33 32 23 14 33 14 29 33 22 30 29 22 11 30 11 26 30 21 27 26 21 8 27 8 38 27 20 24 35 20 19 24 19 15 24 17 23 32 17 16 23 16 12 23 14 22 29 14 13 22 13 9 22 11 21 26 11 10 21 10 3 21 8 25 38 8 4 25 4 18 25 7 19 18 7 6 19 6 15 19 6 16 15 6 5 16 5 12 16 5 13 12 5 2 13 2 9 13 4 7 18 4 1 7 1 0 7 2 10 9 2 1 10 1 3 10 
+[Normals]
+0 -1 -0 0.425323 -0.850654 0.309011 -0.162456 -0.850654 0.499995 0.723607 -0.44722 0.525725 0.850648 -0.525736 -0 -0.52573 -0.850652 -0 -0.162456 -0.850654 -0.499995 0.425323 -0.850654 -0.309011 0.951058 -0 0.309013 -0.276388 -0.44722 0.850649 0.262869 -0.525738 0.809012 0 -0 1 -0.894426 -0.447216 -0 -0.688189 -0.525736 0.499997 -0.951058 -0 0.309013 -0.276388 -0.44722 -0.850649 -0.688189 -0.525736 -0.499997 -0.587786 0 -0.809017 0.723607 -0.44722 -0.525725 0.262869 -0.525738 -0.809012 0.587786 0 -0.809017 0.587786 -0 0.809017 -0.587786 -0 0.809017 -0.951058 0 -0.309013 0 0 -1 0.951058 0 -0.309013 0.276388 0.44722 0.850649 0.688189 0.525736 0.499997 0.162456 0.850654 0.499995 -0.723607 0.44722 0.525725 -0.262869 0.525738 0.809012 -0.425323 0.850654 0.309011 -0.723607 0.44722 -0.525725 -0.850648 0.525736 0 -0.425323 0.850654 -0.309011 0.276388 0.44722 -0.850649 -0.262869 0.525738 -0.809012 0.162456 0.850654 -0.499995 0.894426 0.447216 0 0.688189 0.525736 -0.499997 0.52573 0.850652 0 0 1 0 
+[Voxels]
+[Key]
+0 0 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.75 -0.75
+[Neighbor Count]
+3
+1 0 0 0 1 0 0 0 1 
+[Contained Mesh Vertex Count]
+1
+16 
+[Bezier Curve Count]
+6
+[TStart]
+0.000201371
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.688188 -0.525731 -0.5 -0.688189 -0.525736 -0.499997 -0.683274 -0.5 -0.515124 
+[TStart]
+1.00002
+[TEnd]
+1.74927e-05
+[Control Point Count]
+3
+[Control Points]
+-0.451058 -0.999996 -0.672281 -0.688189 -0.525736 -0.499997 -0.688185 -0.525744 -0.5 
+[TStart]
+2.61467e-05
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.688186 -0.525735 -0.5 -0.688189 -0.525736 -0.499997 -0.553209 -0.5 -0.614934 
+[TStart]
+1.00001
+[TEnd]
+6.02818e-06
+[Control Point Count]
+3
+[Control Points]
+-0.48195 -0.604257 -1 -0.688189 -0.525736 -0.499997 -0.688188 -0.525736 -0.5 
+[TStart]
+0.0545847
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.729831 -0.5 -0.499997 -0.688189 -0.525736 -0.499997 -1.49272 -0.028513 -0.5 
+[TStart]
+1.00008
+[TEnd]
+7.5998e-05
+[Control Point Count]
+3
+[Control Points]
+-0.701057 -0.5 -0.539601 -0.688189 -0.525736 -0.499997 -0.68819 -0.525734 -0.5 
+[Key]
+1 3 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.75 0.25
+[Neighbor Count]
+5
+0 3 2 2 3 2 1 2 2 1 3 1 1 3 3 
+[Contained Mesh Vertex Count]
+1
+31 
+[Bezier Curve Count]
+6
+[TStart]
+0.810989
+[TEnd]
+0.189011
+[Control Point Count]
+3
+[Control Points]
+-0.314902 1 0.228786 -0.425323 0.850654 0.309011 -0.451058 0.815847 0.327708 
+[TStart]
+0.293147
+[TEnd]
+0.706853
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.902125 0.229804 -0.425323 0.850654 0.309011 -0.363269 0.726543 0.5 
+[TStart]
+0.883674
+[TEnd]
+0.116326
+[Control Point Count]
+3
+[Control Points]
+-0.229826 1 0.451045 -0.425323 0.850654 0.309011 -0.451058 0.830994 0.290314 
+[TStart]
+0.0570547
+[TEnd]
+0.942945
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.841618 0.327708 -0.425323 0.850654 0.309011 -1.49012e-08 1 1.49012e-08 
+[TStart]
+0.381978
+[TEnd]
+0.618022
+[Control Point Count]
+3
+[Control Points]
+-0.425323 0.850654 0.5 -0.425323 0.850654 0.309011 -0.425323 0.850654 0 
+[TStart]
+0.0514699
+[TEnd]
+0.94853
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.850654 0.300649 -0.425323 0.850654 0.309011 0.048942 0.850654 0.463111 
+[Key]
+0 0 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.75 -0.25
+[Neighbor Count]
+4
+1 0 1 0 1 1 0 0 0 0 0 2 
+[Contained Mesh Vertex Count]
+1
+5 
+[Bezier Curve Count]
+6
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.52573 -0.850652 0 -0.52573 -0.850652 -0 -0.68819 -0.525734 -0.5 
+[TStart]
+0.850656
+[TEnd]
+0.149344
+[Control Point Count]
+3
+[Control Points]
+-0.951058 -0.729826 0 -0.52573 -0.850652 -0 -0.451058 -0.871865 0 
+[TStart]
+1
+[TEnd]
+2.41104e-08
+[Control Point Count]
+3
+[Control Points]
+-0.889008 -0.85065 -0.5 -0.52573 -0.850652 -0 -0.52573 -0.850652 -1.49012e-08 
+[TStart]
+4.83626e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.52573 -0.850652 1.49012e-08 -0.52573 -0.850652 -0 -0.451058 -0.850652 -0.102775 
+[TStart]
+0.188981
+[TEnd]
+0.811019
+[Control Point Count]
+3
+[Control Points]
+-0.451058 -0.93236 0 -0.52573 -0.850652 -0 -0.846187 -0.5 0 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.451058 -0.999995 -0.229817 -0.52573 -0.850652 -0 -0.52573 -0.850652 0 
+[Key]
+0 0 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.75 0.25
+[Neighbor Count]
+4
+1 0 2 0 1 2 0 0 1 0 0 3 
+[Contained Mesh Vertex Count]
+1
+13 
+[Bezier Curve Count]
+6
+[TStart]
+0.999989
+[TEnd]
+1.07983e-05
+[Control Point Count]
+3
+[Control Points]
+-0.778762 -1 0.221231 -0.688189 -0.525736 0.499997 -0.688188 -0.525731 0.5 
+[TStart]
+0.000320573
+[TEnd]
+0.999679
+[Control Point Count]
+3
+[Control Points]
+-0.688185 -0.525744 0.5 -0.688189 -0.525736 0.499997 -0.701057 -0.5 0.490648 
+[TStart]
+1.83916e-05
+[TEnd]
+0.999982
+[Control Point Count]
+3
+[Control Points]
+-0.688188 -0.525736 0.5 -0.688189 -0.525736 0.499997 -0.755786 -0.5 0.336116 
+[TStart]
+0.999987
+[TEnd]
+1.35295e-05
+[Control Point Count]
+3
+[Control Points]
+-0.951058 -0.575856 0.276162 -0.688189 -0.525736 0.499997 -0.688185 -0.525735 0.5 
+[TStart]
+6.01916e-06
+[TEnd]
+0.999994
+[Control Point Count]
+3
+[Control Points]
+-0.68819 -0.525734 0.5 -0.688189 -0.525736 0.499997 -0.52573 -0.850652 0 
+[TStart]
+0.149376
+[TEnd]
+0.850624
+[Control Point Count]
+3
+[Control Points]
+-0.729831 -0.5 0.499997 -0.688189 -0.525736 0.499997 -0.451058 -0.67229 0.499996 
+[Key]
+2 3 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.75 0.25
+[Neighbor Count]
+5
+1 3 2 3 3 2 2 2 2 2 3 1 2 3 3 
+[Contained Mesh Vertex Count]
+1
+28 
+[Bezier Curve Count]
+6
+[TStart]
+0.999962
+[TEnd]
+3.8427e-05
+[Control Point Count]
+3
+[Control Points]
+0.12028 1 0.370187 0.162456 0.850654 0.499995 0.162458 0.850648 0.5 
+[TStart]
+0.227028
+[TEnd]
+0.772972
+[Control Point Count]
+3
+[Control Points]
+0.048942 0.920809 0.499995 0.162456 0.850654 0.499995 0.548942 0.611795 0.499996 
+[TStart]
+1.43367e-05
+[TEnd]
+0.999986
+[Control Point Count]
+3
+[Control Points]
+0.162458 0.850653 0.5 0.162456 0.850654 0.499995 0.048942 0.955008 0.15063 
+[TStart]
+0.00013643
+[TEnd]
+0.999864
+[Control Point Count]
+3
+[Control Points]
+0.162472 0.850654 0.5 0.162456 0.850654 0.499995 0.048942 0.850654 0.463111 
+[TStart]
+0.999965
+[TEnd]
+3.52323e-05
+[Control Point Count]
+3
+[Control Points]
+0.357955 1 0.357957 0.162456 0.850654 0.499995 0.162449 0.850649 0.5 
+[TStart]
+9.9977e-06
+[TEnd]
+0.99999
+[Control Point Count]
+3
+[Control Points]
+0.162452 0.850654 0.5 0.162456 0.850654 0.499995 0.52573 0.850652 -1.49012e-08 
+[Key]
+2 0 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.75 -0.25
+[Neighbor Count]
+5
+1 0 1 3 0 1 2 1 1 2 0 0 2 0 2 
+[Contained Mesh Vertex Count]
+1
+7 
+[Bezier Curve Count]
+6
+[TStart]
+0.247238
+[TEnd]
+0.752762
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.807247 -0.398824 0.425323 -0.850654 -0.309011 0.048942 -0.982815 -0.035558 
+[TStart]
+0.247238
+[TEnd]
+0.752762
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.850654 -0.268844 0.425323 -0.850654 -0.309011 0.048942 -0.850654 -0.431307 
+[TStart]
+0.546142
+[TEnd]
+0.453858
+[Control Point Count]
+3
+[Control Points]
+0.499994 -1 -0.079188 0.425323 -0.850654 -0.309011 0.363269 -0.726543 -0.5 
+[TStart]
+0.471804
+[TEnd]
+0.528196
+[Control Point Count]
+3
+[Control Points]
+0.314902 -1 -0.228786 0.425323 -0.850654 -0.309011 0.548942 -0.683457 -0.398825 
+[TStart]
+0.612621
+[TEnd]
+0.387379
+[Control Point Count]
+3
+[Control Points]
+0.229826 -1 -0.451045 0.425323 -0.850654 -0.309011 0.548942 -0.756218 -0.219198 
+[TStart]
+0.381978
+[TEnd]
+0.618022
+[Control Point Count]
+3
+[Control Points]
+0.425323 -0.850654 -0.5 0.425323 -0.850654 -0.309011 0.425323 -0.850654 0 
+[Key]
+0 0 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.75 0.75
+[Neighbor Count]
+3
+1 0 3 0 1 3 0 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 2 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.25 0.25
+[Neighbor Count]
+6
+1 2 2 3 2 2 2 1 2 2 3 2 2 2 1 2 2 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.25 -0.75
+[Neighbor Count]
+4
+1 1 0 0 0 0 0 2 0 0 1 1 
+[Contained Mesh Vertex Count]
+1
+17 
+[Bezier Curve Count]
+6
+[TStart]
+0.378496
+[TEnd]
+0.621504
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0 -0.997208 -0.587786 0 -0.809017 -0.812299 0 -0.5 
+[TStart]
+2.56023e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.587786 1.49012e-08 -0.809017 -0.587786 0 -0.809017 -0.451058 -0.196364 -0.827297 
+[TStart]
+1
+[TEnd]
+4.04424e-08
+[Control Point Count]
+3
+[Control Points]
+-0.496222 -0.301496 -1 -0.587786 0 -0.809017 -0.587786 -1.49012e-08 -0.809017 
+[TStart]
+0.726544
+[TEnd]
+0.273456
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 -0.690983 -0.587786 0 -0.809017 -0.451058 0 -0.853443 
+[TStart]
+1.01406e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.587786 0 -0.809017 -0.587786 0 -0.809017 -0.683274 -0.5 -0.515124 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.896796 -0.5 -0.809022 -0.587786 0 -0.809017 -0.587786 0 -0.809017 
+[Key]
+0 1 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.25 -0.25
+[Neighbor Count]
+5
+1 1 1 0 0 1 0 2 1 0 1 0 0 1 2 
+[Contained Mesh Vertex Count]
+2
+12 23 
+[Bezier Curve Count]
+11
+[TStart]
+0.540017
+[TEnd]
+0.459983
+[Control Point Count]
+3
+[Control Points]
+-0.951058 -0.385248 0 -0.894426 -0.447216 -0 -0.846187 -0.5 0 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.951058 -0.425655 -0.137298 -0.894426 -0.447216 -0 -0.894426 -0.447216 0 
+[TStart]
+1
+[TEnd]
+4.62008e-07
+[Control Point Count]
+3
+[Control Points]
+-0.887742 -0.5 -0.0364722 -0.894426 -0.447216 -0 -0.894426 -0.447216 0 
+[TStart]
+1.21932e-07
+[TEnd]
+1.03643e-06
+[Control Point Count]
+4
+[Control Points]
+-0.894426 -0.447216 0 -0.894426 -0.447216 -0 -0.951058 0 -0.309013 -0.951058 -4.61936e-07 -0.309013 
+[TStart]
+8.11173e-08
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.894426 -0.447216 0 -0.894426 -0.447216 -0 -0.755786 -0.5 -0.336116 
+[TStart]
+1.03643e-06
+[TEnd]
+1.21932e-07
+[Control Point Count]
+4
+[Control Points]
+-0.951058 -4.61936e-07 -0.309013 -0.951058 0 -0.309013 -0.894426 -0.447216 -0 -0.894426 -0.447216 0 
+[TStart]
+0.381974
+[TEnd]
+0.618026
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 -0.5 -0.951058 0 -0.309013 -0.951058 0 0 
+[TStart]
+2.52485e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 -0.309013 -0.951058 0 -0.309013 -0.812299 0 -0.5 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.951058 2.98023e-08 -0.309013 -0.951058 0 -0.309013 -0.951058 0 -0.309013 
+[TStart]
+1.13375e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 -0.309013 -0.951058 0 -0.309013 -0.701057 -0.5 -0.490648 
+[TStart]
+0.5
+[TEnd]
+0.5
+[Control Point Count]
+3
+[Control Points]
+-0.951058 1.49012e-08 -0.309013 -0.951058 0 -0.309013 -0.951058 -1.49012e-08 -0.309013 
+[Key]
+0 1 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.25 0.25
+[Neighbor Count]
+5
+1 1 2 0 0 2 0 2 2 0 1 1 0 1 3 
+[Contained Mesh Vertex Count]
+1
+14 
+[Bezier Curve Count]
+6
+[TStart]
+1.03643e-06
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.951058 -4.61936e-07 0.309013 -0.951058 -0 0.309013 -0.894426 -0.447216 0 
+[TStart]
+0.5
+[TEnd]
+0.5
+[Control Point Count]
+3
+[Control Points]
+-0.951058 1.49012e-08 0.309013 -0.951058 -0 0.309013 -0.951058 -1.49012e-08 0.309013 
+[TStart]
+1.13375e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 0.309013 -0.951058 -0 0.309013 -0.701057 -0.5 0.490648 
+[TStart]
+0.381974
+[TEnd]
+0.618026
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 0.5 -0.951058 -0 0.309013 -0.951058 0 0 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.951058 2.98023e-08 0.309013 -0.951058 -0 0.309013 -0.951058 0 0.309013 
+[TStart]
+2.52485e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 0.309013 -0.951058 -0 0.309013 -0.812299 0 0.5 
+[Key]
+2 0 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.75 0.25
+[Neighbor Count]
+5
+1 0 2 3 0 2 2 1 2 2 0 1 2 0 3 
+[Contained Mesh Vertex Count]
+1
+1 
+[Bezier Curve Count]
+6
+[TStart]
+0.546142
+[TEnd]
+0.453858
+[Control Point Count]
+3
+[Control Points]
+0.499994 -1 0.079188 0.425323 -0.850654 0.309011 0.363269 -0.726543 0.5 
+[TStart]
+0.247238
+[TEnd]
+0.752762
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.850654 0.268844 0.425323 -0.850654 0.309011 0.048942 -0.850654 0.431307 
+[TStart]
+0.247238
+[TEnd]
+0.752762
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.807247 0.398824 0.425323 -0.850654 0.309011 0.048942 -0.982815 0.035558 
+[TStart]
+0.612621
+[TEnd]
+0.387379
+[Control Point Count]
+3
+[Control Points]
+0.229826 -1 0.451045 0.425323 -0.850654 0.309011 0.548942 -0.756218 0.219198 
+[TStart]
+0.471804
+[TEnd]
+0.528196
+[Control Point Count]
+3
+[Control Points]
+0.314902 -1 0.228786 0.425323 -0.850654 0.309011 0.548942 -0.683457 0.398825 
+[TStart]
+0.381978
+[TEnd]
+0.618022
+[Control Point Count]
+3
+[Control Points]
+0.425323 -0.850654 0.5 0.425323 -0.850654 0.309011 0.425323 -0.850654 0 
+[Key]
+0 1 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 -0.25 0.75
+[Neighbor Count]
+4
+1 1 3 0 0 3 0 2 3 0 1 2 
+[Contained Mesh Vertex Count]
+1
+22 
+[Bezier Curve Count]
+6
+[TStart]
+2.56023e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.587786 1.49012e-08 0.809017 -0.587786 -0 0.809017 -0.451058 -0.196364 0.827297 
+[TStart]
+0.726544
+[TEnd]
+0.273456
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0 0.690983 -0.587786 -0 0.809017 -0.451058 0 0.853443 
+[TStart]
+0.378496
+[TEnd]
+0.621504
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0 0.997208 -0.587786 -0 0.809017 -0.812299 0 0.5 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.896796 -0.5 0.809022 -0.587786 -0 0.809017 -0.587786 0 0.809017 
+[TStart]
+1.01406e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.587786 0 0.809017 -0.587786 -0 0.809017 -0.683274 -0.5 0.515124 
+[TStart]
+1
+[TEnd]
+4.04424e-08
+[Control Point Count]
+3
+[Control Points]
+-0.496222 -0.301496 1 -0.587786 -0 0.809017 -0.587786 -1.49012e-08 0.809017 
+[Key]
+2 2 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.25 -0.25
+[Neighbor Count]
+6
+1 2 1 3 2 1 2 1 1 2 3 1 2 2 0 2 2 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.25 -0.75
+[Neighbor Count]
+4
+1 2 0 0 1 0 0 3 0 0 2 1 
+[Contained Mesh Vertex Count]
+1
+32 
+[Bezier Curve Count]
+5
+[TStart]
+0.083248
+[TEnd]
+0.916752
+[Control Point Count]
+3
+[Control Points]
+-0.735941 0.487831 -0.5 -0.723607 0.44722 -0.525725 -0.587786 -1.49012e-08 -0.809017 
+[TStart]
+0.94855
+[TEnd]
+0.05145
+[Control Point Count]
+3
+[Control Points]
+-0.608999 0.376388 -1 -0.723607 0.44722 -0.525725 -0.729823 0.451062 -0.5 
+[TStart]
+0.865297
+[TEnd]
+0.134703
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0.139589 -0.690976 -0.723607 0.44722 -0.525725 -0.688199 0.49511 -0.5 
+[TStart]
+0.133081
+[TEnd]
+0.866919
+[Control Point Count]
+3
+[Control Points]
+-0.765446 0.44009 -0.5 -0.723607 0.44722 -0.525725 -0.451058 0.493667 -0.693303 
+[TStart]
+0.498547
+[TEnd]
+0.501453
+[Control Point Count]
+3
+[Control Points]
+-0.696764 0.5 -0.551301 -0.723607 0.44722 -0.525725 -0.750607 0.394132 -0.5 
+[Key]
+3 1 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.25 0.25
+[Neighbor Count]
+5
+2 1 2 3 0 2 3 2 2 3 1 1 3 1 3 
+[Contained Mesh Vertex Count]
+1
+8 
+[Bezier Curve Count]
+6
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+1.04894 -0.195768 0.237897 0.951058 -0 0.309013 0.951058 0 0.309013 
+[TStart]
+3.09371e-08
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.951058 1.49012e-08 0.309013 0.951058 -0 0.309013 0.750607 -0.394132 0.5 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.951058 0 0.309013 0.951058 -0 0.309013 0.855563 -0.5 0.0151269 
+[TStart]
+0.413635
+[TEnd]
+0.586365
+[Control Point Count]
+3
+[Control Points]
+1.04894 0 0.174286 0.951058 -0 0.309013 0.812299 0 0.5 
+[TStart]
+1
+[TEnd]
+4.4114e-08
+[Control Point Count]
+3
+[Control Points]
+0.98606 -0.276404 0.5 0.951058 -0 0.309013 0.951058 -1.49012e-08 0.309013 
+[TStart]
+0.381974
+[TEnd]
+0.618026
+[Control Point Count]
+3
+[Control Points]
+0.951058 0 0.5 0.951058 -0 0.309013 0.951058 0 0 
+[Key]
+0 2 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.25 -0.25
+[Neighbor Count]
+5
+1 2 1 0 1 1 0 3 1 0 2 0 0 2 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 1 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.25 0.75
+[Neighbor Count]
+4
+2 1 3 3 0 3 3 2 3 3 1 2 
+[Contained Mesh Vertex Count]
+2
+3 21 
+[Bezier Curve Count]
+11
+[TStart]
+0.901848
+[TEnd]
+0.0981523
+[Control Point Count]
+3
+[Control Points]
+1.04894 -0.00719905 0.762092 0.723607 -0.44722 0.525725 0.688199 -0.49511 0.5 
+[TStart]
+0.94855
+[TEnd]
+0.05145
+[Control Point Count]
+3
+[Control Points]
+0.608999 -0.376388 1 0.723607 -0.44722 0.525725 0.729823 -0.451062 0.5 
+[TStart]
+0.498547
+[TEnd]
+0.501453
+[Control Point Count]
+3
+[Control Points]
+0.696764 -0.5 0.551301 0.723607 -0.44722 0.525725 0.750607 -0.394132 0.5 
+[TStart]
+0.083248
+[TEnd]
+1.03056e-07
+[Control Point Count]
+4
+[Control Points]
+0.735941 -0.487831 0.5 0.723607 -0.44722 0.525725 0.587786 -0 0.809017 0.587786 1.49012e-08 0.809017 
+[TStart]
+0.193249
+[TEnd]
+0.806751
+[Control Point Count]
+3
+[Control Points]
+0.765446 -0.44009 0.5 0.723607 -0.44722 0.525725 0.548942 -0.476986 0.633119 
+[TStart]
+0.922312
+[TEnd]
+0.0776878
+[Control Point Count]
+3
+[Control Points]
+1.04894 0 0.659178 0.587786 -0 0.809017 0.548942 0 0.821638 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.203396 0.92857 0.587786 -0 0.809017 0.587786 0 0.809017 
+[TStart]
+1.03056e-07
+[TEnd]
+0.083248
+[Control Point Count]
+4
+[Control Points]
+0.587786 1.49012e-08 0.809017 0.587786 -0 0.809017 0.723607 -0.44722 0.525725 0.735941 -0.487831 0.5 
+[TStart]
+0.147496
+[TEnd]
+0.852504
+[Control Point Count]
+3
+[Control Points]
+0.548942 0 0.862481 0.587786 -0 0.809017 0.812299 0 0.5 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.587786 0 0.809017 0.587786 -0 0.809017 0.548942 -0.0628521 0.809016 
+[TStart]
+1
+[TEnd]
+2.43864e-08
+[Control Point Count]
+3
+[Control Points]
+0.935935 -0.5 0.762472 0.587786 -0 0.809017 0.587786 -1.49012e-08 0.809017 
+[Key]
+2 2 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.25 0.75
+[Neighbor Count]
+5
+1 2 3 3 2 3 2 1 3 2 3 3 2 2 2 
+[Contained Mesh Vertex Count]
+1
+26 
+[Bezier Curve Count]
+5
+[TStart]
+0.125426
+[TEnd]
+0.874575
+[Control Point Count]
+3
+[Control Points]
+0.309007 0.5 0.833023 0.276388 0.44722 0.850649 0.048942 0.0791925 0.973553 
+[TStart]
+0.391552
+[TEnd]
+0.608448
+[Control Point Count]
+3
+[Control Points]
+0.100992 0.413778 1 0.276388 0.44722 0.850649 0.548942 0.499186 0.618567 
+[TStart]
+0.765016
+[TEnd]
+0.234984
+[Control Point Count]
+3
+[Control Points]
+0.324914 0.275389 1 0.276388 0.44722 0.850649 0.261483 0.5 0.804774 
+[TStart]
+0.545108
+[TEnd]
+0.454892
+[Control Point Count]
+3
+[Control Points]
+0.548942 0.407535 0.871693 0.276388 0.44722 0.850649 0.048942 0.480337 0.833088 
+[TStart]
+0.118817
+[TEnd]
+0.881183
+[Control Point Count]
+3
+[Control Points]
+0.239637 0.5 0.855562 0.276388 0.44722 0.850649 0.548942 0.0557865 0.81421 
+[Key]
+0 2 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.25 0.25
+[Neighbor Count]
+5
+1 2 2 0 1 2 0 3 2 0 2 1 0 2 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 1 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.25 -0.75
+[Neighbor Count]
+4
+2 1 0 3 0 0 3 2 0 3 1 1 
+[Contained Mesh Vertex Count]
+2
+18 20 
+[Bezier Curve Count]
+11
+[TStart]
+0.193249
+[TEnd]
+0.806751
+[Control Point Count]
+3
+[Control Points]
+0.765446 -0.44009 -0.5 0.723607 -0.44722 -0.525725 0.548942 -0.476986 -0.633119 
+[TStart]
+0.94855
+[TEnd]
+0.05145
+[Control Point Count]
+3
+[Control Points]
+0.608999 -0.376388 -1 0.723607 -0.44722 -0.525725 0.729823 -0.451062 -0.5 
+[TStart]
+0.083248
+[TEnd]
+1.03056e-07
+[Control Point Count]
+4
+[Control Points]
+0.735941 -0.487831 -0.5 0.723607 -0.44722 -0.525725 0.587786 0 -0.809017 0.587786 1.49012e-08 -0.809017 
+[TStart]
+0.498547
+[TEnd]
+0.501453
+[Control Point Count]
+3
+[Control Points]
+0.696764 -0.5 -0.551301 0.723607 -0.44722 -0.525725 0.750607 -0.394132 -0.5 
+[TStart]
+0.901848
+[TEnd]
+0.0981523
+[Control Point Count]
+3
+[Control Points]
+1.04894 -0.00719905 -0.762092 0.723607 -0.44722 -0.525725 0.688199 -0.49511 -0.5 
+[TStart]
+1.03056e-07
+[TEnd]
+0.083248
+[Control Point Count]
+4
+[Control Points]
+0.587786 1.49012e-08 -0.809017 0.587786 0 -0.809017 0.723607 -0.44722 -0.525725 0.735941 -0.487831 -0.5 
+[TStart]
+1
+[TEnd]
+2.43864e-08
+[Control Point Count]
+3
+[Control Points]
+0.935935 -0.5 -0.762472 0.587786 0 -0.809017 0.587786 -1.49012e-08 -0.809017 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.587786 0 -0.809017 0.587786 0 -0.809017 0.548942 -0.0628521 -0.809016 
+[TStart]
+0.147496
+[TEnd]
+0.852504
+[Control Point Count]
+3
+[Control Points]
+0.548942 0 -0.862481 0.587786 0 -0.809017 0.812299 0 -0.5 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.203396 -0.92857 0.587786 0 -0.809017 0.587786 0 -0.809017 
+[TStart]
+0.922312
+[TEnd]
+0.0776878
+[Control Point Count]
+3
+[Control Points]
+1.04894 0 -0.659178 0.587786 0 -0.809017 0.548942 0 -0.821638 
+[Key]
+2 1 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.25 0.25
+[Neighbor Count]
+6
+1 1 2 3 1 2 2 0 2 2 2 2 2 1 1 2 1 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.25 0.75
+[Neighbor Count]
+4
+1 2 3 0 1 3 0 3 3 0 2 2 
+[Contained Mesh Vertex Count]
+1
+29 
+[Bezier Curve Count]
+5
+[TStart]
+0.083248
+[TEnd]
+0.916752
+[Control Point Count]
+3
+[Control Points]
+-0.735941 0.487831 0.5 -0.723607 0.44722 0.525725 -0.587786 -1.49012e-08 0.809017 
+[TStart]
+0.498547
+[TEnd]
+0.501453
+[Control Point Count]
+3
+[Control Points]
+-0.696764 0.5 0.551301 -0.723607 0.44722 0.525725 -0.750607 0.394132 0.5 
+[TStart]
+0.133081
+[TEnd]
+0.866919
+[Control Point Count]
+3
+[Control Points]
+-0.765446 0.44009 0.5 -0.723607 0.44722 0.525725 -0.451058 0.493667 0.693303 
+[TStart]
+0.865297
+[TEnd]
+0.134703
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0.139589 0.690976 -0.723607 0.44722 0.525725 -0.688199 0.49511 0.5 
+[TStart]
+0.94855
+[TEnd]
+0.05145
+[Control Point Count]
+3
+[Control Points]
+-0.608999 0.376388 1 -0.723607 0.44722 0.525725 -0.729823 0.451062 0.5 
+[Key]
+0 3 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.75 -0.75
+[Neighbor Count]
+3
+1 3 0 0 2 0 0 3 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.75 -0.25
+[Neighbor Count]
+4
+1 3 1 0 2 1 0 3 0 0 3 2 
+[Contained Mesh Vertex Count]
+1
+33 
+[Bezier Curve Count]
+6
+[TStart]
+1.05814e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.850648 0.525736 -1.49012e-08 -0.850648 0.525736 0 -0.451058 0.830994 -0.290314 
+[TStart]
+3.32726e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.850648 0.525736 0 -0.850648 0.525736 0 -0.809007 0.5 -0.172322 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.850648 0.525736 0 -0.850648 0.525736 0 -0.855563 0.5 -0.0151269 
+[TStart]
+1
+[TEnd]
+3.044e-07
+[Control Point Count]
+3
+[Control Points]
+-0.884337 0.5 -0.024476 -0.850648 0.525736 0 -0.850648 0.525736 1.49012e-08 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.951058 0.587793 -0.41552 -0.850648 0.525736 0 -0.850648 0.525736 0 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+-0.760069 1 -0.278759 -0.850648 0.525736 0 -0.850648 0.525736 0 
+[Key]
+0 3 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.75 0.25
+[Neighbor Count]
+4
+1 3 2 0 2 2 0 3 1 0 3 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 3 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.75 0.75
+[Neighbor Count]
+4
+1 3 3 3 3 3 2 2 3 2 3 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.701058 0.75 0.75
+[Neighbor Count]
+3
+1 3 3 0 2 3 0 3 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.75 -0.75
+[Neighbor Count]
+4
+0 0 0 2 0 0 1 1 0 1 0 1 
+[Contained Mesh Vertex Count]
+1
+6 
+[Bezier Curve Count]
+6
+[TStart]
+1.27706
+[TEnd]
+0.277059
+[Control Point Count]
+3
+[Control Points]
+-1.49272 -0.028513 -0.5 -0.162456 -0.850654 -0.499995 -0.451058 -0.67229 -0.499996 
+[TStart]
+1.00001
+[TEnd]
+1.00176e-05
+[Control Point Count]
+3
+[Control Points]
+-0.324915 -0.701305 -1 -0.162456 -0.850654 -0.499995 -0.162458 -0.850653 -0.5 
+[TStart]
+1.00002
+[TEnd]
+1.72296e-05
+[Control Point Count]
+3
+[Control Points]
+0.048942 -0.850655 -0.790954 -0.162456 -0.850654 -0.499995 -0.162452 -0.850654 -0.5 
+[TStart]
+1.64598e-05
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.162458 -0.850648 -0.5 -0.162456 -0.850654 -0.499995 -0.261483 -0.5 -0.804774 
+[TStart]
+1.00005
+[TEnd]
+5.3391e-05
+[Control Point Count]
+3
+[Control Points]
+-0.451058 -0.850654 -0.593769 -0.162456 -0.850654 -0.499995 -0.162471 -0.850654 -0.5 
+[TStart]
+3.28539e-05
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-0.162449 -0.850649 -0.5 -0.162456 -0.850654 -0.499995 0.048942 -0.689162 -0.653585 
+[Key]
+3 0 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.75 -0.25
+[Neighbor Count]
+4
+2 0 1 3 1 1 3 0 0 3 0 2 
+[Contained Mesh Vertex Count]
+1
+4 
+[Bezier Curve Count]
+6
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+0.971473 -0.60041 -0.5 0.850648 -0.525736 -0 0.850648 -0.525736 0 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.850648 -0.525736 0 0.850648 -0.525736 -0 0.855563 -0.5 -0.0151269 
+[TStart]
+1
+[TEnd]
+3.044e-07
+[Control Point Count]
+3
+[Control Points]
+0.884337 -0.5 -0.024476 0.850648 -0.525736 -0 0.850648 -0.525736 1.49012e-08 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+0.760069 -1 -0.278759 0.850648 -0.525736 -0 0.850648 -0.525736 0 
+[TStart]
+3.32726e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.850648 -0.525736 0 0.850648 -0.525736 -0 0.809007 -0.5 -0.172322 
+[TStart]
+1.40143e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.850648 -0.525736 -1.49012e-08 0.850648 -0.525736 -0 0.548942 -0.756218 -0.219198 
+[Key]
+1 0 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.75 -0.25
+[Neighbor Count]
+5
+0 0 1 2 0 1 1 1 1 1 0 0 1 0 2 
+[Contained Mesh Vertex Count]
+1
+0 
+[Bezier Curve Count]
+5
+[TStart]
+0.447214
+[TEnd]
+0.632456
+[Control Point Count]
+3
+[Control Points]
+0 -1 -1.49012e-08 0 -1 -0 1.49012e-08 -1 1.49012e-08 
+[TStart]
+1.666e-08
+[TEnd]
+1.666e-08
+[Control Point Count]
+3
+[Control Points]
+7.45058e-09 -1 -1.49012e-08 0 -1 -0 7.45058e-09 -1 -1.49012e-08 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0 -1 0 0 -1 -0 -0.451058 -0.871865 0 
+[TStart]
+3.04831e-08
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+7.45058e-09 -1 1.49012e-08 0 -1 -0 -0.162458 -0.850653 -0.5 
+[TStart]
+3.35089e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1.49012e-08 -1 -1.49012e-08 0 -1 -0 0.048942 -0.982815 -0.035558 
+[Key]
+1 1 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.25 -0.25
+[Neighbor Count]
+6
+0 1 1 2 1 1 1 0 1 1 2 1 1 1 0 1 1 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.75 0.25
+[Neighbor Count]
+5
+0 0 2 2 0 2 1 1 2 1 0 1 1 0 3 
+[Contained Mesh Vertex Count]
+1
+2 
+[Bezier Curve Count]
+6
+[TStart]
+1.00176e-05
+[TEnd]
+0.99999
+[Control Point Count]
+3
+[Control Points]
+-0.162458 -0.850653 0.5 -0.162456 -0.850654 0.499995 7.45058e-09 -1 -1.49012e-08 
+[TStart]
+0.999962
+[TEnd]
+3.8427e-05
+[Control Point Count]
+3
+[Control Points]
+-0.12028 -1 0.370187 -0.162456 -0.850654 0.499995 -0.162458 -0.850648 0.5 
+[TStart]
+7.32631e-05
+[TEnd]
+0.999927
+[Control Point Count]
+3
+[Control Points]
+-0.162472 -0.850654 0.5 -0.162456 -0.850654 0.499995 0.048942 -0.850654 0.431307 
+[TStart]
+0.422796
+[TEnd]
+0.577204
+[Control Point Count]
+3
+[Control Points]
+0.048942 -0.981304 0.499994 -0.162456 -0.850654 0.499995 -0.451058 -0.67229 0.499996 
+[TStart]
+1.25844e-05
+[TEnd]
+0.999987
+[Control Point Count]
+3
+[Control Points]
+-0.162452 -0.850654 0.5 -0.162456 -0.850654 0.499995 -0.451058 -0.850652 0.102775 
+[TStart]
+0.999965
+[TEnd]
+3.52323e-05
+[Control Point Count]
+3
+[Control Points]
+-0.357955 -1 0.357957 -0.162456 -0.850654 0.499995 -0.162449 -0.850649 0.5 
+[Key]
+1 0 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.75 0.75
+[Neighbor Count]
+4
+0 0 3 2 0 3 1 1 3 1 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 2 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.25 -0.25
+[Neighbor Count]
+6
+0 2 1 2 2 1 1 1 1 1 3 1 1 2 0 1 2 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 1 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.25 -0.75
+[Neighbor Count]
+5
+0 1 0 2 1 0 1 0 0 1 2 0 1 1 1 
+[Contained Mesh Vertex Count]
+2
+15 24 
+[Bezier Curve Count]
+11
+[TStart]
+0.10556
+[TEnd]
+3.4488e-08
+[Control Point Count]
+4
+[Control Points]
+-0.309007 -0.5 -0.833023 -0.276388 -0.44722 -0.850649 0 0 -1 1.49012e-08 1.49012e-08 -1 
+[TStart]
+0.501037
+[TEnd]
+0.498963
+[Control Point Count]
+3
+[Control Points]
+-0.100992 -0.413778 -1 -0.276388 -0.44722 -0.850649 -0.451058 -0.480523 -0.701916 
+[TStart]
+0.173827
+[TEnd]
+0.826173
+[Control Point Count]
+3
+[Control Points]
+-0.239637 -0.5 -0.855562 -0.276388 -0.44722 -0.850649 -0.451058 -0.196364 -0.827297 
+[TStart]
+0.34934
+[TEnd]
+0.65066
+[Control Point Count]
+3
+[Control Points]
+-0.451058 -0.421787 -0.864136 -0.276388 -0.44722 -0.850649 0.048942 -0.494589 -0.82553 
+[TStart]
+0.765016
+[TEnd]
+0.234984
+[Control Point Count]
+3
+[Control Points]
+-0.324914 -0.275389 -1 -0.276388 -0.44722 -0.850649 -0.261483 -0.5 -0.804774 
+[TStart]
+3.4488e-08
+[TEnd]
+0.10556
+[Control Point Count]
+4
+[Control Points]
+1.49012e-08 1.49012e-08 -1 0 0 -1 -0.276388 -0.44722 -0.850649 -0.309007 -0.5 -0.833023 
+[TStart]
+3.77029e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1.78814e-07 0 -1 0 0 -1 -0.451058 0 -0.853443 
+[TStart]
+3.47476e-06
+[TEnd]
+0.999997
+[Control Point Count]
+3
+[Control Points]
+-1.78814e-07 0 -1 0 0 -1 0.048942 0 -0.984098 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+7.45058e-08 -1.49012e-07 -1 0 0 -1 0 0 -1 
+[TStart]
+5.17987e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0 0 -1 0 0 -1 0.048942 -0.0978841 -0.964441 
+[TStart]
+2.10734e-08
+[TEnd]
+2.10734e-08
+[Control Point Count]
+3
+[Control Points]
+-1.49012e-08 -1.49012e-08 -1 0 0 -1 -1.49012e-08 -1.49012e-08 -1 
+[Key]
+1 1 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.25 0.25
+[Neighbor Count]
+6
+0 1 2 2 1 2 1 0 2 1 2 2 1 1 1 1 1 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 1 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 -0.25 0.75
+[Neighbor Count]
+5
+0 1 3 2 1 3 1 0 3 1 2 3 1 1 2 
+[Contained Mesh Vertex Count]
+2
+9 11 
+[Bezier Curve Count]
+11
+[TStart]
+0.765016
+[TEnd]
+0.234984
+[Control Point Count]
+3
+[Control Points]
+-0.324914 -0.275389 1 -0.276388 -0.44722 0.850649 -0.261483 -0.5 0.804774 
+[TStart]
+0.34934
+[TEnd]
+0.65066
+[Control Point Count]
+3
+[Control Points]
+-0.451058 -0.421787 0.864136 -0.276388 -0.44722 0.850649 0.048942 -0.494589 0.82553 
+[TStart]
+0.10556
+[TEnd]
+3.4488e-08
+[Control Point Count]
+4
+[Control Points]
+-0.309007 -0.5 0.833023 -0.276388 -0.44722 0.850649 0 -0 1 1.49012e-08 1.49012e-08 1 
+[TStart]
+0.173827
+[TEnd]
+0.826173
+[Control Point Count]
+3
+[Control Points]
+-0.239637 -0.5 0.855562 -0.276388 -0.44722 0.850649 -0.451058 -0.196364 0.827297 
+[TStart]
+0.501037
+[TEnd]
+0.498963
+[Control Point Count]
+3
+[Control Points]
+-0.100992 -0.413778 1 -0.276388 -0.44722 0.850649 -0.451058 -0.480523 0.701916 
+[TStart]
+3.4488e-08
+[TEnd]
+0.10556
+[Control Point Count]
+4
+[Control Points]
+1.49012e-08 1.49012e-08 1 0 -0 1 -0.276388 -0.44722 0.850649 -0.309007 -0.5 0.833023 
+[TStart]
+2.10734e-08
+[TEnd]
+2.10734e-08
+[Control Point Count]
+3
+[Control Points]
+-1.49012e-08 -1.49012e-08 1 0 -0 1 -1.49012e-08 -1.49012e-08 1 
+[TStart]
+5.17987e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0 0 1 0 -0 1 0.048942 -0.0978841 0.964441 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+7.45058e-08 -1.49012e-07 1 0 -0 1 0 0 1 
+[TStart]
+3.77029e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1.78814e-07 0 1 0 -0 1 -0.451058 0 0.853443 
+[TStart]
+3.47476e-06
+[TEnd]
+0.999997
+[Control Point Count]
+3
+[Control Points]
+-1.78814e-07 0 1 0 -0 1 0.048942 0 0.984098 
+[Key]
+1 2 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.25 -0.75
+[Neighbor Count]
+5
+0 2 0 2 2 0 1 1 0 1 3 0 1 2 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.75 -0.75
+[Neighbor Count]
+4
+1 0 0 3 0 0 2 1 0 2 0 1 
+[Contained Mesh Vertex Count]
+1
+19 
+[Bezier Curve Count]
+6
+[TStart]
+0.930791
+[TEnd]
+0.0692093
+[Control Point Count]
+3
+[Control Points]
+0.048942 -0.871886 -0.809009 0.262869 -0.525738 -0.809012 0.278776 -0.5 -0.809012 
+[TStart]
+0.586173
+[TEnd]
+0.413827
+[Control Point Count]
+3
+[Control Points]
+0.048942 -0.562195 -0.940546 0.262869 -0.525738 -0.809012 0.413898 -0.5 -0.716151 
+[TStart]
+0.948524
+[TEnd]
+0.051476
+[Control Point Count]
+3
+[Control Points]
+0.5 -1 -0.636724 0.262869 -0.525738 -0.809012 0.25 -0.5 -0.818362 
+[TStart]
+0.113612
+[TEnd]
+0.886388
+[Control Point Count]
+3
+[Control Points]
+0.25 -0.5 -0.848619 0.262869 -0.525738 -0.809012 0.363269 -0.726543 -0.5 
+[TStart]
+0.618082
+[TEnd]
+0.381918
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.567391 -0.786924 0.262869 -0.525738 -0.809012 0.086102 -0.5 -0.822661 
+[TStart]
+0.136063
+[TEnd]
+0.863937
+[Control Point Count]
+3
+[Control Points]
+0.296561 -0.5 -0.83349 0.262869 -0.525738 -0.809012 0.048942 -0.689162 -0.653585 
+[Key]
+1 2 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.25 0.25
+[Neighbor Count]
+6
+0 2 2 2 2 2 1 1 2 1 3 2 1 2 1 1 2 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 2 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.25 0.75
+[Neighbor Count]
+5
+0 2 3 2 2 3 1 1 3 1 3 3 1 2 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 3 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.75 -0.75
+[Neighbor Count]
+4
+0 3 0 2 3 0 1 2 0 1 3 1 
+[Contained Mesh Vertex Count]
+1
+36 
+[Bezier Curve Count]
+6
+[TStart]
+0.0975153
+[TEnd]
+0.902485
+[Control Point Count]
+3
+[Control Points]
+-0.296561 0.5 -0.83349 -0.262869 0.525738 -0.809012 0.048942 0.763938 -0.582468 
+[TStart]
+0.515648
+[TEnd]
+0.484352
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.553139 -0.794482 -0.262869 0.525738 -0.809012 -0.086102 0.5 -0.822661 
+[TStart]
+0.113612
+[TEnd]
+0.886388
+[Control Point Count]
+3
+[Control Points]
+-0.25 0.5 -0.848619 -0.262869 0.525738 -0.809012 -0.363269 0.726543 -0.5 
+[TStart]
+0.935994
+[TEnd]
+0.0640064
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.902116 -0.672283 -0.262869 0.525738 -0.809012 -0.25 0.5 -0.818362 
+[TStart]
+0.672851
+[TEnd]
+0.327149
+[Control Point Count]
+3
+[Control Points]
+0.0477537 0.578674 -1 -0.262869 0.525738 -0.809012 -0.413898 0.5 -0.716151 
+[TStart]
+0.948524
+[TEnd]
+0.051476
+[Control Point Count]
+3
+[Control Points]
+0.0302348 1 -0.809007 -0.262869 0.525738 -0.809012 -0.278776 0.5 -0.809012 
+[Key]
+1 3 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.75 -0.25
+[Neighbor Count]
+5
+0 3 1 2 3 1 1 2 1 1 3 0 1 3 2 
+[Contained Mesh Vertex Count]
+2
+34 41 
+[Bezier Curve Count]
+11
+[TStart]
+0.810989
+[TEnd]
+0.189011
+[Control Point Count]
+3
+[Control Points]
+-0.314902 1 -0.228786 -0.425323 0.850654 -0.309011 -0.451058 0.815847 -0.327708 
+[TStart]
+0.0570547
+[TEnd]
+3.63588e-08
+[Control Point Count]
+4
+[Control Points]
+-0.451058 0.841618 -0.327708 -0.425323 0.850654 -0.309011 0 1 0 -1.49012e-08 1 -1.49012e-08 
+[TStart]
+0.883674
+[TEnd]
+0.116326
+[Control Point Count]
+3
+[Control Points]
+-0.229826 1 -0.451045 -0.425323 0.850654 -0.309011 -0.451058 0.830994 -0.290314 
+[TStart]
+0.0514699
+[TEnd]
+0.94853
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.850654 -0.300649 -0.425323 0.850654 -0.309011 0.048942 0.850654 -0.463111 
+[TStart]
+0.293147
+[TEnd]
+0.706853
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.902125 -0.229804 -0.425323 0.850654 -0.309011 -0.363269 0.726543 -0.5 
+[TStart]
+0.381978
+[TEnd]
+0.618022
+[Control Point Count]
+3
+[Control Points]
+-0.425323 0.850654 -0.5 -0.425323 0.850654 -0.309011 -0.425323 0.850654 0 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0 1 0 0 1 0 0.048942 0.986097 0 
+[TStart]
+1.01185e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-7.45058e-09 1 1.49012e-08 0 1 0 0.048942 0.955008 -0.15063 
+[TStart]
+3.63588e-08
+[TEnd]
+0.0570547
+[Control Point Count]
+4
+[Control Points]
+-1.49012e-08 1 -1.49012e-08 0 1 0 -0.425323 0.850654 -0.309011 -0.451058 0.841618 -0.327708 
+[TStart]
+0.447214
+[TEnd]
+0.632456
+[Control Point Count]
+3
+[Control Points]
+0 1 -1.49012e-08 0 1 0 -1.49012e-08 1 1.49012e-08 
+[TStart]
+1.666e-08
+[TEnd]
+1.666e-08
+[Control Point Count]
+3
+[Control Points]
+-7.45058e-09 1 -1.49012e-08 0 1 0 -7.45058e-09 1 -1.49012e-08 
+[Key]
+1 3 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+-0.201058 0.75 0.75
+[Neighbor Count]
+4
+0 3 3 2 3 3 1 2 3 1 3 2 
+[Contained Mesh Vertex Count]
+1
+30 
+[Bezier Curve Count]
+6
+[TStart]
+0.113612
+[TEnd]
+0.886388
+[Control Point Count]
+3
+[Control Points]
+-0.25 0.5 0.848619 -0.262869 0.525738 0.809012 -0.363269 0.726543 0.5 
+[TStart]
+0.672851
+[TEnd]
+0.327149
+[Control Point Count]
+3
+[Control Points]
+0.0477537 0.578674 1 -0.262869 0.525738 0.809012 -0.413898 0.5 0.716151 
+[TStart]
+0.0975153
+[TEnd]
+0.902485
+[Control Point Count]
+3
+[Control Points]
+-0.296561 0.5 0.83349 -0.262869 0.525738 0.809012 0.048942 0.763938 0.582468 
+[TStart]
+0.515648
+[TEnd]
+0.484352
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.553139 0.794482 -0.262869 0.525738 0.809012 -0.086102 0.5 0.822661 
+[TStart]
+0.948524
+[TEnd]
+0.051476
+[Control Point Count]
+3
+[Control Points]
+0.0302348 1 0.809007 -0.262869 0.525738 0.809012 -0.278776 0.5 0.809012 
+[TStart]
+0.935994
+[TEnd]
+0.0640064
+[Control Point Count]
+3
+[Control Points]
+-0.451058 0.902116 0.672283 -0.262869 0.525738 0.809012 -0.25 0.5 0.818362 
+[Key]
+2 0 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.75 0.75
+[Neighbor Count]
+4
+1 0 3 3 0 3 2 1 3 2 0 2 
+[Contained Mesh Vertex Count]
+1
+10 
+[Bezier Curve Count]
+6
+[TStart]
+0.586173
+[TEnd]
+0.413827
+[Control Point Count]
+3
+[Control Points]
+0.048942 -0.562195 0.940546 0.262869 -0.525738 0.809012 0.413898 -0.5 0.716151 
+[TStart]
+0.948524
+[TEnd]
+0.051476
+[Control Point Count]
+3
+[Control Points]
+0.5 -1 0.636724 0.262869 -0.525738 0.809012 0.25 -0.5 0.818362 
+[TStart]
+0.113612
+[TEnd]
+0.886388
+[Control Point Count]
+3
+[Control Points]
+0.25 -0.5 0.848619 0.262869 -0.525738 0.809012 0.363269 -0.726543 0.5 
+[TStart]
+0.618082
+[TEnd]
+0.381918
+[Control Point Count]
+3
+[Control Points]
+0.548942 -0.567391 0.786924 0.262869 -0.525738 0.809012 0.086102 -0.5 0.822661 
+[TStart]
+0.930791
+[TEnd]
+0.0692093
+[Control Point Count]
+3
+[Control Points]
+0.048942 -0.871886 0.809009 0.262869 -0.525738 0.809012 0.278776 -0.5 0.809012 
+[TStart]
+0.136063
+[TEnd]
+0.863937
+[Control Point Count]
+3
+[Control Points]
+0.296561 -0.5 0.83349 0.262869 -0.525738 0.809012 0.048942 -0.689162 0.653585 
+[Key]
+2 1 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.25 -0.75
+[Neighbor Count]
+5
+1 1 0 3 1 0 2 0 0 2 2 0 2 1 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.75 -0.75
+[Neighbor Count]
+3
+2 0 0 3 1 0 3 0 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 1 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.25 -0.25
+[Neighbor Count]
+6
+1 1 1 3 1 1 2 0 1 2 2 1 2 1 0 2 1 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 1 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 -0.25 0.75
+[Neighbor Count]
+5
+1 1 3 3 1 3 2 0 3 2 2 3 2 1 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 2 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.25 -0.75
+[Neighbor Count]
+5
+1 2 0 3 2 0 2 1 0 2 3 0 2 2 1 
+[Contained Mesh Vertex Count]
+1
+35 
+[Bezier Curve Count]
+5
+[TStart]
+0.118817
+[TEnd]
+0.881183
+[Control Point Count]
+3
+[Control Points]
+0.239637 0.5 -0.855562 0.276388 0.44722 -0.850649 0.548942 0.0557865 -0.81421 
+[TStart]
+0.545108
+[TEnd]
+0.454892
+[Control Point Count]
+3
+[Control Points]
+0.548942 0.407535 -0.871693 0.276388 0.44722 -0.850649 0.048942 0.480337 -0.833088 
+[TStart]
+0.765016
+[TEnd]
+0.234984
+[Control Point Count]
+3
+[Control Points]
+0.324914 0.275389 -1 0.276388 0.44722 -0.850649 0.261483 0.5 -0.804774 
+[TStart]
+0.391552
+[TEnd]
+0.608448
+[Control Point Count]
+3
+[Control Points]
+0.100992 0.413778 -1 0.276388 0.44722 -0.850649 0.548942 0.499186 -0.618567 
+[TStart]
+0.125426
+[TEnd]
+0.874575
+[Control Point Count]
+3
+[Control Points]
+0.309007 0.5 -0.833023 0.276388 0.44722 -0.850649 0.048942 0.0791925 -0.973553 
+[Key]
+2 3 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.75 -0.75
+[Neighbor Count]
+4
+1 3 0 3 3 0 2 2 0 2 3 1 
+[Contained Mesh Vertex Count]
+1
+37 
+[Bezier Curve Count]
+6
+[TStart]
+1.64598e-05
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.162458 0.850648 -0.5 0.162456 0.850654 -0.499995 0.261483 0.5 -0.804774 
+[TStart]
+6.11858e-05
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.162449 0.850649 -0.5 0.162456 0.850654 -0.499995 0.048942 0.763938 -0.582468 
+[TStart]
+1.00001
+[TEnd]
+1.00176e-05
+[Control Point Count]
+3
+[Control Points]
+0.324915 0.701305 -1 0.162456 0.850654 -0.499995 0.162458 0.850653 -0.5 
+[TStart]
+1.00003
+[TEnd]
+3.20872e-05
+[Control Point Count]
+3
+[Control Points]
+0.048942 0.850655 -0.656231 0.162456 0.850654 -0.499995 0.162452 0.850654 -0.5 
+[TStart]
+1.40951
+[TEnd]
+0.40951
+[Control Point Count]
+3
+[Control Points]
+1.49272 0.028513 -0.5 0.162456 0.850654 -0.499995 0.548942 0.611795 -0.499996 
+[TStart]
+1.00004
+[TEnd]
+3.98683e-05
+[Control Point Count]
+3
+[Control Points]
+0.548942 0.850654 -0.625574 0.162456 0.850654 -0.499995 0.162471 0.850654 -0.5 
+[Key]
+2 3 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.298942 0.75 -0.25
+[Neighbor Count]
+5
+1 3 1 3 3 1 2 2 1 2 3 0 2 3 2 
+[Contained Mesh Vertex Count]
+1
+40 
+[Bezier Curve Count]
+6
+[TStart]
+0.854652
+[TEnd]
+0.145348
+[Control Point Count]
+3
+[Control Points]
+0.389242 1 0 0.52573 0.850652 0 0.548942 0.825253 0 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.52573 0.850652 0 0.52573 0.850652 0 0.548942 0.804228 -0.0714392 
+[TStart]
+9.94099e-08
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.52573 0.850652 1.49012e-08 0.52573 0.850652 0 0.162452 0.850654 -0.5 
+[TStart]
+0.046424
+[TEnd]
+0.953576
+[Control Point Count]
+3
+[Control Points]
+0.548942 0.844058 0 0.52573 0.850652 0 0.048942 0.986097 0 
+[TStart]
+1
+[TEnd]
+3.77339e-07
+[Control Point Count]
+3
+[Control Points]
+0.548942 0.850652 -0.031948 0.52573 0.850652 0 0.52573 0.850652 -1.49012e-08 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+0.451056 1 -0.229824 0.52573 0.850652 0 0.52573 0.850652 0 
+[Key]
+3 0 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.75 0.25
+[Neighbor Count]
+4
+2 0 2 3 1 2 3 0 1 3 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.75 0.75
+[Neighbor Count]
+3
+2 0 3 3 1 3 3 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 1 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 -0.25 -0.25
+[Neighbor Count]
+5
+2 1 1 3 0 1 3 2 1 3 1 0 3 1 2 
+[Contained Mesh Vertex Count]
+1
+25 
+[Bezier Curve Count]
+6
+[TStart]
+3.09371e-08
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.951058 1.49012e-08 -0.309013 0.951058 0 -0.309013 0.750607 -0.394132 -0.5 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.951058 0 -0.309013 0.951058 0 -0.309013 0.855563 -0.5 -0.0151269 
+[TStart]
+0.413635
+[TEnd]
+0.586365
+[Control Point Count]
+3
+[Control Points]
+1.04894 0 -0.174286 0.951058 0 -0.309013 0.812299 0 -0.5 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+1.04894 -0.195768 -0.237897 0.951058 0 -0.309013 0.951058 0 -0.309013 
+[TStart]
+1
+[TEnd]
+4.4114e-08
+[Control Point Count]
+3
+[Control Points]
+0.98606 -0.276404 -0.5 0.951058 0 -0.309013 0.951058 -1.49012e-08 -0.309013 
+[TStart]
+0.381974
+[TEnd]
+0.618026
+[Control Point Count]
+3
+[Control Points]
+0.951058 0 -0.5 0.951058 0 -0.309013 0.951058 0 0 
+[Key]
+3 2 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.25 -0.75
+[Neighbor Count]
+4
+2 2 0 3 1 0 3 3 0 3 2 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 2 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.25 -0.25
+[Neighbor Count]
+5
+2 2 1 3 1 1 3 3 1 3 2 0 3 2 2 
+[Contained Mesh Vertex Count]
+1
+38 
+[Bezier Curve Count]
+5
+[TStart]
+8.11173e-08
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.894426 0.447216 0 0.894426 0.447216 0 0.755786 0.5 -0.336116 
+[TStart]
+1
+[TEnd]
+4.62008e-07
+[Control Point Count]
+3
+[Control Points]
+0.887742 0.5 -0.0364722 0.894426 0.447216 0 0.894426 0.447216 0 
+[TStart]
+0.762083
+[TEnd]
+0.237917
+[Control Point Count]
+3
+[Control Points]
+1.04894 0.278141 0 0.894426 0.447216 0 0.846187 0.5 0 
+[TStart]
+1
+[TEnd]
+0
+[Control Point Count]
+3
+[Control Points]
+1.04894 0.388388 -0.374606 0.894426 0.447216 0 0.894426 0.447216 0 
+[TStart]
+1.21932e-07
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.894426 0.447216 0 0.894426 0.447216 0 0.951058 -1.49012e-08 -0.309013 
+[Key]
+3 3 1
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.75 -0.25
+[Neighbor Count]
+4
+2 3 1 3 2 1 3 3 0 3 3 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 2 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.25 0.25
+[Neighbor Count]
+5
+2 2 2 3 1 2 3 3 2 3 2 1 3 2 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 2 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.25 0.75
+[Neighbor Count]
+4
+2 2 3 3 1 3 3 3 3 3 2 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 3 0
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.75 -0.75
+[Neighbor Count]
+3
+2 3 0 3 2 0 3 3 1 
+[Contained Mesh Vertex Count]
+1
+39 
+[Bezier Curve Count]
+6
+[TStart]
+1.00008
+[TEnd]
+7.5998e-05
+[Control Point Count]
+3
+[Control Points]
+0.701057 0.5 -0.539601 0.688189 0.525736 -0.499997 0.68819 0.525734 -0.5 
+[TStart]
+1.00001
+[TEnd]
+8.92839e-06
+[Control Point Count]
+3
+[Control Points]
+0.548942 0.578751 -0.837585 0.688189 0.525736 -0.499997 0.688188 0.525736 -0.5 
+[TStart]
+0.0545847
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.729831 0.5 -0.499997 0.688189 0.525736 -0.499997 1.49272 0.028513 -0.5 
+[TStart]
+2.61467e-05
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.688186 0.525735 -0.5 0.688189 0.525736 -0.499997 0.553209 0.5 -0.614934 
+[TStart]
+1.00003
+[TEnd]
+2.97896e-05
+[Control Point Count]
+3
+[Control Points]
+0.548942 0.804229 -0.601165 0.688189 0.525736 -0.499997 0.688185 0.525744 -0.5 
+[TStart]
+0.000201371
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+0.688188 0.525731 -0.5 0.688189 0.525736 -0.499997 0.683274 0.5 -0.515124 
+[Key]
+3 3 2
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.75 0.25
+[Neighbor Count]
+4
+2 3 2 3 2 2 3 3 1 3 3 3 
+[Contained Mesh Vertex Count]
+1
+27 
+[Bezier Curve Count]
+6
+[TStart]
+0.230208
+[TEnd]
+0.769792
+[Control Point Count]
+3
+[Control Points]
+0.729831 0.5 0.499997 0.688189 0.525736 0.499997 0.548942 0.611795 0.499996 
+[TStart]
+0.99999
+[TEnd]
+9.85851e-06
+[Control Point Count]
+3
+[Control Points]
+1.04894 0.594519 0.192813 0.688189 0.525736 0.499997 0.688185 0.525735 0.5 
+[TStart]
+0.000320573
+[TEnd]
+0.999679
+[Control Point Count]
+3
+[Control Points]
+0.688185 0.525744 0.5 0.688189 0.525736 0.499997 0.701057 0.5 0.490648 
+[TStart]
+7.02253e-06
+[TEnd]
+0.999993
+[Control Point Count]
+3
+[Control Points]
+0.68819 0.525734 0.5 0.688189 0.525736 0.499997 0.548942 0.804228 0.0714394 
+[TStart]
+1.83916e-05
+[TEnd]
+0.999982
+[Control Point Count]
+3
+[Control Points]
+0.688188 0.525736 0.5 0.688189 0.525736 0.499997 0.755786 0.5 0.336116 
+[TStart]
+0.999989
+[TEnd]
+1.07983e-05
+[Control Point Count]
+3
+[Control Points]
+0.778762 1 0.221231 0.688189 0.525736 0.499997 0.688188 0.525731 0.5 
+[Key]
+3 3 3
+[Dimensions]
+0.5 0.5 0.5
+[Position]
+0.798942 0.75 0.75
+[Neighbor Count]
+3
+2 3 3 3 2 3 3 3 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0

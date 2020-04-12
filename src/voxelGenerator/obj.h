@@ -12,6 +12,7 @@ struct Mesh;
 namespace VoxGen
 {
 
+// Will only work with obj files that contain vertices and indices. No normals or uv coordinates
 class ObjReader
 {
   enum class Present : u32

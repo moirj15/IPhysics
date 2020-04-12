@@ -13,6 +13,7 @@ void PhysicsEngine::Reset()
   mVoxelWorld.Reset();
   mVoxels.clear();
   mObjects.clear();
+  mObjectHandles.clear();
   Init();
 }
 

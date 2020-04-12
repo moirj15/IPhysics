@@ -211,12 +211,12 @@ void ObjReader::ParseFace()
   //   u32 normal = 0;
   for (s32 i = 0; i < 3; i++)
   {
-    // TODO: only support vertex-normal pairs for obj files at the moment
+    // NOTE: only indices are read in
     u32 index = 0.0;
     u32 normal = 0.0;
-    line >> index >> normal;
+    line >> index; // >> normal;
     index--;
-    normal--;
+    //     normal--;
     mMesh->mIndices.emplace_back(index);
     //     mMesh->mNormals.AccessCastBuffer(index) = mTempNormals[normal];
     //     mMesh->mNormals.AccessBuffer((index * 3)) = mTempNormals[normal].x;

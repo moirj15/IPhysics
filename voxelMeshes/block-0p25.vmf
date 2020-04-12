@@ -1,0 +1,4165 @@
+[Vertex Count]
+24
+[Index Count]
+36
+[Normal Count]
+24
+[Voxel Count]
+296
+[Extents (Voxel Space)]
+8 8 8
+[Extents (Object Space)]
+2 2 2
+[Initial Voxel Size]
+0.25 0.25 0.25 
+[Vertices]
+1 1 -1 1 -1 -1 1 1 1 1 -1 1 -1 1 -1 -1 -1 -1 -1 1 1 -1 -1 1 
+[Indecies]
+4 2 0 2 7 3 6 5 7 1 7 5 0 3 1 4 1 5 4 6 2 2 6 7 6 4 5 1 3 7 0 2 3 4 0 1 
+[Normals]
+0.57735 0.57735 -0.57735 0.57735 -0.57735 -0.57735 0.57735 0.57735 0.57735 0.57735 -0.57735 0.57735 -0.57735 0.57735 -0.57735 -0.57735 -0.57735 -0.57735 -0.57735 0.57735 0.57735 -0.57735 -0.57735 0.57735 
+[Voxels]
+[Key]
+0 5 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 0.625
+[Neighbor Count]
+4
+0 4 6 0 6 6 0 5 5 0 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 -0.875
+[Neighbor Count]
+3
+1 0 0 0 1 0 0 0 1 
+[Contained Mesh Vertex Count]
+1
+5 
+[Bezier Curve Count]
+4
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 -1 -1 -1 -1 -1 -1 -0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 -1 -1 -1 -1 -1 -0.75 -0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 -1 -1 -1 -1 -0.75 -1 -1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 -1 -1 -1 -1 -1 -0.75 -1 
+[Key]
+0 5 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 -0.625
+[Neighbor Count]
+4
+0 4 1 0 6 1 0 5 0 0 5 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 -0.625
+[Neighbor Count]
+4
+1 0 1 0 1 1 0 0 0 0 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 -0.375
+[Neighbor Count]
+4
+1 7 2 0 6 2 0 7 1 0 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.375 -0.875
+[Neighbor Count]
+4
+4 2 0 6 2 0 5 1 0 5 3 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 -0.375
+[Neighbor Count]
+4
+1 0 2 0 1 2 0 0 1 0 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 -0.125
+[Neighbor Count]
+4
+1 0 3 0 1 3 0 0 2 0 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 5 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 -0.375
+[Neighbor Count]
+4
+0 4 2 0 6 2 0 5 1 0 5 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 -0.375
+[Neighbor Count]
+4
+0 1 2 0 3 2 0 2 1 0 2 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 0.125
+[Neighbor Count]
+4
+1 0 4 0 1 4 0 0 3 0 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.625 -0.875
+[Neighbor Count]
+4
+2 1 0 4 1 0 3 0 0 3 2 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 -0.125
+[Neighbor Count]
+4
+0 1 3 0 3 3 0 2 2 0 2 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 0.375
+[Neighbor Count]
+4
+1 0 5 0 1 5 0 0 4 0 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 5 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 0.125
+[Neighbor Count]
+4
+0 4 4 0 6 4 0 5 3 0 5 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 0.625
+[Neighbor Count]
+4
+1 0 6 0 1 6 0 0 5 0 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 0.875
+[Neighbor Count]
+4
+1 5 7 0 4 7 0 6 7 0 5 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.875 0.875
+[Neighbor Count]
+3
+1 0 7 0 1 7 0 0 6 
+[Contained Mesh Vertex Count]
+1
+7 
+[Bezier Curve Count]
+5
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 1 -1 -1 1 -0.75 -1 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 1 -1 -1 1 -0.75 -0.75 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 1 -1 -1 1 -1 -0.75 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 1 -1 -1 1 -1 -1 0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 -1 1 -1 -1 1 -0.75 -1 0.75 
+[Key]
+4 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 -0.125
+[Neighbor Count]
+4
+3 7 3 5 7 3 4 7 2 4 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 0.625
+[Neighbor Count]
+4
+0 3 6 0 5 6 0 4 5 0 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 -0.875
+[Neighbor Count]
+4
+1 1 0 0 0 0 0 2 0 0 1 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.125 0.875
+[Neighbor Count]
+4
+1 3 7 3 3 7 2 2 7 2 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 -0.625
+[Neighbor Count]
+4
+0 3 1 0 5 1 0 4 0 0 4 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 -0.625
+[Neighbor Count]
+4
+0 0 1 0 2 1 0 1 0 0 1 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 -0.375
+[Neighbor Count]
+4
+0 0 2 0 2 2 0 1 1 0 1 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 -0.375
+[Neighbor Count]
+4
+0 5 2 0 7 2 0 6 1 0 6 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 -0.125
+[Neighbor Count]
+4
+0 0 3 0 2 3 0 1 2 0 1 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 0.875
+[Neighbor Count]
+4
+3 7 7 5 7 7 4 6 7 4 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 -0.375
+[Neighbor Count]
+4
+0 2 2 0 4 2 0 3 1 0 3 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 -0.375
+[Neighbor Count]
+4
+0 3 2 0 5 2 0 4 1 0 4 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 0.125
+[Neighbor Count]
+4
+0 0 4 0 2 4 0 1 3 0 1 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 0.625
+[Neighbor Count]
+4
+3 7 6 5 7 6 4 7 5 4 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 0.125
+[Neighbor Count]
+4
+1 0 4 3 0 4 2 0 3 2 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 -0.125
+[Neighbor Count]
+4
+0 2 3 0 4 3 0 3 2 0 3 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 0.375
+[Neighbor Count]
+4
+0 0 5 0 2 5 0 1 4 0 1 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 0.125
+[Neighbor Count]
+4
+0 3 4 0 5 4 0 4 3 0 4 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 0.625
+[Neighbor Count]
+4
+0 0 6 0 2 6 0 1 5 0 1 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.625 0.875
+[Neighbor Count]
+4
+1 1 7 0 0 7 0 2 7 0 1 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 0.875
+[Neighbor Count]
+4
+1 4 7 0 3 7 0 5 7 0 4 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 -0.375
+[Neighbor Count]
+4
+5 7 2 7 7 2 6 7 1 6 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 -0.875
+[Neighbor Count]
+4
+1 2 0 0 1 0 0 3 0 0 2 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 -0.625
+[Neighbor Count]
+4
+0 1 1 0 3 1 0 2 0 0 2 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 -0.625
+[Neighbor Count]
+4
+0 2 1 0 4 1 0 3 0 0 3 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 0.875
+[Neighbor Count]
+4
+6 3 7 7 2 7 7 4 7 7 3 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 0.125
+[Neighbor Count]
+4
+0 1 4 0 3 4 0 2 3 0 2 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 0.625
+[Neighbor Count]
+4
+7 2 6 7 4 6 7 3 5 7 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 -0.875
+[Neighbor Count]
+4
+1 3 0 0 2 0 0 4 0 0 3 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 0.375
+[Neighbor Count]
+4
+0 1 5 0 3 5 0 2 4 0 2 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.375 0.875
+[Neighbor Count]
+4
+1 2 7 3 2 7 2 1 7 2 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 0.625
+[Neighbor Count]
+4
+0 1 6 0 3 6 0 2 5 0 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.375 0.875
+[Neighbor Count]
+4
+1 2 7 0 1 7 0 3 7 0 2 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 -0.625
+[Neighbor Count]
+4
+7 1 1 7 3 1 7 2 0 7 2 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 -0.625
+[Neighbor Count]
+4
+0 0 1 2 0 1 1 0 0 1 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 0.125
+[Neighbor Count]
+4
+0 2 4 0 4 4 0 3 3 0 3 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 -0.875
+[Neighbor Count]
+4
+6 2 0 7 1 0 7 3 0 7 2 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 0.625
+[Neighbor Count]
+4
+4 7 6 6 7 6 5 7 5 5 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 0.375
+[Neighbor Count]
+4
+0 2 5 0 4 5 0 3 4 0 3 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 0.875
+[Neighbor Count]
+4
+2 0 7 4 0 7 3 1 7 3 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 0.625
+[Neighbor Count]
+4
+0 2 6 0 4 6 0 3 5 0 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 0.375
+[Neighbor Count]
+4
+7 4 5 7 6 5 7 5 4 7 5 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 0.125
+[Neighbor Count]
+4
+2 0 4 4 0 4 3 0 3 3 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 -0.125 0.875
+[Neighbor Count]
+4
+1 3 7 0 2 7 0 4 7 0 3 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 -0.375
+[Neighbor Count]
+4
+7 2 2 7 4 2 7 3 1 7 3 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.375 0.875
+[Neighbor Count]
+4
+2 5 7 4 5 7 3 4 7 3 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 -0.875
+[Neighbor Count]
+4
+1 4 0 0 3 0 0 5 0 0 4 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 -0.125
+[Neighbor Count]
+4
+7 2 3 7 4 3 7 3 2 7 3 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 -0.125
+[Neighbor Count]
+4
+0 3 3 0 5 3 0 4 2 0 4 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 -0.125
+[Neighbor Count]
+4
+0 5 3 0 7 3 0 6 2 0 6 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 0.625
+[Neighbor Count]
+4
+0 7 6 2 7 6 1 7 5 1 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 4 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.125 0.375
+[Neighbor Count]
+4
+0 3 5 0 5 5 0 4 4 0 4 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 -0.875
+[Neighbor Count]
+4
+1 5 0 0 4 0 0 6 0 0 5 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 5 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 -0.125
+[Neighbor Count]
+4
+0 4 3 0 6 3 0 5 2 0 5 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.125 -0.875
+[Neighbor Count]
+4
+3 3 0 5 3 0 4 2 0 4 4 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 -0.125
+[Neighbor Count]
+4
+1 7 3 0 6 3 0 7 2 0 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 5 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.375 0.375
+[Neighbor Count]
+4
+0 4 5 0 6 5 0 5 4 0 5 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 -0.875
+[Neighbor Count]
+4
+1 6 0 0 5 0 0 7 0 0 6 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 0.625
+[Neighbor Count]
+4
+1 0 6 3 0 6 2 0 5 2 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 -0.625
+[Neighbor Count]
+4
+0 5 1 0 7 1 0 6 0 0 6 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 0.125
+[Neighbor Count]
+4
+0 5 4 0 7 4 0 6 3 0 6 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 -0.875
+[Neighbor Count]
+4
+6 1 0 7 0 0 7 2 0 7 1 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.375 0.875
+[Neighbor Count]
+4
+4 5 7 6 5 7 5 4 7 5 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 0.375
+[Neighbor Count]
+4
+0 5 5 0 7 5 0 6 4 0 6 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 0.625
+[Neighbor Count]
+4
+1 7 6 0 6 6 0 7 5 0 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 0.625
+[Neighbor Count]
+4
+0 5 6 0 7 6 0 6 5 0 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.625 0.875
+[Neighbor Count]
+4
+1 6 7 0 5 7 0 7 7 0 6 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 -0.875
+[Neighbor Count]
+3
+1 7 0 0 6 0 0 7 1 
+[Contained Mesh Vertex Count]
+1
+4 
+[Bezier Curve Count]
+5
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 -1 -1 1 -1 -0.75 1 -0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 -1 -1 1 -1 -0.75 1 -1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 -1 -1 1 -1 -0.75 0.75 -1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 -1 -1 1 -1 -1 0.75 -1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 -1 -1 1 -1 -1 1 -0.75 
+[Key]
+0 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 -0.625
+[Neighbor Count]
+4
+1 7 1 0 6 1 0 7 0 0 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 0.125
+[Neighbor Count]
+4
+4 0 4 6 0 4 5 0 3 5 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 0.125
+[Neighbor Count]
+4
+1 7 4 0 6 4 0 7 3 0 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 0.375
+[Neighbor Count]
+4
+1 7 5 0 6 5 0 7 4 0 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 -0.625
+[Neighbor Count]
+4
+7 0 1 7 2 1 7 1 0 7 1 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+0 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.875 0.875 0.875
+[Neighbor Count]
+3
+1 7 7 0 6 7 0 7 6 
+[Contained Mesh Vertex Count]
+1
+6 
+[Bezier Curve Count]
+4
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 1 -1 1 1 -1 0.75 0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 1 -1 1 1 -1 0.75 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 1 -1 1 1 -0.75 1 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+-1 1 1 -1 1 1 -1 1 0.75 
+[Key]
+5 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.125 0.875
+[Neighbor Count]
+4
+4 4 7 6 4 7 5 3 7 5 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 -0.875
+[Neighbor Count]
+4
+0 0 0 2 0 0 1 1 0 1 0 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 -0.375
+[Neighbor Count]
+4
+0 0 2 2 0 2 1 0 1 1 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 -0.125
+[Neighbor Count]
+4
+0 0 3 2 0 3 1 0 2 1 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 0.125
+[Neighbor Count]
+4
+0 0 4 2 0 4 1 0 3 1 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 0.625
+[Neighbor Count]
+4
+7 4 6 7 6 6 7 5 5 7 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 0.375
+[Neighbor Count]
+4
+0 0 5 2 0 5 1 0 4 1 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 0.625
+[Neighbor Count]
+4
+0 0 6 2 0 6 1 0 5 1 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 0.125
+[Neighbor Count]
+4
+7 2 4 7 4 4 7 3 3 7 3 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 0.875
+[Neighbor Count]
+4
+6 2 7 7 1 7 7 3 7 7 2 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.875 0.875
+[Neighbor Count]
+4
+0 0 7 2 0 7 1 1 7 1 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.625 -0.875
+[Neighbor Count]
+4
+0 1 0 2 1 0 1 0 0 1 2 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 -0.375
+[Neighbor Count]
+4
+1 7 2 3 7 2 2 7 1 2 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.625 0.875
+[Neighbor Count]
+4
+0 1 7 2 1 7 1 0 7 1 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.375 -0.875
+[Neighbor Count]
+4
+0 2 0 2 2 0 1 1 0 1 3 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.125 -0.875
+[Neighbor Count]
+4
+5 3 0 7 3 0 6 2 0 6 4 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 0.375
+[Neighbor Count]
+4
+1 7 5 3 7 5 2 7 4 2 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.375 0.875
+[Neighbor Count]
+4
+0 2 7 2 2 7 1 1 7 1 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.125 -0.875
+[Neighbor Count]
+4
+0 3 0 2 3 0 1 2 0 1 4 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 -0.125 0.875
+[Neighbor Count]
+4
+0 3 7 2 3 7 1 2 7 1 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.125 -0.875
+[Neighbor Count]
+4
+0 4 0 2 4 0 1 3 0 1 5 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.125 0.875
+[Neighbor Count]
+4
+0 4 7 2 4 7 1 3 7 1 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.625 0.875
+[Neighbor Count]
+4
+0 6 7 2 6 7 1 5 7 1 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.375 -0.875
+[Neighbor Count]
+4
+0 5 0 2 5 0 1 4 0 1 6 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.375 0.875
+[Neighbor Count]
+4
+0 5 7 2 5 7 1 4 7 1 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.625 -0.875
+[Neighbor Count]
+4
+0 6 0 2 6 0 1 5 0 1 7 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 -0.875
+[Neighbor Count]
+4
+0 7 0 2 7 0 1 6 0 1 7 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 -0.625
+[Neighbor Count]
+4
+0 7 1 2 7 1 1 7 0 1 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 -0.375
+[Neighbor Count]
+4
+0 7 2 2 7 2 1 7 1 1 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 -0.125
+[Neighbor Count]
+4
+0 7 3 2 7 3 1 7 2 1 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 0.125
+[Neighbor Count]
+4
+0 7 4 2 7 4 1 7 3 1 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.625 -0.875
+[Neighbor Count]
+4
+4 6 0 6 6 0 5 5 0 5 7 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 0.375
+[Neighbor Count]
+4
+0 7 5 2 7 5 1 7 4 1 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+1 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.625 0.875 0.875
+[Neighbor Count]
+4
+0 7 7 2 7 7 1 6 7 1 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.625 -0.875
+[Neighbor Count]
+4
+3 1 0 5 1 0 4 0 0 4 2 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 -0.875
+[Neighbor Count]
+4
+1 0 0 3 0 0 2 1 0 2 0 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 -0.625
+[Neighbor Count]
+4
+1 0 1 3 0 1 2 0 0 2 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 -0.375
+[Neighbor Count]
+4
+1 0 2 3 0 2 2 0 1 2 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 -0.125
+[Neighbor Count]
+4
+1 0 3 3 0 3 2 0 2 2 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 0.375
+[Neighbor Count]
+4
+1 0 5 3 0 5 2 0 4 2 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.625 -0.875
+[Neighbor Count]
+4
+5 6 0 7 6 0 6 5 0 6 7 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.875 0.875
+[Neighbor Count]
+4
+1 0 7 3 0 7 2 1 7 2 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.625 -0.875
+[Neighbor Count]
+4
+1 1 0 3 1 0 2 0 0 2 2 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.375 -0.875
+[Neighbor Count]
+4
+5 5 0 7 5 0 6 4 0 6 6 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.625 0.875
+[Neighbor Count]
+4
+1 1 7 3 1 7 2 0 7 2 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 0.375
+[Neighbor Count]
+4
+3 7 5 5 7 5 4 7 4 4 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.375 -0.875
+[Neighbor Count]
+4
+1 2 0 3 2 0 2 1 0 2 3 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 -0.125 -0.875
+[Neighbor Count]
+4
+1 3 0 3 3 0 2 2 0 2 4 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 0.375
+[Neighbor Count]
+4
+5 7 5 7 7 5 6 7 4 6 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.125 -0.875
+[Neighbor Count]
+4
+1 4 0 3 4 0 2 3 0 2 5 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.125 0.875
+[Neighbor Count]
+4
+1 4 7 3 4 7 2 3 7 2 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 -0.625
+[Neighbor Count]
+4
+7 2 1 7 4 1 7 3 0 7 3 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.125 0.875
+[Neighbor Count]
+4
+5 3 7 7 3 7 6 2 7 6 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.375 -0.875
+[Neighbor Count]
+4
+1 5 0 3 5 0 2 4 0 2 6 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.625 0.875
+[Neighbor Count]
+4
+1 6 7 3 6 7 2 5 7 2 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.375 0.875
+[Neighbor Count]
+4
+1 5 7 3 5 7 2 4 7 2 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.625 -0.875
+[Neighbor Count]
+4
+1 6 0 3 6 0 2 5 0 2 7 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 -0.875
+[Neighbor Count]
+4
+1 7 0 3 7 0 2 6 0 2 7 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 -0.625
+[Neighbor Count]
+4
+1 7 1 3 7 1 2 7 0 2 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 -0.125
+[Neighbor Count]
+4
+1 7 3 3 7 3 2 7 2 2 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 0.125
+[Neighbor Count]
+4
+1 7 4 3 7 4 2 7 3 2 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 0.625
+[Neighbor Count]
+4
+1 7 6 3 7 6 2 7 5 2 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+2 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.375 0.875 0.875
+[Neighbor Count]
+4
+1 7 7 3 7 7 2 6 7 2 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 0.125
+[Neighbor Count]
+4
+5 0 4 7 0 4 6 0 3 6 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.625 0.875
+[Neighbor Count]
+4
+2 1 7 4 1 7 3 0 7 3 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 -0.875
+[Neighbor Count]
+4
+2 0 0 4 0 0 3 1 0 3 0 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 0.875
+[Neighbor Count]
+4
+5 0 7 7 0 7 6 1 7 6 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 -0.625
+[Neighbor Count]
+4
+4 7 1 6 7 1 5 7 0 5 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 -0.625
+[Neighbor Count]
+4
+2 0 1 4 0 1 3 0 0 3 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 -0.375
+[Neighbor Count]
+4
+2 0 2 4 0 2 3 0 1 3 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.625 -0.875
+[Neighbor Count]
+4
+5 1 0 7 1 0 6 0 0 6 2 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 0.875
+[Neighbor Count]
+4
+4 7 7 6 7 7 5 6 7 5 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 -0.125
+[Neighbor Count]
+4
+2 0 3 4 0 3 3 0 2 3 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 0.375
+[Neighbor Count]
+4
+2 0 5 4 0 5 3 0 4 3 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.875 0.625
+[Neighbor Count]
+4
+2 0 6 4 0 6 3 0 5 3 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 0.875
+[Neighbor Count]
+4
+6 6 7 7 5 7 7 7 7 7 6 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.125 0.875
+[Neighbor Count]
+4
+2 3 7 4 3 7 3 2 7 3 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.375 -0.875
+[Neighbor Count]
+4
+2 2 0 4 2 0 3 1 0 3 3 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.375 0.875
+[Neighbor Count]
+4
+2 2 7 4 2 7 3 1 7 3 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 -0.875
+[Neighbor Count]
+4
+6 6 0 7 5 0 7 7 0 7 6 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 -0.125 -0.875
+[Neighbor Count]
+4
+2 3 0 4 3 0 3 2 0 3 4 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.125 -0.875
+[Neighbor Count]
+4
+2 4 0 4 4 0 3 3 0 3 5 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.125 0.875
+[Neighbor Count]
+4
+2 4 7 4 4 7 3 3 7 3 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 -0.875
+[Neighbor Count]
+4
+3 0 0 5 0 0 4 1 0 4 0 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.375 -0.875
+[Neighbor Count]
+4
+2 5 0 4 5 0 3 4 0 3 6 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.625 -0.875
+[Neighbor Count]
+4
+2 6 0 4 6 0 3 5 0 3 7 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.625 0.875
+[Neighbor Count]
+4
+2 6 7 4 6 7 3 5 7 3 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 0.625
+[Neighbor Count]
+4
+5 0 6 7 0 6 6 0 5 6 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 -0.875
+[Neighbor Count]
+4
+2 7 0 4 7 0 3 6 0 3 7 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 -0.625
+[Neighbor Count]
+4
+2 7 1 4 7 1 3 7 0 3 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 -0.375
+[Neighbor Count]
+4
+2 7 2 4 7 2 3 7 1 3 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 0.125
+[Neighbor Count]
+4
+7 4 4 7 6 4 7 5 3 7 5 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 -0.625
+[Neighbor Count]
+4
+5 0 1 7 0 1 6 0 0 6 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 -0.125
+[Neighbor Count]
+4
+2 7 3 4 7 3 3 7 2 3 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 -0.375
+[Neighbor Count]
+4
+4 7 2 6 7 2 5 7 1 5 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 0.125
+[Neighbor Count]
+4
+2 7 4 4 7 4 3 7 3 3 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 0.375
+[Neighbor Count]
+4
+2 7 5 4 7 5 3 7 4 3 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 0.375
+[Neighbor Count]
+4
+7 2 5 7 4 5 7 3 4 7 3 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 0.125
+[Neighbor Count]
+4
+5 7 4 7 7 4 6 7 3 6 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 0.625
+[Neighbor Count]
+4
+2 7 6 4 7 6 3 7 5 3 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 0.375
+[Neighbor Count]
+4
+5 0 5 7 0 5 6 0 4 6 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+3 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+-0.125 0.875 0.875
+[Neighbor Count]
+4
+2 7 7 4 7 7 3 6 7 3 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 -0.625
+[Neighbor Count]
+4
+3 0 1 5 0 1 4 0 0 4 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 -0.375
+[Neighbor Count]
+4
+3 0 2 5 0 2 4 0 1 4 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 -0.125
+[Neighbor Count]
+4
+3 0 3 5 0 3 4 0 2 4 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 0.125
+[Neighbor Count]
+4
+3 0 4 5 0 4 4 0 3 4 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 0.375
+[Neighbor Count]
+4
+3 0 5 5 0 5 4 0 4 4 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 0.625
+[Neighbor Count]
+4
+3 0 6 5 0 6 4 0 5 4 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.875 0.875
+[Neighbor Count]
+4
+3 0 7 5 0 7 4 1 7 4 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.625 0.875
+[Neighbor Count]
+4
+3 1 7 5 1 7 4 0 7 4 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.375 -0.875
+[Neighbor Count]
+4
+3 2 0 5 2 0 4 1 0 4 3 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.375 0.875
+[Neighbor Count]
+4
+3 2 7 5 2 7 4 1 7 4 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 -0.125 0.875
+[Neighbor Count]
+4
+3 3 7 5 3 7 4 2 7 4 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 0.875
+[Neighbor Count]
+3
+6 0 7 7 1 7 7 0 6 
+[Contained Mesh Vertex Count]
+1
+3 
+[Bezier Curve Count]
+4
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 1 1 -1 1 1 -0.75 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 1 1 -1 1 0.75 -1 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 1 1 -1 1 1 -1 0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 1 1 -1 1 1 -0.75 0.75 
+[Key]
+4 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.125 -0.875
+[Neighbor Count]
+4
+3 4 0 5 4 0 4 3 0 4 5 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.125 0.875
+[Neighbor Count]
+4
+3 4 7 5 4 7 4 3 7 4 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.375 -0.875
+[Neighbor Count]
+4
+3 5 0 5 5 0 4 4 0 4 6 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.375 0.875
+[Neighbor Count]
+4
+3 5 7 5 5 7 4 4 7 4 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 6 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.625 -0.875
+[Neighbor Count]
+4
+3 6 0 5 6 0 4 5 0 4 7 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 -0.375
+[Neighbor Count]
+4
+4 0 2 6 0 2 5 0 1 5 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.625 0.875
+[Neighbor Count]
+4
+3 6 7 5 6 7 4 5 7 4 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 -0.875
+[Neighbor Count]
+4
+3 7 0 5 7 0 4 6 0 4 7 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 -0.625
+[Neighbor Count]
+4
+3 7 1 5 7 1 4 7 0 4 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 -0.125
+[Neighbor Count]
+4
+7 3 3 7 5 3 7 4 2 7 4 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 -0.375
+[Neighbor Count]
+4
+3 7 2 5 7 2 4 7 1 4 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+4 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.125 0.875 0.125
+[Neighbor Count]
+4
+3 7 4 5 7 4 4 7 3 4 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 -0.875
+[Neighbor Count]
+4
+4 0 0 6 0 0 5 1 0 5 0 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 -0.625
+[Neighbor Count]
+4
+4 0 1 6 0 1 5 0 0 5 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 -0.125
+[Neighbor Count]
+4
+4 0 3 6 0 3 5 0 2 5 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 0.375
+[Neighbor Count]
+4
+4 0 5 6 0 5 5 0 4 5 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 0.625
+[Neighbor Count]
+4
+4 0 6 6 0 6 5 0 5 5 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 0.125
+[Neighbor Count]
+4
+7 5 4 7 7 4 7 6 3 7 6 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 0 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.875 0.875
+[Neighbor Count]
+4
+4 0 7 6 0 7 5 1 7 5 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 1 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.625 -0.875
+[Neighbor Count]
+4
+4 1 0 6 1 0 5 0 0 5 2 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.625 0.875
+[Neighbor Count]
+4
+4 1 7 6 1 7 5 0 7 5 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.375 0.875
+[Neighbor Count]
+4
+4 2 7 6 2 7 5 1 7 5 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.125 -0.875
+[Neighbor Count]
+4
+4 3 0 6 3 0 5 2 0 5 4 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 3 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 -0.125 0.875
+[Neighbor Count]
+4
+4 3 7 6 3 7 5 2 7 5 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.125 -0.875
+[Neighbor Count]
+4
+4 4 0 6 4 0 5 3 0 5 5 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 -0.875
+[Neighbor Count]
+4
+6 5 0 7 4 0 7 6 0 7 5 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 5 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.375 -0.875
+[Neighbor Count]
+4
+4 5 0 6 5 0 5 4 0 5 6 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.625 0.875
+[Neighbor Count]
+4
+4 6 7 6 6 7 5 5 7 5 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 -0.875
+[Neighbor Count]
+4
+4 7 0 6 7 0 5 6 0 5 7 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 -0.125
+[Neighbor Count]
+4
+4 7 3 6 7 3 5 7 2 5 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 0.125
+[Neighbor Count]
+4
+4 7 4 6 7 4 5 7 3 5 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 -0.125
+[Neighbor Count]
+4
+5 0 3 7 0 3 6 0 2 6 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+5 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.375 0.875 0.375
+[Neighbor Count]
+4
+4 7 5 6 7 5 5 7 4 5 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 -0.875
+[Neighbor Count]
+4
+5 0 0 7 0 0 6 1 0 6 0 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.875 -0.375
+[Neighbor Count]
+4
+5 0 2 7 0 2 6 0 1 6 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.625 0.875
+[Neighbor Count]
+4
+5 1 7 7 1 7 6 0 7 6 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 2 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.375 -0.875
+[Neighbor Count]
+4
+5 2 0 7 2 0 6 1 0 6 3 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 2 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 -0.375 0.875
+[Neighbor Count]
+4
+5 2 7 7 2 7 6 1 7 6 3 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.125 -0.875
+[Neighbor Count]
+4
+5 4 0 7 4 0 6 3 0 6 5 0 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.125 0.875
+[Neighbor Count]
+4
+5 4 7 7 4 7 6 3 7 6 5 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 -0.125
+[Neighbor Count]
+4
+7 0 3 7 2 3 7 1 2 7 1 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.375 0.875
+[Neighbor Count]
+4
+5 5 7 7 5 7 6 4 7 6 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 6 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.625 0.875
+[Neighbor Count]
+4
+5 6 7 7 6 7 6 5 7 6 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 -0.875
+[Neighbor Count]
+4
+5 7 0 7 7 0 6 6 0 6 7 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 -0.625
+[Neighbor Count]
+4
+5 7 1 7 7 1 6 7 0 6 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 -0.125
+[Neighbor Count]
+4
+5 7 3 7 7 3 6 7 2 6 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 0.625
+[Neighbor Count]
+4
+5 7 6 7 7 6 6 7 5 6 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+6 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.625 0.875 0.875
+[Neighbor Count]
+4
+5 7 7 7 7 7 6 6 7 6 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 0 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 -0.875
+[Neighbor Count]
+3
+6 0 0 7 1 0 7 0 1 
+[Contained Mesh Vertex Count]
+1
+1 
+[Bezier Curve Count]
+5
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 -1 1 -1 -1 0.75 -1 -0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 -1 1 -1 -1 0.75 -1 -1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 -1 1 -1 -1 1 -0.75 -1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 -1 1 -1 -1 1 -1 -0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 -1 -1 1 -1 -1 0.75 -0.75 -1 
+[Key]
+7 0 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 -0.625
+[Neighbor Count]
+4
+6 0 1 7 1 1 7 0 0 7 0 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 0 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 -0.375
+[Neighbor Count]
+4
+6 0 2 7 1 2 7 0 1 7 0 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 0 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 -0.125
+[Neighbor Count]
+4
+6 0 3 7 1 3 7 0 2 7 0 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 0 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 0.125
+[Neighbor Count]
+4
+6 0 4 7 1 4 7 0 3 7 0 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 3 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.125 -0.875
+[Neighbor Count]
+4
+6 3 0 7 2 0 7 4 0 7 3 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 0 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 0.375
+[Neighbor Count]
+4
+6 0 5 7 1 5 7 0 4 7 0 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 0 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.875 0.625
+[Neighbor Count]
+4
+6 0 6 7 1 6 7 0 5 7 0 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 -0.375
+[Neighbor Count]
+4
+7 0 2 7 2 2 7 1 1 7 1 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 0.125
+[Neighbor Count]
+4
+7 0 4 7 2 4 7 1 3 7 1 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 0.375
+[Neighbor Count]
+4
+7 0 5 7 2 5 7 1 4 7 1 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 0.625
+[Neighbor Count]
+4
+7 0 6 7 2 6 7 1 5 7 1 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 1 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.625 0.875
+[Neighbor Count]
+4
+6 1 7 7 0 7 7 2 7 7 1 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 -0.375
+[Neighbor Count]
+4
+7 1 2 7 3 2 7 2 1 7 2 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 -0.125
+[Neighbor Count]
+4
+7 1 3 7 3 3 7 2 2 7 2 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 0.125
+[Neighbor Count]
+4
+7 1 4 7 3 4 7 2 3 7 2 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 0.375
+[Neighbor Count]
+4
+7 1 5 7 3 5 7 2 4 7 2 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 2 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 -0.375 0.625
+[Neighbor Count]
+4
+7 1 6 7 3 6 7 2 5 7 2 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 -0.875
+[Neighbor Count]
+4
+6 4 0 7 3 0 7 5 0 7 4 1 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 -0.625
+[Neighbor Count]
+4
+7 3 1 7 5 1 7 4 0 7 4 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 -0.375
+[Neighbor Count]
+4
+7 3 2 7 5 2 7 4 1 7 4 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 0.125
+[Neighbor Count]
+4
+7 3 4 7 5 4 7 4 3 7 4 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 0.375
+[Neighbor Count]
+4
+7 3 5 7 5 5 7 4 4 7 4 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 0.625
+[Neighbor Count]
+4
+7 3 6 7 5 6 7 4 5 7 4 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 4 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.125 0.875
+[Neighbor Count]
+4
+6 4 7 7 3 7 7 5 7 7 4 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 -0.625
+[Neighbor Count]
+4
+7 4 1 7 6 1 7 5 0 7 5 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 -0.375
+[Neighbor Count]
+4
+7 4 2 7 6 2 7 5 1 7 5 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 -0.125
+[Neighbor Count]
+4
+7 4 3 7 6 3 7 5 2 7 5 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 5 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.375 0.875
+[Neighbor Count]
+4
+6 5 7 7 4 7 7 6 7 7 5 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 -0.625
+[Neighbor Count]
+4
+7 5 1 7 7 1 7 6 0 7 6 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 -0.375
+[Neighbor Count]
+4
+7 5 2 7 7 2 7 6 1 7 6 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 -0.125
+[Neighbor Count]
+4
+7 5 3 7 7 3 7 6 2 7 6 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 0.375
+[Neighbor Count]
+4
+7 5 5 7 7 5 7 6 4 7 6 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 6 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.625 0.625
+[Neighbor Count]
+4
+7 5 6 7 7 6 7 6 5 7 6 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 7 0
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 -0.875
+[Neighbor Count]
+3
+6 7 0 7 6 0 7 7 1 
+[Contained Mesh Vertex Count]
+1
+0 
+[Bezier Curve Count]
+4
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 -1 1 1 -1 0.75 1 -1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 -1 1 1 -1 1 1 -0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 -1 1 1 -1 1 0.75 -0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 -1 1 1 -1 1 0.75 -1 
+[Key]
+7 7 1
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 -0.625
+[Neighbor Count]
+4
+6 7 1 7 6 1 7 7 0 7 7 2 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 7 2
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 -0.375
+[Neighbor Count]
+4
+6 7 2 7 6 2 7 7 1 7 7 3 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 7 3
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 -0.125
+[Neighbor Count]
+4
+6 7 3 7 6 3 7 7 2 7 7 4 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 7 4
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 0.125
+[Neighbor Count]
+4
+6 7 4 7 6 4 7 7 3 7 7 5 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 7 5
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 0.375
+[Neighbor Count]
+4
+6 7 5 7 6 5 7 7 4 7 7 6 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 7 6
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 0.625
+[Neighbor Count]
+4
+6 7 6 7 6 6 7 7 5 7 7 7 
+[Contained Mesh Vertex Count]
+0
+[Bezier Curve Count]
+0
+[Key]
+7 7 7
+[Dimensions]
+0.25 0.25 0.25
+[Position]
+0.875 0.875 0.875
+[Neighbor Count]
+3
+6 7 7 7 6 7 7 7 6 
+[Contained Mesh Vertex Count]
+1
+2 
+[Bezier Curve Count]
+5
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 1 1 1 1 1 1 0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 1 1 1 1 0.75 1 0.75 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 1 1 1 1 0.75 0.75 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 1 1 1 1 1 0.75 1 
+[TStart]
+0
+[TEnd]
+1
+[Control Point Count]
+3
+[Control Points]
+1 1 1 1 1 1 0.75 1 1 

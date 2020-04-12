@@ -55,7 +55,7 @@ void PhysicsSimulationApp::LoadObject()
     auto *voxelMesh = Utils::DeSerialize(*optionalPath);
     u32 handle = VoxelMeshManager::Get().SubmitMesh(voxelMesh);
     // TODO: Modify the physics engine so it takes object setting modifications into account
-    mPhysicsEngine->SubmitObject(handle);
+    //     mPhysicsEngine->SubmitObject(handle);
     mRenderer->RegisterMeshHandle(handle);
     mUI->SetCurrentObject(handle);
   }
@@ -136,6 +136,7 @@ void PhysicsSimulationApp::CollectUIInput()
     for (auto &[handle, setting] : mUI->GetAllObjectSettings())
     {
       VoxelMeshManager::Get().UpdateOriginalSettings(handle, setting);
+      mPhysicsEngine->SubmitObject(handle);
     }
   }
   if (mUI->StopSimulationClicked())
