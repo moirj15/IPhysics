@@ -130,7 +130,7 @@ void RendererBackend::UpdateMesh(const u32 handle, Mesh *mesh)
 {
   auto [vao, ibo] = (*mMeshLibrary)[handle];
   const auto vbos = vao.GetVertexBuffers();
-  vbos[1].Bind();
+  vbos[2].Bind();
   glBufferSubData(
       GL_ARRAY_BUFFER, 0, mesh->mOffsets.BufferSize() * sizeof(f32),
       mesh->mOffsets.GetBuffer().data());

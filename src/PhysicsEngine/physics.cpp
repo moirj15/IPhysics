@@ -30,7 +30,10 @@ void PhysicsEngine::Update(f32 t)
       glm::vec3 voxelCurrPosition(origin.x(), origin.y(), origin.z());
       auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
       voxel->mPosition = voxelCurrPosition;
-      voxel->mRelativePositionDelta =
+      //       voxel->mRelativePositionDelta =
+      //           (voxel->mPosition - objectSettings->mPosition) -
+      //           voxel->mPositionRelativeToCenter;
+      voxel->mRelativePositionDelta +=
           (voxel->mPosition - objectSettings->mPosition) - voxel->mPositionRelativeToCenter;
       voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
     }

@@ -167,6 +167,7 @@ void PhysicsSimulationApp::ApplyDeformations()
         // TODO: Maybe move the copying into the physics engine so it isn't copied twice?
         //         vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mRelativePositionDelta;
+        //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
       }
     }
     mRenderer->UpdateMesh(handle);
