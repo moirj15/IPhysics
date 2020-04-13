@@ -45,7 +45,7 @@ public:
   void Draw();
   void Clear();
   void RemoveMesh(u32 handle);
-  void UpdateMesh(const VMeshHandle handle, std::vector<u32> &verts);
+  void UpdateMesh(const VMeshHandle handle);
   RendererBackend *GetBackend()
   {
     return mBackend.get();

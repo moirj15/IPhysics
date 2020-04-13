@@ -193,9 +193,9 @@ void RendererFrontend::RemoveMesh(u32 handle)
   mBackend->RemoveMesh(handle);
 }
 
-void RendererFrontend::UpdateMesh(const VMeshHandle handle, std::vector<u32> &verts)
+void RendererFrontend::UpdateMesh(const VMeshHandle handle)
 {
-  mBackend->UpdateMesh(mMeshHandles[handle], verts, VoxelMeshManager::Get().GetMesh(handle)->mMesh);
+  mBackend->UpdateMesh(mMeshHandles[handle], VoxelMeshManager::Get().GetMesh(handle)->mMesh);
 }
 
 } // namespace Renderer

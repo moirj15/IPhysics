@@ -53,7 +53,7 @@ public:
 
   inline void SetBufferSize(u64 size)
   {
-    mContents.resize(size);
+    mContents.resize(size, (ContentType)0);
   }
 
   NODISCARD inline const ContentType *BufferPtr() const

@@ -113,7 +113,7 @@ public:
 
   void ClearScreen();
   void RemoveMesh(u32 handle);
-  void UpdateMesh(const u32 handle, const std::vector<u32> &verts, Mesh *mesh);
+  void UpdateMesh(const u32 handle, Mesh *mesh);
 
 private:
   void DrawFromCommand(const DrawCommand &command);

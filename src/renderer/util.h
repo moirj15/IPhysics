@@ -15,12 +15,18 @@
  * \param len: The length of the data list.
  * \return: The handle to the OpenGL buffer.
  */
-inline u32 CreateBuffer(GLenum bufferType, void *data, u32 len)
+inline u32 CreateBuffer(GLenum bufferType, void *data, u32 len, bool dynamic = false)
 {
   u32 handle = 0;
   glGenBuffers(1, &handle);
   glBindBuffer(bufferType, handle);
-  // glBufferData(bufferType, len, data, GL_STATIC_DRAW);
-  glBufferData(bufferType, len, data, GL_DYNAMIC_DRAW);
+  if (dynamic)
+  {
+    glBufferData(bufferType, len, data, GL_DYNAMIC_DRAW);
+  }
+  else
+  {
+    glBufferData(bufferType, len, data, GL_STATIC_DRAW);
+  }
   return handle;
 }

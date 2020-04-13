@@ -64,11 +64,17 @@ MeshPair MeshLibrary::VAOFromMesh(Mesh *mesh)
         mesh->mNormals.BufferPtr(), mesh->mNormals.BufferSize(),
         BufferLayout("Normals", 3, 0, 1, GL_FLOAT)));
   }
-  if (!mesh->mVertices.IsEmpty())
+  //   if (!mesh->mVertices.IsEmpty())
+  //   {
+  //     vao.AddVBO(VertexBuffer(
+  //         mesh->mTextureCoords.BufferPtr(), mesh->mTextureCoords.BufferSize(),
+  //         BufferLayout("UVs", 2, 0, 2, GL_FLOAT)));
+  //   }
+  if (!mesh->mOffsets.IsEmpty())
   {
     vao.AddVBO(VertexBuffer(
-        mesh->mTextureCoords.BufferPtr(), mesh->mTextureCoords.BufferSize(),
-        BufferLayout("UVs", 2, 0, 2, GL_FLOAT)));
+        mesh->mOffsets.BufferPtr(), mesh->mOffsets.BufferSize(),
+        BufferLayout("Offsets", 3, 0, 2, GL_FLOAT), true));
   }
   return {vao, ibo};
 }

@@ -53,6 +53,7 @@ void PhysicsSimulationApp::LoadObject()
   if (optionalPath && fs::exists(*optionalPath))
   {
     auto *voxelMesh = Utils::DeSerialize(*optionalPath);
+    voxelMesh->mMesh->mOffsets.SetBufferSize(voxelMesh->mMesh->mVertices.BufferSize());
     u32 handle = VoxelMeshManager::Get().SubmitMesh(voxelMesh);
     // TODO: Modify the physics engine so it takes object setting modifications into account
     //     mPhysicsEngine->SubmitObject(handle);
@@ -163,14 +164,12 @@ void PhysicsSimulationApp::ApplyDeformations()
     {
       for (auto index : voxel.mMeshVertices)
       {
-        // glm::vec3 offset = voxel.mPosition - settings->mPosition;
-        vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
-        //         vMesh->mMesh->mVertices[(index * 3)] += voxel.mRelativePositionDelta.x;
-        //         vMesh->mMesh->mVertices[(index * 3) + 1] += voxel.mRelativePositionDelta.y;
-        //         vMesh->mMesh->mVertices[(index * 3) + 2] += voxel.mRelativePositionDelta.z;
+        // TODO: Maybe move the copying into the physics engine so it isn't copied twice?
+        //         vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
+        vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mRelativePositionDelta;
       }
     }
-    mRenderer->UpdateMesh(handle, vMesh->mMesh->mIndices);
+    mRenderer->UpdateMesh(handle);
   }
 }
 

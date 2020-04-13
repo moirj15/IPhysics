@@ -47,10 +47,10 @@ public:
    * \param len: The length of the list.
    * \param layout: The VertexBuffer's layout.
    */
-  VertexBuffer(const f32 *vertexes, const u32 len, const BufferLayout &layout)
+  VertexBuffer(const f32 *vertexes, const u32 len, const BufferLayout &layout, bool dynamic = false)
   {
     mLayout.emplace_back(layout);
-    mHandle = CreateBuffer(GL_ARRAY_BUFFER, (void *)vertexes, len * sizeof(f32));
+    mHandle = CreateBuffer(GL_ARRAY_BUFFER, (void *)vertexes, len * sizeof(f32), dynamic);
   }
   /**
    * \brief: Construct a VertexBuffer.
@@ -58,10 +58,12 @@ public:
    * \param len: The length of the list.
    * \param layout: The list of the VertexBuffer's layout.
    */
-  VertexBuffer(const f32 *vertexes, const u32 len, const std::vector<BufferLayout> &layout) :
+  VertexBuffer(
+      const f32 *vertexes, const u32 len, const std::vector<BufferLayout> &layout,
+      bool dynamic = false) :
       mLayout(layout)
   {
-    mHandle = CreateBuffer(GL_ARRAY_BUFFER, (void *)vertexes, len * sizeof(f32));
+    mHandle = CreateBuffer(GL_ARRAY_BUFFER, (void *)vertexes, len * sizeof(f32), dynamic);
   }
 
   /**

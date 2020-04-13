@@ -126,17 +126,23 @@ void RendererBackend::RemoveMesh(u32 handle)
   mMeshLibrary->Remove(handle);
 }
 
-void RendererBackend::UpdateMesh(const u32 handle, const std::vector<u32> &verts, Mesh *mesh)
+void RendererBackend::UpdateMesh(const u32 handle, Mesh *mesh)
 {
   auto [vao, ibo] = (*mMeshLibrary)[handle];
   const auto vbos = vao.GetVertexBuffers();
-  vbos[0].Bind();
-  for (auto v : verts)
-  {
-    glBufferSubData(
-        GL_ARRAY_BUFFER, (v * 3) * sizeof(f32), 3 * sizeof(f32),
-        &mesh->mVertices.AccessBuffer(v * 3)); // TODO: Replace this with a helper method
-  }
+  vbos[1].Bind();
+  glBufferSubData(
+      GL_ARRAY_BUFFER, 0, mesh->mOffsets.BufferSize() * sizeof(f32),
+      mesh->mOffsets.GetBuffer().data());
+  //   for (auto v : verts)
+  //   {
+  //     //     glBufferSubData(
+  //     //         GL_ARRAY_BUFFER, (v * 3) * sizeof(f32), 3 * sizeof(f32),
+  //     //         &mesh->mVertices.AccessBuffer(v * 3)); // TODO: Replace this with a helper
+  //     method glBufferSubData(
+  //         GL_ARRAY_BUFFER, (v * 3) * sizeof(f32), 3 * sizeof(f32),
+  //         &mesh->mOffsets.AccessBuffer(v * 3)); // TODO: Replace this with a helper method
+  //   }
 }
 
 void RendererBackend::DrawFromCommand(const DrawCommand &command)
