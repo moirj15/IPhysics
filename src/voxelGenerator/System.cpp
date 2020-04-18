@@ -148,6 +148,24 @@ void System::GenerateVoxels()
     // TODO: remove duplicate vertices
     mRenderer->RemoveMesh(mCurrentVoxelMeshHandle);
     mCurrentVoxelMeshHandle = mRenderer->RegisterVoxelMesh(mVoxelMesh.get());
+    //     QuickCastBuffer<f32, glm::vec3> points;
+    //     for (auto &[key, voxel] : mVoxelMesh->mVoxels)
+    //     {
+    //       for (const auto &bezierCurve : voxel.mBezierCurves)
+    //       {
+    //         points.CastBufferPushBack(bezierCurve.mControlPoints);
+    //       }
+    //     }
+    //
+    //     mRenderer->DrawPoints(points);
+  }
+}
+
+void System::Render()
+{
+  mRenderer->Clear();
+  if (mVoxelMesh)
+  {
     QuickCastBuffer<f32, glm::vec3> points;
     for (auto &[key, voxel] : mVoxelMesh->mVoxels)
     {
@@ -156,14 +174,8 @@ void System::GenerateVoxels()
         points.CastBufferPushBack(bezierCurve.mControlPoints);
       }
     }
-
     mRenderer->DrawPoints(points);
   }
-}
-
-void System::Render()
-{
-  mRenderer->Clear();
 
   if (mCurrentMeshHandle != 0)
   {

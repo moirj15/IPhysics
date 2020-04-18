@@ -54,7 +54,7 @@ struct BezierCurve
     assert(!isnan(mTStart) && !isnan(mTStart) && "NAN");
   }
 
-  explicit BezierCurve(const BezierCurve &b) :
+  BezierCurve(const BezierCurve &b) :
       mControlPoints(b.mControlPoints), mTStart(b.mTStart), mTEnd(b.mTEnd)
   {
   }

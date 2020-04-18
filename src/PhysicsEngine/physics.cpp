@@ -1,7 +1,9 @@
 #include "physics.h"
 
+#include "../utils/MathCasts.h"
 #include "../voxelObjects/VoxelMesh.h"
 
+#include <glm/gtx/component_wise.hpp>
 #include <unordered_set>
 
 namespace Physics
@@ -21,21 +23,65 @@ void PhysicsEngine::Update(f32 t)
 {
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
   mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
+  // TODO: add a bool to make this optional
+  auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
+  s32 numManifolds = voxelDispatcher->getNumManifolds();
+  for (s32 i = 0; i < numManifolds; i++)
+  {
+    auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
+    s32 numContacts = contactManifold->getNumContacts();
+    for (s32 j = 0; j < numContacts; j++)
+    {
+      auto contactPoint = contactManifold->getContactPoint(j);
+      f32 impulse = contactPoint.getAppliedImpulse();
+      auto *voxelRB = contactManifold->getBody1();
+      auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
+      // TODO: store the mass of the voxel, since we can't get this from bullet
+      f32 density = glm::compMul(voxel->mDimensions) * 1.0f;
+      const f32 impulseThreshold = density; // * 10.0f;
+      if (impulse > impulseThreshold)
+      {
+        auto impulseDirection = ToGLM(contactPoint.m_normalWorldOnB);
+        impulseDirection *= impulse;
+        //         printf("impulse * t %f\n", impulse * t * 0.01f);
+        for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
+        {
+          auto &bezierCurve = voxel->mBezierCurves[v];
+          bezierCurve.mControlPoints[0] += impulseDirection;
+          bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] += impulseDirection;
+        }
+      }
+    }
+  }
   for (const auto &[key, voxelRBs] : mVoxels)
   {
     auto *objectSettings = VoxelMeshManager::Get().GetSettings(key);
     for (auto &voxelRB : voxelRBs)
     {
+
       const auto &origin = voxelRB->getWorldTransform().getOrigin();
       glm::vec3 voxelCurrPosition(origin.x(), origin.y(), origin.z());
       auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
+      auto orignalPosition = voxel->mPosition;
       voxel->mPosition = voxelCurrPosition;
-      //       voxel->mRelativePositionDelta =
-      //           (voxel->mPosition - objectSettings->mPosition) -
-      //           voxel->mPositionRelativeToCenter;
+      auto toNewPosition = voxel->mPosition - orignalPosition;
+      // TODO: may have to move this to before the dimensions of the voxel are changed.
+      for (u32 i = 0; i < voxel->mBezierCurves.size(); i++)
+      {
+        for (u32 b = 0; b < voxel->mBezierCurves[i].mControlPoints.size(); b++)
+        {
+          auto &controlPoints = voxel->mBezierCurves[i].mControlPoints;
+          controlPoints[b] += toNewPosition;
+        }
+      }
       voxel->mRelativePositionDelta +=
           (voxel->mPosition - objectSettings->mPosition) - voxel->mPositionRelativeToCenter;
       voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
+      //       auto scaling = ((btBoxShape *)voxelRB->getCollisionShape())->getLocalScaling();
+      //       ((btBoxShape
+      //       *)voxelRB->getCollisionShape())->setLocalScaling(ToBullet(voxel->mDimensions)); auto
+      //       scaling2 = ((btBoxShape *)voxelRB->getCollisionShape())->getLocalScaling();
+      //       mVoxelWorld.mDynamicsWorld->updateSingleAabb(voxelRB.get());
     }
   }
   for (const auto handle : mObjectHandles)
@@ -144,6 +190,7 @@ btCompoundShape *PhysicsEngine::AddVoxels(const VMeshHandle handle)
   mVoxels.emplace(handle, std::vector<std::unique_ptr<btRigidBody>>());
   std::unordered_map<glm::uvec3, btRigidBody *> neighbors;
   auto *collisionShape = new btCompoundShape(true, vMesh->mVoxels.size());
+  static u32 dontCollide = 1;
   for (auto &[key, voxel] : vMesh->mVoxels)
   {
 
@@ -177,11 +224,13 @@ btCompoundShape *PhysicsEngine::AddVoxels(const VMeshHandle handle)
     collisionShape->addChildShape(rigidBody->getWorldTransform(), voxelCollisionShape);
 
     // Add the object to the voxel world so it will only interact with other voxels
+    //     mVoxelWorld.mDynamicsWorld->addRigidBody(rigidBody, dontCollide, 0xffff ^ dontCollide);
     mVoxelWorld.mDynamicsWorld->addRigidBody(rigidBody);
 
     mVoxels[handle].emplace_back(rigidBody);
     neighbors.emplace(key, rigidBody);
   }
+  dontCollide <<= 1;
   std::vector<f32> masses(vMesh->mVoxels.size(), 1.0f);
   btTransform principal;
   btVector3 inertia;
@@ -225,11 +274,47 @@ btCompoundShape *PhysicsEngine::AddVoxels(const VMeshHandle handle)
           btVector3(-size.x, -size.y, -size.z) + btVector3(ap.x, ap.y, ap.z));
       constraint->setLinearUpperLimit(
           btVector3(size.x, size.y, size.z) - btVector3(ap.x, ap.y, ap.z));
-      // constraint->setLimit(2, 0.0, 1.0);
+      //       if (ap.x != 0.0)
+      //       {
+      //         constraint->setLimit(0, 0.0, 0.0);
+      //       }
+      //       else if (ap.y != 0.0)
+      //       {
+      //         constraint->setLimit(1, 0.0, 0.0);
+      //       }
+      //       else if (ap.z != 0.0)
+      //       {
+      //         constraint->setLimit(2, 0.0, 0.0);
+      //       }
+      //       constraint->setLimit(3, 0.0, 0.0);
+      //       constraint->setLimit(4, 0.0, 0.0);
+      //       constraint->setLimit(5, 0.0, 0.0);
       mVoxelWorld.mDynamicsWorld->addConstraint(constraint, false);
     }
   }
   return collisionShape;
+}
+
+void PhysicsEngine::AdjustVoxelSizeFromImpulse(
+    VoxObj::Voxel *voxel, f32 impulse, u32 modifiedDimm, u32 unchangedDimm0, u32 unchangedDimm1)
+{
+  f32 springForce = -1.0f * voxel->mDimensions[modifiedDimm];
+  // apply the impulse then
+  // solve for the new values of the undisturbed dimensions
+  if (impulse > springForce)
+  {
+    springForce += impulse;
+    f32 volume = glm::compMul(voxel->mDimensions);
+    voxel->mDimensions[modifiedDimm] = glm::abs(springForce / -2.0f);
+
+    volume = volume / voxel->mDimensions[modifiedDimm];
+    f32 volume2 = glm::compMul(voxel->mDimensions);
+    int foo = 0;
+
+    voxel->mDimensions[unchangedDimm0] = sqrt(volume);
+    voxel->mDimensions[unchangedDimm1] = sqrt(volume);
+    voxel->mDimensions = glm::abs(voxel->mDimensions);
+  }
 }
 
 } // namespace Physics

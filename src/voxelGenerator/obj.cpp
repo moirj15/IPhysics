@@ -100,7 +100,7 @@ void ObjReader::Clear()
 void ObjReader::LoadOBJFile(const char *filename)
 {
   mFilename = filename;
-  FILE *fp = OpenFile(filename, "r");
+  FILE *fp = OpenFile(filename, "rb");
   char *data = nullptr;
   Size len = 0;
 
@@ -204,7 +204,7 @@ void ObjReader::ParseFace()
   //     mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
   //   }
   std::string lineStr{ReadLine()};
-  ReplaceChars(&lineStr, '/', ' ');
+  //   ReplaceChars(&lineStr, '/', ' ');
   std::stringstream line{lineStr};
   //   u32 index = 0;
   //   u32 texCoord = 0;

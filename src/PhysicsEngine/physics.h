@@ -102,6 +102,8 @@ private:
   void Init();
   void AddObject(const VMeshHandle handle, btCompoundShape *collisionShape);
   btCompoundShape *AddVoxels(const VMeshHandle handle);
+  void AdjustVoxelSizeFromImpulse(
+      VoxObj::Voxel *voxel, f32 impulse, u32 modifiedDimm, u32 unchangedDimm0, u32 unchangedDimm1);
 };
 
 } // namespace Physics

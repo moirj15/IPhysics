@@ -41,7 +41,10 @@ u32 RendererFrontend::RegisterMesh(Mesh *mesh)
     auto &normals = mesh->mNormals;
     auto normal = mesh->mVertices.AccessCastBuffer(i);
     //     glm::vec3 normal(vertices[i], vertices[i + 1], vertices[i + 2]);
-    normal = glm::normalize(normal);
+    if (glm::length(normal) > 0.0f)
+    {
+      normal = glm::normalize(normal);
+    }
     normals.AccessCastBuffer(i) = normal;
     //     normals[i] = normal.x;
     //     normals[i + 1] = normal.y;
@@ -123,6 +126,7 @@ void RendererFrontend::DrawMesh(const u32 handle)
 
 void RendererFrontend::DrawPoints(const QuickCastBuffer<f32, glm::vec3> &points)
 {
+  static u32 handle = 0;
   std::vector<ShaderData> shaderData = {
       ShaderData("camera", mCamera->CalculateMatrix()),
       ShaderData("projection", mProjection),
@@ -134,10 +138,11 @@ void RendererFrontend::DrawPoints(const QuickCastBuffer<f32, glm::vec3> &points)
     mesh.mIndices.emplace_back(i);
   }
 
-  auto handle = mBackend->SubmitMesh(&mesh);
-  mPointMeshHandles.emplace_back(handle);
-  //   DrawCommand dc(CommandType::DrawPoints, handle, shaderData, true);
-  //   mBackend->SubmitCommand(dc);
+  mBackend->RemoveMesh(handle);
+  handle = mBackend->SubmitMesh(&mesh);
+  //   mPointMeshHandles.emplace_back(handle);
+  DrawCommand dc(CommandType::DrawPoints, handle, shaderData);
+  mBackend->SubmitCommand(dc);
 }
 
 void RendererFrontend::Draw()
@@ -170,15 +175,15 @@ void RendererFrontend::Draw()
     DrawCommand dc(CommandType::DrawSolidPhong, mMeshHandles[key], shaderData);
     mBackend->SubmitCommand(dc);
   }
-  for (const u32 h : mPointMeshHandles)
-  {
-    std::vector<ShaderData> shaderData = {
-        ShaderData("projection", mProjection),
-        ShaderData("camera", mCamera->CalculateMatrix()),
-    };
-    DrawCommand dc(CommandType::DrawPoints, h, shaderData);
-    mBackend->SubmitCommand(dc);
-  }
+  //   for (const u32 h : mPointMeshHandles)
+  //   {
+  //     std::vector<ShaderData> shaderData = {
+  //         ShaderData("projection", mProjection),
+  //         ShaderData("camera", mCamera->CalculateMatrix()),
+  //     };
+  //     DrawCommand dc(CommandType::DrawPoints, h, shaderData);
+  //     mBackend->SubmitCommand(dc);
+  //   }
   mBackend->Draw();
 }
 
