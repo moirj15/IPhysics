@@ -177,6 +177,24 @@ void PhysicsSimulationApp::ApplyDeformations()
 void PhysicsSimulationApp::Render()
 {
   mRenderer->Clear();
+
+  // TODO: add debug check
+  QuickCastBuffer<f32, glm::vec3> points;
+  for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
+  {
+    for (const auto &[key, voxel] : vMesh->mVoxels)
+    {
+      for (const auto &bezierCurve : voxel.mBezierCurves)
+      {
+        for (const auto &cp : bezierCurve.mControlPoints)
+        {
+          points.CastBufferPushBack(cp);
+        }
+      }
+    }
+  }
+  mRenderer->DrawPoints(points);
+
   mRenderer->Draw();
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
   mDB->Draw(mCamera.CalculateMatrix(), mProjection);

@@ -24,35 +24,36 @@ void PhysicsEngine::Update(f32 t)
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
   mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
   // TODO: add a bool to make this optional
-  auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
-  s32 numManifolds = voxelDispatcher->getNumManifolds();
-  for (s32 i = 0; i < numManifolds; i++)
-  {
-    auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
-    s32 numContacts = contactManifold->getNumContacts();
-    for (s32 j = 0; j < numContacts; j++)
-    {
-      auto contactPoint = contactManifold->getContactPoint(j);
-      f32 impulse = contactPoint.getAppliedImpulse();
-      auto *voxelRB = contactManifold->getBody1();
-      auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
-      // TODO: store the mass of the voxel, since we can't get this from bullet
-      f32 density = glm::compMul(voxel->mDimensions) * 1.0f;
-      const f32 impulseThreshold = density; // * 10.0f;
-      if (impulse > impulseThreshold)
-      {
-        auto impulseDirection = ToGLM(contactPoint.m_normalWorldOnB);
-        impulseDirection *= impulse;
-        //         printf("impulse * t %f\n", impulse * t * 0.01f);
-        for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
-        {
-          auto &bezierCurve = voxel->mBezierCurves[v];
-          bezierCurve.mControlPoints[0] += impulseDirection;
-          bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] += impulseDirection;
-        }
-      }
-    }
-  }
+  //   auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
+  //   s32 numManifolds = voxelDispatcher->getNumManifolds();
+  //   for (s32 i = 0; i < numManifolds; i++)
+  //   {
+  //     auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
+  //     s32 numContacts = contactManifold->getNumContacts();
+  //     for (s32 j = 0; j < numContacts; j++)
+  //     {
+  //       auto contactPoint = contactManifold->getContactPoint(j);
+  //       f32 impulse = contactPoint.getAppliedImpulse();
+  //       auto *voxelRB = contactManifold->getBody1();
+  //       auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
+  //       // TODO: store the mass of the voxel, since we can't get this from bullet
+  //       f32 density = glm::compMul(voxel->mDimensions) * 1.0f;
+  //       const f32 impulseThreshold = density; // * 10.0f;
+  //       if (impulse > impulseThreshold)
+  //       {
+  //         auto impulseDirection = ToGLM(contactPoint.m_normalWorldOnB);
+  //         impulseDirection *= impulse;
+  //         //         printf("impulse * t %f\n", impulse * t * 0.01f);
+  //         for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
+  //         {
+  //           auto &bezierCurve = voxel->mBezierCurves[v];
+  //           bezierCurve.mControlPoints[0] += impulseDirection;
+  //           bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] +=
+  //           impulseDirection;
+  //         }
+  //       }
+  //     }
+  //   }
   for (const auto &[key, voxelRBs] : mVoxels)
   {
     auto *objectSettings = VoxelMeshManager::Get().GetSettings(key);
@@ -265,30 +266,32 @@ btCompoundShape *PhysicsEngine::AddVoxels(const VMeshHandle handle)
       glm::vec3 bp(-ap);
       auto *voxelRB = neighbors[key];
       auto *neighbor = neighbors[n];
-      auto a = btTransform::getIdentity();
+      auto a = voxelRB->getWorldTransform(); // btTransform::getIdentity();
+      a.setOrigin(btVector3(0.0f, 0.0f, 0.0f));
       // a.setOrigin(btVector3(ap.x, ap.y, ap.z));
-      auto b = btTransform::getIdentity();
+      auto b = neighbor->getWorldTransform(); // btTransform::getIdentity();
+      b.setOrigin(btVector3(0.0f, 0.0f, 0.0f));
       // b.setOrigin(btVector3(bp.x, bp.y, bp.z));
       auto *constraint = new btGeneric6DofSpringConstraint(*voxelRB, *neighbor, a, b, true);
-      constraint->setLinearLowerLimit(
-          btVector3(-size.x, -size.y, -size.z) + btVector3(ap.x, ap.y, ap.z));
-      constraint->setLinearUpperLimit(
-          btVector3(size.x, size.y, size.z) - btVector3(ap.x, ap.y, ap.z));
-      //       if (ap.x != 0.0)
+      auto lower = -size + ap;
+      auto upper = size - ap;
+      //       constraint->setLinearLowerLimit(ToBullet(lower));
+      //       constraint->setLinearUpperLimit(ToBullet(upper));
+      constraint->setLimit(0, -1.0, 1.0);
+      constraint->setLimit(1, -1.0, 1.0);
+      constraint->setLimit(2, -1.0, 1.0);
+      //       if (ap.x != 0.0f)
       //       {
       //         constraint->setLimit(0, 0.0, 0.0);
       //       }
-      //       else if (ap.y != 0.0)
+      //       if (ap.y != 0.0f)
       //       {
       //         constraint->setLimit(1, 0.0, 0.0);
       //       }
-      //       else if (ap.z != 0.0)
+      //       if (ap.z != 0.0f)
       //       {
       //         constraint->setLimit(2, 0.0, 0.0);
       //       }
-      //       constraint->setLimit(3, 0.0, 0.0);
-      //       constraint->setLimit(4, 0.0, 0.0);
-      //       constraint->setLimit(5, 0.0, 0.0);
       mVoxelWorld.mDynamicsWorld->addConstraint(constraint, false);
     }
   }
