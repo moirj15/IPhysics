@@ -136,6 +136,11 @@ void PhysicsSimulationApp::CollectUIInput()
     mPhysicsEngine->SetEngineSettings(mUI->GetPhysicsSettings());
     for (auto &[handle, setting] : mUI->GetAllObjectSettings())
     {
+      auto *voxelMesh = VoxelMeshManager::Get().GetMesh(handle);
+      for (auto &[key, voxel] : voxelMesh->mVoxels)
+      {
+        voxel.UpdateBezierCurves(setting.mPosition);
+      }
       VoxelMeshManager::Get().UpdateOriginalSettings(handle, setting);
       mPhysicsEngine->SubmitObject(handle);
     }
@@ -166,7 +171,7 @@ void PhysicsSimulationApp::ApplyDeformations()
       {
         // TODO: Maybe move the copying into the physics engine so it isn't copied twice?
         //         vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
-        vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mRelativePositionDelta;
+        //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mRelativePositionDelta;
         //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
       }
     }
@@ -177,23 +182,69 @@ void PhysicsSimulationApp::ApplyDeformations()
 void PhysicsSimulationApp::Render()
 {
   mRenderer->Clear();
-
-  // TODO: add debug check
-  QuickCastBuffer<f32, glm::vec3> points;
-  for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
+  if (mPhysicsSimulationRunning)
   {
-    for (const auto &[key, voxel] : vMesh->mVoxels)
+
+    for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
     {
-      for (const auto &bezierCurve : voxel.mBezierCurves)
+      auto *mesh = vMesh->mMesh;
+      for (auto &[key, voxel] : vMesh->mVoxels)
       {
-        for (const auto &cp : bezierCurve.mControlPoints)
+        std::unordered_map<u32, bool> alreadyCalculated;
+        for (auto &bezierCurve : voxel.mBezierCurves)
         {
-          points.CastBufferPushBack(cp);
+          if (bezierCurve.mControlPoints.size() == 3)
+          {
+            if (alreadyCalculated[bezierCurve.mEffectedPoints[0]])
+            {
+              continue;
+            }
+            // just assuming t = .5 for now, need to actually calculate this later
+            mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
+                voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
+            // mesh->mOffsets.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
+            //    voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
+          }
+          else // if (bezierCurve.mControlPoints.size() == 4)
+          {
+            if (alreadyCalculated[bezierCurve.mEffectedPoints[0]]
+                && alreadyCalculated[bezierCurve
+                                         .mEffectedPoints[bezierCurve.mEffectedPoints.size() - 1]])
+            {
+              continue;
+            }
+            u32 effectedPoint = alreadyCalculated[bezierCurve.mEffectedPoints[0]]
+                                    ? bezierCurve.mEffectedPoints[0]
+                                    : bezierCurve.mEffectedPoints[1];
+            f32 t = alreadyCalculated[bezierCurve.mEffectedPoints[0]] ? bezierCurve.mTStart
+                                                                      : bezierCurve.mTEnd;
+
+            mesh->mVertices.AccessCastBuffer(effectedPoint) =
+                voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t);
+            // mesh->mOffsets.AccessCastBuffer(effectedPoint) =
+            //    voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t);
+          }
         }
       }
     }
   }
-  mRenderer->DrawPoints(points);
+
+  // TODO: add debug check
+  //   QuickCastBuffer<f32, glm::vec3> points;
+  //   for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
+  //   {
+  //     for (const auto &[key, voxel] : vMesh->mVoxels)
+  //     {
+  //       for (const auto &bezierCurve : voxel.mBezierCurves)
+  //       {
+  //         for (const auto &cp : bezierCurve.mControlPoints)
+  //         {
+  //           points.CastBufferPushBack(cp);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   mRenderer->DrawPoints(points);
 
   mRenderer->Draw();
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

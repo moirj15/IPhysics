@@ -13,6 +13,8 @@ struct BezierCurve
   // The value of t where the line ends
   f32 mTEnd = 1.0f;
 
+  std::vector<u32> mEffectedPoints;
+
   BezierCurve() = default;
 
   /**
@@ -25,7 +27,8 @@ struct BezierCurve
    * control points come from ray casts. The points that aren't the starting or final control points
    * come from the vertices of the edge that this BezierCurve will represent.
    */
-  BezierCurve(const std::vector<glm::vec3> &controlPoints) : mControlPoints(controlPoints)
+  BezierCurve(const std::vector<glm::vec3> &controlPoints, const std::vector<u32> &effectedPoints) :
+      mControlPoints(controlPoints), mEffectedPoints(effectedPoints)
   {
     assert((mControlPoints.size() == 3) || (mControlPoints.size() == 4));
     f32 totalLength = glm::length(controlPoints.back() - controlPoints.front());
@@ -55,7 +58,8 @@ struct BezierCurve
   }
 
   BezierCurve(const BezierCurve &b) :
-      mControlPoints(b.mControlPoints), mTStart(b.mTStart), mTEnd(b.mTEnd)
+      mControlPoints(b.mControlPoints), mTStart(b.mTStart), mTEnd(b.mTEnd),
+      mEffectedPoints(b.mEffectedPoints)
   {
   }
 };

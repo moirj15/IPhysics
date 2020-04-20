@@ -130,10 +130,14 @@ void RendererBackend::UpdateMesh(const u32 handle, Mesh *mesh)
 {
   auto [vao, ibo] = (*mMeshLibrary)[handle];
   const auto vbos = vao.GetVertexBuffers();
-  vbos[2].Bind();
+  //   vbos[2].Bind();
+  //   glBufferSubData(
+  //       GL_ARRAY_BUFFER, 0, mesh->mOffsets.BufferSize() * sizeof(f32),
+  //       mesh->mOffsets.GetBuffer().data());
+  vbos[0].Bind();
   glBufferSubData(
-      GL_ARRAY_BUFFER, 0, mesh->mOffsets.BufferSize() * sizeof(f32),
-      mesh->mOffsets.GetBuffer().data());
+      GL_ARRAY_BUFFER, 0, mesh->mVertices.BufferSize() * sizeof(f32),
+      mesh->mVertices.GetBuffer().data());
 }
 
 void RendererBackend::DrawFromCommand(const DrawCommand &command)

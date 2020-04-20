@@ -24,36 +24,42 @@ void PhysicsEngine::Update(f32 t)
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
   mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
   // TODO: add a bool to make this optional
-  //   auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
-  //   s32 numManifolds = voxelDispatcher->getNumManifolds();
-  //   for (s32 i = 0; i < numManifolds; i++)
-  //   {
-  //     auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
-  //     s32 numContacts = contactManifold->getNumContacts();
-  //     for (s32 j = 0; j < numContacts; j++)
-  //     {
-  //       auto contactPoint = contactManifold->getContactPoint(j);
-  //       f32 impulse = contactPoint.getAppliedImpulse();
-  //       auto *voxelRB = contactManifold->getBody1();
-  //       auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
-  //       // TODO: store the mass of the voxel, since we can't get this from bullet
-  //       f32 density = glm::compMul(voxel->mDimensions) * 1.0f;
-  //       const f32 impulseThreshold = density; // * 10.0f;
-  //       if (impulse > impulseThreshold)
-  //       {
-  //         auto impulseDirection = ToGLM(contactPoint.m_normalWorldOnB);
-  //         impulseDirection *= impulse;
-  //         //         printf("impulse * t %f\n", impulse * t * 0.01f);
-  //         for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
-  //         {
-  //           auto &bezierCurve = voxel->mBezierCurves[v];
-  //           bezierCurve.mControlPoints[0] += impulseDirection;
-  //           bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] +=
-  //           impulseDirection;
-  //         }
-  //       }
-  //     }
-  //   }
+  auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
+  s32 numManifolds = voxelDispatcher->getNumManifolds();
+  for (s32 i = 0; i < numManifolds; i++)
+  {
+    auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
+    s32 numContacts = contactManifold->getNumContacts();
+    for (s32 j = 0; j < numContacts; j++)
+    {
+      auto contactPoint = contactManifold->getContactPoint(j);
+      f32 impulse = contactPoint.getAppliedImpulse();
+      auto *voxelRB = contactManifold->getBody1();
+      auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
+      // TODO: store the mass of the voxel, since we can't get this from bullet
+      f32 density = glm::compMul(voxel->mDimensions) * 1.0f;
+      const f32 impulseThreshold = density; // * 10.0f;
+      if (impulse > impulseThreshold)
+      {
+        // Use the contactPoint's B normal to determine which voxel face to adjust
+        auto contactNormal = ToGLM(contactPoint.m_normalWorldOnB);
+        contactNormal *= impulse;
+        //         printf("impulse * t %f\n", impulse * t * 0.01f);
+        for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
+        {
+          auto &bezierCurve = voxel->mBezierCurves[v];
+          // TODO: compare these two methods of modifying the bezier curves
+          //           for (auto &cp : bezierCurve.mControlPoints)
+          //           {
+          //             cp += impulseDirection;
+          //           }
+          auto cpInModelSpace = bezierCurve.mControlPoints[0] - voxel->mPosition;
+          bezierCurve.mControlPoints[0] += contactNormal;
+          bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] += contactNormal;
+        }
+      }
+    }
+  }
   for (const auto &[key, voxelRBs] : mVoxels)
   {
     auto *objectSettings = VoxelMeshManager::Get().GetSettings(key);
@@ -67,22 +73,10 @@ void PhysicsEngine::Update(f32 t)
       voxel->mPosition = voxelCurrPosition;
       auto toNewPosition = voxel->mPosition - orignalPosition;
       // TODO: may have to move this to before the dimensions of the voxel are changed.
-      for (u32 i = 0; i < voxel->mBezierCurves.size(); i++)
-      {
-        for (u32 b = 0; b < voxel->mBezierCurves[i].mControlPoints.size(); b++)
-        {
-          auto &controlPoints = voxel->mBezierCurves[i].mControlPoints;
-          controlPoints[b] += toNewPosition;
-        }
-      }
+      voxel->UpdateBezierCurves(toNewPosition);
       voxel->mRelativePositionDelta +=
           (voxel->mPosition - objectSettings->mPosition) - voxel->mPositionRelativeToCenter;
       voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
-      //       auto scaling = ((btBoxShape *)voxelRB->getCollisionShape())->getLocalScaling();
-      //       ((btBoxShape
-      //       *)voxelRB->getCollisionShape())->setLocalScaling(ToBullet(voxel->mDimensions)); auto
-      //       scaling2 = ((btBoxShape *)voxelRB->getCollisionShape())->getLocalScaling();
-      //       mVoxelWorld.mDynamicsWorld->updateSingleAabb(voxelRB.get());
     }
   }
   for (const auto handle : mObjectHandles)

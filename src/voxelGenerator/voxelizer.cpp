@@ -223,17 +223,20 @@ void Voxelizer::AddBezierCurves(VoxObj::VoxelMesh *voxelMesh)
         auto secondIntersection =
             CastRayInBox(startToExtendedStart, Box(voxel.mPosition, voxel.mDimensions));
 
+        std::vector<u32> effectedPoints;
         std::vector<glm::vec3> controlPoints;
         controlPoints.emplace_back(firstIntersection);
         controlPoints.emplace_back(startVert);
+        effectedPoints.push_back(edge.mStartVert);
         if (voxel.InVoxel(edge.mEndVert))
         {
           controlPoints.emplace_back(endVert);
+          effectedPoints.push_back(edge.mEndVert);
         }
 
         controlPoints.emplace_back(secondIntersection);
 
-        voxelMesh->mVoxels[key].mBezierCurves.emplace_back(controlPoints);
+        voxelMesh->mVoxels[key].mBezierCurves.emplace_back(controlPoints, effectedPoints);
         //       printf("first: %s\n", glm::to_string(firstIntersection).c_str());
         //       printf("second: %s\n\n", glm::to_string(secondIntersection).c_str());
       }

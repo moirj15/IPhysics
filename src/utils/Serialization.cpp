@@ -98,6 +98,14 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
         file << cp.x << " " << cp.y << " " << cp.z << " ";
       }
       file << "\n";
+      file << "[Effected point count]\n" << b.mEffectedPoints.size() << "\n";
+      file << "[Effected points]\n";
+      for (const auto &e : b.mEffectedPoints)
+      {
+        file << e << " ";
+      }
+
+      file << "\n";
     }
   }
 }
@@ -248,6 +256,18 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
         file >> voxel.mBezierCurves[b].mControlPoints[cp].x
             >> voxel.mBezierCurves[b].mControlPoints[cp].y
             >> voxel.mBezierCurves[b].mControlPoints[cp].z;
+      }
+
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      u64 effectPointCount = 0;
+      file >> effectPointCount;
+      voxel.mBezierCurves[b].mEffectedPoints.resize(effectPointCount);
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      for (u64 effectedPoint = 0; effectedPoint < effectPointCount; effectedPoint++)
+      {
+        file >> voxel.mBezierCurves[b].mEffectedPoints[effectedPoint];
       }
     }
 

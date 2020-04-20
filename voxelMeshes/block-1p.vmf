@@ -41,6 +41,10 @@
 3
 [Control Points]
 -1 -1 -1 -1 -1 -1 -1 -1 0 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 0
 [TEnd]
@@ -49,6 +53,10 @@
 3
 [Control Points]
 -1 -1 -1 -1 -1 -1 -1 0 0 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 0
 [TEnd]
@@ -57,6 +65,10 @@
 3
 [Control Points]
 -1 -1 -1 -1 -1 -1 0 -1 -1 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 0
 [TEnd]
@@ -65,6 +77,10 @@
 3
 [Control Points]
 -1 -1 -1 -1 -1 -1 -1 0 -1 
+[Effected point count]
+1
+[Effected points]
+5 
 [Key]
 1 1 0
 [Dimensions]
@@ -87,6 +103,10 @@
 3
 [Control Points]
 1 1 -1 1 1 -1 0 1 -1 
+[Effected point count]
+1
+[Effected points]
+0 
 [TStart]
 0
 [TEnd]
@@ -95,6 +115,10 @@
 3
 [Control Points]
 1 1 -1 1 1 -1 1 1 0 
+[Effected point count]
+1
+[Effected points]
+0 
 [TStart]
 0
 [TEnd]
@@ -103,6 +127,10 @@
 3
 [Control Points]
 1 1 -1 1 1 -1 1 0 0 
+[Effected point count]
+1
+[Effected points]
+0 
 [TStart]
 0
 [TEnd]
@@ -111,6 +139,10 @@
 3
 [Control Points]
 1 1 -1 1 1 -1 1 0 -1 
+[Effected point count]
+1
+[Effected points]
+0 
 [Key]
 0 0 1
 [Dimensions]
@@ -133,6 +165,10 @@
 3
 [Control Points]
 -1 -1 1 -1 -1 1 0 -1 1 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0
 [TEnd]
@@ -141,6 +177,10 @@
 3
 [Control Points]
 -1 -1 1 -1 -1 1 0 0 1 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0
 [TEnd]
@@ -149,6 +189,10 @@
 3
 [Control Points]
 -1 -1 1 -1 -1 1 -1 0 1 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0
 [TEnd]
@@ -157,6 +201,10 @@
 3
 [Control Points]
 -1 -1 1 -1 -1 1 -1 -1 0 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0
 [TEnd]
@@ -165,6 +213,10 @@
 3
 [Control Points]
 -1 -1 1 -1 -1 1 0 -1 0 
+[Effected point count]
+1
+[Effected points]
+7 
 [Key]
 0 1 0
 [Dimensions]
@@ -187,6 +239,10 @@
 3
 [Control Points]
 -1 1 -1 -1 1 -1 0 1 0 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 0
 [TEnd]
@@ -195,6 +251,10 @@
 3
 [Control Points]
 -1 1 -1 -1 1 -1 0 1 -1 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 0
 [TEnd]
@@ -203,6 +263,10 @@
 3
 [Control Points]
 -1 1 -1 -1 1 -1 0 0 -1 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 0
 [TEnd]
@@ -211,6 +275,10 @@
 3
 [Control Points]
 -1 1 -1 -1 1 -1 -1 0 -1 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 0
 [TEnd]
@@ -219,6 +287,10 @@
 3
 [Control Points]
 -1 1 -1 -1 1 -1 -1 1 0 
+[Effected point count]
+1
+[Effected points]
+4 
 [Key]
 1 0 0
 [Dimensions]
@@ -241,6 +313,10 @@
 3
 [Control Points]
 1 -1 -1 1 -1 -1 0 -1 0 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0
 [TEnd]
@@ -249,6 +325,10 @@
 3
 [Control Points]
 1 -1 -1 1 -1 -1 0 -1 -1 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0
 [TEnd]
@@ -257,6 +337,10 @@
 3
 [Control Points]
 1 -1 -1 1 -1 -1 1 0 -1 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0
 [TEnd]
@@ -265,6 +349,10 @@
 3
 [Control Points]
 1 -1 -1 1 -1 -1 1 -1 0 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0
 [TEnd]
@@ -273,6 +361,10 @@
 3
 [Control Points]
 1 -1 -1 1 -1 -1 0 0 -1 
+[Effected point count]
+1
+[Effected points]
+1 
 [Key]
 0 1 1
 [Dimensions]
@@ -295,6 +387,10 @@
 3
 [Control Points]
 -1 1 1 -1 1 1 -1 0 0 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 0
 [TEnd]
@@ -303,6 +399,10 @@
 3
 [Control Points]
 -1 1 1 -1 1 1 -1 0 1 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 0
 [TEnd]
@@ -311,6 +411,10 @@
 3
 [Control Points]
 -1 1 1 -1 1 1 0 1 1 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 0
 [TEnd]
@@ -319,6 +423,10 @@
 3
 [Control Points]
 -1 1 1 -1 1 1 -1 1 0 
+[Effected point count]
+1
+[Effected points]
+6 
 [Key]
 1 0 1
 [Dimensions]
@@ -341,6 +449,10 @@
 3
 [Control Points]
 1 -1 1 1 -1 1 1 0 1 
+[Effected point count]
+1
+[Effected points]
+3 
 [TStart]
 0
 [TEnd]
@@ -349,6 +461,10 @@
 3
 [Control Points]
 1 -1 1 1 -1 1 0 -1 1 
+[Effected point count]
+1
+[Effected points]
+3 
 [TStart]
 0
 [TEnd]
@@ -357,6 +473,10 @@
 3
 [Control Points]
 1 -1 1 1 -1 1 1 -1 0 
+[Effected point count]
+1
+[Effected points]
+3 
 [TStart]
 0
 [TEnd]
@@ -365,6 +485,10 @@
 3
 [Control Points]
 1 -1 1 1 -1 1 1 0 0 
+[Effected point count]
+1
+[Effected points]
+3 
 [Key]
 1 1 1
 [Dimensions]
@@ -387,6 +511,10 @@
 3
 [Control Points]
 1 1 1 1 1 1 1 1 0 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 0
 [TEnd]
@@ -395,6 +523,10 @@
 3
 [Control Points]
 1 1 1 1 1 1 0 1 0 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 0
 [TEnd]
@@ -403,6 +535,10 @@
 3
 [Control Points]
 1 1 1 1 1 1 0 0 1 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 0
 [TEnd]
@@ -411,6 +547,10 @@
 3
 [Control Points]
 1 1 1 1 1 1 1 0 1 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 0
 [TEnd]
@@ -419,3 +559,7 @@
 3
 [Control Points]
 1 1 1 1 1 1 0 1 1 
+[Effected point count]
+1
+[Effected points]
+2 

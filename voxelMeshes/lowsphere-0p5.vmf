@@ -41,6 +41,10 @@
 3
 [Control Points]
 -0.688188 -0.525731 -0.5 -0.688189 -0.525736 -0.499997 -0.683274 -0.5 -0.515124 
+[Effected point count]
+1
+[Effected points]
+16 
 [TStart]
 1.00002
 [TEnd]
@@ -49,6 +53,10 @@
 3
 [Control Points]
 -0.451058 -0.999996 -0.672281 -0.688189 -0.525736 -0.499997 -0.688185 -0.525744 -0.5 
+[Effected point count]
+1
+[Effected points]
+16 
 [TStart]
 2.61467e-05
 [TEnd]
@@ -57,6 +65,10 @@
 3
 [Control Points]
 -0.688186 -0.525735 -0.5 -0.688189 -0.525736 -0.499997 -0.553209 -0.5 -0.614934 
+[Effected point count]
+1
+[Effected points]
+16 
 [TStart]
 1.00001
 [TEnd]
@@ -65,6 +77,10 @@
 3
 [Control Points]
 -0.48195 -0.604257 -1 -0.688189 -0.525736 -0.499997 -0.688188 -0.525736 -0.5 
+[Effected point count]
+1
+[Effected points]
+16 
 [TStart]
 0.0545847
 [TEnd]
@@ -73,6 +89,10 @@
 3
 [Control Points]
 -0.729831 -0.5 -0.499997 -0.688189 -0.525736 -0.499997 -1.49272 -0.028513 -0.5 
+[Effected point count]
+1
+[Effected points]
+16 
 [TStart]
 1.00008
 [TEnd]
@@ -81,6 +101,10 @@
 3
 [Control Points]
 -0.701057 -0.5 -0.539601 -0.688189 -0.525736 -0.499997 -0.68819 -0.525734 -0.5 
+[Effected point count]
+1
+[Effected points]
+16 
 [Key]
 1 3 2
 [Dimensions]
@@ -103,6 +127,10 @@
 3
 [Control Points]
 -0.314902 1 0.228786 -0.425323 0.850654 0.309011 -0.451058 0.815847 0.327708 
+[Effected point count]
+1
+[Effected points]
+31 
 [TStart]
 0.293147
 [TEnd]
@@ -111,6 +139,10 @@
 3
 [Control Points]
 -0.451058 0.902125 0.229804 -0.425323 0.850654 0.309011 -0.363269 0.726543 0.5 
+[Effected point count]
+1
+[Effected points]
+31 
 [TStart]
 0.883674
 [TEnd]
@@ -119,6 +151,10 @@
 3
 [Control Points]
 -0.229826 1 0.451045 -0.425323 0.850654 0.309011 -0.451058 0.830994 0.290314 
+[Effected point count]
+1
+[Effected points]
+31 
 [TStart]
 0.0570547
 [TEnd]
@@ -127,6 +163,10 @@
 3
 [Control Points]
 -0.451058 0.841618 0.327708 -0.425323 0.850654 0.309011 -1.49012e-08 1 1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+31 
 [TStart]
 0.381978
 [TEnd]
@@ -135,6 +175,10 @@
 3
 [Control Points]
 -0.425323 0.850654 0.5 -0.425323 0.850654 0.309011 -0.425323 0.850654 0 
+[Effected point count]
+1
+[Effected points]
+31 
 [TStart]
 0.0514699
 [TEnd]
@@ -143,6 +187,10 @@
 3
 [Control Points]
 -0.451058 0.850654 0.300649 -0.425323 0.850654 0.309011 0.048942 0.850654 0.463111 
+[Effected point count]
+1
+[Effected points]
+31 
 [Key]
 0 0 1
 [Dimensions]
@@ -165,6 +213,10 @@
 3
 [Control Points]
 -0.52573 -0.850652 0 -0.52573 -0.850652 -0 -0.68819 -0.525734 -0.5 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 0.850656
 [TEnd]
@@ -173,6 +225,10 @@
 3
 [Control Points]
 -0.951058 -0.729826 0 -0.52573 -0.850652 -0 -0.451058 -0.871865 0 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 1
 [TEnd]
@@ -181,6 +237,10 @@
 3
 [Control Points]
 -0.889008 -0.85065 -0.5 -0.52573 -0.850652 -0 -0.52573 -0.850652 -1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 4.83626e-07
 [TEnd]
@@ -189,6 +249,10 @@
 3
 [Control Points]
 -0.52573 -0.850652 1.49012e-08 -0.52573 -0.850652 -0 -0.451058 -0.850652 -0.102775 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 0.188981
 [TEnd]
@@ -197,6 +261,10 @@
 3
 [Control Points]
 -0.451058 -0.93236 0 -0.52573 -0.850652 -0 -0.846187 -0.5 0 
+[Effected point count]
+1
+[Effected points]
+5 
 [TStart]
 1
 [TEnd]
@@ -205,6 +273,10 @@
 3
 [Control Points]
 -0.451058 -0.999995 -0.229817 -0.52573 -0.850652 -0 -0.52573 -0.850652 0 
+[Effected point count]
+1
+[Effected points]
+5 
 [Key]
 0 0 2
 [Dimensions]
@@ -227,6 +299,10 @@
 3
 [Control Points]
 -0.778762 -1 0.221231 -0.688189 -0.525736 0.499997 -0.688188 -0.525731 0.5 
+[Effected point count]
+1
+[Effected points]
+13 
 [TStart]
 0.000320573
 [TEnd]
@@ -235,6 +311,10 @@
 3
 [Control Points]
 -0.688185 -0.525744 0.5 -0.688189 -0.525736 0.499997 -0.701057 -0.5 0.490648 
+[Effected point count]
+1
+[Effected points]
+13 
 [TStart]
 1.83916e-05
 [TEnd]
@@ -243,6 +323,10 @@
 3
 [Control Points]
 -0.688188 -0.525736 0.5 -0.688189 -0.525736 0.499997 -0.755786 -0.5 0.336116 
+[Effected point count]
+1
+[Effected points]
+13 
 [TStart]
 0.999987
 [TEnd]
@@ -251,6 +335,10 @@
 3
 [Control Points]
 -0.951058 -0.575856 0.276162 -0.688189 -0.525736 0.499997 -0.688185 -0.525735 0.5 
+[Effected point count]
+1
+[Effected points]
+13 
 [TStart]
 6.01916e-06
 [TEnd]
@@ -259,6 +347,10 @@
 3
 [Control Points]
 -0.68819 -0.525734 0.5 -0.688189 -0.525736 0.499997 -0.52573 -0.850652 0 
+[Effected point count]
+1
+[Effected points]
+13 
 [TStart]
 0.149376
 [TEnd]
@@ -267,6 +359,10 @@
 3
 [Control Points]
 -0.729831 -0.5 0.499997 -0.688189 -0.525736 0.499997 -0.451058 -0.67229 0.499996 
+[Effected point count]
+1
+[Effected points]
+13 
 [Key]
 2 3 2
 [Dimensions]
@@ -289,6 +385,10 @@
 3
 [Control Points]
 0.12028 1 0.370187 0.162456 0.850654 0.499995 0.162458 0.850648 0.5 
+[Effected point count]
+1
+[Effected points]
+28 
 [TStart]
 0.227028
 [TEnd]
@@ -297,6 +397,10 @@
 3
 [Control Points]
 0.048942 0.920809 0.499995 0.162456 0.850654 0.499995 0.548942 0.611795 0.499996 
+[Effected point count]
+1
+[Effected points]
+28 
 [TStart]
 1.43367e-05
 [TEnd]
@@ -305,6 +409,10 @@
 3
 [Control Points]
 0.162458 0.850653 0.5 0.162456 0.850654 0.499995 0.048942 0.955008 0.15063 
+[Effected point count]
+1
+[Effected points]
+28 
 [TStart]
 0.00013643
 [TEnd]
@@ -313,6 +421,10 @@
 3
 [Control Points]
 0.162472 0.850654 0.5 0.162456 0.850654 0.499995 0.048942 0.850654 0.463111 
+[Effected point count]
+1
+[Effected points]
+28 
 [TStart]
 0.999965
 [TEnd]
@@ -321,6 +433,10 @@
 3
 [Control Points]
 0.357955 1 0.357957 0.162456 0.850654 0.499995 0.162449 0.850649 0.5 
+[Effected point count]
+1
+[Effected points]
+28 
 [TStart]
 9.9977e-06
 [TEnd]
@@ -329,6 +445,10 @@
 3
 [Control Points]
 0.162452 0.850654 0.5 0.162456 0.850654 0.499995 0.52573 0.850652 -1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+28 
 [Key]
 2 0 1
 [Dimensions]
@@ -351,6 +471,10 @@
 3
 [Control Points]
 0.548942 -0.807247 -0.398824 0.425323 -0.850654 -0.309011 0.048942 -0.982815 -0.035558 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0.247238
 [TEnd]
@@ -359,6 +483,10 @@
 3
 [Control Points]
 0.548942 -0.850654 -0.268844 0.425323 -0.850654 -0.309011 0.048942 -0.850654 -0.431307 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0.546142
 [TEnd]
@@ -367,6 +495,10 @@
 3
 [Control Points]
 0.499994 -1 -0.079188 0.425323 -0.850654 -0.309011 0.363269 -0.726543 -0.5 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0.471804
 [TEnd]
@@ -375,6 +507,10 @@
 3
 [Control Points]
 0.314902 -1 -0.228786 0.425323 -0.850654 -0.309011 0.548942 -0.683457 -0.398825 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0.612621
 [TEnd]
@@ -383,6 +519,10 @@
 3
 [Control Points]
 0.229826 -1 -0.451045 0.425323 -0.850654 -0.309011 0.548942 -0.756218 -0.219198 
+[Effected point count]
+1
+[Effected points]
+7 
 [TStart]
 0.381978
 [TEnd]
@@ -391,6 +531,10 @@
 3
 [Control Points]
 0.425323 -0.850654 -0.5 0.425323 -0.850654 -0.309011 0.425323 -0.850654 0 
+[Effected point count]
+1
+[Effected points]
+7 
 [Key]
 0 0 3
 [Dimensions]
@@ -439,6 +583,10 @@
 3
 [Control Points]
 -0.451058 0 -0.997208 -0.587786 0 -0.809017 -0.812299 0 -0.5 
+[Effected point count]
+1
+[Effected points]
+17 
 [TStart]
 2.56023e-07
 [TEnd]
@@ -447,6 +595,10 @@
 3
 [Control Points]
 -0.587786 1.49012e-08 -0.809017 -0.587786 0 -0.809017 -0.451058 -0.196364 -0.827297 
+[Effected point count]
+1
+[Effected points]
+17 
 [TStart]
 1
 [TEnd]
@@ -455,6 +607,10 @@
 3
 [Control Points]
 -0.496222 -0.301496 -1 -0.587786 0 -0.809017 -0.587786 -1.49012e-08 -0.809017 
+[Effected point count]
+1
+[Effected points]
+17 
 [TStart]
 0.726544
 [TEnd]
@@ -463,6 +619,10 @@
 3
 [Control Points]
 -0.951058 0 -0.690983 -0.587786 0 -0.809017 -0.451058 0 -0.853443 
+[Effected point count]
+1
+[Effected points]
+17 
 [TStart]
 1.01406e-07
 [TEnd]
@@ -471,6 +631,10 @@
 3
 [Control Points]
 -0.587786 0 -0.809017 -0.587786 0 -0.809017 -0.683274 -0.5 -0.515124 
+[Effected point count]
+1
+[Effected points]
+17 
 [TStart]
 1
 [TEnd]
@@ -479,6 +643,10 @@
 3
 [Control Points]
 -0.896796 -0.5 -0.809022 -0.587786 0 -0.809017 -0.587786 0 -0.809017 
+[Effected point count]
+1
+[Effected points]
+17 
 [Key]
 0 1 1
 [Dimensions]
@@ -501,6 +669,10 @@
 3
 [Control Points]
 -0.951058 -0.385248 0 -0.894426 -0.447216 -0 -0.846187 -0.5 0 
+[Effected point count]
+1
+[Effected points]
+12 
 [TStart]
 1
 [TEnd]
@@ -509,6 +681,10 @@
 3
 [Control Points]
 -0.951058 -0.425655 -0.137298 -0.894426 -0.447216 -0 -0.894426 -0.447216 0 
+[Effected point count]
+1
+[Effected points]
+12 
 [TStart]
 1
 [TEnd]
@@ -517,6 +693,10 @@
 3
 [Control Points]
 -0.887742 -0.5 -0.0364722 -0.894426 -0.447216 -0 -0.894426 -0.447216 0 
+[Effected point count]
+1
+[Effected points]
+12 
 [TStart]
 1.21932e-07
 [TEnd]
@@ -525,6 +705,10 @@
 4
 [Control Points]
 -0.894426 -0.447216 0 -0.894426 -0.447216 -0 -0.951058 0 -0.309013 -0.951058 -4.61936e-07 -0.309013 
+[Effected point count]
+2
+[Effected points]
+12 23 
 [TStart]
 8.11173e-08
 [TEnd]
@@ -533,6 +717,10 @@
 3
 [Control Points]
 -0.894426 -0.447216 0 -0.894426 -0.447216 -0 -0.755786 -0.5 -0.336116 
+[Effected point count]
+1
+[Effected points]
+12 
 [TStart]
 1.03643e-06
 [TEnd]
@@ -541,6 +729,10 @@
 4
 [Control Points]
 -0.951058 -4.61936e-07 -0.309013 -0.951058 0 -0.309013 -0.894426 -0.447216 -0 -0.894426 -0.447216 0 
+[Effected point count]
+2
+[Effected points]
+23 12 
 [TStart]
 0.381974
 [TEnd]
@@ -549,6 +741,10 @@
 3
 [Control Points]
 -0.951058 0 -0.5 -0.951058 0 -0.309013 -0.951058 0 0 
+[Effected point count]
+1
+[Effected points]
+23 
 [TStart]
 2.52485e-07
 [TEnd]
@@ -557,6 +753,10 @@
 3
 [Control Points]
 -0.951058 0 -0.309013 -0.951058 0 -0.309013 -0.812299 0 -0.5 
+[Effected point count]
+1
+[Effected points]
+23 
 [TStart]
 1
 [TEnd]
@@ -565,6 +765,10 @@
 3
 [Control Points]
 -0.951058 2.98023e-08 -0.309013 -0.951058 0 -0.309013 -0.951058 0 -0.309013 
+[Effected point count]
+1
+[Effected points]
+23 
 [TStart]
 1.13375e-07
 [TEnd]
@@ -573,6 +777,10 @@
 3
 [Control Points]
 -0.951058 0 -0.309013 -0.951058 0 -0.309013 -0.701057 -0.5 -0.490648 
+[Effected point count]
+1
+[Effected points]
+23 
 [TStart]
 0.5
 [TEnd]
@@ -581,6 +789,10 @@
 3
 [Control Points]
 -0.951058 1.49012e-08 -0.309013 -0.951058 0 -0.309013 -0.951058 -1.49012e-08 -0.309013 
+[Effected point count]
+1
+[Effected points]
+23 
 [Key]
 0 1 2
 [Dimensions]
@@ -603,6 +815,10 @@
 3
 [Control Points]
 -0.951058 -4.61936e-07 0.309013 -0.951058 -0 0.309013 -0.894426 -0.447216 0 
+[Effected point count]
+1
+[Effected points]
+14 
 [TStart]
 0.5
 [TEnd]
@@ -611,6 +827,10 @@
 3
 [Control Points]
 -0.951058 1.49012e-08 0.309013 -0.951058 -0 0.309013 -0.951058 -1.49012e-08 0.309013 
+[Effected point count]
+1
+[Effected points]
+14 
 [TStart]
 1.13375e-07
 [TEnd]
@@ -619,6 +839,10 @@
 3
 [Control Points]
 -0.951058 0 0.309013 -0.951058 -0 0.309013 -0.701057 -0.5 0.490648 
+[Effected point count]
+1
+[Effected points]
+14 
 [TStart]
 0.381974
 [TEnd]
@@ -627,6 +851,10 @@
 3
 [Control Points]
 -0.951058 0 0.5 -0.951058 -0 0.309013 -0.951058 0 0 
+[Effected point count]
+1
+[Effected points]
+14 
 [TStart]
 1
 [TEnd]
@@ -635,6 +863,10 @@
 3
 [Control Points]
 -0.951058 2.98023e-08 0.309013 -0.951058 -0 0.309013 -0.951058 0 0.309013 
+[Effected point count]
+1
+[Effected points]
+14 
 [TStart]
 2.52485e-07
 [TEnd]
@@ -643,6 +875,10 @@
 3
 [Control Points]
 -0.951058 0 0.309013 -0.951058 -0 0.309013 -0.812299 0 0.5 
+[Effected point count]
+1
+[Effected points]
+14 
 [Key]
 2 0 2
 [Dimensions]
@@ -665,6 +901,10 @@
 3
 [Control Points]
 0.499994 -1 0.079188 0.425323 -0.850654 0.309011 0.363269 -0.726543 0.5 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0.247238
 [TEnd]
@@ -673,6 +913,10 @@
 3
 [Control Points]
 0.548942 -0.850654 0.268844 0.425323 -0.850654 0.309011 0.048942 -0.850654 0.431307 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0.247238
 [TEnd]
@@ -681,6 +925,10 @@
 3
 [Control Points]
 0.548942 -0.807247 0.398824 0.425323 -0.850654 0.309011 0.048942 -0.982815 0.035558 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0.612621
 [TEnd]
@@ -689,6 +937,10 @@
 3
 [Control Points]
 0.229826 -1 0.451045 0.425323 -0.850654 0.309011 0.548942 -0.756218 0.219198 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0.471804
 [TEnd]
@@ -697,6 +949,10 @@
 3
 [Control Points]
 0.314902 -1 0.228786 0.425323 -0.850654 0.309011 0.548942 -0.683457 0.398825 
+[Effected point count]
+1
+[Effected points]
+1 
 [TStart]
 0.381978
 [TEnd]
@@ -705,6 +961,10 @@
 3
 [Control Points]
 0.425323 -0.850654 0.5 0.425323 -0.850654 0.309011 0.425323 -0.850654 0 
+[Effected point count]
+1
+[Effected points]
+1 
 [Key]
 0 1 3
 [Dimensions]
@@ -727,6 +987,10 @@
 3
 [Control Points]
 -0.587786 1.49012e-08 0.809017 -0.587786 -0 0.809017 -0.451058 -0.196364 0.827297 
+[Effected point count]
+1
+[Effected points]
+22 
 [TStart]
 0.726544
 [TEnd]
@@ -735,6 +999,10 @@
 3
 [Control Points]
 -0.951058 0 0.690983 -0.587786 -0 0.809017 -0.451058 0 0.853443 
+[Effected point count]
+1
+[Effected points]
+22 
 [TStart]
 0.378496
 [TEnd]
@@ -743,6 +1011,10 @@
 3
 [Control Points]
 -0.451058 0 0.997208 -0.587786 -0 0.809017 -0.812299 0 0.5 
+[Effected point count]
+1
+[Effected points]
+22 
 [TStart]
 1
 [TEnd]
@@ -751,6 +1023,10 @@
 3
 [Control Points]
 -0.896796 -0.5 0.809022 -0.587786 -0 0.809017 -0.587786 0 0.809017 
+[Effected point count]
+1
+[Effected points]
+22 
 [TStart]
 1.01406e-07
 [TEnd]
@@ -759,6 +1035,10 @@
 3
 [Control Points]
 -0.587786 0 0.809017 -0.587786 -0 0.809017 -0.683274 -0.5 0.515124 
+[Effected point count]
+1
+[Effected points]
+22 
 [TStart]
 1
 [TEnd]
@@ -767,6 +1047,10 @@
 3
 [Control Points]
 -0.496222 -0.301496 1 -0.587786 -0 0.809017 -0.587786 -1.49012e-08 0.809017 
+[Effected point count]
+1
+[Effected points]
+22 
 [Key]
 2 2 1
 [Dimensions]
@@ -802,6 +1086,10 @@
 3
 [Control Points]
 -0.735941 0.487831 -0.5 -0.723607 0.44722 -0.525725 -0.587786 -1.49012e-08 -0.809017 
+[Effected point count]
+1
+[Effected points]
+32 
 [TStart]
 0.94855
 [TEnd]
@@ -810,6 +1098,10 @@
 3
 [Control Points]
 -0.608999 0.376388 -1 -0.723607 0.44722 -0.525725 -0.729823 0.451062 -0.5 
+[Effected point count]
+1
+[Effected points]
+32 
 [TStart]
 0.865297
 [TEnd]
@@ -818,6 +1110,10 @@
 3
 [Control Points]
 -0.951058 0.139589 -0.690976 -0.723607 0.44722 -0.525725 -0.688199 0.49511 -0.5 
+[Effected point count]
+1
+[Effected points]
+32 
 [TStart]
 0.133081
 [TEnd]
@@ -826,6 +1122,10 @@
 3
 [Control Points]
 -0.765446 0.44009 -0.5 -0.723607 0.44722 -0.525725 -0.451058 0.493667 -0.693303 
+[Effected point count]
+1
+[Effected points]
+32 
 [TStart]
 0.498547
 [TEnd]
@@ -834,6 +1134,10 @@
 3
 [Control Points]
 -0.696764 0.5 -0.551301 -0.723607 0.44722 -0.525725 -0.750607 0.394132 -0.5 
+[Effected point count]
+1
+[Effected points]
+32 
 [Key]
 3 1 2
 [Dimensions]
@@ -856,6 +1160,10 @@
 3
 [Control Points]
 1.04894 -0.195768 0.237897 0.951058 -0 0.309013 0.951058 0 0.309013 
+[Effected point count]
+1
+[Effected points]
+8 
 [TStart]
 3.09371e-08
 [TEnd]
@@ -864,6 +1172,10 @@
 3
 [Control Points]
 0.951058 1.49012e-08 0.309013 0.951058 -0 0.309013 0.750607 -0.394132 0.5 
+[Effected point count]
+1
+[Effected points]
+8 
 [TStart]
 0
 [TEnd]
@@ -872,6 +1184,10 @@
 3
 [Control Points]
 0.951058 0 0.309013 0.951058 -0 0.309013 0.855563 -0.5 0.0151269 
+[Effected point count]
+1
+[Effected points]
+8 
 [TStart]
 0.413635
 [TEnd]
@@ -880,6 +1196,10 @@
 3
 [Control Points]
 1.04894 0 0.174286 0.951058 -0 0.309013 0.812299 0 0.5 
+[Effected point count]
+1
+[Effected points]
+8 
 [TStart]
 1
 [TEnd]
@@ -888,6 +1208,10 @@
 3
 [Control Points]
 0.98606 -0.276404 0.5 0.951058 -0 0.309013 0.951058 -1.49012e-08 0.309013 
+[Effected point count]
+1
+[Effected points]
+8 
 [TStart]
 0.381974
 [TEnd]
@@ -896,6 +1220,10 @@
 3
 [Control Points]
 0.951058 0 0.5 0.951058 -0 0.309013 0.951058 0 0 
+[Effected point count]
+1
+[Effected points]
+8 
 [Key]
 0 2 1
 [Dimensions]
@@ -931,6 +1259,10 @@
 3
 [Control Points]
 1.04894 -0.00719905 0.762092 0.723607 -0.44722 0.525725 0.688199 -0.49511 0.5 
+[Effected point count]
+1
+[Effected points]
+3 
 [TStart]
 0.94855
 [TEnd]
@@ -939,6 +1271,10 @@
 3
 [Control Points]
 0.608999 -0.376388 1 0.723607 -0.44722 0.525725 0.729823 -0.451062 0.5 
+[Effected point count]
+1
+[Effected points]
+3 
 [TStart]
 0.498547
 [TEnd]
@@ -947,6 +1283,10 @@
 3
 [Control Points]
 0.696764 -0.5 0.551301 0.723607 -0.44722 0.525725 0.750607 -0.394132 0.5 
+[Effected point count]
+1
+[Effected points]
+3 
 [TStart]
 0.083248
 [TEnd]
@@ -955,6 +1295,10 @@
 4
 [Control Points]
 0.735941 -0.487831 0.5 0.723607 -0.44722 0.525725 0.587786 -0 0.809017 0.587786 1.49012e-08 0.809017 
+[Effected point count]
+2
+[Effected points]
+3 21 
 [TStart]
 0.193249
 [TEnd]
@@ -963,6 +1307,10 @@
 3
 [Control Points]
 0.765446 -0.44009 0.5 0.723607 -0.44722 0.525725 0.548942 -0.476986 0.633119 
+[Effected point count]
+1
+[Effected points]
+3 
 [TStart]
 0.922312
 [TEnd]
@@ -971,6 +1319,10 @@
 3
 [Control Points]
 1.04894 0 0.659178 0.587786 -0 0.809017 0.548942 0 0.821638 
+[Effected point count]
+1
+[Effected points]
+21 
 [TStart]
 1
 [TEnd]
@@ -979,6 +1331,10 @@
 3
 [Control Points]
 0.548942 -0.203396 0.92857 0.587786 -0 0.809017 0.587786 0 0.809017 
+[Effected point count]
+1
+[Effected points]
+21 
 [TStart]
 1.03056e-07
 [TEnd]
@@ -987,6 +1343,10 @@
 4
 [Control Points]
 0.587786 1.49012e-08 0.809017 0.587786 -0 0.809017 0.723607 -0.44722 0.525725 0.735941 -0.487831 0.5 
+[Effected point count]
+2
+[Effected points]
+21 3 
 [TStart]
 0.147496
 [TEnd]
@@ -995,6 +1355,10 @@
 3
 [Control Points]
 0.548942 0 0.862481 0.587786 -0 0.809017 0.812299 0 0.5 
+[Effected point count]
+1
+[Effected points]
+21 
 [TStart]
 0
 [TEnd]
@@ -1003,6 +1367,10 @@
 3
 [Control Points]
 0.587786 0 0.809017 0.587786 -0 0.809017 0.548942 -0.0628521 0.809016 
+[Effected point count]
+1
+[Effected points]
+21 
 [TStart]
 1
 [TEnd]
@@ -1011,6 +1379,10 @@
 3
 [Control Points]
 0.935935 -0.5 0.762472 0.587786 -0 0.809017 0.587786 -1.49012e-08 0.809017 
+[Effected point count]
+1
+[Effected points]
+21 
 [Key]
 2 2 3
 [Dimensions]
@@ -1033,6 +1405,10 @@
 3
 [Control Points]
 0.309007 0.5 0.833023 0.276388 0.44722 0.850649 0.048942 0.0791925 0.973553 
+[Effected point count]
+1
+[Effected points]
+26 
 [TStart]
 0.391552
 [TEnd]
@@ -1041,6 +1417,10 @@
 3
 [Control Points]
 0.100992 0.413778 1 0.276388 0.44722 0.850649 0.548942 0.499186 0.618567 
+[Effected point count]
+1
+[Effected points]
+26 
 [TStart]
 0.765016
 [TEnd]
@@ -1049,6 +1429,10 @@
 3
 [Control Points]
 0.324914 0.275389 1 0.276388 0.44722 0.850649 0.261483 0.5 0.804774 
+[Effected point count]
+1
+[Effected points]
+26 
 [TStart]
 0.545108
 [TEnd]
@@ -1057,6 +1441,10 @@
 3
 [Control Points]
 0.548942 0.407535 0.871693 0.276388 0.44722 0.850649 0.048942 0.480337 0.833088 
+[Effected point count]
+1
+[Effected points]
+26 
 [TStart]
 0.118817
 [TEnd]
@@ -1065,6 +1453,10 @@
 3
 [Control Points]
 0.239637 0.5 0.855562 0.276388 0.44722 0.850649 0.548942 0.0557865 0.81421 
+[Effected point count]
+1
+[Effected points]
+26 
 [Key]
 0 2 2
 [Dimensions]
@@ -1100,6 +1492,10 @@
 3
 [Control Points]
 0.765446 -0.44009 -0.5 0.723607 -0.44722 -0.525725 0.548942 -0.476986 -0.633119 
+[Effected point count]
+1
+[Effected points]
+18 
 [TStart]
 0.94855
 [TEnd]
@@ -1108,6 +1504,10 @@
 3
 [Control Points]
 0.608999 -0.376388 -1 0.723607 -0.44722 -0.525725 0.729823 -0.451062 -0.5 
+[Effected point count]
+1
+[Effected points]
+18 
 [TStart]
 0.083248
 [TEnd]
@@ -1116,6 +1516,10 @@
 4
 [Control Points]
 0.735941 -0.487831 -0.5 0.723607 -0.44722 -0.525725 0.587786 0 -0.809017 0.587786 1.49012e-08 -0.809017 
+[Effected point count]
+2
+[Effected points]
+18 20 
 [TStart]
 0.498547
 [TEnd]
@@ -1124,6 +1528,10 @@
 3
 [Control Points]
 0.696764 -0.5 -0.551301 0.723607 -0.44722 -0.525725 0.750607 -0.394132 -0.5 
+[Effected point count]
+1
+[Effected points]
+18 
 [TStart]
 0.901848
 [TEnd]
@@ -1132,6 +1540,10 @@
 3
 [Control Points]
 1.04894 -0.00719905 -0.762092 0.723607 -0.44722 -0.525725 0.688199 -0.49511 -0.5 
+[Effected point count]
+1
+[Effected points]
+18 
 [TStart]
 1.03056e-07
 [TEnd]
@@ -1140,6 +1552,10 @@
 4
 [Control Points]
 0.587786 1.49012e-08 -0.809017 0.587786 0 -0.809017 0.723607 -0.44722 -0.525725 0.735941 -0.487831 -0.5 
+[Effected point count]
+2
+[Effected points]
+20 18 
 [TStart]
 1
 [TEnd]
@@ -1148,6 +1564,10 @@
 3
 [Control Points]
 0.935935 -0.5 -0.762472 0.587786 0 -0.809017 0.587786 -1.49012e-08 -0.809017 
+[Effected point count]
+1
+[Effected points]
+20 
 [TStart]
 0
 [TEnd]
@@ -1156,6 +1576,10 @@
 3
 [Control Points]
 0.587786 0 -0.809017 0.587786 0 -0.809017 0.548942 -0.0628521 -0.809016 
+[Effected point count]
+1
+[Effected points]
+20 
 [TStart]
 0.147496
 [TEnd]
@@ -1164,6 +1588,10 @@
 3
 [Control Points]
 0.548942 0 -0.862481 0.587786 0 -0.809017 0.812299 0 -0.5 
+[Effected point count]
+1
+[Effected points]
+20 
 [TStart]
 1
 [TEnd]
@@ -1172,6 +1600,10 @@
 3
 [Control Points]
 0.548942 -0.203396 -0.92857 0.587786 0 -0.809017 0.587786 0 -0.809017 
+[Effected point count]
+1
+[Effected points]
+20 
 [TStart]
 0.922312
 [TEnd]
@@ -1180,6 +1612,10 @@
 3
 [Control Points]
 1.04894 0 -0.659178 0.587786 0 -0.809017 0.548942 0 -0.821638 
+[Effected point count]
+1
+[Effected points]
+20 
 [Key]
 2 1 2
 [Dimensions]
@@ -1215,6 +1651,10 @@
 3
 [Control Points]
 -0.735941 0.487831 0.5 -0.723607 0.44722 0.525725 -0.587786 -1.49012e-08 0.809017 
+[Effected point count]
+1
+[Effected points]
+29 
 [TStart]
 0.498547
 [TEnd]
@@ -1223,6 +1663,10 @@
 3
 [Control Points]
 -0.696764 0.5 0.551301 -0.723607 0.44722 0.525725 -0.750607 0.394132 0.5 
+[Effected point count]
+1
+[Effected points]
+29 
 [TStart]
 0.133081
 [TEnd]
@@ -1231,6 +1675,10 @@
 3
 [Control Points]
 -0.765446 0.44009 0.5 -0.723607 0.44722 0.525725 -0.451058 0.493667 0.693303 
+[Effected point count]
+1
+[Effected points]
+29 
 [TStart]
 0.865297
 [TEnd]
@@ -1239,6 +1687,10 @@
 3
 [Control Points]
 -0.951058 0.139589 0.690976 -0.723607 0.44722 0.525725 -0.688199 0.49511 0.5 
+[Effected point count]
+1
+[Effected points]
+29 
 [TStart]
 0.94855
 [TEnd]
@@ -1247,6 +1699,10 @@
 3
 [Control Points]
 -0.608999 0.376388 1 -0.723607 0.44722 0.525725 -0.729823 0.451062 0.5 
+[Effected point count]
+1
+[Effected points]
+29 
 [Key]
 0 3 0
 [Dimensions]
@@ -1282,6 +1738,10 @@
 3
 [Control Points]
 -0.850648 0.525736 -1.49012e-08 -0.850648 0.525736 0 -0.451058 0.830994 -0.290314 
+[Effected point count]
+1
+[Effected points]
+33 
 [TStart]
 3.32726e-07
 [TEnd]
@@ -1290,6 +1750,10 @@
 3
 [Control Points]
 -0.850648 0.525736 0 -0.850648 0.525736 0 -0.809007 0.5 -0.172322 
+[Effected point count]
+1
+[Effected points]
+33 
 [TStart]
 0
 [TEnd]
@@ -1298,6 +1762,10 @@
 3
 [Control Points]
 -0.850648 0.525736 0 -0.850648 0.525736 0 -0.855563 0.5 -0.0151269 
+[Effected point count]
+1
+[Effected points]
+33 
 [TStart]
 1
 [TEnd]
@@ -1306,6 +1774,10 @@
 3
 [Control Points]
 -0.884337 0.5 -0.024476 -0.850648 0.525736 0 -0.850648 0.525736 1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+33 
 [TStart]
 1
 [TEnd]
@@ -1314,6 +1786,10 @@
 3
 [Control Points]
 -0.951058 0.587793 -0.41552 -0.850648 0.525736 0 -0.850648 0.525736 0 
+[Effected point count]
+1
+[Effected points]
+33 
 [TStart]
 1
 [TEnd]
@@ -1322,6 +1798,10 @@
 3
 [Control Points]
 -0.760069 1 -0.278759 -0.850648 0.525736 0 -0.850648 0.525736 0 
+[Effected point count]
+1
+[Effected points]
+33 
 [Key]
 0 3 2
 [Dimensions]
@@ -1383,6 +1863,10 @@
 3
 [Control Points]
 -1.49272 -0.028513 -0.5 -0.162456 -0.850654 -0.499995 -0.451058 -0.67229 -0.499996 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 1.00001
 [TEnd]
@@ -1391,6 +1875,10 @@
 3
 [Control Points]
 -0.324915 -0.701305 -1 -0.162456 -0.850654 -0.499995 -0.162458 -0.850653 -0.5 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 1.00002
 [TEnd]
@@ -1399,6 +1887,10 @@
 3
 [Control Points]
 0.048942 -0.850655 -0.790954 -0.162456 -0.850654 -0.499995 -0.162452 -0.850654 -0.5 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 1.64598e-05
 [TEnd]
@@ -1407,6 +1899,10 @@
 3
 [Control Points]
 -0.162458 -0.850648 -0.5 -0.162456 -0.850654 -0.499995 -0.261483 -0.5 -0.804774 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 1.00005
 [TEnd]
@@ -1415,6 +1911,10 @@
 3
 [Control Points]
 -0.451058 -0.850654 -0.593769 -0.162456 -0.850654 -0.499995 -0.162471 -0.850654 -0.5 
+[Effected point count]
+1
+[Effected points]
+6 
 [TStart]
 3.28539e-05
 [TEnd]
@@ -1423,6 +1923,10 @@
 3
 [Control Points]
 -0.162449 -0.850649 -0.5 -0.162456 -0.850654 -0.499995 0.048942 -0.689162 -0.653585 
+[Effected point count]
+1
+[Effected points]
+6 
 [Key]
 3 0 1
 [Dimensions]
@@ -1445,6 +1949,10 @@
 3
 [Control Points]
 0.971473 -0.60041 -0.5 0.850648 -0.525736 -0 0.850648 -0.525736 0 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 0
 [TEnd]
@@ -1453,6 +1961,10 @@
 3
 [Control Points]
 0.850648 -0.525736 0 0.850648 -0.525736 -0 0.855563 -0.5 -0.0151269 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 1
 [TEnd]
@@ -1461,6 +1973,10 @@
 3
 [Control Points]
 0.884337 -0.5 -0.024476 0.850648 -0.525736 -0 0.850648 -0.525736 1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 1
 [TEnd]
@@ -1469,6 +1985,10 @@
 3
 [Control Points]
 0.760069 -1 -0.278759 0.850648 -0.525736 -0 0.850648 -0.525736 0 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 3.32726e-07
 [TEnd]
@@ -1477,6 +1997,10 @@
 3
 [Control Points]
 0.850648 -0.525736 0 0.850648 -0.525736 -0 0.809007 -0.5 -0.172322 
+[Effected point count]
+1
+[Effected points]
+4 
 [TStart]
 1.40143e-07
 [TEnd]
@@ -1485,6 +2009,10 @@
 3
 [Control Points]
 0.850648 -0.525736 -1.49012e-08 0.850648 -0.525736 -0 0.548942 -0.756218 -0.219198 
+[Effected point count]
+1
+[Effected points]
+4 
 [Key]
 1 0 1
 [Dimensions]
@@ -1507,6 +2035,10 @@
 3
 [Control Points]
 0 -1 -1.49012e-08 0 -1 -0 1.49012e-08 -1 1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+0 
 [TStart]
 1.666e-08
 [TEnd]
@@ -1515,6 +2047,10 @@
 3
 [Control Points]
 7.45058e-09 -1 -1.49012e-08 0 -1 -0 7.45058e-09 -1 -1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+0 
 [TStart]
 0
 [TEnd]
@@ -1523,6 +2059,10 @@
 3
 [Control Points]
 0 -1 0 0 -1 -0 -0.451058 -0.871865 0 
+[Effected point count]
+1
+[Effected points]
+0 
 [TStart]
 3.04831e-08
 [TEnd]
@@ -1531,6 +2071,10 @@
 3
 [Control Points]
 7.45058e-09 -1 1.49012e-08 0 -1 -0 -0.162458 -0.850653 -0.5 
+[Effected point count]
+1
+[Effected points]
+0 
 [TStart]
 3.35089e-07
 [TEnd]
@@ -1539,6 +2083,10 @@
 3
 [Control Points]
 1.49012e-08 -1 -1.49012e-08 0 -1 -0 0.048942 -0.982815 -0.035558 
+[Effected point count]
+1
+[Effected points]
+0 
 [Key]
 1 1 1
 [Dimensions]
@@ -1574,6 +2122,10 @@
 3
 [Control Points]
 -0.162458 -0.850653 0.5 -0.162456 -0.850654 0.499995 7.45058e-09 -1 -1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 0.999962
 [TEnd]
@@ -1582,6 +2134,10 @@
 3
 [Control Points]
 -0.12028 -1 0.370187 -0.162456 -0.850654 0.499995 -0.162458 -0.850648 0.5 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 7.32631e-05
 [TEnd]
@@ -1590,6 +2146,10 @@
 3
 [Control Points]
 -0.162472 -0.850654 0.5 -0.162456 -0.850654 0.499995 0.048942 -0.850654 0.431307 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 0.422796
 [TEnd]
@@ -1598,6 +2158,10 @@
 3
 [Control Points]
 0.048942 -0.981304 0.499994 -0.162456 -0.850654 0.499995 -0.451058 -0.67229 0.499996 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 1.25844e-05
 [TEnd]
@@ -1606,6 +2170,10 @@
 3
 [Control Points]
 -0.162452 -0.850654 0.5 -0.162456 -0.850654 0.499995 -0.451058 -0.850652 0.102775 
+[Effected point count]
+1
+[Effected points]
+2 
 [TStart]
 0.999965
 [TEnd]
@@ -1614,6 +2182,10 @@
 3
 [Control Points]
 -0.357955 -1 0.357957 -0.162456 -0.850654 0.499995 -0.162449 -0.850649 0.5 
+[Effected point count]
+1
+[Effected points]
+2 
 [Key]
 1 0 3
 [Dimensions]
@@ -1662,6 +2234,10 @@
 4
 [Control Points]
 -0.309007 -0.5 -0.833023 -0.276388 -0.44722 -0.850649 0 0 -1 1.49012e-08 1.49012e-08 -1 
+[Effected point count]
+2
+[Effected points]
+15 24 
 [TStart]
 0.501037
 [TEnd]
@@ -1670,6 +2246,10 @@
 3
 [Control Points]
 -0.100992 -0.413778 -1 -0.276388 -0.44722 -0.850649 -0.451058 -0.480523 -0.701916 
+[Effected point count]
+1
+[Effected points]
+15 
 [TStart]
 0.173827
 [TEnd]
@@ -1678,6 +2258,10 @@
 3
 [Control Points]
 -0.239637 -0.5 -0.855562 -0.276388 -0.44722 -0.850649 -0.451058 -0.196364 -0.827297 
+[Effected point count]
+1
+[Effected points]
+15 
 [TStart]
 0.34934
 [TEnd]
@@ -1686,6 +2270,10 @@
 3
 [Control Points]
 -0.451058 -0.421787 -0.864136 -0.276388 -0.44722 -0.850649 0.048942 -0.494589 -0.82553 
+[Effected point count]
+1
+[Effected points]
+15 
 [TStart]
 0.765016
 [TEnd]
@@ -1694,6 +2282,10 @@
 3
 [Control Points]
 -0.324914 -0.275389 -1 -0.276388 -0.44722 -0.850649 -0.261483 -0.5 -0.804774 
+[Effected point count]
+1
+[Effected points]
+15 
 [TStart]
 3.4488e-08
 [TEnd]
@@ -1702,6 +2294,10 @@
 4
 [Control Points]
 1.49012e-08 1.49012e-08 -1 0 0 -1 -0.276388 -0.44722 -0.850649 -0.309007 -0.5 -0.833023 
+[Effected point count]
+2
+[Effected points]
+24 15 
 [TStart]
 3.77029e-07
 [TEnd]
@@ -1710,6 +2306,10 @@
 3
 [Control Points]
 1.78814e-07 0 -1 0 0 -1 -0.451058 0 -0.853443 
+[Effected point count]
+1
+[Effected points]
+24 
 [TStart]
 3.47476e-06
 [TEnd]
@@ -1718,6 +2318,10 @@
 3
 [Control Points]
 -1.78814e-07 0 -1 0 0 -1 0.048942 0 -0.984098 
+[Effected point count]
+1
+[Effected points]
+24 
 [TStart]
 1
 [TEnd]
@@ -1726,6 +2330,10 @@
 3
 [Control Points]
 7.45058e-08 -1.49012e-07 -1 0 0 -1 0 0 -1 
+[Effected point count]
+1
+[Effected points]
+24 
 [TStart]
 5.17987e-07
 [TEnd]
@@ -1734,6 +2342,10 @@
 3
 [Control Points]
 0 0 -1 0 0 -1 0.048942 -0.0978841 -0.964441 
+[Effected point count]
+1
+[Effected points]
+24 
 [TStart]
 2.10734e-08
 [TEnd]
@@ -1742,6 +2354,10 @@
 3
 [Control Points]
 -1.49012e-08 -1.49012e-08 -1 0 0 -1 -1.49012e-08 -1.49012e-08 -1 
+[Effected point count]
+1
+[Effected points]
+24 
 [Key]
 1 1 2
 [Dimensions]
@@ -1777,6 +2393,10 @@
 3
 [Control Points]
 -0.324914 -0.275389 1 -0.276388 -0.44722 0.850649 -0.261483 -0.5 0.804774 
+[Effected point count]
+1
+[Effected points]
+9 
 [TStart]
 0.34934
 [TEnd]
@@ -1785,6 +2405,10 @@
 3
 [Control Points]
 -0.451058 -0.421787 0.864136 -0.276388 -0.44722 0.850649 0.048942 -0.494589 0.82553 
+[Effected point count]
+1
+[Effected points]
+9 
 [TStart]
 0.10556
 [TEnd]
@@ -1793,6 +2417,10 @@
 4
 [Control Points]
 -0.309007 -0.5 0.833023 -0.276388 -0.44722 0.850649 0 -0 1 1.49012e-08 1.49012e-08 1 
+[Effected point count]
+2
+[Effected points]
+9 11 
 [TStart]
 0.173827
 [TEnd]
@@ -1801,6 +2429,10 @@
 3
 [Control Points]
 -0.239637 -0.5 0.855562 -0.276388 -0.44722 0.850649 -0.451058 -0.196364 0.827297 
+[Effected point count]
+1
+[Effected points]
+9 
 [TStart]
 0.501037
 [TEnd]
@@ -1809,6 +2441,10 @@
 3
 [Control Points]
 -0.100992 -0.413778 1 -0.276388 -0.44722 0.850649 -0.451058 -0.480523 0.701916 
+[Effected point count]
+1
+[Effected points]
+9 
 [TStart]
 3.4488e-08
 [TEnd]
@@ -1817,6 +2453,10 @@
 4
 [Control Points]
 1.49012e-08 1.49012e-08 1 0 -0 1 -0.276388 -0.44722 0.850649 -0.309007 -0.5 0.833023 
+[Effected point count]
+2
+[Effected points]
+11 9 
 [TStart]
 2.10734e-08
 [TEnd]
@@ -1825,6 +2465,10 @@
 3
 [Control Points]
 -1.49012e-08 -1.49012e-08 1 0 -0 1 -1.49012e-08 -1.49012e-08 1 
+[Effected point count]
+1
+[Effected points]
+11 
 [TStart]
 5.17987e-07
 [TEnd]
@@ -1833,6 +2477,10 @@
 3
 [Control Points]
 0 0 1 0 -0 1 0.048942 -0.0978841 0.964441 
+[Effected point count]
+1
+[Effected points]
+11 
 [TStart]
 1
 [TEnd]
@@ -1841,6 +2489,10 @@
 3
 [Control Points]
 7.45058e-08 -1.49012e-07 1 0 -0 1 0 0 1 
+[Effected point count]
+1
+[Effected points]
+11 
 [TStart]
 3.77029e-07
 [TEnd]
@@ -1849,6 +2501,10 @@
 3
 [Control Points]
 1.78814e-07 0 1 0 -0 1 -0.451058 0 0.853443 
+[Effected point count]
+1
+[Effected points]
+11 
 [TStart]
 3.47476e-06
 [TEnd]
@@ -1857,6 +2513,10 @@
 3
 [Control Points]
 -1.78814e-07 0 1 0 -0 1 0.048942 0 0.984098 
+[Effected point count]
+1
+[Effected points]
+11 
 [Key]
 1 2 0
 [Dimensions]
@@ -1892,6 +2552,10 @@
 3
 [Control Points]
 0.048942 -0.871886 -0.809009 0.262869 -0.525738 -0.809012 0.278776 -0.5 -0.809012 
+[Effected point count]
+1
+[Effected points]
+19 
 [TStart]
 0.586173
 [TEnd]
@@ -1900,6 +2564,10 @@
 3
 [Control Points]
 0.048942 -0.562195 -0.940546 0.262869 -0.525738 -0.809012 0.413898 -0.5 -0.716151 
+[Effected point count]
+1
+[Effected points]
+19 
 [TStart]
 0.948524
 [TEnd]
@@ -1908,6 +2576,10 @@
 3
 [Control Points]
 0.5 -1 -0.636724 0.262869 -0.525738 -0.809012 0.25 -0.5 -0.818362 
+[Effected point count]
+1
+[Effected points]
+19 
 [TStart]
 0.113612
 [TEnd]
@@ -1916,6 +2588,10 @@
 3
 [Control Points]
 0.25 -0.5 -0.848619 0.262869 -0.525738 -0.809012 0.363269 -0.726543 -0.5 
+[Effected point count]
+1
+[Effected points]
+19 
 [TStart]
 0.618082
 [TEnd]
@@ -1924,6 +2600,10 @@
 3
 [Control Points]
 0.548942 -0.567391 -0.786924 0.262869 -0.525738 -0.809012 0.086102 -0.5 -0.822661 
+[Effected point count]
+1
+[Effected points]
+19 
 [TStart]
 0.136063
 [TEnd]
@@ -1932,6 +2612,10 @@
 3
 [Control Points]
 0.296561 -0.5 -0.83349 0.262869 -0.525738 -0.809012 0.048942 -0.689162 -0.653585 
+[Effected point count]
+1
+[Effected points]
+19 
 [Key]
 1 2 2
 [Dimensions]
@@ -1980,6 +2664,10 @@
 3
 [Control Points]
 -0.296561 0.5 -0.83349 -0.262869 0.525738 -0.809012 0.048942 0.763938 -0.582468 
+[Effected point count]
+1
+[Effected points]
+36 
 [TStart]
 0.515648
 [TEnd]
@@ -1988,6 +2676,10 @@
 3
 [Control Points]
 -0.451058 0.553139 -0.794482 -0.262869 0.525738 -0.809012 -0.086102 0.5 -0.822661 
+[Effected point count]
+1
+[Effected points]
+36 
 [TStart]
 0.113612
 [TEnd]
@@ -1996,6 +2688,10 @@
 3
 [Control Points]
 -0.25 0.5 -0.848619 -0.262869 0.525738 -0.809012 -0.363269 0.726543 -0.5 
+[Effected point count]
+1
+[Effected points]
+36 
 [TStart]
 0.935994
 [TEnd]
@@ -2004,6 +2700,10 @@
 3
 [Control Points]
 -0.451058 0.902116 -0.672283 -0.262869 0.525738 -0.809012 -0.25 0.5 -0.818362 
+[Effected point count]
+1
+[Effected points]
+36 
 [TStart]
 0.672851
 [TEnd]
@@ -2012,6 +2712,10 @@
 3
 [Control Points]
 0.0477537 0.578674 -1 -0.262869 0.525738 -0.809012 -0.413898 0.5 -0.716151 
+[Effected point count]
+1
+[Effected points]
+36 
 [TStart]
 0.948524
 [TEnd]
@@ -2020,6 +2724,10 @@
 3
 [Control Points]
 0.0302348 1 -0.809007 -0.262869 0.525738 -0.809012 -0.278776 0.5 -0.809012 
+[Effected point count]
+1
+[Effected points]
+36 
 [Key]
 1 3 1
 [Dimensions]
@@ -2042,6 +2750,10 @@
 3
 [Control Points]
 -0.314902 1 -0.228786 -0.425323 0.850654 -0.309011 -0.451058 0.815847 -0.327708 
+[Effected point count]
+1
+[Effected points]
+34 
 [TStart]
 0.0570547
 [TEnd]
@@ -2050,6 +2762,10 @@
 4
 [Control Points]
 -0.451058 0.841618 -0.327708 -0.425323 0.850654 -0.309011 0 1 0 -1.49012e-08 1 -1.49012e-08 
+[Effected point count]
+2
+[Effected points]
+34 41 
 [TStart]
 0.883674
 [TEnd]
@@ -2058,6 +2774,10 @@
 3
 [Control Points]
 -0.229826 1 -0.451045 -0.425323 0.850654 -0.309011 -0.451058 0.830994 -0.290314 
+[Effected point count]
+1
+[Effected points]
+34 
 [TStart]
 0.0514699
 [TEnd]
@@ -2066,6 +2786,10 @@
 3
 [Control Points]
 -0.451058 0.850654 -0.300649 -0.425323 0.850654 -0.309011 0.048942 0.850654 -0.463111 
+[Effected point count]
+1
+[Effected points]
+34 
 [TStart]
 0.293147
 [TEnd]
@@ -2074,6 +2798,10 @@
 3
 [Control Points]
 -0.451058 0.902125 -0.229804 -0.425323 0.850654 -0.309011 -0.363269 0.726543 -0.5 
+[Effected point count]
+1
+[Effected points]
+34 
 [TStart]
 0.381978
 [TEnd]
@@ -2082,6 +2810,10 @@
 3
 [Control Points]
 -0.425323 0.850654 -0.5 -0.425323 0.850654 -0.309011 -0.425323 0.850654 0 
+[Effected point count]
+1
+[Effected points]
+34 
 [TStart]
 0
 [TEnd]
@@ -2090,6 +2822,10 @@
 3
 [Control Points]
 0 1 0 0 1 0 0.048942 0.986097 0 
+[Effected point count]
+1
+[Effected points]
+41 
 [TStart]
 1.01185e-07
 [TEnd]
@@ -2098,6 +2834,10 @@
 3
 [Control Points]
 -7.45058e-09 1 1.49012e-08 0 1 0 0.048942 0.955008 -0.15063 
+[Effected point count]
+1
+[Effected points]
+41 
 [TStart]
 3.63588e-08
 [TEnd]
@@ -2106,6 +2846,10 @@
 4
 [Control Points]
 -1.49012e-08 1 -1.49012e-08 0 1 0 -0.425323 0.850654 -0.309011 -0.451058 0.841618 -0.327708 
+[Effected point count]
+2
+[Effected points]
+41 34 
 [TStart]
 0.447214
 [TEnd]
@@ -2114,6 +2858,10 @@
 3
 [Control Points]
 0 1 -1.49012e-08 0 1 0 -1.49012e-08 1 1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+41 
 [TStart]
 1.666e-08
 [TEnd]
@@ -2122,6 +2870,10 @@
 3
 [Control Points]
 -7.45058e-09 1 -1.49012e-08 0 1 0 -7.45058e-09 1 -1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+41 
 [Key]
 1 3 3
 [Dimensions]
@@ -2144,6 +2896,10 @@
 3
 [Control Points]
 -0.25 0.5 0.848619 -0.262869 0.525738 0.809012 -0.363269 0.726543 0.5 
+[Effected point count]
+1
+[Effected points]
+30 
 [TStart]
 0.672851
 [TEnd]
@@ -2152,6 +2908,10 @@
 3
 [Control Points]
 0.0477537 0.578674 1 -0.262869 0.525738 0.809012 -0.413898 0.5 0.716151 
+[Effected point count]
+1
+[Effected points]
+30 
 [TStart]
 0.0975153
 [TEnd]
@@ -2160,6 +2920,10 @@
 3
 [Control Points]
 -0.296561 0.5 0.83349 -0.262869 0.525738 0.809012 0.048942 0.763938 0.582468 
+[Effected point count]
+1
+[Effected points]
+30 
 [TStart]
 0.515648
 [TEnd]
@@ -2168,6 +2932,10 @@
 3
 [Control Points]
 -0.451058 0.553139 0.794482 -0.262869 0.525738 0.809012 -0.086102 0.5 0.822661 
+[Effected point count]
+1
+[Effected points]
+30 
 [TStart]
 0.948524
 [TEnd]
@@ -2176,6 +2944,10 @@
 3
 [Control Points]
 0.0302348 1 0.809007 -0.262869 0.525738 0.809012 -0.278776 0.5 0.809012 
+[Effected point count]
+1
+[Effected points]
+30 
 [TStart]
 0.935994
 [TEnd]
@@ -2184,6 +2956,10 @@
 3
 [Control Points]
 -0.451058 0.902116 0.672283 -0.262869 0.525738 0.809012 -0.25 0.5 0.818362 
+[Effected point count]
+1
+[Effected points]
+30 
 [Key]
 2 0 3
 [Dimensions]
@@ -2206,6 +2982,10 @@
 3
 [Control Points]
 0.048942 -0.562195 0.940546 0.262869 -0.525738 0.809012 0.413898 -0.5 0.716151 
+[Effected point count]
+1
+[Effected points]
+10 
 [TStart]
 0.948524
 [TEnd]
@@ -2214,6 +2994,10 @@
 3
 [Control Points]
 0.5 -1 0.636724 0.262869 -0.525738 0.809012 0.25 -0.5 0.818362 
+[Effected point count]
+1
+[Effected points]
+10 
 [TStart]
 0.113612
 [TEnd]
@@ -2222,6 +3006,10 @@
 3
 [Control Points]
 0.25 -0.5 0.848619 0.262869 -0.525738 0.809012 0.363269 -0.726543 0.5 
+[Effected point count]
+1
+[Effected points]
+10 
 [TStart]
 0.618082
 [TEnd]
@@ -2230,6 +3018,10 @@
 3
 [Control Points]
 0.548942 -0.567391 0.786924 0.262869 -0.525738 0.809012 0.086102 -0.5 0.822661 
+[Effected point count]
+1
+[Effected points]
+10 
 [TStart]
 0.930791
 [TEnd]
@@ -2238,6 +3030,10 @@
 3
 [Control Points]
 0.048942 -0.871886 0.809009 0.262869 -0.525738 0.809012 0.278776 -0.5 0.809012 
+[Effected point count]
+1
+[Effected points]
+10 
 [TStart]
 0.136063
 [TEnd]
@@ -2246,6 +3042,10 @@
 3
 [Control Points]
 0.296561 -0.5 0.83349 0.262869 -0.525738 0.809012 0.048942 -0.689162 0.653585 
+[Effected point count]
+1
+[Effected points]
+10 
 [Key]
 2 1 0
 [Dimensions]
@@ -2320,6 +3120,10 @@
 3
 [Control Points]
 0.239637 0.5 -0.855562 0.276388 0.44722 -0.850649 0.548942 0.0557865 -0.81421 
+[Effected point count]
+1
+[Effected points]
+35 
 [TStart]
 0.545108
 [TEnd]
@@ -2328,6 +3132,10 @@
 3
 [Control Points]
 0.548942 0.407535 -0.871693 0.276388 0.44722 -0.850649 0.048942 0.480337 -0.833088 
+[Effected point count]
+1
+[Effected points]
+35 
 [TStart]
 0.765016
 [TEnd]
@@ -2336,6 +3144,10 @@
 3
 [Control Points]
 0.324914 0.275389 -1 0.276388 0.44722 -0.850649 0.261483 0.5 -0.804774 
+[Effected point count]
+1
+[Effected points]
+35 
 [TStart]
 0.391552
 [TEnd]
@@ -2344,6 +3156,10 @@
 3
 [Control Points]
 0.100992 0.413778 -1 0.276388 0.44722 -0.850649 0.548942 0.499186 -0.618567 
+[Effected point count]
+1
+[Effected points]
+35 
 [TStart]
 0.125426
 [TEnd]
@@ -2352,6 +3168,10 @@
 3
 [Control Points]
 0.309007 0.5 -0.833023 0.276388 0.44722 -0.850649 0.048942 0.0791925 -0.973553 
+[Effected point count]
+1
+[Effected points]
+35 
 [Key]
 2 3 0
 [Dimensions]
@@ -2374,6 +3194,10 @@
 3
 [Control Points]
 0.162458 0.850648 -0.5 0.162456 0.850654 -0.499995 0.261483 0.5 -0.804774 
+[Effected point count]
+1
+[Effected points]
+37 
 [TStart]
 6.11858e-05
 [TEnd]
@@ -2382,6 +3206,10 @@
 3
 [Control Points]
 0.162449 0.850649 -0.5 0.162456 0.850654 -0.499995 0.048942 0.763938 -0.582468 
+[Effected point count]
+1
+[Effected points]
+37 
 [TStart]
 1.00001
 [TEnd]
@@ -2390,6 +3218,10 @@
 3
 [Control Points]
 0.324915 0.701305 -1 0.162456 0.850654 -0.499995 0.162458 0.850653 -0.5 
+[Effected point count]
+1
+[Effected points]
+37 
 [TStart]
 1.00003
 [TEnd]
@@ -2398,6 +3230,10 @@
 3
 [Control Points]
 0.048942 0.850655 -0.656231 0.162456 0.850654 -0.499995 0.162452 0.850654 -0.5 
+[Effected point count]
+1
+[Effected points]
+37 
 [TStart]
 1.40951
 [TEnd]
@@ -2406,6 +3242,10 @@
 3
 [Control Points]
 1.49272 0.028513 -0.5 0.162456 0.850654 -0.499995 0.548942 0.611795 -0.499996 
+[Effected point count]
+1
+[Effected points]
+37 
 [TStart]
 1.00004
 [TEnd]
@@ -2414,6 +3254,10 @@
 3
 [Control Points]
 0.548942 0.850654 -0.625574 0.162456 0.850654 -0.499995 0.162471 0.850654 -0.5 
+[Effected point count]
+1
+[Effected points]
+37 
 [Key]
 2 3 1
 [Dimensions]
@@ -2436,6 +3280,10 @@
 3
 [Control Points]
 0.389242 1 0 0.52573 0.850652 0 0.548942 0.825253 0 
+[Effected point count]
+1
+[Effected points]
+40 
 [TStart]
 0
 [TEnd]
@@ -2444,6 +3292,10 @@
 3
 [Control Points]
 0.52573 0.850652 0 0.52573 0.850652 0 0.548942 0.804228 -0.0714392 
+[Effected point count]
+1
+[Effected points]
+40 
 [TStart]
 9.94099e-08
 [TEnd]
@@ -2452,6 +3304,10 @@
 3
 [Control Points]
 0.52573 0.850652 1.49012e-08 0.52573 0.850652 0 0.162452 0.850654 -0.5 
+[Effected point count]
+1
+[Effected points]
+40 
 [TStart]
 0.046424
 [TEnd]
@@ -2460,6 +3316,10 @@
 3
 [Control Points]
 0.548942 0.844058 0 0.52573 0.850652 0 0.048942 0.986097 0 
+[Effected point count]
+1
+[Effected points]
+40 
 [TStart]
 1
 [TEnd]
@@ -2468,6 +3328,10 @@
 3
 [Control Points]
 0.548942 0.850652 -0.031948 0.52573 0.850652 0 0.52573 0.850652 -1.49012e-08 
+[Effected point count]
+1
+[Effected points]
+40 
 [TStart]
 1
 [TEnd]
@@ -2476,6 +3340,10 @@
 3
 [Control Points]
 0.451056 1 -0.229824 0.52573 0.850652 0 0.52573 0.850652 0 
+[Effected point count]
+1
+[Effected points]
+40 
 [Key]
 3 0 2
 [Dimensions]
@@ -2524,6 +3392,10 @@
 3
 [Control Points]
 0.951058 1.49012e-08 -0.309013 0.951058 0 -0.309013 0.750607 -0.394132 -0.5 
+[Effected point count]
+1
+[Effected points]
+25 
 [TStart]
 0
 [TEnd]
@@ -2532,6 +3404,10 @@
 3
 [Control Points]
 0.951058 0 -0.309013 0.951058 0 -0.309013 0.855563 -0.5 -0.0151269 
+[Effected point count]
+1
+[Effected points]
+25 
 [TStart]
 0.413635
 [TEnd]
@@ -2540,6 +3416,10 @@
 3
 [Control Points]
 1.04894 0 -0.174286 0.951058 0 -0.309013 0.812299 0 -0.5 
+[Effected point count]
+1
+[Effected points]
+25 
 [TStart]
 1
 [TEnd]
@@ -2548,6 +3428,10 @@
 3
 [Control Points]
 1.04894 -0.195768 -0.237897 0.951058 0 -0.309013 0.951058 0 -0.309013 
+[Effected point count]
+1
+[Effected points]
+25 
 [TStart]
 1
 [TEnd]
@@ -2556,6 +3440,10 @@
 3
 [Control Points]
 0.98606 -0.276404 -0.5 0.951058 0 -0.309013 0.951058 -1.49012e-08 -0.309013 
+[Effected point count]
+1
+[Effected points]
+25 
 [TStart]
 0.381974
 [TEnd]
@@ -2564,6 +3452,10 @@
 3
 [Control Points]
 0.951058 0 -0.5 0.951058 0 -0.309013 0.951058 0 0 
+[Effected point count]
+1
+[Effected points]
+25 
 [Key]
 3 2 0
 [Dimensions]
@@ -2599,6 +3491,10 @@
 3
 [Control Points]
 0.894426 0.447216 0 0.894426 0.447216 0 0.755786 0.5 -0.336116 
+[Effected point count]
+1
+[Effected points]
+38 
 [TStart]
 1
 [TEnd]
@@ -2607,6 +3503,10 @@
 3
 [Control Points]
 0.887742 0.5 -0.0364722 0.894426 0.447216 0 0.894426 0.447216 0 
+[Effected point count]
+1
+[Effected points]
+38 
 [TStart]
 0.762083
 [TEnd]
@@ -2615,6 +3515,10 @@
 3
 [Control Points]
 1.04894 0.278141 0 0.894426 0.447216 0 0.846187 0.5 0 
+[Effected point count]
+1
+[Effected points]
+38 
 [TStart]
 1
 [TEnd]
@@ -2623,6 +3527,10 @@
 3
 [Control Points]
 1.04894 0.388388 -0.374606 0.894426 0.447216 0 0.894426 0.447216 0 
+[Effected point count]
+1
+[Effected points]
+38 
 [TStart]
 1.21932e-07
 [TEnd]
@@ -2631,6 +3539,10 @@
 3
 [Control Points]
 0.894426 0.447216 0 0.894426 0.447216 0 0.951058 -1.49012e-08 -0.309013 
+[Effected point count]
+1
+[Effected points]
+38 
 [Key]
 3 3 1
 [Dimensions]
@@ -2692,6 +3604,10 @@
 3
 [Control Points]
 0.701057 0.5 -0.539601 0.688189 0.525736 -0.499997 0.68819 0.525734 -0.5 
+[Effected point count]
+1
+[Effected points]
+39 
 [TStart]
 1.00001
 [TEnd]
@@ -2700,6 +3616,10 @@
 3
 [Control Points]
 0.548942 0.578751 -0.837585 0.688189 0.525736 -0.499997 0.688188 0.525736 -0.5 
+[Effected point count]
+1
+[Effected points]
+39 
 [TStart]
 0.0545847
 [TEnd]
@@ -2708,6 +3628,10 @@
 3
 [Control Points]
 0.729831 0.5 -0.499997 0.688189 0.525736 -0.499997 1.49272 0.028513 -0.5 
+[Effected point count]
+1
+[Effected points]
+39 
 [TStart]
 2.61467e-05
 [TEnd]
@@ -2716,6 +3640,10 @@
 3
 [Control Points]
 0.688186 0.525735 -0.5 0.688189 0.525736 -0.499997 0.553209 0.5 -0.614934 
+[Effected point count]
+1
+[Effected points]
+39 
 [TStart]
 1.00003
 [TEnd]
@@ -2724,6 +3652,10 @@
 3
 [Control Points]
 0.548942 0.804229 -0.601165 0.688189 0.525736 -0.499997 0.688185 0.525744 -0.5 
+[Effected point count]
+1
+[Effected points]
+39 
 [TStart]
 0.000201371
 [TEnd]
@@ -2732,6 +3664,10 @@
 3
 [Control Points]
 0.688188 0.525731 -0.5 0.688189 0.525736 -0.499997 0.683274 0.5 -0.515124 
+[Effected point count]
+1
+[Effected points]
+39 
 [Key]
 3 3 2
 [Dimensions]
@@ -2754,6 +3690,10 @@
 3
 [Control Points]
 0.729831 0.5 0.499997 0.688189 0.525736 0.499997 0.548942 0.611795 0.499996 
+[Effected point count]
+1
+[Effected points]
+27 
 [TStart]
 0.99999
 [TEnd]
@@ -2762,6 +3702,10 @@
 3
 [Control Points]
 1.04894 0.594519 0.192813 0.688189 0.525736 0.499997 0.688185 0.525735 0.5 
+[Effected point count]
+1
+[Effected points]
+27 
 [TStart]
 0.000320573
 [TEnd]
@@ -2770,6 +3714,10 @@
 3
 [Control Points]
 0.688185 0.525744 0.5 0.688189 0.525736 0.499997 0.701057 0.5 0.490648 
+[Effected point count]
+1
+[Effected points]
+27 
 [TStart]
 7.02253e-06
 [TEnd]
@@ -2778,6 +3726,10 @@
 3
 [Control Points]
 0.68819 0.525734 0.5 0.688189 0.525736 0.499997 0.548942 0.804228 0.0714394 
+[Effected point count]
+1
+[Effected points]
+27 
 [TStart]
 1.83916e-05
 [TEnd]
@@ -2786,6 +3738,10 @@
 3
 [Control Points]
 0.688188 0.525736 0.5 0.688189 0.525736 0.499997 0.755786 0.5 0.336116 
+[Effected point count]
+1
+[Effected points]
+27 
 [TStart]
 0.999989
 [TEnd]
@@ -2794,6 +3750,10 @@
 3
 [Control Points]
 0.778762 1 0.221231 0.688189 0.525736 0.499997 0.688188 0.525731 0.5 
+[Effected point count]
+1
+[Effected points]
+27 
 [Key]
 3 3 3
 [Dimensions]
