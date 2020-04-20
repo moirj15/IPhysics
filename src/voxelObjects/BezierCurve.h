@@ -61,5 +61,15 @@ struct BezierCurve
       mControlPoints(b.mControlPoints), mTStart(b.mTStart), mTEnd(b.mTEnd),
       mEffectedPoints(b.mEffectedPoints)
   {
+    // TODO: maybe remove this
+    // if (mControlPoints.size() == 3)
+    //{
+    //  f32 totalLength = glm::length(mControlPoints.back() - mControlPoints.front());
+    //  if (totalLength == 0.0f)
+    //  {
+    //    totalLength = 1.0f;
+    //    mTStart = glm::length(controlPoints[1] - controlPoints[0]) / totalLength;
+    //  }
+    //}
   }
 };

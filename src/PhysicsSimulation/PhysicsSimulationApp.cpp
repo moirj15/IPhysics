@@ -137,10 +137,10 @@ void PhysicsSimulationApp::CollectUIInput()
     for (auto &[handle, setting] : mUI->GetAllObjectSettings())
     {
       auto *voxelMesh = VoxelMeshManager::Get().GetMesh(handle);
-      for (auto &[key, voxel] : voxelMesh->mVoxels)
-      {
-        voxel.UpdateBezierCurves(setting.mPosition);
-      }
+      //       for (auto &[key, voxel] : voxelMesh->mVoxels)
+      //       {
+      //         voxel.UpdateBezierCurves(setting.mPosition);
+      //       }
       VoxelMeshManager::Get().UpdateOriginalSettings(handle, setting);
       mPhysicsEngine->SubmitObject(handle);
     }
@@ -169,9 +169,10 @@ void PhysicsSimulationApp::ApplyDeformations()
     {
       for (auto index : voxel.mMeshVertices)
       {
+        // this is the good one
+        vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mRelativePositionDelta;
         // TODO: Maybe move the copying into the physics engine so it isn't copied twice?
         //         vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
-        //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mRelativePositionDelta;
         //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
       }
     }
@@ -200,8 +201,10 @@ void PhysicsSimulationApp::Render()
               continue;
             }
             // just assuming t = .5 for now, need to actually calculate this later
+            //             mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
+            //                 voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
             mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
-                voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
+                voxel.CalculateFrom3Points(bezierCurve.mControlPoints, bezierCurve.mTStart);
             // mesh->mOffsets.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
             //    voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
           }

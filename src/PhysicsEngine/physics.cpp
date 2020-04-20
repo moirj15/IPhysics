@@ -43,7 +43,7 @@ void PhysicsEngine::Update(f32 t)
       {
         // Use the contactPoint's B normal to determine which voxel face to adjust
         auto contactNormal = ToGLM(contactPoint.m_normalWorldOnB);
-        contactNormal *= impulse;
+        //         contactNormal *= impulse;
         //         printf("impulse * t %f\n", impulse * t * 0.01f);
         for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
         {
@@ -53,9 +53,24 @@ void PhysicsEngine::Update(f32 t)
           //           {
           //             cp += impulseDirection;
           //           }
-          auto cpInModelSpace = bezierCurve.mControlPoints[0] - voxel->mPosition;
-          bezierCurve.mControlPoints[0] += contactNormal;
-          bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] += contactNormal;
+          auto &firstCP = bezierCurve.mControlPoints[0];
+          auto &secondCP = bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1];
+          auto firstCPNormal = glm::normalize(firstCP - voxel->mPosition);
+          auto secondCPNormal = glm::normalize(secondCP - voxel->mPosition);
+          // check if the normalized control point and the contact normal point in the same
+          // direction
+          if (glm::dot(firstCPNormal, contactNormal) > 0.0f)
+          {
+            firstCP += (-contactNormal * impulse) * t; // * t;
+          }
+          if (glm::dot(secondCPNormal, contactNormal) > 0.0f)
+          {
+            secondCP += (-contactNormal * impulse) * t; // * t;
+          }
+
+          //           bezierCurve.mControlPoints[0] += contactNormal;
+          //           bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] +=
+          //           contactNormal;
         }
       }
     }
@@ -73,7 +88,7 @@ void PhysicsEngine::Update(f32 t)
       voxel->mPosition = voxelCurrPosition;
       auto toNewPosition = voxel->mPosition - orignalPosition;
       // TODO: may have to move this to before the dimensions of the voxel are changed.
-      voxel->UpdateBezierCurves(toNewPosition);
+      // voxel->UpdateBezierCurves(toNewPosition);
       voxel->mRelativePositionDelta +=
           (voxel->mPosition - objectSettings->mPosition) - voxel->mPositionRelativeToCenter;
       voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
