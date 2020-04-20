@@ -170,8 +170,10 @@ void PhysicsSimulationApp::ApplyDeformations()
       for (auto index : voxel.mMeshVertices)
       {
         // this is the good one
+        // TODO: maybe doing this on the gpu isn't a good idea?
         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mRelativePositionDelta;
         // TODO: Maybe move the copying into the physics engine so it isn't copied twice?
+
         //         vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
         //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
       }
