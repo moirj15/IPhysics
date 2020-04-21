@@ -38,13 +38,14 @@ struct BezierCurve
     }
     if (mControlPoints.size() == 3)
     {
+    // TODO: these should be 0.0 and 1.0
       mTStart = glm::length(controlPoints[1] - controlPoints[0]) / totalLength;
       mTEnd = glm::length(controlPoints[1] - controlPoints[2]) / totalLength;
     }
     else
     {
       mTStart = glm::length(controlPoints[1] - controlPoints[0]) / totalLength;
-      mTEnd = glm::length(controlPoints[2] - controlPoints[3]) / totalLength;
+      mTEnd = glm::length(controlPoints[2] - controlPoints[0]) / totalLength;
     }
     if (mTEnd > 1.0f)
     {

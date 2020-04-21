@@ -202,11 +202,38 @@ void PhysicsSimulationApp::Render()
             {
               continue;
             }
+            alreadyCalculated[bezierCurve.mEffectedPoints[0]] = true;
             // just assuming t = .5 for now, need to actually calculate this later
             //             mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
             //                 voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
-            mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
-                voxel.CalculateFrom3Points(bezierCurve.mControlPoints, bezierCurve.mTStart);
+
+            f32 totalLength =
+                glm::length(bezierCurve.mControlPoints[0] - bezierCurve.mControlPoints[2]);
+            if (totalLength == 0.0f)
+            {
+              totalLength = 1.0f;
+            }
+            // TODO: need to have the control points ordered from left to right
+
+            f32 t;
+            if (glm::any(
+                    glm::lessThan(bezierCurve.mControlPoints[0], bezierCurve.mControlPoints[1])))
+            {
+              t = glm::length(bezierCurve.mControlPoints[1] - bezierCurve.mControlPoints[0])
+                  / totalLength;
+            }
+            else
+            {
+              t = glm::length(bezierCurve.mControlPoints[1] - bezierCurve.mControlPoints[2])
+                  / totalLength;
+            }
+
+            auto result = voxel.CalculateFrom3Points(bezierCurve.mControlPoints, t / 2.0f);
+            mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) = result;
+
+            //             mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
+            //                 voxel.CalculateFrom3Points(bezierCurve.mControlPoints,
+            //                 bezierCurve.mTStart);
             // mesh->mOffsets.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
             //    voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
           }
@@ -219,13 +246,25 @@ void PhysicsSimulationApp::Render()
               continue;
             }
             u32 effectedPoint = alreadyCalculated[bezierCurve.mEffectedPoints[0]]
-                                    ? bezierCurve.mEffectedPoints[0]
-                                    : bezierCurve.mEffectedPoints[1];
-            f32 t = alreadyCalculated[bezierCurve.mEffectedPoints[0]] ? bezierCurve.mTStart
-                                                                      : bezierCurve.mTEnd;
+                                    ? bezierCurve.mEffectedPoints[1]
+                                    : bezierCurve.mEffectedPoints[0];
+            alreadyCalculated[effectedPoint] = true;
+            u32 tIndex = alreadyCalculated[bezierCurve.mEffectedPoints[0]] ? 2 : 1;
+            f32 totalLength =
+                glm::length(bezierCurve.mControlPoints[0] - bezierCurve.mControlPoints[3]);
+            if (totalLength == 0.0f)
+            {
+              totalLength = 1.0f;
+            }
+            f32 t = glm::length(bezierCurve.mControlPoints[tIndex] - bezierCurve.mControlPoints[0])
+                    / totalLength;
+            //             f32 t = alreadyCalculated[bezierCurve.mEffectedPoints[0]] ?
+            //             bezierCurve.mTStart
+            //                                                                       :
+            //                                                                       bezierCurve.mTEnd;
+            auto result = voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t);
+            mesh->mVertices.AccessCastBuffer(effectedPoint) = result;
 
-            mesh->mVertices.AccessCastBuffer(effectedPoint) =
-                voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t);
             // mesh->mOffsets.AccessCastBuffer(effectedPoint) =
             //    voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t);
           }
