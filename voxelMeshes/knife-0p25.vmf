@@ -62,7 +62,7 @@
 [TStart]
 0
 [TEnd]
-0.397696
+6.12412
 [Control Point Count]
 4
 [Control Points]
@@ -84,7 +84,7 @@
 [Effected points]
 65 
 [TStart]
-1.48944e-08
+0
 [TEnd]
 1
 [Control Point Count]
@@ -96,7 +96,7 @@
 [Effected points]
 65 
 [TStart]
-1.19559e-07
+-nan(ind)
 [TEnd]
 1
 [Control Point Count]
@@ -110,7 +110,7 @@
 [TStart]
 0
 [TEnd]
-0.76589
+1.51268
 [Control Point Count]
 4
 [Control Points]
@@ -132,9 +132,9 @@
 [Effected points]
 65 
 [TStart]
-0.02578
+0.139912
 [TEnd]
-0.97422
+1
 [Control Point Count]
 3
 [Control Points]
@@ -144,7 +144,7 @@
 [Effected points]
 98 
 [TStart]
-0.602304
+1.55312
 [TEnd]
 1
 [Control Point Count]
@@ -168,7 +168,7 @@
 [Effected points]
 98 
 [TStart]
-2.97889e-08
+0
 [TEnd]
 1
 [Control Point Count]
@@ -180,7 +180,7 @@
 [Effected points]
 98 
 [TStart]
-1.14159e-07
+0
 [TEnd]
 1
 [Control Point Count]
@@ -204,9 +204,9 @@
 [Effected points]
 99 
 [TStart]
-0.02578
+0.139912
 [TEnd]
-0.97422
+1
 [Control Point Count]
 3
 [Control Points]
@@ -216,9 +216,9 @@
 [Effected points]
 99 
 [TStart]
-0.0257798
+0.139912
 [TEnd]
-0.97422
+1
 [Control Point Count]
 3
 [Control Points]
@@ -228,9 +228,9 @@
 [Effected points]
 99 
 [TStart]
-0.23411
+1.50884
 [TEnd]
-1
+1.00011
 [Control Point Count]
 4
 [Control Points]
@@ -293,9 +293,9 @@
 [Bezier Curve Count]
 15
 [TStart]
-0.342212
+-2.58785
 [TEnd]
-0.657788
+1
 [Control Point Count]
 3
 [Control Points]
@@ -305,9 +305,9 @@
 [Effected points]
 97 
 [TStart]
-0.342212
+-2.58785
 [TEnd]
-0.657788
+1
 [Control Point Count]
 3
 [Control Points]
@@ -329,7 +329,7 @@
 [Effected points]
 97 
 [TStart]
-1.14159e-07
+0
 [TEnd]
 1
 [Control Point Count]
@@ -341,9 +341,9 @@
 [Effected points]
 97 
 [TStart]
-0.396444
+0
 [TEnd]
-0.658212
+0
 [Control Point Count]
 4
 [Control Points]
@@ -353,9 +353,9 @@
 [Effected points]
 97 100 
 [TStart]
-0.316432
+-2.12868
 [TEnd]
-0.683568
+1
 [Control Point Count]
 3
 [Control Points]
@@ -365,9 +365,9 @@
 [Effected points]
 100 
 [TStart]
-0.658212
+2.5493
 [TEnd]
-0.919984
+2.80694
 [Control Point Count]
 4
 [Control Points]
@@ -377,7 +377,7 @@
 [Effected points]
 100 101 
 [TStart]
-1.48944e-08
+0
 [TEnd]
 1
 [Control Point Count]
@@ -401,9 +401,9 @@
 [Effected points]
 100 
 [TStart]
-0.316432
+-2.12868
 [TEnd]
-0.683568
+1
 [Control Point Count]
 3
 [Control Points]
@@ -413,9 +413,9 @@
 [Effected points]
 100 
 [TStart]
-0.341788
+0
 [TEnd]
-0.603556
+0
 [Control Point Count]
 4
 [Control Points]
@@ -425,9 +425,9 @@
 [Effected points]
 100 97 
 [TStart]
-0.0800161
+0.21711
 [TEnd]
-0.341788
+0.558729
 [Control Point Count]
 4
 [Control Points]
@@ -437,9 +437,9 @@
 [Effected points]
 101 100 
 [TStart]
-0.342212
+-2.58785
 [TEnd]
-0.657788
+1
 [Control Point Count]
 3
 [Control Points]
@@ -461,7 +461,7 @@
 [Effected points]
 101 
 [TStart]
-2.97889e-08
+0
 [TEnd]
 1
 [Control Point Count]
@@ -526,9 +526,9 @@
 [Bezier Curve Count]
 24
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -538,9 +538,9 @@
 [Effected points]
 44 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -550,9 +550,9 @@
 [Effected points]
 44 
 [TStart]
-0.844005
+1.75412
 [TEnd]
-0.155995
+1
 [Control Point Count]
 3
 [Control Points]
@@ -562,9 +562,9 @@
 [Effected points]
 44 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -574,9 +574,9 @@
 [Effected points]
 44 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -586,9 +586,9 @@
 [Effected points]
 44 
 [TStart]
-0.144736
+0.826172
 [TEnd]
-0.396448
+1.02713
 [Control Point Count]
 4
 [Control Points]
@@ -598,9 +598,9 @@
 [Effected points]
 44 46 
 [TStart]
-0.603552
+2.39777
 [TEnd]
-0.855264
+2.34703
 [Control Point Count]
 4
 [Control Points]
@@ -610,9 +610,9 @@
 [Effected points]
 46 44 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -622,9 +622,9 @@
 [Effected points]
 46 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -634,9 +634,9 @@
 [Effected points]
 46 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -646,9 +646,9 @@
 [Effected points]
 46 
 [TStart]
-0.396448
+2.38152
 [TEnd]
-0.658216
+2.44033
 [Control Point Count]
 4
 [Control Points]
@@ -658,9 +658,9 @@
 [Effected points]
 46 48 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -670,9 +670,9 @@
 [Effected points]
 46 
 [TStart]
-0.341784
+2.17604
 [TEnd]
-0.603552
+2.25514
 [Control Point Count]
 4
 [Control Points]
@@ -682,9 +682,9 @@
 [Effected points]
 48 46 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -694,9 +694,9 @@
 [Effected points]
 48 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -706,9 +706,9 @@
 [Effected points]
 48 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -718,9 +718,9 @@
 [Effected points]
 48 
 [TStart]
-0.658216
+2.54932
 [TEnd]
-0.919988
+2.80704
 [Control Point Count]
 4
 [Control Points]
@@ -730,9 +730,9 @@
 [Effected points]
 48 50 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -742,9 +742,9 @@
 [Effected points]
 48 
 [TStart]
-0.080012
+0.217106
 [TEnd]
-0.341784
+0.558728
 [Control Point Count]
 4
 [Control Points]
@@ -754,9 +754,9 @@
 [Effected points]
 50 48 
 [TStart]
-0.531944
+0.515988
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -766,9 +766,9 @@
 [Effected points]
 50 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -778,9 +778,9 @@
 [Effected points]
 50 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -790,9 +790,9 @@
 [Effected points]
 50 
 [TStart]
-0.919988
+1.41825
 [TEnd]
-0.080012
+1
 [Control Point Count]
 3
 [Control Points]
@@ -802,9 +802,9 @@
 [Effected points]
 50 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -828,9 +828,9 @@
 [Bezier Curve Count]
 27
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -840,9 +840,9 @@
 [Effected points]
 71 
 [TStart]
-0.171696
+0
 [TEnd]
-0.403672
+0
 [Control Point Count]
 4
 [Control Points]
@@ -852,9 +852,9 @@
 [Effected points]
 71 94 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -864,9 +864,9 @@
 [Effected points]
 71 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -876,9 +876,9 @@
 [Effected points]
 74 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -888,9 +888,9 @@
 [Effected points]
 74 
 [TStart]
-0.171692
+0
 [TEnd]
-0.403668
+0
 [Control Point Count]
 4
 [Control Points]
@@ -900,9 +900,9 @@
 [Effected points]
 74 80 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -912,9 +912,9 @@
 [Effected points]
 74 
 [TStart]
-0.393
+0.445873
 [TEnd]
-0.607
+1
 [Control Point Count]
 3
 [Control Points]
@@ -924,9 +924,9 @@
 [Effected points]
 88 
 [TStart]
-0.450757
+0
 [TEnd]
-0.683971
+0
 [Control Point Count]
 4
 [Control Points]
@@ -936,9 +936,9 @@
 [Effected points]
 88 80 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -948,9 +948,9 @@
 [Effected points]
 88 
 [TStart]
-0.752148
+0.635306
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -960,9 +960,9 @@
 [Effected points]
 88 
 [TStart]
-0.450756
+0
 [TEnd]
-0.683965
+0
 [Control Point Count]
 4
 [Control Points]
@@ -972,9 +972,9 @@
 [Effected points]
 88 94 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -984,9 +984,9 @@
 [Effected points]
 80 
 [TStart]
-0.596332
+0.548621
 [TEnd]
-0.403668
+1
 [Control Point Count]
 3
 [Control Points]
@@ -996,9 +996,9 @@
 [Effected points]
 80 
 [TStart]
-0.316029
+0
 [TEnd]
-0.549243
+0
 [Control Point Count]
 4
 [Control Points]
@@ -1008,9 +1008,9 @@
 [Effected points]
 80 88 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1020,9 +1020,9 @@
 [Effected points]
 80 
 [TStart]
-0.596332
+0
 [TEnd]
-0.828308
+0
 [Control Point Count]
 4
 [Control Points]
@@ -1032,9 +1032,9 @@
 [Effected points]
 80 74 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1044,9 +1044,9 @@
 [Effected points]
 94 
 [TStart]
-0.596328
+0.548619
 [TEnd]
-0.403672
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1056,9 +1056,9 @@
 [Effected points]
 94 
 [TStart]
-0.752148
+0.635306
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1068,9 +1068,9 @@
 [Effected points]
 94 
 [TStart]
-0.596328
+0.54862
 [TEnd]
-0.403672
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1080,9 +1080,9 @@
 [Effected points]
 94 
 [TStart]
-0.316035
+0
 [TEnd]
-0.549244
+0
 [Control Point Count]
 4
 [Control Points]
@@ -1092,9 +1092,9 @@
 [Effected points]
 94 88 
 [TStart]
-0.596328
+0
 [TEnd]
-0.828304
+0
 [Control Point Count]
 4
 [Control Points]
@@ -1104,9 +1104,9 @@
 [Effected points]
 94 71 
 [TStart]
-0.596328
+5.64199
 [TEnd]
-0.403672
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1116,9 +1116,9 @@
 [Effected points]
 94 
 [TStart]
-0.596328
+5.642
 [TEnd]
-0.403672
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1128,9 +1128,9 @@
 [Effected points]
 94 
 [TStart]
-0.596328
+0.54862
 [TEnd]
-0.403672
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1140,9 +1140,9 @@
 [Effected points]
 94 
 [TStart]
-0.226132
+0.350887
 [TEnd]
-0.773868
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1218,9 +1218,9 @@
 [Bezier Curve Count]
 25
 [TStart]
-0.843999
+1.75415
 [TEnd]
-0.156001
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1230,9 +1230,9 @@
 [Effected points]
 31 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1242,9 +1242,9 @@
 [Effected points]
 31 
 [TStart]
-0.91998
+1.41829
 [TEnd]
-0.08002
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1254,9 +1254,9 @@
 [Effected points]
 31 
 [TStart]
-0.08002
+0.217115
 [TEnd]
-0.341788
+0.558727
 [Control Point Count]
 4
 [Control Points]
@@ -1266,9 +1266,9 @@
 [Effected points]
 31 33 
 [TStart]
-0.848372
+0.702858
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1278,9 +1278,9 @@
 [Effected points]
 33 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1290,9 +1290,9 @@
 [Effected points]
 33 
 [TStart]
-0.658212
+2.54916
 [TEnd]
-0.91998
+2.8064
 [Control Point Count]
 4
 [Control Points]
@@ -1302,9 +1302,9 @@
 [Effected points]
 33 31 
 [TStart]
-0.341788
+2.17612
 [TEnd]
-0.60356
+2.25522
 [Control Point Count]
 4
 [Control Points]
@@ -1314,9 +1314,9 @@
 [Effected points]
 33 35 
 [TStart]
-0.580815
+6.64629
 [TEnd]
-0.419185
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1326,9 +1326,9 @@
 [Effected points]
 33 
 [TStart]
-0.658212
+3.57913
 [TEnd]
-0.341788
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1338,9 +1338,9 @@
 [Effected points]
 33 
 [TStart]
-0.341788
+1.80872
 [TEnd]
-0.855268
+1.51598
 [Control Point Count]
 4
 [Control Points]
@@ -1350,9 +1350,9 @@
 [Effected points]
 33 37 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1362,9 +1362,9 @@
 [Effected points]
 35 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1374,9 +1374,9 @@
 [Effected points]
 35 
 [TStart]
-0.39644
+2.38156
 [TEnd]
-0.658212
+2.44038
 [Control Point Count]
 4
 [Control Points]
@@ -1386,9 +1386,9 @@
 [Effected points]
 35 33 
 [TStart]
-0.60356
+2.39772
 [TEnd]
-0.855268
+2.34698
 [Control Point Count]
 4
 [Control Points]
@@ -1398,9 +1398,9 @@
 [Effected points]
 35 37 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1410,9 +1410,9 @@
 [Effected points]
 37 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1422,9 +1422,9 @@
 [Effected points]
 37 
 [TStart]
-0.743064
+0.629711
 [TEnd]
-0.256936
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1434,9 +1434,9 @@
 [Effected points]
 37 
 [TStart]
-0.545023
+11.5829
 [TEnd]
-0.454977
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1446,9 +1446,9 @@
 [Effected points]
 37 
 [TStart]
-0.144732
+-0.698856
 [TEnd]
-0.855268
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1458,9 +1458,9 @@
 [Effected points]
 37 
 [TStart]
-0.778954
+0.652442
 [TEnd]
-0.221046
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1470,9 +1470,9 @@
 [Effected points]
 37 
 [TStart]
-0.144732
+0.826153
 [TEnd]
-0.39644
+1.02711
 [Control Point Count]
 4
 [Control Points]
@@ -1482,9 +1482,9 @@
 [Effected points]
 37 35 
 [TStart]
-0.844006
+0.699343
 [TEnd]
-0.155994
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1494,9 +1494,9 @@
 [Effected points]
 37 
 [TStart]
-0.81232
+0.675371
 [TEnd]
-0.18768
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1506,9 +1506,9 @@
 [Effected points]
 37 
 [TStart]
-0.144732
+2.34123
 [TEnd]
-0.658212
+2.15768
 [Control Point Count]
 4
 [Control Points]
@@ -1818,9 +1818,9 @@
 [Bezier Curve Count]
 22
 [TStart]
-0.300628
+1.86981
 [TEnd]
-0.823453
+1.59816
 [Control Point Count]
 4
 [Control Points]
@@ -1830,9 +1830,9 @@
 [Effected points]
 67 84 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1842,9 +1842,9 @@
 [Effected points]
 67 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1854,9 +1854,9 @@
 [Effected points]
 67 
 [TStart]
-0.569019
+0.534676
 [TEnd]
-0.430981
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1866,9 +1866,9 @@
 [Effected points]
 67 
 [TStart]
-0.462336
+0.481141
 [TEnd]
-0.537664
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1878,9 +1878,9 @@
 [Effected points]
 67 
 [TStart]
-0.515096
+33.6151
 [TEnd]
-0.484904
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1890,9 +1890,9 @@
 [Effected points]
 70 
 [TStart]
-0.752148
+2.34766
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1902,9 +1902,9 @@
 [Effected points]
 70 
 [TStart]
-0.437555
+-7.47564
 [TEnd]
-0.562445
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1914,9 +1914,9 @@
 [Effected points]
 70 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1926,9 +1926,9 @@
 [Effected points]
 70 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1938,9 +1938,9 @@
 [Effected points]
 70 
 [TStart]
-0.234113
+1.50884
 [TEnd]
-1
+1.00035
 [Control Point Count]
 4
 [Control Points]
@@ -1950,9 +1950,9 @@
 [Effected points]
 70 85 
 [TStart]
-0.602307
+1.55312
 [TEnd]
-1
+1.00002
 [Control Point Count]
 4
 [Control Points]
@@ -1962,9 +1962,9 @@
 [Effected points]
 84 85 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1974,9 +1974,9 @@
 [Effected points]
 84 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1986,9 +1986,9 @@
 [Effected points]
 84 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -1998,9 +1998,9 @@
 [Effected points]
 84 
 [TStart]
-0.0887021
+0.237797
 [TEnd]
-0.911298
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2010,9 +2010,9 @@
 [Effected points]
 84 
 [TStart]
-0.176799
+-0.863701
 [TEnd]
-0.823201
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2022,9 +2022,9 @@
 [Effected points]
 84 
 [TStart]
-0.176547
+2.18831
 [TEnd]
-0.699372
+1.9845
 [Control Point Count]
 4
 [Control Points]
@@ -2034,9 +2034,9 @@
 [Effected points]
 84 67 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2048,7 +2048,7 @@
 [TStart]
 0
 [TEnd]
-0.397693
+6.1243
 [Control Point Count]
 4
 [Control Points]
@@ -2058,7 +2058,7 @@
 [Effected points]
 85 84 
 [TStart]
-1.16819e-06
+0
 [TEnd]
 1
 [Control Point Count]
@@ -2072,7 +2072,7 @@
 [TStart]
 0
 [TEnd]
-0.765887
+1.51268
 [Control Point Count]
 4
 [Control Points]
@@ -2109,9 +2109,9 @@
 [Bezier Curve Count]
 23
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2121,9 +2121,9 @@
 [Effected points]
 75 
 [TStart]
-0.752148
+0.635306
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2133,9 +2133,9 @@
 [Effected points]
 75 
 [TStart]
-0.91276
+1.44751
 [TEnd]
-0.08724
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2145,9 +2145,9 @@
 [Effected points]
 75 
 [TStart]
-0.101311
+3.66277
 [TEnd]
-0.531223
+3.55244
 [Control Point Count]
 4
 [Control Points]
@@ -2157,9 +2157,9 @@
 [Effected points]
 75 89 
 [TStart]
-0.08724
+0
 [TEnd]
-0.290568
+0.73606
 [Control Point Count]
 4
 [Control Points]
@@ -2169,9 +2169,9 @@
 [Effected points]
 75 81 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2181,9 +2181,9 @@
 [Effected points]
 89 
 [TStart]
-0.54256
+12.2268
 [TEnd]
-0.45744
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2193,9 +2193,9 @@
 [Effected points]
 89 
 [TStart]
-0.752148
+0.635306
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2205,9 +2205,9 @@
 [Effected points]
 89 
 [TStart]
-0.54256
+12.2268
 [TEnd]
-0.45744
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2217,9 +2217,9 @@
 [Effected points]
 89 
 [TStart]
-0.420026
+0
 [TEnd]
-0.631598
+0
 [Control Point Count]
 4
 [Control Points]
@@ -2229,9 +2229,9 @@
 [Effected points]
 89 81 
 [TStart]
-0.596332
+0
 [TEnd]
-0.828308
+0
 [Control Point Count]
 4
 [Control Points]
@@ -2241,9 +2241,9 @@
 [Effected points]
 89 95 
 [TStart]
-0.468777
+1.79732
 [TEnd]
-0.898689
+1.46544
 [Control Point Count]
 4
 [Control Points]
@@ -2253,9 +2253,9 @@
 [Effected points]
 89 75 
 [TStart]
-0.518135
+28.0616
 [TEnd]
-0.481865
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2265,9 +2265,9 @@
 [Effected points]
 89 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2277,9 +2277,9 @@
 [Effected points]
 81 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2289,9 +2289,9 @@
 [Effected points]
 81 
 [TStart]
-0.709432
+1.91965
 [TEnd]
-0.91276
+1.84588
 [Control Point Count]
 4
 [Control Points]
@@ -2301,9 +2301,9 @@
 [Effected points]
 81 75 
 [TStart]
-0.368402
+0
 [TEnd]
-0.579974
+0
 [Control Point Count]
 4
 [Control Points]
@@ -2313,9 +2313,9 @@
 [Effected points]
 81 89 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2325,9 +2325,9 @@
 [Effected points]
 95 
 [TStart]
-0.418568
+-5.59909
 [TEnd]
-0.581432
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2337,9 +2337,9 @@
 [Effected points]
 95 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2349,9 +2349,9 @@
 [Effected points]
 95 
 [TStart]
-0.171692
+0
 [TEnd]
-0.403668
+0
 [Control Point Count]
 4
 [Control Points]
@@ -2361,9 +2361,9 @@
 [Effected points]
 95 89 
 [TStart]
-0.418568
+0.45901
 [TEnd]
-0.581432
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2373,9 +2373,9 @@
 [Effected points]
 95 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2399,9 +2399,9 @@
 [Bezier Curve Count]
 29
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2411,9 +2411,9 @@
 [Effected points]
 64 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2423,9 +2423,9 @@
 [Effected points]
 64 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2435,9 +2435,9 @@
 [Effected points]
 64 
 [TStart]
-0.515052
+33.7102
 [TEnd]
-0.484948
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2447,9 +2447,9 @@
 [Effected points]
 64 
 [TStart]
-0.23411
+1.50884
 [TEnd]
-1
+1.00011
 [Control Point Count]
 4
 [Control Points]
@@ -2459,9 +2459,9 @@
 [Effected points]
 64 66 
 [TStart]
-0.02578
+0.139912
 [TEnd]
-0.97422
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2471,9 +2471,9 @@
 [Effected points]
 64 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2483,9 +2483,9 @@
 [Effected points]
 64 
 [TStart]
-0.0307563
+0.151201
 [TEnd]
-0.969244
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2495,9 +2495,9 @@
 [Effected points]
 64 
 [TStart]
-0.437514
+-7.47035
 [TEnd]
-0.562486
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2507,9 +2507,9 @@
 [Effected points]
 64 
 [TStart]
-0.376076
+-3.47177
 [TEnd]
-0.623924
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2519,9 +2519,9 @@
 [Effected points]
 64 
 [TStart]
-0.325319
+-2.27218
 [TEnd]
-0.674681
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2533,7 +2533,7 @@
 [TStart]
 0
 [TEnd]
-0.76589
+1.51268
 [Control Point Count]
 4
 [Control Points]
@@ -2555,9 +2555,9 @@
 [Effected points]
 66 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2567,9 +2567,9 @@
 [Effected points]
 66 
 [TStart]
-1.90104e-06
+-0.001381
 [TEnd]
-0.999998
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2579,9 +2579,9 @@
 [Effected points]
 66 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2593,7 +2593,7 @@
 [TStart]
 0
 [TEnd]
-0.397696
+6.1241
 [Control Point Count]
 4
 [Control Points]
@@ -2603,9 +2603,9 @@
 [Effected points]
 66 91 
 [TStart]
-0.02578
+0.139912
 [TEnd]
-0.97422
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2615,9 +2615,9 @@
 [Effected points]
 91 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2627,9 +2627,9 @@
 [Effected points]
 91 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2639,7 +2639,7 @@
 [Effected points]
 91 
 [TStart]
-0.602304
+1.55312
 [TEnd]
 1
 [Control Point Count]
@@ -2651,9 +2651,9 @@
 [Effected points]
 91 66 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2663,9 +2663,9 @@
 [Effected points]
 91 
 [TStart]
-0.102314
+-0.509669
 [TEnd]
-0.897686
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2675,9 +2675,9 @@
 [Effected points]
 91 
 [TStart]
-0.176524
+2.18831
 [TEnd]
-0.699361
+1.9845
 [Control Point Count]
 4
 [Control Points]
@@ -2687,9 +2687,9 @@
 [Effected points]
 91 83 
 [TStart]
-0.13569
+0.283782
 [TEnd]
-0.86431
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2699,9 +2699,9 @@
 [Effected points]
 91 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2711,9 +2711,9 @@
 [Effected points]
 83 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2723,9 +2723,9 @@
 [Effected points]
 83 
 [TStart]
-0.569014
+0.534673
 [TEnd]
-0.430986
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2735,9 +2735,9 @@
 [Effected points]
 83 
 [TStart]
-0.300639
+1.86975
 [TEnd]
-0.823476
+1.59808
 [Control Point Count]
 4
 [Control Points]
@@ -2774,9 +2774,9 @@
 [Bezier Curve Count]
 23
 [TStart]
-0.515096
+33.6151
 [TEnd]
-0.484904
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2786,9 +2786,9 @@
 [Effected points]
 14 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2798,9 +2798,9 @@
 [Effected points]
 14 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2810,9 +2810,9 @@
 [Effected points]
 14 
 [TStart]
-0.234113
+1.50884
 [TEnd]
-1
+1.00035
 [Control Point Count]
 4
 [Control Points]
@@ -2822,9 +2822,9 @@
 [Effected points]
 14 16 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2834,7 +2834,7 @@
 [Effected points]
 14 
 [TStart]
-2.54052e-07
+-0.000504921
 [TEnd]
 1
 [Control Point Count]
@@ -2846,9 +2846,9 @@
 [Effected points]
 16 
 [TStart]
-0
+1.77062
 [TEnd]
-0.765887
+1.51268
 [Control Point Count]
 4
 [Control Points]
@@ -2882,9 +2882,9 @@
 [Effected points]
 16 
 [TStart]
-0
+6.17921
 [TEnd]
-0.397693
+6.1243
 [Control Point Count]
 4
 [Control Points]
@@ -2894,7 +2894,7 @@
 [Effected points]
 16 18 
 [TStart]
-2.54052e-07
+-0.000504921
 [TEnd]
 1
 [Control Point Count]
@@ -2906,9 +2906,9 @@
 [Effected points]
 16 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2918,9 +2918,9 @@
 [Effected points]
 16 
 [TStart]
-0.602307
+1.55312
 [TEnd]
-1
+1.00002
 [Control Point Count]
 4
 [Control Points]
@@ -2930,9 +2930,9 @@
 [Effected points]
 18 16 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2942,9 +2942,9 @@
 [Effected points]
 18 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2954,9 +2954,9 @@
 [Effected points]
 18 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -2966,9 +2966,9 @@
 [Effected points]
 18 
 [TStart]
-0.176547
+2.18831
 [TEnd]
-0.699372
+1.9845
 [Control Point Count]
 4
 [Control Points]
@@ -2978,9 +2978,9 @@
 [Effected points]
 18 20 
 [TStart]
-0.300628
+1.86982
 [TEnd]
-0.823453
+1.59816
 [Control Point Count]
 4
 [Control Points]
@@ -2990,9 +2990,9 @@
 [Effected points]
 20 18 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3002,9 +3002,9 @@
 [Effected points]
 20 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3014,9 +3014,9 @@
 [Effected points]
 20 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3026,9 +3026,9 @@
 [Effected points]
 20 
 [TStart]
-0.569019
+0.534676
 [TEnd]
-0.430981
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3038,9 +3038,9 @@
 [Effected points]
 20 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3077,9 +3077,9 @@
 [Bezier Curve Count]
 26
 [TStart]
-0.08002
+0.217115
 [TEnd]
-0.341788
+0.558727
 [Control Point Count]
 4
 [Control Points]
@@ -3089,9 +3089,9 @@
 [Effected points]
 72 78 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3101,9 +3101,9 @@
 [Effected points]
 72 
 [TStart]
-0.342212
+-2.58785
 [TEnd]
-0.657788
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3113,9 +3113,9 @@
 [Effected points]
 72 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3125,9 +3125,9 @@
 [Effected points]
 72 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3137,9 +3137,9 @@
 [Effected points]
 72 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3149,9 +3149,9 @@
 [Effected points]
 72 
 [TStart]
-0.91998
+1.41829
 [TEnd]
-0.08002
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3161,9 +3161,9 @@
 [Effected points]
 72 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3173,9 +3173,9 @@
 [Effected points]
 86 
 [TStart]
-0.603556
+5.27597
 [TEnd]
-0.396444
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3185,9 +3185,9 @@
 [Effected points]
 86 
 [TStart]
-0.603556
+0
 [TEnd]
-0.855268
+2.34702
 [Control Point Count]
 4
 [Control Points]
@@ -3197,9 +3197,9 @@
 [Effected points]
 86 92 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3209,9 +3209,9 @@
 [Effected points]
 86 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3221,9 +3221,9 @@
 [Effected points]
 86 
 [TStart]
-0.342212
+-2.58785
 [TEnd]
-0.657788
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3233,9 +3233,9 @@
 [Effected points]
 86 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3245,9 +3245,9 @@
 [Effected points]
 86 
 [TStart]
-0.396444
+0
 [TEnd]
-0.658212
+0
 [Control Point Count]
 4
 [Control Points]
@@ -3257,9 +3257,9 @@
 [Effected points]
 86 78 
 [TStart]
-0.342212
+-2.58785
 [TEnd]
-0.657788
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3269,9 +3269,9 @@
 [Effected points]
 86 
 [TStart]
-0.658212
+2.54916
 [TEnd]
-0.91998
+2.8064
 [Control Point Count]
 4
 [Control Points]
@@ -3281,9 +3281,9 @@
 [Effected points]
 78 72 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3293,9 +3293,9 @@
 [Effected points]
 78 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3305,9 +3305,9 @@
 [Effected points]
 78 
 [TStart]
-0.341788
+0
 [TEnd]
-0.603556
+0
 [Control Point Count]
 4
 [Control Points]
@@ -3317,9 +3317,9 @@
 [Effected points]
 78 86 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3329,9 +3329,9 @@
 [Effected points]
 78 
 [TStart]
-0.247852
+-1.34765
 [TEnd]
-0.752148
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3341,9 +3341,9 @@
 [Effected points]
 78 
 [TStart]
-0.844006
+0.699343
 [TEnd]
-0.155994
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3353,9 +3353,9 @@
 [Effected points]
 92 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3365,9 +3365,9 @@
 [Effected points]
 92 
 [TStart]
-0.144732
+0
 [TEnd]
-0.396444
+0
 [Control Point Count]
 4
 [Control Points]
@@ -3377,9 +3377,9 @@
 [Effected points]
 92 86 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3403,9 +3403,9 @@
 [Bezier Curve Count]
 23
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3415,9 +3415,9 @@
 [Effected points]
 93 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3427,9 +3427,9 @@
 [Effected points]
 93 
 [TStart]
-0.596328
+0.548619
 [TEnd]
-0.403672
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3439,9 +3439,9 @@
 [Effected points]
 93 
 [TStart]
-0.596328
+0
 [TEnd]
-0.828304
+0
 [Control Point Count]
 4
 [Control Points]
@@ -3451,9 +3451,9 @@
 [Effected points]
 93 87 
 [TStart]
-0.420023
+0
 [TEnd]
-0.631591
+0
 [Control Point Count]
 4
 [Control Points]
@@ -3463,9 +3463,9 @@
 [Effected points]
 93 69 
 [TStart]
-0.226128
+0.350885
 [TEnd]
-0.773872
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3475,9 +3475,9 @@
 [Effected points]
 77 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3487,9 +3487,9 @@
 [Effected points]
 77 
 [TStart]
-0.752148
+2.34766
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3499,9 +3499,9 @@
 [Effected points]
 77 
 [TStart]
-0.144365
+0.291162
 [TEnd]
-0.855635
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3511,9 +3511,9 @@
 [Effected points]
 77 
 [TStart]
-0.0872441
+0
 [TEnd]
-0.290572
+0.736085
 [Control Point Count]
 4
 [Control Points]
@@ -3523,9 +3523,9 @@
 [Effected points]
 77 69 
 [TStart]
-0.912756
+1.44752
 [TEnd]
-0.0872441
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3535,9 +3535,9 @@
 [Effected points]
 77 
 [TStart]
-0.912756
+1.44752
 [TEnd]
-0.087244
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3547,9 +3547,9 @@
 [Effected points]
 77 
 [TStart]
-0.340179
+0.417937
 [TEnd]
-0.659821
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3559,9 +3559,9 @@
 [Effected points]
 77 
 [TStart]
-0.226128
+0.350885
 [TEnd]
-0.773872
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3571,9 +3571,9 @@
 [Effected points]
 77 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3583,9 +3583,9 @@
 [Effected points]
 69 
 [TStart]
-0.752148
+2.34766
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3595,9 +3595,9 @@
 [Effected points]
 69 
 [TStart]
-0.368409
+0
 [TEnd]
-0.579977
+0
 [Control Point Count]
 4
 [Control Points]
@@ -3607,9 +3607,9 @@
 [Effected points]
 69 93 
 [TStart]
-0.709428
+1.91965
 [TEnd]
-0.912756
+1.8459
 [Control Point Count]
 4
 [Control Points]
@@ -3619,9 +3619,9 @@
 [Effected points]
 69 77 
 [TStart]
-0.392996
+0.445871
 [TEnd]
-0.607004
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3631,9 +3631,9 @@
 [Effected points]
 69 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3643,9 +3643,9 @@
 [Effected points]
 87 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3655,9 +3655,9 @@
 [Effected points]
 87 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3667,9 +3667,9 @@
 [Effected points]
 87 
 [TStart]
-0.171696
+0
 [TEnd]
-0.403672
+0
 [Control Point Count]
 4
 [Control Points]
@@ -3706,9 +3706,9 @@
 [Bezier Curve Count]
 31
 [TStart]
-0.171696
+1.07084
 [TEnd]
-0.403672
+1.22132
 [Control Point Count]
 4
 [Control Points]
@@ -3718,9 +3718,9 @@
 [Effected points]
 12 10 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3730,9 +3730,9 @@
 [Effected points]
 12 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3742,9 +3742,9 @@
 [Effected points]
 12 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3754,9 +3754,9 @@
 [Effected points]
 12 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3766,9 +3766,9 @@
 [Effected points]
 12 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3778,9 +3778,9 @@
 [Effected points]
 12 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3790,9 +3790,9 @@
 [Effected points]
 12 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3802,9 +3802,9 @@
 [Effected points]
 4 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3814,9 +3814,9 @@
 [Effected points]
 4 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3826,9 +3826,9 @@
 [Effected points]
 4 
 [TStart]
-0.171692
+1.07081
 [TEnd]
-0.403668
+1.2213
 [Control Point Count]
 4
 [Control Points]
@@ -3838,9 +3838,9 @@
 [Effected points]
 4 6 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3850,9 +3850,9 @@
 [Effected points]
 4 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3862,9 +3862,9 @@
 [Effected points]
 4 
 [TStart]
-0.596332
+2.23615
 [TEnd]
-0.828308
+2.22341
 [Control Point Count]
 4
 [Control Points]
@@ -3874,9 +3874,9 @@
 [Effected points]
 6 4 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3886,9 +3886,9 @@
 [Effected points]
 6 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3898,9 +3898,9 @@
 [Effected points]
 6 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3910,9 +3910,9 @@
 [Effected points]
 6 
 [TStart]
-0.316029
+1.7779
 [TEnd]
-0.549243
+1.86051
 [Control Point Count]
 4
 [Control Points]
@@ -3922,9 +3922,9 @@
 [Effected points]
 6 8 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3934,9 +3934,9 @@
 [Effected points]
 6 
 [TStart]
-0.450757
+2.1444
 [TEnd]
-0.683971
+2.18833
 [Control Point Count]
 4
 [Control Points]
@@ -3946,9 +3946,9 @@
 [Effected points]
 8 6 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3958,9 +3958,9 @@
 [Effected points]
 8 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3970,9 +3970,9 @@
 [Effected points]
 8 
 [TStart]
-0.450756
+2.14434
 [TEnd]
-0.683965
+2.18827
 [Control Point Count]
 4
 [Control Points]
@@ -3982,9 +3982,9 @@
 [Effected points]
 8 10 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -3994,9 +3994,9 @@
 [Effected points]
 8 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4006,9 +4006,9 @@
 [Effected points]
 8 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4018,9 +4018,9 @@
 [Effected points]
 10 
 [TStart]
-0.316035
+1.77788
 [TEnd]
-0.549244
+1.86049
 [Control Point Count]
 4
 [Control Points]
@@ -4030,9 +4030,9 @@
 [Effected points]
 10 8 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4042,9 +4042,9 @@
 [Effected points]
 10 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4054,9 +4054,9 @@
 [Effected points]
 10 
 [TStart]
-0.596328
+2.23615
 [TEnd]
-0.828304
+2.22342
 [Control Point Count]
 4
 [Control Points]
@@ -4066,9 +4066,9 @@
 [Effected points]
 10 12 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4092,9 +4092,9 @@
 [Bezier Curve Count]
 23
 [TStart]
-0.341784
+0
 [TEnd]
-0.603552
+0
 [Control Point Count]
 4
 [Control Points]
@@ -4104,9 +4104,9 @@
 [Effected points]
 73 96 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4116,9 +4116,9 @@
 [Effected points]
 73 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4128,9 +4128,9 @@
 [Effected points]
 73 
 [TStart]
-0.658216
+2.54932
 [TEnd]
-0.919988
+2.80704
 [Control Point Count]
 4
 [Control Points]
@@ -4140,9 +4140,9 @@
 [Effected points]
 73 79 
 [TStart]
-0.0800121
+0.227744
 [TEnd]
-0.919988
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4152,9 +4152,9 @@
 [Effected points]
 79 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4164,9 +4164,9 @@
 [Effected points]
 79 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4176,9 +4176,9 @@
 [Effected points]
 79 
 [TStart]
-0.911702
+1.45181
 [TEnd]
-0.0882978
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4188,9 +4188,9 @@
 [Effected points]
 79 
 [TStart]
-0.864882
+1.65359
 [TEnd]
-0.135119
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4200,9 +4200,9 @@
 [Effected points]
 79 
 [TStart]
-0.080012
+0.217106
 [TEnd]
-0.341784
+0.558728
 [Control Point Count]
 4
 [Control Points]
@@ -4212,9 +4212,9 @@
 [Effected points]
 79 73 
 [TStart]
-0.919988
+1.41825
 [TEnd]
-0.080012
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4224,9 +4224,9 @@
 [Effected points]
 79 
 [TStart]
-0.080012
+2.47871
 [TEnd]
-0.603552
+2.31629
 [Control Point Count]
 4
 [Control Points]
@@ -4236,9 +4236,9 @@
 [Effected points]
 79 96 
 [TStart]
-0.888908
+1.54683
 [TEnd]
-0.111092
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4248,9 +4248,9 @@
 [Effected points]
 79 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4260,9 +4260,9 @@
 [Effected points]
 90 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4272,9 +4272,9 @@
 [Effected points]
 90 
 [TStart]
-0.844005
+1.75412
 [TEnd]
-0.155995
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4284,9 +4284,9 @@
 [Effected points]
 90 
 [TStart]
-0.144736
+0
 [TEnd]
-0.396448
+0
 [Control Point Count]
 4
 [Control Points]
@@ -4296,9 +4296,9 @@
 [Effected points]
 90 96 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4308,9 +4308,9 @@
 [Effected points]
 96 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4320,9 +4320,9 @@
 [Effected points]
 96 
 [TStart]
-0.603552
+0.552343
 [TEnd]
-0.396448
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4332,9 +4332,9 @@
 [Effected points]
 96 
 [TStart]
-0.603552
+0
 [TEnd]
-0.855264
+2.34703
 [Control Point Count]
 4
 [Control Points]
@@ -4344,9 +4344,9 @@
 [Effected points]
 96 90 
 [TStart]
-0.396448
+0
 [TEnd]
-0.658216
+0
 [Control Point Count]
 4
 [Control Points]
@@ -4356,9 +4356,9 @@
 [Effected points]
 96 73 
 [TStart]
-0.396448
+1.66803
 [TEnd]
-0.919988
+1.32237
 [Control Point Count]
 4
 [Control Points]
@@ -4382,9 +4382,9 @@
 [Bezier Curve Count]
 19
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4394,9 +4394,9 @@
 [Effected points]
 76 
 [TStart]
-0.549242
+10.1262
 [TEnd]
-0.864665
+10.2042
 [Control Point Count]
 4
 [Control Points]
@@ -4406,9 +4406,9 @@
 [Effected points]
 76 82 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4418,9 +4418,9 @@
 [Effected points]
 76 
 [TStart]
-0.549241
+10.1235
 [TEnd]
-0.86466
+10.2015
 [Control Point Count]
 4
 [Control Points]
@@ -4430,9 +4430,9 @@
 [Effected points]
 76 68 
 [TStart]
-0.912756
+1.44752
 [TEnd]
-0.087244
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4442,9 +4442,9 @@
 [Effected points]
 68 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4454,9 +4454,9 @@
 [Effected points]
 68 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4466,9 +4466,9 @@
 [Effected points]
 68 
 [TStart]
-0.907485
+1.46905
 [TEnd]
-0.0925145
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4478,9 +4478,9 @@
 [Effected points]
 68 
 [TStart]
-0.13534
+0.248877
 [TEnd]
-0.450759
+0.600947
 [Control Point Count]
 4
 [Control Points]
@@ -4490,9 +4490,9 @@
 [Effected points]
 68 76 
 [TStart]
-0.160173
+1.71705
 [TEnd]
-0.839832
+1.42721
 [Control Point Count]
 4
 [Control Points]
@@ -4502,9 +4502,9 @@
 [Effected points]
 68 82 
 [TStart]
-0.542564
+12.2257
 [TEnd]
-0.457436
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4514,9 +4514,9 @@
 [Effected points]
 68 
 [TStart]
-0.907494
+0.757992
 [TEnd]
-0.0925064
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4526,9 +4526,9 @@
 [Effected points]
 82 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4538,9 +4538,9 @@
 [Effected points]
 82 
 [TStart]
-0.160168
+1.71706
 [TEnd]
-0.839827
+1.42722
 [Control Point Count]
 4
 [Control Points]
@@ -4550,9 +4550,9 @@
 [Effected points]
 82 68 
 [TStart]
-0.135335
+0.248873
 [TEnd]
-0.450758
+0.600946
 [Control Point Count]
 4
 [Control Points]
@@ -4562,9 +4562,9 @@
 [Effected points]
 82 76 
 [TStart]
-0.752148
+0.635307
 [TEnd]
-0.247852
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4574,9 +4574,9 @@
 [Effected points]
 82 
 [TStart]
-0.91276
+0.76385
 [TEnd]
-0.08724
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4586,9 +4586,9 @@
 [Effected points]
 82 
 [TStart]
-0.91276
+1.44751
 [TEnd]
-0.08724
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4598,9 +4598,9 @@
 [Effected points]
 82 
 [TStart]
-0.91276
+1.44751
 [TEnd]
-0.08724
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4741,9 +4741,9 @@
 [Bezier Curve Count]
 24
 [TStart]
-0.91276
+1.44751
 [TEnd]
-0.08724
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4753,9 +4753,9 @@
 [Effected points]
 22 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4765,9 +4765,9 @@
 [Effected points]
 22 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4777,9 +4777,9 @@
 [Effected points]
 22 
 [TStart]
-0.08724
+0.518373
 [TEnd]
-0.290568
+0.73606
 [Control Point Count]
 4
 [Control Points]
@@ -4789,9 +4789,9 @@
 [Effected points]
 22 24 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4801,9 +4801,9 @@
 [Effected points]
 22 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4813,9 +4813,9 @@
 [Effected points]
 22 
 [TStart]
-0.709432
+1.91965
 [TEnd]
-0.91276
+1.84588
 [Control Point Count]
 4
 [Control Points]
@@ -4825,9 +4825,9 @@
 [Effected points]
 24 22 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4837,9 +4837,9 @@
 [Effected points]
 24 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4849,9 +4849,9 @@
 [Effected points]
 24 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4861,9 +4861,9 @@
 [Effected points]
 24 
 [TStart]
-0.368402
+1.77836
 [TEnd]
-0.579974
+1.84231
 [Control Point Count]
 4
 [Control Points]
@@ -4873,9 +4873,9 @@
 [Effected points]
 24 26 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4885,9 +4885,9 @@
 [Effected points]
 24 
 [TStart]
-0.420026
+1.89439
 [TEnd]
-0.631598
+1.94639
 [Control Point Count]
 4
 [Control Points]
@@ -4897,9 +4897,9 @@
 [Effected points]
 26 24 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4909,9 +4909,9 @@
 [Effected points]
 26 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4921,9 +4921,9 @@
 [Effected points]
 26 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4933,9 +4933,9 @@
 [Effected points]
 26 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4945,9 +4945,9 @@
 [Effected points]
 26 
 [TStart]
-0.596332
+2.23615
 [TEnd]
-0.828308
+2.22341
 [Control Point Count]
 4
 [Control Points]
@@ -4957,9 +4957,9 @@
 [Effected points]
 26 28 
 [TStart]
-0.171692
+1.07081
 [TEnd]
-0.403668
+1.2213
 [Control Point Count]
 4
 [Control Points]
@@ -4969,9 +4969,9 @@
 [Effected points]
 28 26 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4981,9 +4981,9 @@
 [Effected points]
 28 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -4993,9 +4993,9 @@
 [Effected points]
 28 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5005,9 +5005,9 @@
 [Effected points]
 28 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5017,9 +5017,9 @@
 [Effected points]
 28 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5069,9 +5069,9 @@
 [Bezier Curve Count]
 24
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5081,9 +5081,9 @@
 [Effected points]
 52 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5093,9 +5093,9 @@
 [Effected points]
 52 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5105,9 +5105,9 @@
 [Effected points]
 52 
 [TStart]
-0.171696
+1.07083
 [TEnd]
-0.403672
+1.22132
 [Control Point Count]
 4
 [Control Points]
@@ -5117,9 +5117,9 @@
 [Effected points]
 52 54 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5129,9 +5129,9 @@
 [Effected points]
 52 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5141,9 +5141,9 @@
 [Effected points]
 52 
 [TStart]
-0.596328
+2.23615
 [TEnd]
-0.828304
+2.22342
 [Control Point Count]
 4
 [Control Points]
@@ -5153,9 +5153,9 @@
 [Effected points]
 54 52 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5165,9 +5165,9 @@
 [Effected points]
 54 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5177,9 +5177,9 @@
 [Effected points]
 54 
 [TStart]
-0.531944
+0.515988
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5189,9 +5189,9 @@
 [Effected points]
 54 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5201,9 +5201,9 @@
 [Effected points]
 54 
 [TStart]
-0.420023
+1.89435
 [TEnd]
-0.631591
+1.94635
 [Control Point Count]
 4
 [Control Points]
@@ -5213,9 +5213,9 @@
 [Effected points]
 54 56 
 [TStart]
-0.368409
+1.77835
 [TEnd]
-0.579977
+1.8423
 [Control Point Count]
 4
 [Control Points]
@@ -5225,9 +5225,9 @@
 [Effected points]
 56 54 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5237,9 +5237,9 @@
 [Effected points]
 56 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5249,9 +5249,9 @@
 [Effected points]
 56 
 [TStart]
-0.709428
+1.89119
 [TEnd]
-0.912756
+1.8118
 [Control Point Count]
 4
 [Control Points]
@@ -5261,9 +5261,9 @@
 [Effected points]
 56 58 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5273,9 +5273,9 @@
 [Effected points]
 56 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5285,9 +5285,9 @@
 [Effected points]
 56 
 [TStart]
-0.0872441
+0.518406
 [TEnd]
-0.290572
+0.736085
 [Control Point Count]
 4
 [Control Points]
@@ -5297,9 +5297,9 @@
 [Effected points]
 58 56 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5309,9 +5309,9 @@
 [Effected points]
 58 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5321,9 +5321,9 @@
 [Effected points]
 58 
 [TStart]
-0.912756
+1.44752
 [TEnd]
-0.087244
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5333,9 +5333,9 @@
 [Effected points]
 58 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5345,9 +5345,9 @@
 [Effected points]
 58 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5371,9 +5371,9 @@
 [Bezier Curve Count]
 24
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5383,9 +5383,9 @@
 [Effected points]
 1 
 [TStart]
-0.234122
+1.50885
 [TEnd]
-1
+1.00001
 [Control Point Count]
 4
 [Control Points]
@@ -5395,9 +5395,9 @@
 [Effected points]
 1 2 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5407,9 +5407,9 @@
 [Effected points]
 1 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5419,9 +5419,9 @@
 [Effected points]
 1 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5431,9 +5431,9 @@
 [Effected points]
 1 
 [TStart]
-0.515044
+33.7296
 [TEnd]
-0.484956
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5443,9 +5443,9 @@
 [Effected points]
 1 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5455,9 +5455,9 @@
 [Effected points]
 2 
 [TStart]
-0
+1.77063
 [TEnd]
-0.765878
+1.5127
 [Control Point Count]
 4
 [Control Points]
@@ -5467,9 +5467,9 @@
 [Effected points]
 2 1 
 [TStart]
-0
+6.17901
 [TEnd]
-0.397696
+6.1241
 [Control Point Count]
 4
 [Control Points]
@@ -5479,7 +5479,7 @@
 [Effected points]
 2 62 
 [TStart]
-2.23034e-07
+0.000473171
 [TEnd]
 1
 [Control Point Count]
@@ -5491,9 +5491,9 @@
 [Effected points]
 2 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5503,7 +5503,7 @@
 [Effected points]
 2 
 [TStart]
-2.54052e-07
+-0.000504921
 [TEnd]
 1
 [Control Point Count]
@@ -5515,9 +5515,9 @@
 [Effected points]
 2 
 [TStart]
-0.569014
+0.534673
 [TEnd]
-0.430986
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5527,9 +5527,9 @@
 [Effected points]
 60 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5539,9 +5539,9 @@
 [Effected points]
 60 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5551,9 +5551,9 @@
 [Effected points]
 60 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5563,9 +5563,9 @@
 [Effected points]
 60 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5575,9 +5575,9 @@
 [Effected points]
 60 
 [TStart]
-0.300639
+1.86975
 [TEnd]
-0.823476
+1.59808
 [Control Point Count]
 4
 [Control Points]
@@ -5587,9 +5587,9 @@
 [Effected points]
 60 62 
 [TStart]
-0.176524
+2.18831
 [TEnd]
-0.699361
+1.9845
 [Control Point Count]
 4
 [Control Points]
@@ -5599,9 +5599,9 @@
 [Effected points]
 62 60 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5611,9 +5611,9 @@
 [Effected points]
 62 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5623,7 +5623,7 @@
 [Effected points]
 62 
 [TStart]
-0.602304
+1.55312
 [TEnd]
 1
 [Control Point Count]
@@ -5635,9 +5635,9 @@
 [Effected points]
 62 2 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5647,9 +5647,9 @@
 [Effected points]
 62 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5673,9 +5673,9 @@
 [Bezier Curve Count]
 24
 [TStart]
-0.91998
+1.41829
 [TEnd]
-0.08002
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5685,9 +5685,9 @@
 [Effected points]
 30 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5697,9 +5697,9 @@
 [Effected points]
 30 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5709,9 +5709,9 @@
 [Effected points]
 30 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5721,9 +5721,9 @@
 [Effected points]
 30 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5733,9 +5733,9 @@
 [Effected points]
 30 
 [TStart]
-0.08002
+0.217115
 [TEnd]
-0.341788
+0.558727
 [Control Point Count]
 4
 [Control Points]
@@ -5745,9 +5745,9 @@
 [Effected points]
 30 32 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5757,9 +5757,9 @@
 [Effected points]
 32 
 [TStart]
-0.658212
+2.54916
 [TEnd]
-0.91998
+2.8064
 [Control Point Count]
 4
 [Control Points]
@@ -5769,9 +5769,9 @@
 [Effected points]
 32 30 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5781,9 +5781,9 @@
 [Effected points]
 32 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5793,9 +5793,9 @@
 [Effected points]
 32 
 [TStart]
-0.341788
+2.17606
 [TEnd]
-0.603556
+2.25516
 [Control Point Count]
 4
 [Control Points]
@@ -5805,9 +5805,9 @@
 [Effected points]
 32 34 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5817,9 +5817,9 @@
 [Effected points]
 32 
 [TStart]
-0.396444
+2.38151
 [TEnd]
-0.658212
+2.44033
 [Control Point Count]
 4
 [Control Points]
@@ -5829,9 +5829,9 @@
 [Effected points]
 34 32 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5841,9 +5841,9 @@
 [Effected points]
 34 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5853,9 +5853,9 @@
 [Effected points]
 34 
 [TStart]
-0.603556
+2.39776
 [TEnd]
-0.855268
+2.34702
 [Control Point Count]
 4
 [Control Points]
@@ -5865,9 +5865,9 @@
 [Effected points]
 34 36 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5877,9 +5877,9 @@
 [Effected points]
 34 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5889,9 +5889,9 @@
 [Effected points]
 34 
 [TStart]
-0.144732
+0.826131
 [TEnd]
-0.396444
+1.02709
 [Control Point Count]
 4
 [Control Points]
@@ -5901,9 +5901,9 @@
 [Effected points]
 36 34 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5913,9 +5913,9 @@
 [Effected points]
 36 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5925,9 +5925,9 @@
 [Effected points]
 36 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5937,9 +5937,9 @@
 [Effected points]
 36 
 [TStart]
-0.844006
+0.699343
 [TEnd]
-0.155994
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5949,9 +5949,9 @@
 [Effected points]
 36 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5975,9 +5975,9 @@
 [Bezier Curve Count]
 18
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5987,9 +5987,9 @@
 [Effected points]
 38 
 [TStart]
-0.53194
+16.1384
 [TEnd]
-0.46806
+1
 [Control Point Count]
 3
 [Control Points]
@@ -5999,9 +5999,9 @@
 [Effected points]
 38 
 [TStart]
-0.907485
+1.46905
 [TEnd]
-0.0925145
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6011,9 +6011,9 @@
 [Effected points]
 38 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6023,9 +6023,9 @@
 [Effected points]
 38 
 [TStart]
-0.46806
+0.484014
 [TEnd]
-0.53194
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6035,9 +6035,9 @@
 [Effected points]
 38 
 [TStart]
-0.135338
+0.248876
 [TEnd]
-0.450758
+0.600947
 [Control Point Count]
 4
 [Control Points]
@@ -6047,9 +6047,9 @@
 [Effected points]
 38 40 
 [TStart]
-0.549242
+10.1242
 [TEnd]
-0.864662
+10.2021
 [Control Point Count]
 4
 [Control Points]
@@ -6059,9 +6059,9 @@
 [Effected points]
 40 38 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6071,9 +6071,9 @@
 [Effected points]
 40 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6083,9 +6083,9 @@
 [Effected points]
 40 
 [TStart]
-0.549251
+10.1222
 [TEnd]
-0.864667
+10.2003
 [Control Point Count]
 4
 [Control Points]
@@ -6095,9 +6095,9 @@
 [Effected points]
 40 42 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6107,9 +6107,9 @@
 [Effected points]
 40 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6119,9 +6119,9 @@
 [Effected points]
 40 
 [TStart]
-0.135333
+0.248873
 [TEnd]
-0.450749
+0.600943
 [Control Point Count]
 4
 [Control Points]
@@ -6131,9 +6131,9 @@
 [Effected points]
 42 40 
 [TStart]
-0.468056
+-15.1364
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6143,9 +6143,9 @@
 [Effected points]
 42 
 [TStart]
-0.468056
+0.484012
 [TEnd]
-0.531944
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6155,9 +6155,9 @@
 [Effected points]
 42 
 [TStart]
-0.531944
+0.515988
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6167,9 +6167,9 @@
 [Effected points]
 42 
 [TStart]
-0.907494
+0.757992
 [TEnd]
-0.0925064
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6179,9 +6179,9 @@
 [Effected points]
 42 
 [TStart]
-0.531944
+16.1364
 [TEnd]
-0.468056
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6387,9 +6387,9 @@
 [Bezier Curve Count]
 32
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6399,9 +6399,9 @@
 [Effected points]
 13 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6411,9 +6411,9 @@
 [Effected points]
 13 
 [TStart]
-0.171696
+1.07084
 [TEnd]
-0.403672
+1.22132
 [Control Point Count]
 4
 [Control Points]
@@ -6423,9 +6423,9 @@
 [Effected points]
 13 11 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6435,9 +6435,9 @@
 [Effected points]
 13 
 [TStart]
-0.155796
+3.02462
 [TEnd]
-0.599456
+2.88114
 [Control Point Count]
 4
 [Control Points]
@@ -6447,9 +6447,9 @@
 [Effected points]
 13 9 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6459,9 +6459,9 @@
 [Effected points]
 13 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6471,9 +6471,9 @@
 [Effected points]
 5 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6483,9 +6483,9 @@
 [Effected points]
 5 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6495,9 +6495,9 @@
 [Effected points]
 5 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6507,9 +6507,9 @@
 [Effected points]
 5 
 [TStart]
-0.171692
+1.07081
 [TEnd]
-0.403668
+1.2213
 [Control Point Count]
 4
 [Control Points]
@@ -6519,9 +6519,9 @@
 [Effected points]
 5 7 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6531,9 +6531,9 @@
 [Effected points]
 5 
 [TStart]
-0.15579
+3.02464
 [TEnd]
-0.599451
+2.88116
 [Control Point Count]
 4
 [Control Points]
@@ -6543,9 +6543,9 @@
 [Effected points]
 5 9 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6555,9 +6555,9 @@
 [Effected points]
 5 
 [TStart]
-0.749416
+0.633614
 [TEnd]
-0.250584
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6567,9 +6567,9 @@
 [Effected points]
 5 
 [TStart]
-0.589519
+0.545124
 [TEnd]
-0.410481
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6579,9 +6579,9 @@
 [Effected points]
 5 
 [TStart]
-0.102136
+-0.508921
 [TEnd]
-0.897864
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6591,9 +6591,9 @@
 [Effected points]
 5 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6603,9 +6603,9 @@
 [Effected points]
 7 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6615,9 +6615,9 @@
 [Effected points]
 7 
 [TStart]
-0.596332
+2.23615
 [TEnd]
-0.828308
+2.22341
 [Control Point Count]
 4
 [Control Points]
@@ -6627,9 +6627,9 @@
 [Effected points]
 7 5 
 [TStart]
-0.316024
+1.75236
 [TEnd]
-0.549236
+1.8341
 [Control Point Count]
 4
 [Control Points]
@@ -6639,9 +6639,9 @@
 [Effected points]
 7 9 
 [TStart]
-0.848368
+0.702855
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6651,9 +6651,9 @@
 [Effected points]
 9 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6663,9 +6663,9 @@
 [Effected points]
 9 
 [TStart]
-0.450764
+2.10508
 [TEnd]
-0.683976
+2.14842
 [Control Point Count]
 4
 [Control Points]
@@ -6675,9 +6675,9 @@
 [Effected points]
 9 7 
 [TStart]
-0.450759
+2.14437
 [TEnd]
-0.68397
+2.1883
 [Control Point Count]
 4
 [Control Points]
@@ -6687,9 +6687,9 @@
 [Effected points]
 9 11 
 [TStart]
-0.393
+0.445873
 [TEnd]
-0.607
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6699,9 +6699,9 @@
 [Effected points]
 9 
 [TStart]
-0.400549
+1.94038
 [TEnd]
-0.84421
+1.65353
 [Control Point Count]
 4
 [Control Points]
@@ -6711,9 +6711,9 @@
 [Effected points]
 9 5 
 [TStart]
-0.400544
+1.94041
 [TEnd]
-0.844204
+1.65355
 [Control Point Count]
 4
 [Control Points]
@@ -6723,9 +6723,9 @@
 [Effected points]
 9 13 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6735,9 +6735,9 @@
 [Effected points]
 11 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6747,9 +6747,9 @@
 [Effected points]
 11 
 [TStart]
-0.31603
+1.77788
 [TEnd]
-0.549241
+1.86049
 [Control Point Count]
 4
 [Control Points]
@@ -6759,9 +6759,9 @@
 [Effected points]
 11 9 
 [TStart]
-0.596328
+2.23615
 [TEnd]
-0.828304
+2.22342
 [Control Point Count]
 4
 [Control Points]
@@ -6785,9 +6785,9 @@
 [Bezier Curve Count]
 28
 [TStart]
-0.843989
+1.7542
 [TEnd]
-0.156011
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6797,9 +6797,9 @@
 [Effected points]
 15 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6809,9 +6809,9 @@
 [Effected points]
 15 
 [TStart]
-0.080016
+1.66038
 [TEnd]
-0.855264
+1.35584
 [Control Point Count]
 4
 [Control Points]
@@ -6821,9 +6821,9 @@
 [Effected points]
 15 21 
 [TStart]
-0.515096
+33.6151
 [TEnd]
-0.484904
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6833,9 +6833,9 @@
 [Effected points]
 15 
 [TStart]
-0.234085
+1.50897
 [TEnd]
-0.99988
+1.00731
 [Control Point Count]
 4
 [Control Points]
@@ -6845,9 +6845,9 @@
 [Effected points]
 15 17 
 [TStart]
-0.00277533
+0.0501071
 [TEnd]
-0.997225
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6857,9 +6857,9 @@
 [Effected points]
 17 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6869,9 +6869,9 @@
 [Effected points]
 17 
 [TStart]
-0.000120404
+1.77063
 [TEnd]
-0.765915
+1.51269
 [Control Point Count]
 4
 [Control Points]
@@ -6881,9 +6881,9 @@
 [Effected points]
 17 15 
 [TStart]
-6.25242e-05
+6.18039
 [TEnd]
-0.397731
+6.12548
 [Control Point Count]
 4
 [Control Points]
@@ -6893,9 +6893,9 @@
 [Effected points]
 17 19 
 [TStart]
-3.18398e-05
+1.74609
 [TEnd]
-0.780116
+1.48058
 [Control Point Count]
 4
 [Control Points]
@@ -6905,9 +6905,9 @@
 [Effected points]
 17 21 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6917,9 +6917,9 @@
 [Effected points]
 19 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6929,9 +6929,9 @@
 [Effected points]
 19 
 [TStart]
-0.602269
+1.55328
 [TEnd]
-0.999938
+1.00732
 [Control Point Count]
 4
 [Control Points]
@@ -6941,9 +6941,9 @@
 [Effected points]
 19 17 
 [TStart]
-0.176547
+2.18831
 [TEnd]
-0.699372
+1.9845
 [Control Point Count]
 4
 [Control Points]
@@ -6953,9 +6953,9 @@
 [Effected points]
 19 21 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6965,9 +6965,9 @@
 [Effected points]
 21 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6977,9 +6977,9 @@
 [Effected points]
 21 
 [TStart]
-0.226192
+0.350926
 [TEnd]
-0.773808
+1
 [Control Point Count]
 3
 [Control Points]
@@ -6989,9 +6989,9 @@
 [Effected points]
 21 
 [TStart]
-0.10214
+0.252215
 [TEnd]
-0.89786
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7001,9 +7001,9 @@
 [Effected points]
 21 
 [TStart]
-0.300628
+1.86981
 [TEnd]
-0.823453
+1.59816
 [Control Point Count]
 4
 [Control Points]
@@ -7013,9 +7013,9 @@
 [Effected points]
 21 19 
 [TStart]
-0.569019
+0.534676
 [TEnd]
-0.430981
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7025,9 +7025,9 @@
 [Effected points]
 21 
 [TStart]
-0.219884
+1.50816
 [TEnd]
-0.999968
+1.0037
 [Control Point Count]
 4
 [Control Points]
@@ -7037,9 +7037,9 @@
 [Effected points]
 21 17 
 [TStart]
-0.513652
+0.506827
 [TEnd]
-0.486348
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7049,9 +7049,9 @@
 [Effected points]
 21 
 [TStart]
-0.144736
+1.58961
 [TEnd]
-0.919984
+1.23915
 [Control Point Count]
 4
 [Control Points]
@@ -7061,9 +7061,9 @@
 [Effected points]
 21 15 
 [TStart]
-0.320436
+0.40712
 [TEnd]
-0.679564
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7073,9 +7073,9 @@
 [Effected points]
 21 
 [TStart]
-0.41373
+0.456539
 [TEnd]
-0.58627
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7085,9 +7085,9 @@
 [Effected points]
 21 
 [TStart]
-0.144736
+-0.698875
 [TEnd]
-0.855264
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7097,9 +7097,9 @@
 [Effected points]
 21 
 [TStart]
-0.144736
+-0.698875
 [TEnd]
-0.855264
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7109,9 +7109,9 @@
 [Effected points]
 21 
 [TStart]
-0.144736
+-0.698875
 [TEnd]
-0.855264
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7135,9 +7135,9 @@
 [Bezier Curve Count]
 21
 [TStart]
-0.848368
+0.702855
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7147,9 +7147,9 @@
 [Effected points]
 23 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7159,9 +7159,9 @@
 [Effected points]
 23 
 [TStart]
-0.91276
+1.44751
 [TEnd]
-0.08724
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7171,9 +7171,9 @@
 [Effected points]
 23 
 [TStart]
-0.08724
+0.518373
 [TEnd]
-0.290568
+0.736059
 [Control Point Count]
 4
 [Control Points]
@@ -7183,9 +7183,9 @@
 [Effected points]
 23 25 
 [TStart]
-0.848368
+0.702855
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7195,9 +7195,9 @@
 [Effected points]
 25 
 [TStart]
-0.848368
+1.73241
 [TEnd]
-0.151632
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7207,9 +7207,9 @@
 [Effected points]
 25 
 [TStart]
-0.709432
+1.91965
 [TEnd]
-0.91276
+1.84588
 [Control Point Count]
 4
 [Control Points]
@@ -7219,9 +7219,9 @@
 [Effected points]
 25 23 
 [TStart]
-0.368399
+1.77117
 [TEnd]
-0.579969
+1.83388
 [Control Point Count]
 4
 [Control Points]
@@ -7231,9 +7231,9 @@
 [Effected points]
 25 27 
 [TStart]
-0.709432
+2.77765
 [TEnd]
-0.290568
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7243,9 +7243,9 @@
 [Effected points]
 25 
 [TStart]
-0.393004
+2.01262
 [TEnd]
-0.828308
+1.73638
 [Control Point Count]
 4
 [Control Points]
@@ -7255,9 +7255,9 @@
 [Effected points]
 25 29 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7267,9 +7267,9 @@
 [Effected points]
 27 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7279,9 +7279,9 @@
 [Effected points]
 27 
 [TStart]
-0.420031
+1.86589
 [TEnd]
-0.631601
+1.91833
 [Control Point Count]
 4
 [Control Points]
@@ -7291,9 +7291,9 @@
 [Effected points]
 27 25 
 [TStart]
-0.596332
+2.23615
 [TEnd]
-0.828308
+2.22341
 [Control Point Count]
 4
 [Control Points]
@@ -7303,9 +7303,9 @@
 [Effected points]
 27 29 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7315,9 +7315,9 @@
 [Effected points]
 29 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7327,9 +7327,9 @@
 [Effected points]
 29 
 [TStart]
-0.171692
+1.07081
 [TEnd]
-0.403668
+1.2213
 [Control Point Count]
 4
 [Control Points]
@@ -7339,9 +7339,9 @@
 [Effected points]
 29 27 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7351,9 +7351,9 @@
 [Effected points]
 29 
 [TStart]
-0.171692
+3.07358
 [TEnd]
-0.606996
+2.92875
 [Control Point Count]
 4
 [Control Points]
@@ -7363,9 +7363,9 @@
 [Effected points]
 29 25 
 [TStart]
-0.828308
+0.687153
 [TEnd]
-0.171692
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7375,9 +7375,9 @@
 [Effected points]
 29 
 [TStart]
-0.227973
+-1.19014
 [TEnd]
-0.772027
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7401,9 +7401,9 @@
 [Bezier Curve Count]
 20
 [TStart]
-7.82445e-07
+-0.000887464
 [TEnd]
-0.999999
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7413,9 +7413,9 @@
 [Effected points]
 0 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7425,9 +7425,9 @@
 [Effected points]
 0 
 [TStart]
-0
+1.77063
 [TEnd]
-0.765878
+1.5127
 [Control Point Count]
 4
 [Control Points]
@@ -7437,9 +7437,9 @@
 [Effected points]
 0 3 
 [TStart]
-1.7104e-06
+-0.00132232
 [TEnd]
-0.999998
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7449,9 +7449,9 @@
 [Effected points]
 0 
 [TStart]
-0
+6.17901
 [TEnd]
-0.397696
+6.1241
 [Control Point Count]
 4
 [Control Points]
@@ -7461,9 +7461,9 @@
 [Effected points]
 0 63 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7473,9 +7473,9 @@
 [Effected points]
 3 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7485,9 +7485,9 @@
 [Effected points]
 3 
 [TStart]
-0.234122
+1.50885
 [TEnd]
-1
+1.00001
 [Control Point Count]
 4
 [Control Points]
@@ -7497,9 +7497,9 @@
 [Effected points]
 3 0 
 [TStart]
-0.515044
+33.7296
 [TEnd]
-0.484956
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7509,9 +7509,9 @@
 [Effected points]
 3 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7521,9 +7521,9 @@
 [Effected points]
 61 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7533,9 +7533,9 @@
 [Effected points]
 61 
 [TStart]
-0.569014
+0.534673
 [TEnd]
-0.430986
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7545,9 +7545,9 @@
 [Effected points]
 61 
 [TStart]
-0.513648
+0.506825
 [TEnd]
-0.486352
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7557,9 +7557,9 @@
 [Effected points]
 61 
 [TStart]
-0.144736
+-0.698875
 [TEnd]
-0.855264
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7569,9 +7569,9 @@
 [Effected points]
 61 
 [TStart]
-0.300639
+1.86975
 [TEnd]
-0.823476
+1.59808
 [Control Point Count]
 4
 [Control Points]
@@ -7581,9 +7581,9 @@
 [Effected points]
 61 63 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7593,9 +7593,9 @@
 [Effected points]
 63 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7605,9 +7605,9 @@
 [Effected points]
 63 
 [TStart]
-0.176524
+2.18831
 [TEnd]
-0.699361
+1.9845
 [Control Point Count]
 4
 [Control Points]
@@ -7617,9 +7617,9 @@
 [Effected points]
 63 61 
 [TStart]
-0.302489
+-1.92857
 [TEnd]
-0.697511
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7629,7 +7629,7 @@
 [Effected points]
 63 
 [TStart]
-0.602304
+1.55312
 [TEnd]
 1
 [Control Point Count]
@@ -7668,9 +7668,9 @@
 [Bezier Curve Count]
 26
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7680,9 +7680,9 @@
 [Effected points]
 53 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7692,9 +7692,9 @@
 [Effected points]
 53 
 [TStart]
-0.502433
+0.501216
 [TEnd]
-0.497567
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7704,9 +7704,9 @@
 [Effected points]
 53 
 [TStart]
-0.828304
+1.83583
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7716,9 +7716,9 @@
 [Effected points]
 53 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7728,9 +7728,9 @@
 [Effected points]
 53 
 [TStart]
-0.171696
+1.07083
 [TEnd]
-0.403672
+1.22132
 [Control Point Count]
 4
 [Control Points]
@@ -7740,9 +7740,9 @@
 [Effected points]
 53 55 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7752,9 +7752,9 @@
 [Effected points]
 53 
 [TStart]
-0.171696
+3.07348
 [TEnd]
-0.607004
+2.92865
 [Control Point Count]
 4
 [Control Points]
@@ -7764,9 +7764,9 @@
 [Effected points]
 53 57 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7776,9 +7776,9 @@
 [Effected points]
 53 
 [TStart]
-0.828304
+0.68715
 [TEnd]
-0.171696
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7788,9 +7788,9 @@
 [Effected points]
 53 
 [TStart]
-0.416198
+-5.42427
 [TEnd]
-0.583802
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7800,9 +7800,9 @@
 [Effected points]
 53 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7812,9 +7812,9 @@
 [Effected points]
 55 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7824,9 +7824,9 @@
 [Effected points]
 55 
 [TStart]
-0.596328
+2.23615
 [TEnd]
-0.828304
+2.22342
 [Control Point Count]
 4
 [Control Points]
@@ -7836,9 +7836,9 @@
 [Effected points]
 55 53 
 [TStart]
-0.420023
+1.89435
 [TEnd]
-0.631591
+1.94635
 [Control Point Count]
 4
 [Control Points]
@@ -7848,9 +7848,9 @@
 [Effected points]
 55 57 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7860,9 +7860,9 @@
 [Effected points]
 57 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7872,9 +7872,9 @@
 [Effected points]
 57 
 [TStart]
-0.368409
+1.77835
 [TEnd]
-0.579977
+1.8423
 [Control Point Count]
 4
 [Control Points]
@@ -7884,9 +7884,9 @@
 [Effected points]
 57 55 
 [TStart]
-0.709428
+1.91965
 [TEnd]
-0.912756
+1.8459
 [Control Point Count]
 4
 [Control Points]
@@ -7896,9 +7896,9 @@
 [Effected points]
 57 59 
 [TStart]
-0.709428
+2.7777
 [TEnd]
-0.290572
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7908,9 +7908,9 @@
 [Effected points]
 57 
 [TStart]
-0.392996
+2.01263
 [TEnd]
-0.828304
+1.73638
 [Control Point Count]
 4
 [Control Points]
@@ -7920,9 +7920,9 @@
 [Effected points]
 57 53 
 [TStart]
-0.709428
+2.7777
 [TEnd]
-0.290572
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7932,9 +7932,9 @@
 [Effected points]
 57 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7944,9 +7944,9 @@
 [Effected points]
 59 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7956,9 +7956,9 @@
 [Effected points]
 59 
 [TStart]
-0.0872441
+0.518406
 [TEnd]
-0.290572
+0.736085
 [Control Point Count]
 4
 [Control Points]
@@ -7968,9 +7968,9 @@
 [Effected points]
 59 57 
 [TStart]
-0.912756
+1.44752
 [TEnd]
-0.087244
+1
 [Control Point Count]
 3
 [Control Points]
@@ -7994,9 +7994,9 @@
 [Bezier Curve Count]
 20
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8006,9 +8006,9 @@
 [Effected points]
 45 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8018,9 +8018,9 @@
 [Effected points]
 45 
 [TStart]
-0.844005
+1.75412
 [TEnd]
-0.155995
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8030,9 +8030,9 @@
 [Effected points]
 45 
 [TStart]
-0.144736
+0.826172
 [TEnd]
-0.396448
+1.02713
 [Control Point Count]
 4
 [Control Points]
@@ -8042,9 +8042,9 @@
 [Effected points]
 45 47 
 [TStart]
-0.144736
+-0.698875
 [TEnd]
-0.855264
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8054,9 +8054,9 @@
 [Effected points]
 45 
 [TStart]
-0.743057
+0.629707
 [TEnd]
-0.256943
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8066,9 +8066,9 @@
 [Effected points]
 45 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8078,9 +8078,9 @@
 [Effected points]
 47 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8090,9 +8090,9 @@
 [Effected points]
 47 
 [TStart]
-0.396448
+-4.27615
 [TEnd]
-0.603552
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8102,9 +8102,9 @@
 [Effected points]
 47 
 [TStart]
-0.603552
+2.39777
 [TEnd]
-0.855264
+2.34703
 [Control Point Count]
 4
 [Control Points]
@@ -8114,9 +8114,9 @@
 [Effected points]
 47 45 
 [TStart]
-0.396448
+2.38151
 [TEnd]
-0.658216
+2.44032
 [Control Point Count]
 4
 [Control Points]
@@ -8126,9 +8126,9 @@
 [Effected points]
 47 49 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8138,9 +8138,9 @@
 [Effected points]
 49 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8150,9 +8150,9 @@
 [Effected points]
 49 
 [TStart]
-0.341784
+2.17604
 [TEnd]
-0.603552
+2.25514
 [Control Point Count]
 4
 [Control Points]
@@ -8162,9 +8162,9 @@
 [Effected points]
 49 47 
 [TStart]
-0.658216
+2.5493
 [TEnd]
-0.919988
+2.80704
 [Control Point Count]
 4
 [Control Points]
@@ -8174,9 +8174,9 @@
 [Effected points]
 49 51 
 [TStart]
-0.658216
+3.57904
 [TEnd]
-0.341784
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8186,9 +8186,9 @@
 [Effected points]
 49 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8198,9 +8198,9 @@
 [Effected points]
 51 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8210,9 +8210,9 @@
 [Effected points]
 51 
 [TStart]
-0.080012
+0.217106
 [TEnd]
-0.341784
+0.558728
 [Control Point Count]
 4
 [Control Points]
@@ -8222,9 +8222,9 @@
 [Effected points]
 51 49 
 [TStart]
-0.919988
+1.41825
 [TEnd]
-0.080012
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8248,9 +8248,9 @@
 [Bezier Curve Count]
 14
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8260,9 +8260,9 @@
 [Effected points]
 39 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8272,9 +8272,9 @@
 [Effected points]
 39 
 [TStart]
-0.907485
+1.46905
 [TEnd]
-0.0925145
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8284,9 +8284,9 @@
 [Effected points]
 39 
 [TStart]
-0.135338
+0.248876
 [TEnd]
-0.450758
+0.600947
 [Control Point Count]
 4
 [Control Points]
@@ -8296,9 +8296,9 @@
 [Effected points]
 39 41 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8308,9 +8308,9 @@
 [Effected points]
 41 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8320,9 +8320,9 @@
 [Effected points]
 41 
 [TStart]
-0.549242
+10.1242
 [TEnd]
-0.864662
+10.2021
 [Control Point Count]
 4
 [Control Points]
@@ -8332,9 +8332,9 @@
 [Effected points]
 41 39 
 [TStart]
-0.549251
+10.1222
 [TEnd]
-0.864667
+10.2003
 [Control Point Count]
 4
 [Control Points]
@@ -8344,9 +8344,9 @@
 [Effected points]
 41 43 
 [TStart]
-0.599449
+5.47747
 [TEnd]
-0.400551
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8356,9 +8356,9 @@
 [Effected points]
 41 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8368,9 +8368,9 @@
 [Effected points]
 43 
 [TStart]
-0.848372
+1.73239
 [TEnd]
-0.151628
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8380,9 +8380,9 @@
 [Effected points]
 43 
 [TStart]
-0.135333
+0.248873
 [TEnd]
-0.450749
+0.600943
 [Control Point Count]
 4
 [Control Points]
@@ -8392,9 +8392,9 @@
 [Effected points]
 43 41 
 [TStart]
-0.188564
+-0.930732
 [TEnd]
-0.811436
+1
 [Control Point Count]
 3
 [Control Points]
@@ -8404,9 +8404,9 @@
 [Effected points]
 43 
 [TStart]
-0.907494
+0.757992
 [TEnd]
-0.0925064
+1
 [Control Point Count]
 3
 [Control Points]

@@ -248,7 +248,7 @@ std::unordered_map<u32, std::unordered_set<Edge>>
 Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh)
 {
   std::unordered_map<u32, std::unordered_set<Edge>> edgeMap;
-  auto &AddEdgeNoDuplicates = [&edgeMap](const u32 v0, const u32 v1) {
+  const auto &AddEdgeNoDuplicates = [&edgeMap](const u32 v0, const u32 v1) {
     if (edgeMap.find(v0) != edgeMap.end())
     {
       edgeMap[v0].emplace(v0, v1);
@@ -326,7 +326,7 @@ glm::vec3 Voxelizer::CastRayInBox(const Ray &ray, const Box &box)
   {
     tMax = tyMax;
   }
-  auto &[tzMin, tzMax] = safeTCalculation(boxMin.z, boxMax.z, ray.mOrigin.z, ray.mDirection.z);
+  auto [tzMin, tzMax] = safeTCalculation(boxMin.z, boxMax.z, ray.mOrigin.z, ray.mDirection.z);
   if (tzMin > tzMax)
   {
     std::swap(tzMin, tzMax);

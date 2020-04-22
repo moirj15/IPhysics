@@ -89,8 +89,8 @@ void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
     file << "[Bezier Curve Count]\n" << value.mBezierCurves.size() << "\n";
     for (const auto &b : value.mBezierCurves)
     {
-      file << "[TStart]\n" << b.mTStart << "\n";
-      file << "[TEnd]\n" << b.mTEnd << "\n";
+      file << "[TStart]\n" << b.mFirstT << "\n";
+      file << "[TEnd]\n" << b.mSecondT << "\n";
       file << "[Control Point Count]\n" << b.mControlPoints.size() << "\n";
       file << "[Control Points]\n";
       for (const auto &cp : b.mControlPoints)
@@ -239,10 +239,10 @@ VoxObj::VoxelMesh *DeSerialize(const std::string &path)
     {
       file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      file >> voxel.mBezierCurves[b].mTStart;
+      file >> voxel.mBezierCurves[b].mFirstT;
       file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-      file >> voxel.mBezierCurves[b].mTEnd;
+      file >> voxel.mBezierCurves[b].mSecondT;
       file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
