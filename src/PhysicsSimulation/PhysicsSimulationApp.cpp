@@ -11,6 +11,7 @@
 #include "IPhysicsUI.h"
 
 #include <GLFW/glfw3.h>
+#include <glm/gtx/string_cast.hpp>
 
 namespace IPhysics
 {
@@ -206,30 +207,51 @@ void PhysicsSimulationApp::Render()
             // just assuming t = .5 for now, need to actually calculate this later
             //             mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
             //                 voxel.CalculateFrom3Points(bezierCurve.mControlPoints, 0.5f);
-
-            f32 totalLength =
-                glm::length(bezierCurve.mControlPoints[0] - bezierCurve.mControlPoints[2]);
-            if (totalLength == 0.0f)
+            auto p = bezierCurve.mControlPoints;
+            auto a = p[0] - 2.0f * p[1] + p[2];
+            auto b = -2.0f * p[0] + 2.0f * p[1];
+            auto c = -p[1] + p[0];
+            auto posT = (-b + glm::sqrt(glm::pow(b, glm::vec3(2.0f)) - 4.0f * a * c)) / (2.0f * a);
+            auto negT = (-b - glm::sqrt(glm::pow(b, glm::vec3(2.0f)) - 4.0f * a * c)) / (2.0f * a);
+            for (u32 i = 0; i < 3; i++)
             {
-              totalLength = 1.0f;
+              auto tn = voxel.CalculateFrom3Points(p, negT[i]);
+              auto tp = voxel.CalculateFrom3Points(p, posT[i]);
+              printf("tn[%d] = %s\n", i, glm::to_string(tn).c_str());
+              printf("tp[%d] = %s\n", i, glm::to_string(tp).c_str());
             }
-            // TODO: need to have the control points ordered from left to right
+            printf("actual = %s\n", glm::to_string(p[1]).c_str());
 
-            f32 t;
-            if (glm::any(
-                    glm::lessThan(bezierCurve.mControlPoints[0], bezierCurve.mControlPoints[1])))
-            {
-              t = glm::length(bezierCurve.mControlPoints[1] - bezierCurve.mControlPoints[0])
-                  / totalLength;
-            }
-            else
-            {
-              t = glm::length(bezierCurve.mControlPoints[1] - bezierCurve.mControlPoints[2])
-                  / totalLength;
-            }
-
-            auto result = voxel.CalculateFrom3Points(bezierCurve.mControlPoints, t / 2.0f);
-            mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) = result;
+            //////////////////////////////////////////////////////////////////////////
+            //             f32 totalLength =
+            //                 glm::length(bezierCurve.mControlPoints[0] -
+            //                 bezierCurve.mControlPoints[2]);
+            //             if (totalLength == 0.0f)
+            //             {
+            //               totalLength = 1.0f;
+            //             }
+            //             // TODO: need to have the control points ordered from left to right
+            //
+            //             f32 t;
+            //             if (glm::any(
+            //                     glm::lessThan(bezierCurve.mControlPoints[0],
+            //                     bezierCurve.mControlPoints[1])))
+            //             {
+            //               t = glm::length(bezierCurve.mControlPoints[1] -
+            //               bezierCurve.mControlPoints[0])
+            //                   / totalLength;
+            //             }
+            //             else
+            //             {
+            //               t = glm::length(bezierCurve.mControlPoints[1] -
+            //               bezierCurve.mControlPoints[2])
+            //                   / totalLength;
+            //             }
+            //
+            //             auto result = voxel.CalculateFrom3Points(bezierCurve.mControlPoints, t
+            //             / 2.0f); mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0])
+            //             = result;
+            //////////////////////////////////////////////////////////////////////////
 
             //             mesh->mVertices.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
             //                 voxel.CalculateFrom3Points(bezierCurve.mControlPoints,
