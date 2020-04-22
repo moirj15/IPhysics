@@ -11,6 +11,7 @@
 #include "IPhysicsUI.h"
 
 #include <GLFW/glfw3.h>
+#include <complex>
 #include <glm/gtx/string_cast.hpp>
 
 namespace IPhysics
@@ -288,31 +289,38 @@ void PhysicsSimulationApp::Render()
             alreadyCalculated[effectedPoint] = true;
             u32 index = alreadyCalculated[bezierCurve.mEffectedPoints[0]] ? 2 : 1;
             auto points = bezierCurve.mControlPoints;
-            auto a = -points[0] + 3.0f * points[1] - 3.0f * points[2] + points[3];
-            auto b = 3.0f * points[0] - 6.0f * points[1] + 3.0f * points[2];
-            auto c = -3.0f * points[0] + 3.0f * points[1];
-            auto d = -points[0] - points[index];
-
-            auto p = -b / (3.0f * a);
-            auto q = glm::pow(p, glm::vec3(3.0f))
-                     + (b * c - 3.0f * a * d) / (6.0f * glm::pow(a, glm::vec3(2.0f)));
-            auto r = c / (3.0f * a);
-
-            auto t = glm::pow(
-                q
-                    + glm::pow(
-                        q * q + glm::pow(r - (p * p), glm::vec3(3.0f)), glm::vec3(1.0f / 2.0f)),
-                glm::vec3(1.0f / 3.0f));
+            f32 bestT = 0.0f;
             for (u32 i = 0; i < 3; i++)
             {
-              auto tn = voxel.CalculateFrom3Points(points, t[i]);
-              printf("tn[%d] = %s\n", i, glm::to_string(tn).c_str());
-            }
-            printf("actual = %s\n", glm::to_string(points[index]).c_str());
 
-            auto tmp = voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t.x);
+              std::complex<f32> a =
+                  -points[0][i] + (3.0f * points[1][i]) - (3.0f * points[2][i]) + points[3][i];
+              std::complex<f32> b = 3.0f * points[0][i] - 6.0f * points[1][i] + 3.0f * points[2][i];
+              std::complex<f32> c = -3.0f * points[0][i] + 3.0f * points[1][i];
+              std::complex<f32> d = points[0][i] - points[index][i];
+
+              auto p = -b / (3.0f * a);
+              auto q = pow(p, 3.0f) + (b * c - 3.0f * a * d) / (6.0f * pow(a, 2.0f));
+              auto r = c / (3.0f * a);
+
+              auto t = pow(q + pow(q * q + pow(r - (p * p), 3.0f), 1.0f / 2.0f), 1.0f / 3.0f)
+                       + pow(q - pow((q * q) + pow(r - (p * p), 3.0f), 1.0f / 2.0f), 1.0f / 3.0f)
+                       + p;
+              if (!isnan(t.real()))
+              {
+                bestT = t.real();
+              }
+              //               for (u32 i = 0; i < 3; i++)
+              //               {
+              auto tn = voxel.CalculateFrom4Points(points, t.real());
+              //               printf("tn[%d] = %s\n", i, glm::to_string(tn).c_str());
+              //               }
+            }
+            //             printf("actual = %s\n", glm::to_string(points[index]).c_str());
+            //             printf("\n");
+            auto tmp = voxel.CalculateFrom4Points(bezierCurve.mControlPoints, bestT);
             mesh->mOffsets.AccessCastBuffer(effectedPoint) =
-                voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t.x);
+                voxel.CalculateFrom4Points(bezierCurve.mControlPoints, bestT);
 
             //////////////////////////////////////////////////////////////////////////
             //             f32 totalLength =
