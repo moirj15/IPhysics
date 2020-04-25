@@ -301,7 +301,7 @@
 [Effected points]
 65 
 [TStart]
-0
+2.49104e-07
 [TEnd]
 1
 [Control Point Count]
@@ -313,7 +313,7 @@
 [Effected points]
 65 
 [TStart]
--nan(ind)
+7.56474e-08
 [TEnd]
 1
 [Control Point Count]
@@ -555,7 +555,7 @@
 [Effected points]
 100 101 
 [TStart]
-0
+2.49108e-07
 [TEnd]
 1
 [Control Point Count]
@@ -1380,7 +1380,7 @@
 [Effected points]
 64 
 [TStart]
--3.47173
+0.437055
 [TEnd]
 1
 [Control Point Count]
@@ -2402,7 +2402,7 @@
 [Effected points]
 86 
 [TStart]
-0.667904
+1.98894
 [TEnd]
 1
 [Control Point Count]
@@ -3040,7 +3040,7 @@
 [Effected points]
 82 
 [TStart]
-1.27156
+0.824019
 [TEnd]
 1
 [Control Point Count]
@@ -3129,7 +3129,7 @@
 [Bezier Curve Count]
 14
 [TStart]
--6.05696
+-6.05695
 [TEnd]
 1
 [Control Point Count]
@@ -4442,7 +4442,7 @@
 [Effected points]
 32 30 
 [TStart]
--1.23589
+0.355982
 [TEnd]
 1
 [Control Point Count]
@@ -5682,7 +5682,7 @@
 [Effected points]
 13 21 
 [TStart]
--6.05696
+-6.05697
 [TEnd]
 1
 [Control Point Count]
@@ -5874,7 +5874,7 @@
 [Effected points]
 15 17 
 [TStart]
--6.05696
+-6.057
 [TEnd]
 1
 [Control Point Count]
@@ -6282,7 +6282,7 @@
 [Effected points]
 21 5 
 [TStart]
--6.05696
+-6.05695
 [TEnd]
 1
 [Control Point Count]
@@ -6680,7 +6680,7 @@
 [Effected points]
 25 29 
 [TStart]
--6.05696
+0.461873
 [TEnd]
 1
 [Control Point Count]
@@ -6728,7 +6728,7 @@
 [Effected points]
 35 37 
 [TStart]
--6.05696
+0.461872
 [TEnd]
 1
 [Control Point Count]
@@ -6776,7 +6776,7 @@
 [Effected points]
 27 29 
 [TStart]
--6.05696
+0.461873
 [TEnd]
 1
 [Control Point Count]
@@ -6800,7 +6800,7 @@
 [Effected points]
 37 
 [TStart]
-1.46933
+0.757911
 [TEnd]
 1
 [Control Point Count]
@@ -6994,7 +6994,7 @@
 [Bezier Curve Count]
 46
 [TStart]
--6.05696
+-6.05699
 [TEnd]
 1
 [Control Point Count]
@@ -7126,7 +7126,7 @@
 [Effected points]
 53 
 [TStart]
--6.05696
+-6.05698
 [TEnd]
 1
 [Control Point Count]
@@ -7198,7 +7198,7 @@
 [Effected points]
 45 
 [TStart]
--6.05696
+-6.05695
 [TEnd]
 1
 [Control Point Count]

@@ -12,7 +12,6 @@ file(GLOB SRC_INPUT_FILES "src/Input/*")
 file(GLOB SRC_PHYSICS_SIMULATION_FILES "src/PhysicsSimulation/*")
 file(GLOB GLEW_FILES "glew/*")
 
-
 set(SOURCE_LIST_MAIN_PROJECT
 	${IMGUI_FILES}
   ${GLEW_FILES}
