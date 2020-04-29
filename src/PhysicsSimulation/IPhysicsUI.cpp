@@ -47,14 +47,16 @@ void IPhysicsUI::Update()
       mSettingsFieldModified |=
           ImGui::InputFloat3("Position", glm::value_ptr(objectSettings.mPosition));
 
-      mSettingsFieldModified |=
-          ImGui::InputFloat3("Velocity", glm::value_ptr(objectSettings.mInitialVelocity));
+      //       mSettingsFieldModified |=
+      //           ImGui::InputFloat3("Velocity", glm::value_ptr(objectSettings.mInitialVelocity));
+      //
+      //       mSettingsFieldModified |=
+      //           ImGui::InputFloat3("Acceleration",
+      //           glm::value_ptr(objectSettings.mInitialAccleration));
 
-      mSettingsFieldModified |=
-          ImGui::InputFloat3("Acceleration", glm::value_ptr(objectSettings.mInitialAccleration));
-
-      mSettingsFieldModified |= ImGui::InputFloat("Mass", &objectSettings.mMass);
-      mSettingsFieldModified |= ImGui::Checkbox("Treat as rigid", &objectSettings.mTreatAsRigid);
+      //       mSettingsFieldModified |= ImGui::InputFloat("Mass", &objectSettings.mMass);
+      //       mSettingsFieldModified |= ImGui::Checkbox("Treat as rigid",
+      //       &objectSettings.mTreatAsRigid);
       if (mObjectSettings.find(mCurrentObjectSettingsHandle) != mObjectSettings.end())
       {
         mObjectSettings[mCurrentObjectSettingsHandle] = objectSettings;
@@ -63,9 +65,9 @@ void IPhysicsUI::Update()
     ImGui::EndGroup();
     ImGui::BeginGroup();
     {
-      ImGui::Checkbox("Enable Gravity", &mPhysicsSettings.mEnableGravity);
+      //            ImGui::Checkbox("Enable Gravity", &mPhysicsSettings.mEnableGravity);
       ImGui::Checkbox("Enable Extension", &mPhysicsSettings.mEnableExtension);
-      ImGui::InputFloat("Mouse Force", &mPhysicsSettings.mMouseForce);
+      //            ImGui::InputFloat("Mouse Force", &mPhysicsSettings.mMouseForce);
     }
     ImGui::EndGroup();
     ImGui::BeginGroup();

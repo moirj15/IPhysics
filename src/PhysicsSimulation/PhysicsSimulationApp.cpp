@@ -186,7 +186,7 @@ void PhysicsSimulationApp::ApplyDeformations()
 void PhysicsSimulationApp::Render()
 {
   mRenderer->Clear();
-  if (mPhysicsSimulationRunning)
+  if (mPhysicsSimulationRunning && mUI->GetPhysicsSettings().mEnableExtension)
   {
 
     for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())

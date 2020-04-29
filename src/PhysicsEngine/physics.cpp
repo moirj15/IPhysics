@@ -25,52 +25,55 @@ void PhysicsEngine::Update(f32 t)
   mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
   // TODO: add a bool to make this optional
   auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
-  s32 numManifolds = voxelDispatcher->getNumManifolds();
-  for (s32 i = 0; i < numManifolds; i++)
+  if (mSettings.mEnableExtension)
   {
-    auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
-    s32 numContacts = contactManifold->getNumContacts();
-    for (s32 j = 0; j < numContacts; j++)
+    s32 numManifolds = voxelDispatcher->getNumManifolds();
+    for (s32 i = 0; i < numManifolds; i++)
     {
-      auto contactPoint = contactManifold->getContactPoint(j);
-      f32 impulse = contactPoint.getAppliedImpulse();
-      auto *voxelRB = contactManifold->getBody1();
-      auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
-      // TODO: store the mass of the voxel, since we can't get this from bullet
-      f32 density = glm::compMul(voxel->mDimensions) * 1.0f;
-      const f32 impulseThreshold = density; // * 10.0f;
-      if (impulse > impulseThreshold)
+      auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
+      s32 numContacts = contactManifold->getNumContacts();
+      for (s32 j = 0; j < numContacts; j++)
       {
-        // Use the contactPoint's B normal to determine which voxel face to adjust
-        auto contactNormal = ToGLM(contactPoint.m_normalWorldOnB);
-        //         contactNormal *= impulse;
-        //         printf("impulse * t %f\n", impulse * t * 0.01f);
-        for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
+        auto contactPoint = contactManifold->getContactPoint(j);
+        f32 impulse = contactPoint.getAppliedImpulse();
+        auto *voxelRB = contactManifold->getBody1();
+        auto *voxel = (VoxObj::Voxel *)voxelRB->getUserPointer();
+        // TODO: store the mass of the voxel, since we can't get this from bullet
+        f32 density = glm::compMul(voxel->mDimensions) * 1.0f;
+        const f32 impulseThreshold = density; // * 10.0f;
+        if (impulse > impulseThreshold)
         {
-          auto &bezierCurve = voxel->mBezierCurves[v];
-          // TODO: compare these two methods of modifying the bezier curves
-          //           for (auto &cp : bezierCurve.mControlPoints)
-          //           {
-          //             cp += impulseDirection;
-          //           }
-          auto &firstCP = bezierCurve.mControlPoints[0];
-          auto &secondCP = bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1];
-          auto firstCPNormal = glm::normalize(firstCP - voxel->mPosition);
-          auto secondCPNormal = glm::normalize(secondCP - voxel->mPosition);
-          // check if the normalized control point and the contact normal point in the same
-          // direction
-          if (glm::dot(firstCPNormal, contactNormal) > 0.0f)
+          // Use the contactPoint's B normal to determine which voxel face to adjust
+          auto contactNormal = ToGLM(contactPoint.m_normalWorldOnB);
+          //         contactNormal *= impulse;
+          //         printf("impulse * t %f\n", impulse * t * 0.01f);
+          for (u32 v = 0; v < voxel->mBezierCurves.size(); v++)
           {
-            firstCP += (-contactNormal * impulse) * t; // * t;
-          }
-          if (glm::dot(secondCPNormal, contactNormal) > 0.0f)
-          {
-            secondCP += (-contactNormal * impulse) * t; // * t;
-          }
+            auto &bezierCurve = voxel->mBezierCurves[v];
+            // TODO: compare these two methods of modifying the bezier curves
+            //           for (auto &cp : bezierCurve.mControlPoints)
+            //           {
+            //             cp += impulseDirection;
+            //           }
+            auto &firstCP = bezierCurve.mControlPoints[0];
+            auto &secondCP = bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1];
+            auto firstCPNormal = glm::normalize(firstCP - voxel->mPosition);
+            auto secondCPNormal = glm::normalize(secondCP - voxel->mPosition);
+            // check if the normalized control point and the contact normal point in the same
+            // direction
+            if (glm::dot(firstCPNormal, contactNormal) > 0.0f)
+            {
+              firstCP += (-contactNormal * impulse) * t; // * t;
+            }
+            if (glm::dot(secondCPNormal, contactNormal) > 0.0f)
+            {
+              secondCP += (-contactNormal * impulse) * t; // * t;
+            }
 
-          //           bezierCurve.mControlPoints[0] += contactNormal;
-          //           bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] +=
-          //           contactNormal;
+            //           bezierCurve.mControlPoints[0] += contactNormal;
+            //           bezierCurve.mControlPoints[bezierCurve.mControlPoints.size() - 1] +=
+            //           contactNormal;
+          }
         }
       }
     }
