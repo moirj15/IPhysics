@@ -7,7 +7,7 @@
 #include "../common.h"
 #include "util.h"
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 class IndexBuffer
 {

@@ -6,7 +6,7 @@
 
 #include "../common.h"
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 /**
  * \brief: Create an OpenGL Buffer object.

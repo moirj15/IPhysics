@@ -1,6 +1,6 @@
 #include "RendererBackend.h"
 
-#define IMGUI_IMPL_OPENGL_LOADER_GLEW
+#define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #include "../../imgui/imgui.h"
 #include "../../imgui/imgui_impl_glfw.h"
 #include "../../imgui/imgui_impl_opengl3.h"
@@ -12,6 +12,7 @@
 #include "texture.h"
 #include "textureLibrary.h"
 #include "window.h"
+#include <glad/glad.h>
 
 #include <GLFW/glfw3.h>
 
@@ -38,13 +39,17 @@ Window *InitAPI(const s32 width, const s32 height, const char *windowName, bool 
   Window *window = new Window(width, height, windowName);
 
   glfwMakeContextCurrent(window->mGLWindow);
-  GLenum err = glewInit();
-  if (err != GLEW_OK)
+  if (!gladLoadGL())
   {
-    fprintf(stderr, "glew error: %s\n", glewGetErrorString(err));
-    glfwTerminate();
-    exit(EXIT_FAILURE);
+    fprintf(stderr, "Failed to load glad\n");
   }
+//  GLenum err = glewInit();
+//  if (err != GLEW_OK)
+//  {
+//    fprintf(stderr, "glew error: %s\n", glewGetErrorString(err));
+//    glfwTerminate();
+//    exit(EXIT_FAILURE);
+//  }
   glfwSwapInterval(1);
   glEnable(GL_DEPTH_TEST);
   glLineWidth(3.0f);

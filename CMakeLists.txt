@@ -10,11 +10,9 @@ file(GLOB SRC_VOXEL_GENERATOR "src/voxelGenerator/*")
 file(GLOB SRC_VOXEL_OBJECTS "src/voxelObjects")
 file(GLOB SRC_INPUT_FILES "src/Input/*")
 file(GLOB SRC_PHYSICS_SIMULATION_FILES "src/PhysicsSimulation/*")
-file(GLOB GLEW_FILES "glew/*")
 
 set(SOURCE_LIST_MAIN_PROJECT
 	${IMGUI_FILES}
-  ${GLEW_FILES}
 	${SRC_UTILS_FILES}
 	${SRC_RENDERER_FILES}
 	${SRC_PHYSICS_ENGINE_FILES}
@@ -26,7 +24,6 @@ set(SOURCE_LIST_MAIN_PROJECT
 
 set(SOURCE_LIST_VOXEL_GENERATOR
 	${IMGUI_FILES}
-  ${GLEW_FILES}
   ${SRC_UTILS_FILES}
   ${SRC_VOXEL_GENERATOR}
 	${SRC_RENDERER_FILES}
@@ -79,8 +76,9 @@ elseif (WIN32)
   include_directories(
     D:/libraries/glm;
     D:/libraries/glfw/include;
-    D:/libraries/glew-2.1.0/include;
+#    D:/libraries/glew-2.1.0/include;
     #D:/libraries/ReactPhysics3D/src
+    G:/libraries/include/;
     D:/libraries/bullet/include;
   )
   set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
@@ -91,7 +89,7 @@ elseif (WIN32)
     target_link_libraries(
       IPhysics
       ${OPENGL_LIBRARY}
-      D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
+#      D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
       D:/libraries/glfw/release/glfw3.lib
       D:/libraries/bullet/Debug/BulletDynamics_Debug.lib
       D:/libraries/bullet/Debug/BulletCollision_Debug.lib

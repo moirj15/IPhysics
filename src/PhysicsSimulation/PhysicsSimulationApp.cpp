@@ -2,7 +2,6 @@
 
 #include "../../imgui/imgui.h"
 #include "../PhysicsEngine/physics.h"
-#include "../renderer/DebugDrawer.h"
 #include "../renderer/RendererBackend.h"
 #include "../renderer/RendererFrontend.h"
 #include "../renderer/window.h"
@@ -11,8 +10,6 @@
 #include "IPhysicsUI.h"
 
 #include <GLFW/glfw3.h>
-#include <complex>
-#include <glm/gtx/string_cast.hpp>
 
 namespace IPhysics
 {
@@ -27,6 +24,13 @@ PhysicsSimulationApp::PhysicsSimulationApp() :
 {
   mUI->Init(mWindow.get());
   mRenderer->SetProjection(mProjection);
+  int n = 0;
+  glGetIntegerv(GL_NUM_EXTENSIONS, &n);
+  for (int i = 0; i < n;  i++)
+  {
+    auto tmp = glGetStringi(GL_EXTENSIONS, i);
+    printf("%s\n", tmp);
+  }
 }
 
 PhysicsSimulationApp::~PhysicsSimulationApp() = default;

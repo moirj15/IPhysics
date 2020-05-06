@@ -4,7 +4,7 @@
 #include "../common.h"
 #include "ShaderData.h"
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
