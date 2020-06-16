@@ -1,7 +1,6 @@
-#include "obj.h"
+#include "Obj.h"
 
-#include <Renderer/mesh.h>
-
+#include <Renderer/Mesh.h>
 #include <cstdio>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/normal.hpp>

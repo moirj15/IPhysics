@@ -6,7 +6,7 @@
 
 #include "VoxelizerParameters.h"
 
-#include <common.h>
+#include <Common.h>
 #include <optional>
 #include <string>
 

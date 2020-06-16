@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "../../common.h"
+#include "../../Common.h"
 #include "indexBufferObject.h"
 #include "vertexBufferObject.h"
 

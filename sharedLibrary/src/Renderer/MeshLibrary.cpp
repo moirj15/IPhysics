@@ -1,6 +1,6 @@
-#include "meshLibrary.h"
+#include <Renderer/MeshLibrary.h>
 
-#include "mesh.h"
+#include <Renderer/Mesh.h>
 
 u32 MeshLibrary::CURRENT_HANDLE = 0;
 

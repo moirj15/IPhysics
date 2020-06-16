@@ -1,10 +1,9 @@
 
 #pragma once
 
-#include "../../common.h"
-#include "../utils/VoxelMeshManager.h"
-#include "ShaderData.h"
-#include "indexBufferObject.h"
+#include <Common.h>
+//#include <Renderer/ShaderData.h>
+//#include <Renderer/IndexBufferObject.h>
 
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../common.h"
+#include "../../Common.h"
 #include "../utils/QuickCastBuffer.h"
 #include "../utils/VoxelMeshManager.h"
 

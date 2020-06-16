@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../common.h"
-#include "../../shared/renderer/DebugDrawer.h"
-#include "../../shared/utils/VoxelMeshManager.h"
+#include <Common.h>
+#include <Renderer/DebugDrawer.h>
+#include "../app/VoxelMeshManager.h"
 #include "Settings.h"
 #include "btBulletCollisionCommon.h"
 

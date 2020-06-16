@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(sharedLibrary)
 
+set(CMAKE_CXX_STANDARD 17)
+
 # the source files for the shared libraries
 file(GLOB SRC_UTILS_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*")
 file(GLOB SRC_RENDERER_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Renderer/*")

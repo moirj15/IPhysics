@@ -1,6 +1,6 @@
 #pragma once
-#include "../../common.h"
-#include "texture.h"
+#include "../../Common.h"
+#include "Texture.h"
 
 #include <unordered_map>
 

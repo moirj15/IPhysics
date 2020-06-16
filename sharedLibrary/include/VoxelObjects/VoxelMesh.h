@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../renderer/mesh.h"
-#include "voxel.h"
+#include "../renderer/Mesh.h"
+#include "Voxel.h"
 
 #include <array>
 #include <glm/gtx/hash.hpp>

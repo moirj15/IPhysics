@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../common.h"
+#include <Common.h>
 #include "../PhysicsEngine/Settings.h"
 
 #include <optional>

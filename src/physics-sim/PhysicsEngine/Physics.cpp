@@ -1,4 +1,4 @@
-#include "physics.h"
+#include "Physics.h"
 
 #include "../../shared/utils/MathCasts.h"
 #include "../../shared/voxelObjects/VoxelMesh.h"

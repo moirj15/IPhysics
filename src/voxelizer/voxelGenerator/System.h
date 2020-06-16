@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include <Renderer/camera.h>
-#include <common.h>
+#include <Common.h>
+#include <Renderer/Camera.h>
 #include <memory>
 
 struct Mesh;

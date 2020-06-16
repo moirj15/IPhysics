@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../common.h"
-#include "../utils/QuickCastBuffer.h"
+#include <Common.h>
+#include <Utils/QuickCastBuffer.h>
 
 #include <glm/mat4x4.hpp>
 #include <vector>

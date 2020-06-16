@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include "../../common.h"
-#include "util.h"
+#include "../../Common.h"
+#include "Util.h"
 
 #include <glad/glad.h>
 #include <string>

@@ -4,15 +4,16 @@
 
 #include "VoxelizerUI.h"
 
-#ifndef
+#ifndef IMGUI_IMPL_OPENGL_LOADER_GLAD
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #endif
 #include "../../../imgui/imgui.h"
 #include "../../../imgui/imgui_impl_glfw.h"
 #include "../../../imgui/imgui_impl_opengl3.h"
-#include "../../common.h"
+
+#include <Common.h>
 //#include "../../imgui/cpp/imgui_stdlib.h"
-#include "../renderer/window.h"
+#include <Renderer/Window.h>
 
 namespace VoxGen
 {

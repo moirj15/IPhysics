@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../common.h"
-#include "mesh.h"
+#include <Common.h>
+#include "Mesh.h"
 
 #include <LinearMath/btIDebugDraw.h>
 

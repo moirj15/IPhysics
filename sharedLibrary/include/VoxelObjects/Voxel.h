@@ -1,9 +1,11 @@
 #pragma once
 
-#include "../../common.h"
+#include <Common.h>
 
-#define GLM_ENABLE_EXPERIMENTAL
-#include "BezierCurve.h"
+#ifndef GLM_ENABLE_EXPERIMENTAL
+  #define GLM_ENABLE_EXPERIMENTAL
+#endif
+#include <BezierCurve.h>
 
 #include <glm/gtx/quaternion.hpp>
 #include <glm/vec3.hpp>

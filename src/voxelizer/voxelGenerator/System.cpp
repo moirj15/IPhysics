@@ -5,19 +5,18 @@
 #include "System.h"
 
 #include "../../../imgui/imgui.h"
-#include "../renderer/RendererBackend.h"
-#include "../renderer/RendererFrontend.h"
-#include "../renderer/camera.h"
-#include "../renderer/mesh.h"
-#include "../renderer/window.h"
-#include "../utils/QuickCastBuffer.h"
-#include "../utils/Serialization.h"
-#include "../utils/VoxelMeshManager.h"
-#include "../voxelObjects/VoxelMesh.h"
+#include <Renderer/RendererBackend.h>
+#include <Renderer/RendererFrontend.h>
+#include <Renderer/Camera.h>
+#include <Renderer/Mesh.h>
+#include <Renderer/Window.h>
+#include <Utils/QuickCastBuffer.h>
+#include <Utils/Serialization.h>
+#include <VoxelObjects/VoxelMesh.h>
+#include "Obj.h"
+#include "Voxelizer.h"
 #include "VoxelizerUI.h"
-#include "obj.h"
 #include "tiny_obj_loader.h"
-#include "voxelizer.h"
 
 #include <GLFW/glfw3.h>
 #include <cstdio>

@@ -4,8 +4,8 @@
 
 #include "VoxelMeshManager.h"
 
-#include "../../PhysicsEngine/Settings.h"
-#include "../../voxelObjects/VoxelMesh.h"
+#include "../PhysicsEngine/Settings.h"
+#include <VoxelObjects/VoxelMesh.h>
 
 VoxelMeshManager &VoxelMeshManager::Get()
 {

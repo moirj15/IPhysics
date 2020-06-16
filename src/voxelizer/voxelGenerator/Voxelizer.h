@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../PhysicsEngine/Box.h"
-#include "../../../PhysicsEngine/Ray.h"
 #include "VoxelizerParameters.h"
 
 #include <BulletCollision/Gimpact/btBoxCollision.h>
+#include <Common.h>
+#include <VoxelObjects/Box.h>
 #include <VoxelObjects/EdgeMesh.h>
+#include <VoxelObjects/Ray.h>
+#include <VoxelObjects/Voxel.h>
 #include <VoxelObjects/VoxelMesh.h>
-#include <VoxelObjects/voxel.h>
 #include <array>
-#include <common.h>
 #include <glm/vec3.hpp>
 #include <unordered_map>
 #include <unordered_set>

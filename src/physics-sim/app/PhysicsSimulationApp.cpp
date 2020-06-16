@@ -1,7 +1,7 @@
 #include "PhysicsSimulationApp.h"
 
 #include "../../../imgui/imgui.h"
-#include "../PhysicsEngine/physics.h"
+#include "../PhysicsEngine/Physics.h"
 #include "../renderer/RendererBackend.h"
 #include "../renderer/RendererFrontend.h"
 #include "../renderer/window.h"

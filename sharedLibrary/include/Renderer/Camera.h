@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../common.h"
+#include "../Common.h"
 
 #include <glm/gtc/quaternion.hpp>
 #include <glm/mat4x4.hpp>

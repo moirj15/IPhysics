@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../common.h"
-#include "vertexArrayObject.h"
+#include "../../Common.h"
+#include "VertexArrayObject.h"
 
 #include <unordered_map>
 

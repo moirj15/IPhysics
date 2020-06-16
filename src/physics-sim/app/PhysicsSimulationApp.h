@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../common.h"
-#include "../renderer/camera.h"
-#include "../utils/VoxelMeshManager.h"
+#include <Common.h>
+#include <Renderer/Camera.h>
+#include "VoxelMeshManager.h"
 
 #include <glm/mat4x4.hpp>
 #include <memory>

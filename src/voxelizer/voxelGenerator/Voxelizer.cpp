@@ -1,4 +1,4 @@
-#include "voxelizer.h"
+#include "Voxelizer.h"
 
 #include "../renderer/mesh.h"
 #include "../voxelObjects/EdgeMesh.h"

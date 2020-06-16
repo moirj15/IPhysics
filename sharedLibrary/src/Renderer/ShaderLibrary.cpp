@@ -1,6 +1,6 @@
-#include "shaderLibrary.h"
+#include <Renderer/shaderLibrary.h>
 
-#include "shader.h"
+#include <Renderer/Shader.h>
 
 std::string ShaderLibrary::Add(const std::vector<std::string> &filePaths)
 {

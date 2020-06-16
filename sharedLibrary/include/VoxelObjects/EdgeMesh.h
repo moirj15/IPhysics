@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../common.h"
-#include "../renderer/mesh.h"
+#include <Common.h>
+#include <Renderer/Mesh.h>
 
 #include <glm/vec3.hpp>
 #include <unordered_map>

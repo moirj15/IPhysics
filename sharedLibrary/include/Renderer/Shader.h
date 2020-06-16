@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "../../common.h"
+#include "../../Common.h"
 #include "ShaderData.h"
 
 #include <glad/glad.h>

@@ -5,7 +5,7 @@
 #include "../../../imgui/imgui.h"
 #include "../../../imgui/imgui_impl_glfw.h"
 #include "../../../imgui/imgui_impl_opengl3.h"
-#include "../renderer/window.h"
+#include <Renderer/Window.h>
 
 #include <glad/glad.h>
 #include <glm/gtc/type_ptr.hpp>

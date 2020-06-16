@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "../../common.h"
+#include <Common.h>
 
 #include <memory>
 #include <unordered_map>
