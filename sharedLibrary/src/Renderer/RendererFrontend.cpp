@@ -1,13 +1,13 @@
 
-#include "RendererFrontend.h"
+#include <Renderer/RendererFrontend.h>
 
-#include "../../PhysicsEngine/Settings.h"
-#include "../../voxelObjects/VoxelMesh.h"
-#include "RendererBackend.h"
-#include "ShaderData.h"
-#include "camera.h"
-#include "mesh.h"
-#include "window.h"
+//#include "../../PhysicsEngine/Settings.h"
+//#include "../../voxelObjects/VoxelMesh.h"
+#include <Renderer/RendererBackend.h>
+#include <Renderer/ShaderData.h>
+#include <Renderer/Camera.h>
+#include <Renderer/Mesh.h>
+#include <Renderer/Window.h>
 
 #include <glm/gtx/norm.hpp>
 #include <glm/gtx/transform.hpp>
@@ -21,13 +21,13 @@ RendererFrontend::RendererFrontend(Window *window, Camera *camera) :
 
 RendererFrontend::~RendererFrontend() = default;
 
-void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
-{
-  auto &meshManager = VoxelMeshManager::Get();
-  auto *voxelMesh = meshManager.GetMesh(voxelMeshHandle);
-  auto meshHandle = RegisterMesh(voxelMesh->GetMesh());
-  mMeshHandles.emplace(voxelMeshHandle, meshHandle);
-}
+//void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
+//{
+////  auto &meshManager = VoxelMeshManager::Get();
+////  auto *voxelMesh = meshManager.GetMesh(voxelMeshHandle);
+////  auto meshHandle = RegisterMesh(voxelMesh->GetMesh());
+////  mMeshHandles.emplace(voxelMeshHandle, meshHandle);
+//}
 
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
 {

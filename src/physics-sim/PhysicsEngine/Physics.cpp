@@ -1,7 +1,7 @@
 #include "Physics.h"
 
-#include "../../shared/utils/MathCasts.h"
-#include "../../shared/voxelObjects/VoxelMesh.h"
+#include <utils/MathCasts.h>
+#include <voxelObjects/VoxelMesh.h>
 
 #include <glm/gtx/component_wise.hpp>
 #include <unordered_set>

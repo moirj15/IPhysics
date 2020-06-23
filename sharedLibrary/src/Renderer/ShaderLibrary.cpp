@@ -1,4 +1,4 @@
-#include <Renderer/shaderLibrary.h>
+#include <Renderer/ShaderLibrary.h>
 
 #include <Renderer/Shader.h>
 

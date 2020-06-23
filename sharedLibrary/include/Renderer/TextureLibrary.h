@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Common.h"
+#include <Common.h>
 #include "Texture.h"
 
 #include <unordered_map>

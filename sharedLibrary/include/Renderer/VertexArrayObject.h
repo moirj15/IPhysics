@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include "../../Common.h"
-#include "indexBufferObject.h"
-#include "vertexBufferObject.h"
+#include <Common.h>
+#include "VertexBufferObject.h"
+#include "IndexBufferObject.h"
 
 class VertexArray
 {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../Common.h"
-#include "../utils/QuickCastBuffer.h"
-#include "../utils/VoxelMeshManager.h"
+#include <Common.h>
+#include <Utils/QuickCastBuffer.h>
+//#include <Utils/VoxelMeshManager.h>
 
 #include <glm/mat4x4.hpp>
 #include <memory>

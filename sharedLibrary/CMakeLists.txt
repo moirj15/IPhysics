@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(sharedLibrary)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
 
 # the source files for the shared libraries
 file(GLOB SRC_UTILS_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*")
@@ -16,19 +16,22 @@ file(GLOB INCLUDE_VOXEL_OBJECTS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/i
 file(GLOB INCLUDE_INPUT_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/Input/*")
 
 set(SHARED_LIBRARY_SOURCES
-	${SRC_UTILS_FILES}
-	${SRC_RENDERER_FILES}
-	${SRC_VOXEL_OBJECTS}
-	${SRC_INPUT_FILES}
-)
+        ${SRC_UTILS_FILES}
+        ${SRC_RENDERER_FILES}
+        ${SRC_VOXEL_OBJECTS}
+        ${SRC_INPUT_FILES}
+        )
 
 set(SHARED_LIBRARY_INCLUDE
-	${INCLUDE_UTILS_FILES}
-	${INCLUDE_RENDERER_FILES}
-	${INCLUDE_VOXEL_OBJECTS}
-	${INCLUDE_INPUT_FILES}
-)
+        ${INCLUDE_UTILS_FILES}
+        ${INCLUDE_RENDERER_FILES}
+        ${INCLUDE_VOXEL_OBJECTS}
+        ${INCLUDE_INPUT_FILES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/Common.h
+        )
 
-add_library(sharedLibrary SHARED ${SHARED_LIBRARY_INCLUDE} ${SHARED_LIBRARY_SOURCES})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/include)
 
-target_include_directories(sharedLibrary PUBLIC ${SHARED_LIBRARY_INCLUDE})
+add_library(sharedLibrary STATIC ${SHARED_LIBRARY_INCLUDE} ${SHARED_LIBRARY_SOURCES})
+
+target_include_directories(sharedLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Common.h"
+#include <Common.h>
 
 #include <LinearMath/btVector3.h>
 #include <glm/vec3.hpp>

@@ -1,4 +1,4 @@
-#include "shader.h"
+#include <Renderer/Shader.h>
 
 #include <GLFW/glfw3.h>
 #include <glm/gtc/type_ptr.hpp>
