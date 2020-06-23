@@ -5,7 +5,7 @@
 #ifndef GLM_ENABLE_EXPERIMENTAL
   #define GLM_ENABLE_EXPERIMENTAL
 #endif
-#include <BezierCurve.h>
+#include "BezierCurve.h"
 
 #include <glm/gtx/quaternion.hpp>
 #include <glm/vec3.hpp>

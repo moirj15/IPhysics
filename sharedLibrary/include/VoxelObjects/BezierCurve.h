@@ -5,6 +5,7 @@
 #include <complex>
 #include <glm/vec3.hpp>
 #include <vector>
+#include <math.h>
 
 struct BezierCurve
 {

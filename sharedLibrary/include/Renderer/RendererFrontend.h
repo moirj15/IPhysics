@@ -1,5 +1,6 @@
 #pragma once
 
+#include <unordered_map>
 #include <Common.h>
 #include <Utils/QuickCastBuffer.h>
 //#include <Utils/VoxelMeshManager.h>
@@ -11,6 +12,7 @@
 class Camera;
 struct Window;
 struct Mesh;
+using VMeshHandle = u32;
 
 namespace VoxObj
 {

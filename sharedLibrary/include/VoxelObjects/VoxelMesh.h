@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../renderer/Mesh.h"
+#include <Renderer/Mesh.h>
 #include "Voxel.h"
 
 #include <array>
