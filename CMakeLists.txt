@@ -34,15 +34,6 @@ set(SOURCE_LIST_VOXEL_GENERATOR
         )
 
 
-add_executable(
-        IPhysics
-        ${SOURCE_LIST_MAIN_PROJECT}
-)
-
-add_executable(
-        VoxelGenerator
-        ${SOURCE_LIST_VOXEL_GENERATOR}
-)
 find_package(OpenGL REQUIRED)
 add_subdirectory(sharedLibrary)
 if (WIN32)
@@ -55,7 +46,7 @@ if (WIN32)
             ${CMAKE_SOURCE_DIR}/sharedLibrary/include
     )
 
-    set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
+#    set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
     message(${CMAKE_BUILD_TYPE})
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
@@ -76,7 +67,7 @@ if (WIN32)
         target_link_libraries(
                 IPhysics
                 ${OPENGL_LIBRARY}
-                D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
+#                D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
                 #      D:/libraries/glfw/release/glfw3.lib
                 G:/libraries/glfw-clang/glfw3.lib
                 D:/libraries/bullet/Release/BulletDynamics.lib
@@ -88,17 +79,50 @@ if (WIN32)
                 kernel32.lib
         )
     endif ()
+    add_executable(
+            IPhysics
+            ${SOURCE_LIST_MAIN_PROJECT}
+    )
+
+    add_executable(
+            VoxelGenerator
+            ${SOURCE_LIST_VOXEL_GENERATOR}
+    )
 else ()
     message("not windows hit me")
     set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
     include_directories(
             ${CMAKE_SOURCE_DIR}/include
+            ${CMAKE_SOURCE_DIR}/sharedLibrary/include
+    )
+    link_directories(
+            ${CMAKE_SOURCE_DIR}/libs
+            ${CMAKE_BINARY_DIR}/sharedLibrary
+    )
+    add_executable(
+            IPhysics
+            ${SOURCE_LIST_MAIN_PROJECT}
+    )
+
+    add_executable(
+            VoxelGenerator
+            ${SOURCE_LIST_VOXEL_GENERATOR}
     )
     target_link_libraries(
             IPhysics
             sharedLibrary
-            GL
-            glfw3
+            ${OPENGL_LIBRARY}
+            libglfw3.a
+            dl
+            X11
+    )
+    target_link_libraries(
+            VoxelGenerator
+            sharedLibrary
+            ${OPENGL_LIBRARY}
+            libglfw3.a
+            dl
+            X11
     )
 endif ()
 

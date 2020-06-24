@@ -1,7 +1,7 @@
 #include "Voxelizer.h"
 
-#include "../renderer/mesh.h"
-#include "../voxelObjects/EdgeMesh.h"
+#include <Renderer/Mesh.h>
+#include <VoxelObjects/EdgeMesh.h>
 
 #include <glm/gtx/string_cast.hpp>
 #include <unordered_set>
