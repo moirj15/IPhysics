@@ -35,3 +35,4 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/incl
 add_library(sharedLibrary STATIC ${SHARED_LIBRARY_INCLUDE} ${SHARED_LIBRARY_SOURCES})
 
 target_include_directories(sharedLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+link_directories(${CMAKE_SOURCE_DIR}/libs)
