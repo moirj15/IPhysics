@@ -20,6 +20,7 @@ set(SOURCE_LIST_MAIN_PROJECT
         ${SRC_PHYSICS_ENGINE_FILES}
         #${SRC_INPUT_FILES}
         ${SRC_PHYSICS_SIMULATION_FILES}
+        ${CMAKE_SOURCE_DIR}/glad/src/glad.c
         #${SRC_VOXEL_OBJECTS}
         )
 
@@ -39,46 +40,16 @@ add_subdirectory(sharedLibrary)
 if (WIN32)
     message("WINDOWS")
     include_directories(
-            D:/libraries/glm;
-            G:/libraries/glfw-clang/include;
-            G:/libraries/include/;
-            D:/libraries/bullet/include;
-            ${CMAKE_SOURCE_DIR}/sharedLibrary/include
+            ${CMAKE_SOURCE_DIR}/include;
+            ${CMAKE_SOURCE_DIR}/sharedLibrary/include;
+            ${CMAKE_SOURCE_DIR}/glad/include
     )
-
-#    set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
-    message(${CMAKE_BUILD_TYPE})
-    if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-        message("DEBUG YOU FOOL!!!")
-        target_link_libraries(
-                IPhysics
-                ${OPENGL_LIBRARY}
-                G:/libraries/glfw-clang/glfw3.lib
-                D:/libraries/bullet/Debug/BulletDynamics_Debug.lib
-                D:/libraries/bullet/Debug/BulletCollision_Debug.lib
-                D:/libraries/bullet/Debug/LinearMath_Debug.lib
-                opengl32.lib
-                gdi32.lib
-                user32.lib
-                kernel32.lib
-        )
-    else ()
-        target_link_libraries(
-                IPhysics
-                ${OPENGL_LIBRARY}
-#                D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
-                #      D:/libraries/glfw/release/glfw3.lib
-                G:/libraries/glfw-clang/glfw3.lib
-                D:/libraries/bullet/Release/BulletDynamics.lib
-                D:/libraries/bullet/Release/BulletCollision.lib
-                D:/libraries/bullet/Release/LinearMath.lib
-                opengl32.lib
-                gdi32.lib
-                user32.lib
-                kernel32.lib
-        )
-    endif ()
+    link_directories(
+            ${CMAKE_SOURCE_DIR}/libs/windows
+            ${CMAKE_SOURCE_DIR}/libs/windows/bullet
+            ${CMAKE_BINARY_DIR}/sharedLibrary
+            ${CMAKE_BINARY_DIR}/sharedLibrary
+    )
     add_executable(
             IPhysics
             ${SOURCE_LIST_MAIN_PROJECT}
@@ -88,6 +59,59 @@ if (WIN32)
             VoxelGenerator
             ${SOURCE_LIST_VOXEL_GENERATOR}
     )
+
+    set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
+    set(CMAKE_CXX_FLAGS_DEBUG "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+    message(${CMAKE_BUILD_TYPE})
+    if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+        message("DEBUG YOU FOOL!!!")
+        target_link_libraries(
+                IPhysics
+                ${OPENGL_LIBRARY}
+                BulletDynamics_Debug
+                BulletCollision_Debug
+                LinearMath_Debug
+                glfw3
+                opengl32.lib
+                gdi32.lib
+                user32.lib
+                kernel32.lib
+        )
+        target_link_libraries(
+                VoxelGenerator
+                ${OPENGL_LIBRARY}
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                BulletCollision_Debug
+                LinearMath_Debug
+                sharedLibrary
+                glfw3
+                opengl32.lib
+                gdi32.lib
+                user32.lib
+                kernel32.lib
+        )
+    else ()
+        target_link_libraries(
+                IPhysics
+                ${OPENGL_LIBRARY}
+                #                D:/libraries/glew-2.1.0/lib/Release/x64/glew32s.lib
+                #      D:/libraries/glfw/release/glfw3.lib
+                #                G:/libraries/glfw-clang/glfw3.lib
+                #                D:/libraries/bullet/Release/BulletDynamics.lib
+                #                D:/libraries/bullet/Release/BulletCollision.lib
+                #                D:/libraries/bullet/Release/LinearMath.lib
+                BulletDynamics.lib
+                BulletCollision.lib
+                LinearMath.lib
+
+                glfw3.lib
+                opengl32.lib
+                gdi32.lib
+                user32.lib
+                kernel32.lib
+        )
+    endif ()
 else ()
     message("not windows hit me")
     set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")

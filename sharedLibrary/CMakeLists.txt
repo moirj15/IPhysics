@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 project(sharedLibrary)
-
-set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
+if (WIN32)
+    set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
+    set(CMAKE_CXX_FLAGS_DEBUG "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLM_ENABLE_EXPERIMENTAL")
+else ()
+    set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
+endif ()
 
 # the source files for the shared libraries
 file(GLOB SRC_UTILS_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*")
@@ -20,6 +24,7 @@ set(SHARED_LIBRARY_SOURCES
         ${SRC_RENDERER_FILES}
         ${SRC_VOXEL_OBJECTS}
         ${SRC_INPUT_FILES}
+        ${CMAKE_SOURCE_DIR}/glad/src/glad.c
         )
 
 set(SHARED_LIBRARY_INCLUDE
@@ -30,9 +35,13 @@ set(SHARED_LIBRARY_INCLUDE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Common.h
         )
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/glad/include)
 
 add_library(sharedLibrary STATIC ${SHARED_LIBRARY_INCLUDE} ${SHARED_LIBRARY_SOURCES})
 
 target_include_directories(sharedLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-link_directories(${CMAKE_SOURCE_DIR}/libs)
+if (WIN32)
+    link_directories(${CMAKE_SOURCE_DIR}/libs/windows)
+else ()
+    link_directories(${CMAKE_SOURCE_DIR}/libs/linux)
+endif ()
