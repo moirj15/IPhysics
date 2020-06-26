@@ -22,13 +22,13 @@ RendererFrontend::RendererFrontend(Window *window, Camera *camera) :
 
 RendererFrontend::~RendererFrontend() = default;
 
-//void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
-//{
-////  auto &meshManager = VoxelMeshManager::Get();
-////  auto *voxelMesh = meshManager.GetMesh(voxelMeshHandle);
-////  auto meshHandle = RegisterMesh(voxelMesh->GetMesh());
-////  mMeshHandles.emplace(voxelMeshHandle, meshHandle);
-//}
+void RendererFrontend::RegisterMeshHandle(const VMeshHandle voxelMeshHandle)
+{
+  //  auto &meshManager = VoxelMeshManager::Get();
+  //  auto *voxelMesh = meshManager.GetMesh(voxelMeshHandle);
+  //  auto meshHandle = RegisterMesh(voxelMesh->GetMesh());
+  //  mMeshHandles.emplace(voxelMeshHandle, meshHandle);
+}
 
 u32 RendererFrontend::RegisterMesh(Mesh *mesh)
 {
@@ -199,9 +199,9 @@ void RendererFrontend::RemoveMesh(u32 handle)
   mBackend->RemoveMesh(handle);
 }
 
-void RendererFrontend::UpdateMesh(const VMeshHandle handle)
+void RendererFrontend::UpdateMesh(VMeshHandle handle)
 {
-//  mBackend->UpdateMesh(mMeshHandles[handle], VoxelMeshManager::Get().GetMesh(handle)->mMesh);
+  //  mBackend->UpdateMesh(mMeshHandles[handle], VoxelMeshManager::Get().GetMesh(handle)->mMesh);
 }
 
 } // namespace Renderer

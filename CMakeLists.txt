@@ -72,6 +72,7 @@ if (WIN32)
                 BulletDynamics_Debug
                 BulletCollision_Debug
                 LinearMath_Debug
+                sharedLibrary
                 glfw3
                 opengl32.lib
                 gdi32.lib

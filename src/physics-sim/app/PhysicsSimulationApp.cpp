@@ -2,14 +2,14 @@
 
 #include "../../../imgui/imgui.h"
 #include "../PhysicsEngine/Physics.h"
-#include "../renderer/RendererBackend.h"
-#include "../renderer/RendererFrontend.h"
-#include "../renderer/window.h"
-#include "../utils/Serialization.h"
-#include "../voxelObjects/VoxelMesh.h"
 #include "IPhysicsUI.h"
 
 #include <GLFW/glfw3.h>
+#include <Renderer/RendererBackend.h>
+#include <Renderer/RendererFrontend.h>
+#include <Renderer/Window.h>
+#include <Utils/Serialization.h>
+#include <VoxelObjects/VoxelMesh.h>
 
 namespace IPhysics
 {
