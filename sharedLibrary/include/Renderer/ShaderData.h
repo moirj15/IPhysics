@@ -20,7 +20,8 @@ struct ShaderData
     Mat3,
     Mat4
   } type;
-  union {
+  union
+  {
     glm::vec2 v2;
     glm::vec3 v3;
     glm::vec4 v4;

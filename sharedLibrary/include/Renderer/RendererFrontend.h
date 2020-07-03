@@ -1,57 +1,42 @@
 #pragma once
 
-#include <unordered_map>
 #include <Common.h>
 #include <Utils/QuickCastBuffer.h>
+#include <unordered_map>
 //#include <Utils/VoxelMeshManager.h>
 
 #include <glm/mat4x4.hpp>
 #include <memory>
 #include <vector>
 
-class Camera;
-struct Window;
 struct Mesh;
 using VMeshHandle = u32;
 
-namespace VoxObj
-{
-class VoxelMesh;
-}
 namespace Renderer
 {
 
-class RendererBackend;
+using MeshHandle = u32;
 
-class RendererFrontend
+enum class ShaderProgram : u32
 {
-  std::unique_ptr<RendererBackend> mBackend;
-  Camera *mCamera;
-  glm::mat4 mProjection;
-  std::unordered_map<VMeshHandle, u32> mMeshHandles;
-  std::vector<u32> mPointMeshHandles;
-
-public:
-  explicit RendererFrontend(Window *window, Camera *camera);
-  ~RendererFrontend();
-
-  void RegisterMeshHandle(VMeshHandle voxelMeshHandle);
-  NODISCARD u32 RegisterMesh(Mesh *mesh);
-  NODISCARD u32 RegisterVoxelMesh(VoxObj::VoxelMesh *vm);
-  inline void SetProjection(const glm::mat4 &projection)
-  {
-    mProjection = projection;
-  }
-  void DrawMesh(const u32 handle);
-  void DrawPoints(const QuickCastBuffer<f32, glm::vec3> &points);
-  void Draw();
-  void Clear();
-  void RemoveMesh(u32 handle);
-  void UpdateMesh(const VMeshHandle handle);
-  RendererBackend *GetBackend()
-  {
-    return mBackend.get();
-  }
+  UniformColor,
+  FlatLight,
+  PhongLight,
+  Point,
 };
+
+void Init();
+
+NODISCARD MeshHandle SubmitDynamicMesh(Mesh *mesh, ShaderProgram program);
+
+void UpdateDynamicMesh(MeshHandle handle, const std::vector<u32> &indices, Mesh *mesh);
+
+NODISCARD MeshHandle SubmitStaticMesh(Mesh *mesh, ShaderProgram program);
+
+void RemoveMesh(MeshHandle handle);
+
+void Draw(MeshHandle handle, const std::vector<ShaderData> &data);
+
+void SwapBuffers();
 
 } // namespace Renderer

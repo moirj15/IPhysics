@@ -37,18 +37,10 @@ public:
   }
 
   /**
-   * \brief: Unbind all shaders.
-   */
-  inline void Unbind() const
-  {
-    glUseProgram(0);
-  }
-
-  /**
    * \brief: Get the OpenGL Shader program handle.
    * \return
    */
-  inline u32 Handle() const
+  NODISCARD inline u32 Handle() const
   {
     return mProgramHandle;
   }
@@ -64,7 +56,7 @@ public:
    * \param name: The name of the variable we want to set.
    * \param value: The value we want to set it to.
    */
-  void SetUniform1F(const std::string &name, const f32 value);
+  void SetUniform1F(const std::string &name, f32 value);
   /**
    * \brief: Set a two component uniform variable.
    * \param name: The name of the variable we want to set.
@@ -110,6 +102,8 @@ public:
    */
   void SetShaderData(const std::vector<ShaderData> &shaderData);
 
+  NODISCARD s32 getAttributeLocation(const char *attribute) const;
+
 private:
   /**
    * \brief: Checks if a variable with the given name is present in the uniform cache. If it is then
@@ -117,7 +111,7 @@ private:
    * \param name: The name of the variable we want.
    * \return: The location of the variable.
    */
-  s32 LocationFromCache(const std::string &name);
+  NODISCARD s32 LocationFromCache(const std::string &name);
   /**
    * \brief: Compile an individual shader file.
    */
@@ -126,7 +120,7 @@ private:
    * \brief: Determines what kind of shaders are present in the filePaths list.
    * \return: The list of shader types.
    */
-  std::vector<GLenum> DetermineShaderTypes();
+  NODISCARD std::vector<GLenum> DetermineShaderTypes();
 };
 
 #endif

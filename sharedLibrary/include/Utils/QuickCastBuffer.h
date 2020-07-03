@@ -46,6 +46,11 @@ public:
     return mContents.size();
   }
 
+  NODISCARD inline u64 BufferSizeBytes() const
+  {
+    return mContents.size() * sizeof(ContentType);
+  }
+
   NODISCARD inline u64 CastBufferSize() const
   {
     return (mContents.size() * sizeof(ContentType)) / sizeof(CastToType);

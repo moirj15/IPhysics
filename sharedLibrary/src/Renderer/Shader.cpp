@@ -1,6 +1,5 @@
-#include <Renderer/Shader.h>
-
 #include <GLFW/glfw3.h>
+#include <Renderer/Shader.h>
 #include <glm/gtc/type_ptr.hpp>
 
 static char *readFile(const char *name)
@@ -156,6 +155,13 @@ void Shader::SetShaderData(const std::vector<ShaderData> &shaderData)
   {
     SetShaderData(sd);
   }
+}
+
+s32 Shader::getAttributeLocation(const char *attribute) const
+{
+  s32 location = glGetAttribLocation(mProgramHandle, attribute);
+  assert(location > -1);
+  return location;
 }
 
 // Private

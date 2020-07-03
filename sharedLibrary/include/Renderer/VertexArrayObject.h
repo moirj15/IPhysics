@@ -4,29 +4,21 @@
 
 #pragma once
 
-#include <Common.h>
-#include "VertexBufferObject.h"
 #include "IndexBufferObject.h"
+#include "VertexBufferObject.h"
+
+#include <Common.h>
+#include <unordered_map>
 
 class VertexArray
 {
   u32 mHandle;
-  // TODO: add an accessor for the index buffer
+  // SHOULD NOT BE ALLOCATED
   IndexBuffer mIndexBuffer;
-  std::vector<VertexBuffer> mVertexBuffers;
+  std::unordered_map<s32, VertexBuffer> mVertexBuffers;
 
 public:
-  VertexArray() = default;
-
-  inline const std::vector<VertexBuffer> &GetVertexBuffers() const
-  {
-    return mVertexBuffers;
-  }
-
-  /**
-   * \brief: Create a VertexArray.
-   */
-  inline void Create()
+  VertexArray(const IndexBuffer &indexBuffer) : mHandle(0)
   {
     glGenVertexArrays(1, &mHandle);
   }
