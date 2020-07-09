@@ -3,15 +3,12 @@
 
 //#include "../../PhysicsEngine/Settings.h"
 //#include "../../voxelObjects/VoxelMesh.h"
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-#include <Renderer/Camera.h>
 #include <Renderer/Mesh.h>
 #include <Renderer/RendererBackend.h>
-#include <Renderer/ShaderData.h>
+#include <Renderer/Shader.h>
 #include <Renderer/Window.h>
-#include <VoxelObjects/VoxelMesh.h>
-#include <glm/gtx/norm.hpp>
-#include <glm/gtx/transform.hpp>
 #include <unordered_map>
 namespace Renderer
 {
@@ -96,16 +93,55 @@ struct VertexArray
 
 static std::unordered_map<MeshHandle, VertexArray> sVertexArrays;
 
-void Init(GLFWwindow *window)
+static void ErrorCallback(
+    GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const char *message,
+    const void *userParam)
 {
-  sWindow = window;
+  printf("%s\n", message);
+}
+
+Window *Init(s32 width, s32 height, const char *windowName, bool enableDebug)
+{
+  if (!glfwInit())
+  {
+    fprintf(stderr, "Failed to init GLFW\n");
+    exit(EXIT_FAILURE);
+  }
+  glfwWindowHint(GLFW_SAMPLES, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  Window *window = new Window(width, height, windowName);
+  sWindow = window->mGLWindow;
+
+  glfwMakeContextCurrent(window->mGLWindow);
+  if (!gladLoadGL())
+  {
+    fprintf(stderr, "Failed to load glad\n");
+  }
+  glfwSwapInterval(1);
+  glEnable(GL_DEPTH_TEST);
+  glLineWidth(3.0f);
+  // glfwSwapInterval(0);
+  //  glCullFace(GL_BACK);
+  glClearColor(0.0, 0.0, 0.0, 1.0);
+  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+  glClearDepth(4.0);
+  glDepthFunc(GL_LESS);
+
+  glDebugMessageCallback(ErrorCallback, nullptr);
+  if (enableDebug)
+  {
+    glEnable(GL_DEBUG_OUTPUT);
+  }
   for (const auto &[key, paths] : sShaderPaths)
   {
     sShaders.emplace(key, Shader(paths));
   }
+  return window;
 }
 
-static void StoreMesh(Mesh *mesh, GLenum type, ShaderProgram program, GLenum usage)
+static MeshHandle StoreMesh(Mesh *mesh, GLenum type, ShaderProgram program, GLenum usage)
 {
   VertexArray vertexArray;
   glGenVertexArrays(1, &vertexArray.handle);
@@ -149,11 +185,12 @@ static void StoreMesh(Mesh *mesh, GLenum type, ShaderProgram program, GLenum usa
 
   sCurrentMeshHandle++;
   sVertexArrays.emplace(sCurrentMeshHandle, vertexArray);
+  return sCurrentMeshHandle;
 }
 
 NODISCARD MeshHandle SubmitDynamicMesh(Mesh *mesh, ShaderProgram program)
 {
-  StoreMesh(mesh, GL_ARRAY_BUFFER, program, GL_DYNAMIC_DRAW);
+  return StoreMesh(mesh, GL_ARRAY_BUFFER, program, GL_DYNAMIC_DRAW);
 }
 
 // only updates offsets for now
@@ -171,7 +208,7 @@ void UpdateDynamicMesh(MeshHandle handle, const std::vector<u32> &indices, Mesh 
 
 NODISCARD MeshHandle SubmitStaticMesh(Mesh *mesh, ShaderProgram program)
 {
-  StoreMesh(mesh, GL_ARRAY_BUFFER, program, GL_STATIC_DRAW);
+  return StoreMesh(mesh, GL_ARRAY_BUFFER, program, GL_STATIC_DRAW);
 }
 
 void RemoveMesh(MeshHandle handle)
@@ -180,13 +217,20 @@ void RemoveMesh(MeshHandle handle)
   va.Destroy();
 }
 
-void Draw(MeshHandle handle, const std::vector<ShaderData> &data)
+void Draw(MeshHandle handle, const std::vector<ShaderData> &data, DrawMode drawMode)
 {
   auto &va = sVertexArrays[handle];
   sShaders[va.program].Bind();
   glBindVertexArray(va.handle);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, va.indexBuffer.handle);
-  glDrawElements(GL_TRIANGLES, va.indexBuffer.size, GL_UNSIGNED_INT, (void *)0);
+  if (drawMode == DrawMode::TRIANGLES)
+  {
+    glDrawElements(GL_TRIANGLES, va.indexBuffer.size, GL_UNSIGNED_INT, (void *)0);
+  }
+  else
+  {
+    glDrawElements(GL_LINES, va.indexBuffer.size, GL_UNSIGNED_INT, (void *)0);
+  }
 }
 
 void SwapBuffers()

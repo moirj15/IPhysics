@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#if 0
 
 #include "IndexBufferObject.h"
 #include "VertexBufferObject.h"
@@ -83,3 +84,4 @@ public:
     mIndexBuffer = ibo;
   }
 };
+#endif

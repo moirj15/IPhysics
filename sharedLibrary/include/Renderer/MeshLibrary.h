@@ -1,4 +1,5 @@
 #pragma once
+#if 0
 
 #include <Common.h>
 #include "VertexArrayObject.h"
@@ -49,3 +50,4 @@ private:
    */
   MeshPair VAOFromMesh(Mesh *mesh);
 };
+#endif

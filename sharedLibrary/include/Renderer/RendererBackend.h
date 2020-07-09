@@ -1,4 +1,4 @@
-
+#if 0
 #pragma once
 
 #include <Common.h>
@@ -139,3 +139,4 @@ private:
 };
 
 } // namespace Renderer
+#endif

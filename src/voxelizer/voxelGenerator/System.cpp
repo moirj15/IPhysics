@@ -27,12 +27,13 @@ namespace VoxGen
 System::System() :
     mCamera(
         glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
-    mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator", false)), mUI(new VoxelizerUI()),
-    mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)), mVoxelizer(new Voxelizer()),
+    mWindow(Renderer::Init(1980, 1080, "Voxel Generator", false)), mUI(new VoxelizerUI()),
+    /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/ mVoxelizer(
+        new Voxelizer()),
     mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
   mUI->Init(mWindow.get());
-  mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
+  //  mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
 }
 System::~System() = default;
 
@@ -102,8 +103,10 @@ void System::LoadMesh()
     {
       ObjReader objReader;
       mMesh.reset(objReader.Parse(meshPath->c_str()));
+#if 0
       mRenderer->RemoveMesh(mCurrentMeshHandle);
       mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
+#endif
       // ObjReader objReader;
       //       tinyobj::attrib_t attrib;
       //       std::vector<tinyobj::shape_t> shapes;
@@ -145,8 +148,10 @@ void System::GenerateVoxels()
     mVoxelizer->SetParameters(mUI->GetParameters());
     mVoxelMesh.reset(new VoxObj::VoxelMesh(mVoxelizer->Voxelize(mMesh.get())));
     // TODO: remove duplicate vertices
+#if 0
     mRenderer->RemoveMesh(mCurrentVoxelMeshHandle);
     mCurrentVoxelMeshHandle = mRenderer->RegisterVoxelMesh(mVoxelMesh.get());
+#endif
     //     QuickCastBuffer<f32, glm::vec3> points;
     //     for (auto &[key, voxel] : mVoxelMesh->mVoxels)
     //     {
@@ -162,7 +167,7 @@ void System::GenerateVoxels()
 
 void System::Render()
 {
-  mRenderer->Clear();
+  //  mRenderer->Clear();
   if (mVoxelMesh)
   {
     QuickCastBuffer<f32, glm::vec3> points;
@@ -173,18 +178,18 @@ void System::Render()
         points.CastBufferPushBack(bezierCurve.mControlPoints);
       }
     }
-    mRenderer->DrawPoints(points);
+    //    mRenderer->DrawPoints(points);
   }
 
   if (mCurrentMeshHandle != 0)
   {
-    mRenderer->DrawMesh(mCurrentMeshHandle);
+    //    mRenderer->DrawMesh(mCurrentMeshHandle);
   }
   if (mCurrentVoxelMeshHandle != 0)
   {
-    mRenderer->DrawMesh(mCurrentVoxelMeshHandle);
+    //    mRenderer->DrawMesh(mCurrentVoxelMeshHandle);
   }
-  mRenderer->Draw();
+  //  mRenderer->Draw();
   mUI->Update();
   glfwSwapBuffers(mWindow->mGLWindow);
 }

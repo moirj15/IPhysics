@@ -25,6 +25,7 @@ void DebugDrawer::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
   {
     return;
   }
+#if 0
   auto handle = mBackend->SubmitMesh(&mMesh);
   std::vector<ShaderData> shaderData({ShaderData("color", {1.0, 1.0, 1.0}),
                                       ShaderData("camera", camera),
@@ -34,6 +35,7 @@ void DebugDrawer::Draw(const glm::mat4 &camera, const glm::mat4 &projection)
   mBackend->Draw();
   mBackend->RemoveMesh(handle);
   mMesh.Clear();
+#endif
 }
 
 void DebugDrawer::drawContactPoint(

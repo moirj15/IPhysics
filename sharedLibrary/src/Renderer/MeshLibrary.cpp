@@ -1,4 +1,5 @@
 #include <Renderer/MeshLibrary.h>
+#if 0
 
 #include <Renderer/Mesh.h>
 
@@ -78,3 +79,4 @@ MeshPair MeshLibrary::VAOFromMesh(Mesh *mesh)
   }
   return {vao, ibo};
 }
+#endif

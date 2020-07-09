@@ -1,9 +1,11 @@
 #include <Renderer/RendererBackend.h>
+#if 0
 
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #include "../../../imgui/imgui.h"
 #include "../../../imgui/imgui_impl_glfw.h"
 #include "../../../imgui/imgui_impl_opengl3.h"
+
 #include <Renderer/Camera.h>
 #include <Renderer/Mesh.h>
 #include <Renderer/MeshLibrary.h>
@@ -13,7 +15,7 @@
 #include <Renderer/TextureLibrary.h>
 #include <Renderer/Window.h>
 
-#include <GLFW/glfw3.h>
+//#include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
 namespace Renderer
@@ -220,3 +222,4 @@ IndexBuffer RendererBackend::GetBuffersAndBind(const u32 handle)
 }
 
 } // namespace Renderer
+#endif

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ShaderData.h"
+
 #include <Common.h>
 #include <Utils/QuickCastBuffer.h>
 #include <unordered_map>
@@ -12,6 +14,7 @@
 struct Mesh;
 using VMeshHandle = u32;
 
+struct Window;
 namespace Renderer
 {
 
@@ -25,7 +28,13 @@ enum class ShaderProgram : u32
   Point,
 };
 
-void Init();
+enum class DrawMode : u32
+{
+  TRIANGLES,
+  LINES,
+};
+
+Window *Init(s32 width, s32 height, const char *windowName, bool enableDebug);
 
 NODISCARD MeshHandle SubmitDynamicMesh(Mesh *mesh, ShaderProgram program);
 
@@ -35,7 +44,7 @@ NODISCARD MeshHandle SubmitStaticMesh(Mesh *mesh, ShaderProgram program);
 
 void RemoveMesh(MeshHandle handle);
 
-void Draw(MeshHandle handle, const std::vector<ShaderData> &data);
+void Draw(MeshHandle handle, const std::vector<ShaderData> &data, DrawMode drawMode);
 
 void SwapBuffers();
 
