@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Common.h>
-#include <Renderer/Camera.h>
 #include "VoxelMeshManager.h"
 
+#include <Common.h>
+#include <Renderer/Camera.h>
 #include <glm/mat4x4.hpp>
 #include <memory>
 
@@ -33,7 +33,7 @@ class PhysicsSimulationApp
   glm::mat4 mProjection;
   std::unique_ptr<Window> mWindow;
   std::unique_ptr<IPhysicsUI> mUI;
-  std::unique_ptr<Renderer::RendererFrontend> mRenderer;
+  //   std::unique_ptr<Renderer::RendererFrontend> mRenderer;
   Renderer::DebugDrawer *mDB;
   std::unique_ptr<Physics::PhysicsEngine> mPhysicsEngine;
   bool mPhysicsSimulationRunning{false};

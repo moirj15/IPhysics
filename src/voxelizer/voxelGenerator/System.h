@@ -34,6 +34,7 @@ class System
   std::unique_ptr<Voxelizer> mVoxelizer;
   std::unique_ptr<Mesh> mMesh;
   std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;
+  const glm::mat4 mProjectionMat;
 
   u32 mCurrentMeshHandle;
   u32 mCurrentVoxelMeshHandle;

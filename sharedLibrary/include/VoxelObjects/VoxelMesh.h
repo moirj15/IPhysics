@@ -13,7 +13,7 @@
 namespace VoxObj
 {
 
-// TODO: Refractor, since the accessors aren't needed anymore
+// TODO: Refactor, since the accessors aren't needed anymore
 struct VoxelMesh
 {
   glm::uvec3 mExtentsVoxelSpace;
@@ -35,12 +35,7 @@ struct VoxelMesh
   {
   }
 
-  //   explicit VoxelMesh(VoxelMesh &&v) :
-  //       mExtentsVoxelSpace(v.mExtentsVoxelSpace), mExtentsObjectSpace(v.mExtentsObjectSpace),
-  //       mVoxels(std::move(v.mVoxels)), mInitialVoxelSize(v.mInitialVoxelSize), mMesh(v.mMesh)
-  //   {
-  //   }
-
+  // TODO: remove
   NODISCARD inline const Voxel &GetVoxel(const glm::uvec3 &position)
   {
     assert(glm::all(glm::lessThan(position, mExtentsVoxelSpace)));

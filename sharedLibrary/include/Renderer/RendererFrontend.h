@@ -14,6 +14,11 @@
 struct Mesh;
 using VMeshHandle = u32;
 
+namespace VoxObj
+{
+struct VoxelMesh;
+}
+
 struct Window;
 namespace Renderer
 {
@@ -41,6 +46,8 @@ NODISCARD MeshHandle SubmitDynamicMesh(Mesh *mesh, ShaderProgram program);
 void UpdateDynamicMesh(MeshHandle handle, const std::vector<u32> &indices, Mesh *mesh);
 
 NODISCARD MeshHandle SubmitStaticMesh(Mesh *mesh, ShaderProgram program);
+
+NODISCARD MeshHandle SubmitVoxelMesh(const VoxObj::VoxelMesh &voxelMesh);
 
 void RemoveMesh(MeshHandle handle);
 

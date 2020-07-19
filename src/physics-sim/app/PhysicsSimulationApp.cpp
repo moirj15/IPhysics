@@ -17,20 +17,20 @@ PhysicsSimulationApp::PhysicsSimulationApp() :
     mCamera(
         glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
-    mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator", false)), mUI(new IPhysicsUI()),
-    mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),
-    mDB(new Renderer::DebugDrawer(mRenderer->GetBackend())),
+    /*mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator", false)),*/ mUI(new IPhysicsUI()),
+    /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/
+    /*mDB(new Renderer::DebugDrawer(mRenderer->GetBackend())),*/
     mPhysicsEngine(new Physics::PhysicsEngine(mDB))
 {
   mUI->Init(mWindow.get());
-  mRenderer->SetProjection(mProjection);
+  //   mRenderer->SetProjection(mProjection);
   int n = 0;
-  glGetIntegerv(GL_NUM_EXTENSIONS, &n);
-  for (int i = 0; i < n;  i++)
-  {
-    auto tmp = glGetStringi(GL_EXTENSIONS, i);
-    printf("%s\n", tmp);
-  }
+  //   glGetIntegerv(GL_NUM_EXTENSIONS, &n);
+  //   for (int i = 0; i < n;  i++)
+  //   {
+  //     auto tmp = glGetStringi(GL_EXTENSIONS, i);
+  //     printf("%s\n", tmp);
+  //   }
 }
 
 PhysicsSimulationApp::~PhysicsSimulationApp() = default;
@@ -63,7 +63,7 @@ void PhysicsSimulationApp::LoadObject()
     u32 handle = VoxelMeshManager::Get().SubmitMesh(voxelMesh);
     // TODO: Modify the physics engine so it takes object setting modifications into account
     //     mPhysicsEngine->SubmitObject(handle);
-    mRenderer->RegisterMeshHandle(handle);
+    //     mRenderer->RegisterMeshHandle(handle);
     mUI->SetCurrentObject(handle);
   }
 }
@@ -183,13 +183,17 @@ void PhysicsSimulationApp::ApplyDeformations()
         //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
       }
     }
+#if 0
     mRenderer->UpdateMesh(handle);
+#endif
   }
 }
 
 void PhysicsSimulationApp::Render()
 {
+#if 0
   mRenderer->Clear();
+#endif
   if (mPhysicsSimulationRunning && mUI->GetPhysicsSettings().mEnableExtension)
   {
 
@@ -309,11 +313,13 @@ void PhysicsSimulationApp::Render()
   //   }
   //   mRenderer->DrawPoints(points);
 
+#if 0
   mRenderer->Draw();
   glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
   mDB->Draw(mCamera.CalculateMatrix(), mProjection);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   mUI->Update();
   glfwSwapBuffers(mWindow->mGLWindow);
+#endif
 }
 } // namespace IPhysics

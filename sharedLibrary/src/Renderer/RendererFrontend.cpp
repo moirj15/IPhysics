@@ -9,6 +9,7 @@
 #include <Renderer/RendererBackend.h>
 #include <Renderer/Shader.h>
 #include <Renderer/Window.h>
+#include <VoxelObjects/VoxelMesh.h>
 #include <unordered_map>
 namespace Renderer
 {
@@ -209,6 +210,66 @@ void UpdateDynamicMesh(MeshHandle handle, const std::vector<u32> &indices, Mesh 
 NODISCARD MeshHandle SubmitStaticMesh(Mesh *mesh, ShaderProgram program)
 {
   return StoreMesh(mesh, GL_ARRAY_BUFFER, program, GL_STATIC_DRAW);
+}
+
+MeshHandle SubmitVoxelMesh(const VoxObj::VoxelMesh &voxelMesh)
+{
+  Mesh mesh;
+  const u32 faceIndecies[] = {
+      0, 1, 2, // Front
+      0, 2, 3, //
+      5, 4, 7, // Back
+      5, 7, 6, //
+      1, 5, 6, // Left
+      1, 6, 2, //
+      4, 0, 3, // Right
+      4, 3, 7, //
+      4, 5, 1, // Top
+      4, 1, 0, //
+      6, 7, 3, // Bottom
+      6, 3, 2, //
+  };
+  const glm::vec3 voxelNormals[] = {
+      glm::normalize(glm::vec3(1.0f, 1.0f, 1.0f)),   // 0 Front
+      glm::normalize(glm::vec3(-1.0f, 1.0f, 1.0f)),  // 1
+      glm::normalize(glm::vec3(-1.0f, -1.0f, 1.0f)), // 2
+      glm::normalize(glm::vec3(1.0f, -1.0f, 1.0f)),  // 3
+
+      glm::normalize(glm::vec3(1.0f, 1.0f, -1.0f)),   // 4 Back
+      glm::normalize(glm::vec3(-1.0f, 1.0f, -1.0f)),  // 5
+      glm::normalize(glm::vec3(-1.0f, -1.0f, -1.0f)), // 6
+      glm::normalize(glm::vec3(1.0f, -1.0f, -1.0f)),  // 7
+  };
+  // do this super inefficiently
+  const auto voxelSize = voxelMesh.mInitialVoxelSize;
+  for (const auto &[key, voxel] : voxelMesh.mVoxels)
+  {
+    const glm::vec3 voxelVerts[] = {
+        voxel.mPosition + (glm::vec3(1.0f, 1.0f, 1.0f) * (voxelSize / 2.0f)),   // 0 Front
+        voxel.mPosition + (glm::vec3(-1.0f, 1.0f, 1.0f) * (voxelSize / 2.0f)),  // 1
+        voxel.mPosition + (glm::vec3(-1.0f, -1.0f, 1.0f) * (voxelSize / 2.0f)), // 2
+        voxel.mPosition + (glm::vec3(1.0f, -1.0f, 1.0f) * (voxelSize / 2.0f)),  // 3
+
+        voxel.mPosition + (glm::vec3(1.0f, 1.0f, -1.0f) * (voxelSize / 2.0f)),   // 4 Back
+        voxel.mPosition + (glm::vec3(-1.0f, 1.0f, -1.0f) * (voxelSize / 2.0f)),  // 5
+        voxel.mPosition + (glm::vec3(-1.0f, -1.0f, -1.0f) * (voxelSize / 2.0f)), // 6
+        voxel.mPosition + (glm::vec3(1.0f, -1.0f, -1.0f) * (voxelSize / 2.0f)),  // 7
+    };
+    u32 indexOffset = mesh.mVertices.BufferSize() / 3;
+    for (u32 index : faceIndecies)
+    {
+      mesh.mIndices.push_back(index + indexOffset);
+    }
+    //     auto transform = glm::translate((voxel.mPosition));
+    for (u32 i = 0; i < ArraySize(voxelVerts); i++)
+    {
+      const auto &vert = voxelVerts[i];
+      mesh.mVertices.CastBufferPushBack(voxelVerts[i]);
+      mesh.mNormals.CastBufferPushBack(voxelNormals[i]);
+    }
+  }
+
+  return SubmitStaticMesh(&mesh, ShaderProgram::FlatLight);
 }
 
 void RemoveMesh(MeshHandle handle)

@@ -5,21 +5,22 @@
 #include "System.h"
 
 #include "../../../imgui/imgui.h"
-#include <Renderer/RendererBackend.h>
-#include <Renderer/RendererFrontend.h>
-#include <Renderer/Camera.h>
-#include <Renderer/Mesh.h>
-#include <Renderer/Window.h>
-#include <Utils/QuickCastBuffer.h>
-#include <Utils/Serialization.h>
-#include <VoxelObjects/VoxelMesh.h>
 #include "Obj.h"
 #include "Voxelizer.h"
 #include "VoxelizerUI.h"
 #include "tiny_obj_loader.h"
 
 #include <GLFW/glfw3.h>
+#include <Renderer/Camera.h>
+#include <Renderer/Mesh.h>
+#include <Renderer/RendererBackend.h>
+#include <Renderer/RendererFrontend.h>
+#include <Renderer/Window.h>
+#include <Utils/QuickCastBuffer.h>
+#include <Utils/Serialization.h>
+#include <VoxelObjects/VoxelMesh.h>
 #include <cstdio>
+#include <glm/gtx/transform.hpp>
 
 namespace VoxGen
 {
@@ -30,10 +31,10 @@ System::System() :
     mWindow(Renderer::Init(1980, 1080, "Voxel Generator", false)), mUI(new VoxelizerUI()),
     /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/ mVoxelizer(
         new Voxelizer()),
+    mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
     mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
   mUI->Init(mWindow.get());
-  //  mRenderer->SetProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f));
 }
 System::~System() = default;
 
@@ -107,6 +108,9 @@ void System::LoadMesh()
       mRenderer->RemoveMesh(mCurrentMeshHandle);
       mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
 #endif
+      Renderer::RemoveMesh(mCurrentMeshHandle);
+      mCurrentMeshHandle =
+          Renderer::SubmitStaticMesh(mMesh.get(), Renderer::ShaderProgram::FlatLight);
       // ObjReader objReader;
       //       tinyobj::attrib_t attrib;
       //       std::vector<tinyobj::shape_t> shapes;
@@ -146,12 +150,14 @@ void System::GenerateVoxels()
   if (mCurrentMeshHandle != 0 && mUI->GenerateVoxelsClicked())
   {
     mVoxelizer->SetParameters(mUI->GetParameters());
-    mVoxelMesh.reset(new VoxObj::VoxelMesh(mVoxelizer->Voxelize(mMesh.get())));
+    mVoxelMesh = std::make_unique<VoxObj::VoxelMesh>(mVoxelizer->Voxelize(mMesh.get()));
     // TODO: remove duplicate vertices
 #if 0
     mRenderer->RemoveMesh(mCurrentVoxelMeshHandle);
     mCurrentVoxelMeshHandle = mRenderer->RegisterVoxelMesh(mVoxelMesh.get());
 #endif
+    Renderer::RemoveMesh(mCurrentVoxelMeshHandle);
+    mCurrentVoxelMeshHandle = Renderer::SubmitVoxelMesh(*mVoxelMesh);
     //     QuickCastBuffer<f32, glm::vec3> points;
     //     for (auto &[key, voxel] : mVoxelMesh->mVoxels)
     //     {
@@ -167,7 +173,6 @@ void System::GenerateVoxels()
 
 void System::Render()
 {
-  //  mRenderer->Clear();
   if (mVoxelMesh)
   {
     QuickCastBuffer<f32, glm::vec3> points;
@@ -178,20 +183,30 @@ void System::Render()
         points.CastBufferPushBack(bezierCurve.mControlPoints);
       }
     }
+    // TODO: add point drawing
     //    mRenderer->DrawPoints(points);
   }
 
   if (mCurrentMeshHandle != 0)
   {
-    //    mRenderer->DrawMesh(mCurrentMeshHandle);
+    Renderer::Draw(
+        mCurrentMeshHandle,
+        {ShaderData("projection", mProjectionMat), ShaderData("camera", mCamera.CalculateMatrix()),
+         ShaderData("transform", glm::translate(glm::vec3(-5.0f, 0.0f, 0.0f)))},
+        Renderer::DrawMode::TRIANGLES);
   }
   if (mCurrentVoxelMeshHandle != 0)
   {
-    //    mRenderer->DrawMesh(mCurrentVoxelMeshHandle);
+    Renderer::Draw(
+        mCurrentVoxelMeshHandle,
+        {ShaderData("projection", mProjectionMat), ShaderData("camera", mCamera.CalculateMatrix()),
+         ShaderData("transform", glm::translate(glm::vec3(-5.0f, 0.0f, 0.0f)))},
+        Renderer::DrawMode::TRIANGLES);
   }
   //  mRenderer->Draw();
   mUI->Update();
-  glfwSwapBuffers(mWindow->mGLWindow);
+  Renderer::SwapBuffers();
+  //  glfwSwapBuffers(mWindow->mGLWindow);
 }
 
 void System::SaveVoxels()
