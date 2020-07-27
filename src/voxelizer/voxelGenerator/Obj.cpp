@@ -203,7 +203,7 @@ void ObjReader::ParseFace()
   //     mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
   //   }
   std::string lineStr{ReadLine()};
-  //   ReplaceChars(&lineStr, '/', ' ');
+  ReplaceChars(&lineStr, '/', ' ');
   std::stringstream line{lineStr};
   //   u32 index = 0;
   //   u32 texCoord = 0;
@@ -213,7 +213,7 @@ void ObjReader::ParseFace()
     // NOTE: only indices are read in
     u32 index = 0.0;
     u32 normal = 0.0;
-    line >> index; // >> normal;
+    line >> index >> normal;
     index--;
     //     normal--;
     mMesh->mIndices.emplace_back(index);

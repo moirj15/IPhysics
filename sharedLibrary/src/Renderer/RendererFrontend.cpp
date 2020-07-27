@@ -79,6 +79,8 @@ struct VertexArray
     BufferLayout layout = {positionAttribute, VEC3_SIZE, 0, location, GL_FLOAT};
     VertexBuffer vb = {{layout}, CreateBuffer(bufferType, data, dataSize, usage)};
     vertexBuffers.insert(std::make_pair(location, vb));
+    glEnableVertexAttribArray(location);
+    glVertexAttribPointer(location, attribSize, attribType, GL_FALSE, 0, nullptr);
   }
 
   void Destroy()
@@ -112,7 +114,7 @@ Window *Init(s32 width, s32 height, const char *windowName, bool enableDebug)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  Window *window = new Window(width, height, windowName);
+  auto *window = new Window(width, height, windowName);
   sWindow = window->mGLWindow;
 
   glfwMakeContextCurrent(window->mGLWindow);
@@ -182,7 +184,7 @@ static MeshHandle StoreMesh(Mesh *mesh, GLenum type, ShaderProgram program, GLen
       (u32)mesh->mIndices.size(), CreateBuffer(
                                       GL_ELEMENT_ARRAY_BUFFER, (void *)mesh->mIndices.data(),
                                       mesh->mIndices.size() * sizeof(u32), usage)};
-  glBindVertexArray(0);
+//  glBindVertexArray(0);
 
   sCurrentMeshHandle++;
   sVertexArrays.emplace(sCurrentMeshHandle, vertexArray);
@@ -281,7 +283,9 @@ void RemoveMesh(MeshHandle handle)
 void Draw(MeshHandle handle, const std::vector<ShaderData> &data, DrawMode drawMode)
 {
   auto &va = sVertexArrays[handle];
-  sShaders[va.program].Bind();
+  auto &shader = sShaders[va.program];
+  shader.Bind();
+  shader.SetShaderData(data);
   glBindVertexArray(va.handle);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, va.indexBuffer.handle);
   if (drawMode == DrawMode::TRIANGLES)

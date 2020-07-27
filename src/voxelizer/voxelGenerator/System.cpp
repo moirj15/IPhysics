@@ -28,7 +28,7 @@ namespace VoxGen
 System::System() :
     mCamera(
         glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
-    mWindow(Renderer::Init(1980, 1080, "Voxel Generator", false)), mUI(new VoxelizerUI()),
+    mWindow(Renderer::Init(1980, 1080, "Voxel Generator", true)), mUI(new VoxelizerUI()),
     /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/ mVoxelizer(
         new Voxelizer()),
     mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
@@ -104,39 +104,9 @@ void System::LoadMesh()
     {
       ObjReader objReader;
       mMesh.reset(objReader.Parse(meshPath->c_str()));
-#if 0
-      mRenderer->RemoveMesh(mCurrentMeshHandle);
-      mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
-#endif
       Renderer::RemoveMesh(mCurrentMeshHandle);
       mCurrentMeshHandle =
-          Renderer::SubmitStaticMesh(mMesh.get(), Renderer::ShaderProgram::FlatLight);
-      // ObjReader objReader;
-      //       tinyobj::attrib_t attrib;
-      //       std::vector<tinyobj::shape_t> shapes;
-      //       std::vector<tinyobj::material_t> materials;
-      //       std::string warn;
-      //       std::string err;
-      //       bool success = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err,
-      //       meshPath->c_str());
-      //
-      //       mMesh.reset(new Mesh());
-      //       const auto &indices = shapes[0].mesh.indices;
-      //       for (u64 i = 0; i < indices.size(); i++)
-      //       {
-      //         mMesh->mIndecies.push_back(i);
-      //
-      //         mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index)]);
-      //         mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index) + 1]);
-      //         mMesh->mVertecies.push_back(attrib.vertices[(3 * indices[i].vertex_index) + 2]);
-      //
-      //         mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index)]);
-      //         mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index) + 1]);
-      //         mMesh->mNormals.push_back(attrib.normals[(3 * indices[i].normal_index) + 2]);
-      //       }
-
-      //       mRenderer->RemoveMesh(mCurrentMeshHandle);
-      //       mCurrentMeshHandle = mRenderer->RegisterMesh(mMesh.get());
+          Renderer::SubmitStaticMesh(mMesh.get(), Renderer::ShaderProgram::UniformColor);
     }
     else
     {
@@ -151,23 +121,9 @@ void System::GenerateVoxels()
   {
     mVoxelizer->SetParameters(mUI->GetParameters());
     mVoxelMesh = std::make_unique<VoxObj::VoxelMesh>(mVoxelizer->Voxelize(mMesh.get()));
-    // TODO: remove duplicate vertices
-#if 0
-    mRenderer->RemoveMesh(mCurrentVoxelMeshHandle);
-    mCurrentVoxelMeshHandle = mRenderer->RegisterVoxelMesh(mVoxelMesh.get());
-#endif
+
     Renderer::RemoveMesh(mCurrentVoxelMeshHandle);
     mCurrentVoxelMeshHandle = Renderer::SubmitVoxelMesh(*mVoxelMesh);
-    //     QuickCastBuffer<f32, glm::vec3> points;
-    //     for (auto &[key, voxel] : mVoxelMesh->mVoxels)
-    //     {
-    //       for (const auto &bezierCurve : voxel.mBezierCurves)
-    //       {
-    //         points.CastBufferPushBack(bezierCurve.mControlPoints);
-    //       }
-    //     }
-    //
-    //     mRenderer->DrawPoints(points);
   }
 }
 
@@ -200,7 +156,7 @@ void System::Render()
     Renderer::Draw(
         mCurrentVoxelMeshHandle,
         {ShaderData("projection", mProjectionMat), ShaderData("camera", mCamera.CalculateMatrix()),
-         ShaderData("transform", glm::translate(glm::vec3(-5.0f, 0.0f, 0.0f)))},
+         ShaderData("transform", glm::translate(glm::vec3(5.0f, 0.0f, 0.0f)))},
         Renderer::DrawMode::TRIANGLES);
   }
   //  mRenderer->Draw();
