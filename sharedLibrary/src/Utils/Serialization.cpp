@@ -1,11 +1,69 @@
-#include <Utils/Serialization.h>
-
 #include <Renderer/Mesh.h>
+#include <Utils/Serialization.h>
 #include <VoxelObjects/VoxelMesh.h>
-
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
+
+using nlohmann::json;
+
+namespace glm
+{
+
+void to_json(nlohmann::json &j, const uvec3 &v)
+{
+  j = json{{"x", v.x}, {"y", v.y}, {"z", v.z}};
+}
+void from_json(const nlohmann::json &j, uvec3 &v)
+{
+  j.at("x").get_to(v.x);
+  j.at("y").get_to(v.y);
+  j.at("z").get_to(v.z);
+}
+
+void to_json(nlohmann::json &j, const vec3 &v)
+{
+  j = json{{"x", v.x}, {"y", v.y}, {"z", v.z}};
+}
+void from_json(const nlohmann::json &j, vec3 &v)
+{
+  j.at("x").get_to(v.x);
+  j.at("y").get_to(v.y);
+  j.at("z").get_to(v.z);
+}
+
+} // namespace glm
+
+void to_json(nlohmann::json &j, const BezierCurve &b)
+{
+  j = json{{"ControlPoints", b.mControlPoints}, {"FirstT", b.mFirstT}, {"SecondT", b.mSecondT},
+           {"EffectedPoitns", b.mEffectedPoints}};
+}
+void from_json(const nlohmann::json &j, BezierCurve &b)
+{
+  j.at("ControlPoints").get_to(b.mControlPoints);
+  j.at("FirstT").get_to( b.mFirstT);
+  j.at("SecondT").get_to(b.mSecondT);
+  j.at("EffectedPoitns").get_to( b.mEffectedPoints);
+}
+
+
+namespace VoxObj
+{
+
+void to_json(nlohmann::json &j, const Voxel &v)
+{
+  j = json{
+      {"Dimensions", v.mDimensions}, {"Position", v.mPosition}, {"BezierCurves", v.mBezierCurves}};
+}
+void from_json(const nlohmann::json &j, Voxel &v)
+{
+  j.at("Dimensions").get_to(v.mDimensions);
+  j.at("Position").get_to(v.mPosition);
+  j.at("BezierCurves").get_to(v.mBezierCurves);
+}
+
+} // namespace VoxObj
 
 namespace Utils
 {
@@ -22,102 +80,129 @@ mesh contents
 voxels
  */
 
+void to_json(json &j, const glm::vec3 &v)
+{
+  j = json{{"x", v.x}, {"y", v.y}, {"z", v.z}};
+}
+void from_json(const json &j, glm::vec3 &v)
+{
+  j.at("x").get_to(v.x);
+  j.at("y").get_to(v.y);
+  j.at("z").get_to(v.z);
+}
+
 void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
 {
-  nlohmann::json output;
+  json output;
+  output["ExtentsVoxelSpace"] = voxelMesh->mExtentsVoxelSpace;
+  output["ExtentsObjectSpace"] = voxelMesh->mExtentsVoxelSpace;
+  output["InitialVoxelSize"] = voxelMesh->mExtentsVoxelSpace;
   auto *mesh = voxelMesh->mMesh;
-  output["vertices"] = mesh->mVertices.GetBuffer();
-  output["normals"] = mesh->mNormals.GetBuffer();
-  output["indices"] = mesh->mIndices;
+  json meshJson;
+  meshJson["Vertices"] = mesh->mVertices.GetBuffer();
+  meshJson["Normals"] = mesh->mNormals.GetBuffer();
+  meshJson["Indices"] = mesh->mIndices;
+  output["Mesh"] = meshJson;
+  std::vector<std::pair<glm::uvec3, VoxObj::Voxel>> voxels;
+  for (const auto &pair : voxelMesh->mVoxels)
+  {
+    voxels.emplace_back(pair);
+  }
+  output["Voxels"] = voxels;
+//  output.emplace_back(voxelJsons);
+  std::cout << output << std::endl;
+
+  // TODO: This code is horrible, clean it up
+  // void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
+  //{
+  //  std::ofstream file(path, std::ios::trunc | std::ios::out);
+  //  auto *mesh = voxelMesh->GetMesh();
+  //  file << "[Vertex Count]\n" << mesh->mVertices.BufferSize() << "\n";
+  //  file << "[Index Count]\n" << mesh->mIndices.size() << "\n";
+  //  file << "[Normal Count]\n" << mesh->mNormals.BufferSize() << "\n";
+  //  file << "[Voxel Count]\n" << voxelMesh->GetVoxelCount() << "\n";
+  //
+  //  const auto extentsVoxelSpace = voxelMesh->GetExtentsVoxelSpace();
+  //  file << "[Extents (Voxel Space)]\n"
+  //       << extentsVoxelSpace.x << " " << extentsVoxelSpace.y << " " << extentsVoxelSpace.z <<
+  //       "\n";
+  //
+  //  const auto extentsObjectSpace = voxelMesh->GetExtentsObjectSpace();
+  //  file << "[Extents (Object Space)]\n"
+  //       << extentsObjectSpace.x << " " << extentsObjectSpace.y << " " << extentsObjectSpace.z
+  //       << "\n";
+  //
+  //  file << "[Initial Voxel Size]\n"
+  //       << voxelMesh->GetInitialVoxelSize().x << " " << voxelMesh->GetInitialVoxelSize().y << " "
+  //       << voxelMesh->GetInitialVoxelSize().z << " "
+  //       << "\n";
+  //
+  //  file << "[Vertices]\n";
+  //  for (const auto &v : mesh->mVertices.GetBuffer())
+  //  {
+  //    file << v << " ";
+  //  }
+  //  file << "\n[Indecies]\n";
+  //  for (const auto &i : mesh->mIndices)
+  //  {
+  //    file << i << " ";
+  //  }
+  //  file << "\n[Normals]\n";
+  //  for (const auto &n : mesh->mNormals.GetBuffer())
+  //  {
+  //    file << n << " ";
+  //  }
+  //
+  //  // Begin serializing the voxels
+  //  file << "\n[Voxels]\n";
+  //  for (const auto &[key, value] : voxelMesh->mVoxels)
+  //  {
+  //    file << "[Key]\n" << key.x << " " << key.y << " " << key.z << "\n";
+  //    file << "[Dimensions]\n"
+  //         << value.mDimensions.x << " " << value.mDimensions.y << " " << value.mDimensions.z <<
+  //         "\n";
+  //    file << "[Position]\n"
+  //         << value.mPosition.x << " " << value.mPosition.y << " " << value.mPosition.z << "\n";
+  //    file << "[Neighbor Count]\n" << value.mNeighbors.size() << "\n";
+  //    for (const auto &n : value.mNeighbors)
+  //    {
+  //      file << n.x << " " << n.y << " " << n.z << " ";
+  //    }
+  //    file << "\n";
+  //    file << "[Contained Mesh Vertex Count]\n" << value.mMeshVertices.size() << "\n";
+  //    for (const auto &v : value.mMeshVertices)
+  //    {
+  //      file << v << " ";
+  //    }
+  //    if (!value.mMeshVertices.empty())
+  //    {
+  //      file << "\n";
+  //    }
+  //    // Start serializing the bezier curves
+  //    file << "[Bezier Curve Count]\n" << value.mBezierCurves.size() << "\n";
+  //    for (const auto &b : value.mBezierCurves)
+  //    {
+  //      file << "[TStart]\n" << b.mFirstT << "\n";
+  //      file << "[TEnd]\n" << b.mSecondT << "\n";
+  //      file << "[Control Point Count]\n" << b.mControlPoints.size() << "\n";
+  //      file << "[Control Points]\n";
+  //      for (const auto &cp : b.mControlPoints)
+  //      {
+  //        file << cp.x << " " << cp.y << " " << cp.z << " ";
+  //      }
+  //      file << "\n";
+  //      file << "[Effected point count]\n" << b.mEffectedPoints.size() << "\n";
+  //      file << "[Effected points]\n";
+  //      for (const auto &e : b.mEffectedPoints)
+  //      {
+  //        file << e << " ";
+  //      }
+  //
+  //      file << "\n";
+  //    }
+  //  }
+  //}
 }
-// TODO: This code is horrible, clean it up
-//void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path)
-//{
-//  std::ofstream file(path, std::ios::trunc | std::ios::out);
-//  auto *mesh = voxelMesh->GetMesh();
-//  file << "[Vertex Count]\n" << mesh->mVertices.BufferSize() << "\n";
-//  file << "[Index Count]\n" << mesh->mIndices.size() << "\n";
-//  file << "[Normal Count]\n" << mesh->mNormals.BufferSize() << "\n";
-//  file << "[Voxel Count]\n" << voxelMesh->GetVoxelCount() << "\n";
-//
-//  const auto extentsVoxelSpace = voxelMesh->GetExtentsVoxelSpace();
-//  file << "[Extents (Voxel Space)]\n"
-//       << extentsVoxelSpace.x << " " << extentsVoxelSpace.y << " " << extentsVoxelSpace.z << "\n";
-//
-//  const auto extentsObjectSpace = voxelMesh->GetExtentsObjectSpace();
-//  file << "[Extents (Object Space)]\n"
-//       << extentsObjectSpace.x << " " << extentsObjectSpace.y << " " << extentsObjectSpace.z
-//       << "\n";
-//
-//  file << "[Initial Voxel Size]\n"
-//       << voxelMesh->GetInitialVoxelSize().x << " " << voxelMesh->GetInitialVoxelSize().y << " "
-//       << voxelMesh->GetInitialVoxelSize().z << " "
-//       << "\n";
-//
-//  file << "[Vertices]\n";
-//  for (const auto &v : mesh->mVertices.GetBuffer())
-//  {
-//    file << v << " ";
-//  }
-//  file << "\n[Indecies]\n";
-//  for (const auto &i : mesh->mIndices)
-//  {
-//    file << i << " ";
-//  }
-//  file << "\n[Normals]\n";
-//  for (const auto &n : mesh->mNormals.GetBuffer())
-//  {
-//    file << n << " ";
-//  }
-//
-//  // Begin serializing the voxels
-//  file << "\n[Voxels]\n";
-//  for (const auto &[key, value] : voxelMesh->mVoxels)
-//  {
-//    file << "[Key]\n" << key.x << " " << key.y << " " << key.z << "\n";
-//    file << "[Dimensions]\n"
-//         << value.mDimensions.x << " " << value.mDimensions.y << " " << value.mDimensions.z << "\n";
-//    file << "[Position]\n"
-//         << value.mPosition.x << " " << value.mPosition.y << " " << value.mPosition.z << "\n";
-//    file << "[Neighbor Count]\n" << value.mNeighbors.size() << "\n";
-//    for (const auto &n : value.mNeighbors)
-//    {
-//      file << n.x << " " << n.y << " " << n.z << " ";
-//    }
-//    file << "\n";
-//    file << "[Contained Mesh Vertex Count]\n" << value.mMeshVertices.size() << "\n";
-//    for (const auto &v : value.mMeshVertices)
-//    {
-//      file << v << " ";
-//    }
-//    if (!value.mMeshVertices.empty())
-//    {
-//      file << "\n";
-//    }
-//    // Start serializing the bezier curves
-//    file << "[Bezier Curve Count]\n" << value.mBezierCurves.size() << "\n";
-//    for (const auto &b : value.mBezierCurves)
-//    {
-//      file << "[TStart]\n" << b.mFirstT << "\n";
-//      file << "[TEnd]\n" << b.mSecondT << "\n";
-//      file << "[Control Point Count]\n" << b.mControlPoints.size() << "\n";
-//      file << "[Control Points]\n";
-//      for (const auto &cp : b.mControlPoints)
-//      {
-//        file << cp.x << " " << cp.y << " " << cp.z << " ";
-//      }
-//      file << "\n";
-//      file << "[Effected point count]\n" << b.mEffectedPoints.size() << "\n";
-//      file << "[Effected points]\n";
-//      for (const auto &e : b.mEffectedPoints)
-//      {
-//        file << e << " ";
-//      }
-//
-//      file << "\n";
-//    }
-//  }
-//}
 
 VoxObj::VoxelMesh *DeSerialize(const std::string &path)
 {
