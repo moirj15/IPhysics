@@ -33,13 +33,15 @@ if (WIN32)
     include_directories(
             ${CMAKE_SOURCE_DIR}/include;
             ${CMAKE_SOURCE_DIR}/sharedLibrary/include;
-            ${CMAKE_SOURCE_DIR}/glad/include
+            ${CMAKE_SOURCE_DIR}/glad/include;
+            ${CMAKE_SOURCE_DIR}/focus/pub_include;
     )
     link_directories(
             ${CMAKE_SOURCE_DIR}/libs/windows
             ${CMAKE_SOURCE_DIR}/libs/windows/bullet
             ${CMAKE_BINARY_DIR}/sharedLibrary
             ${CMAKE_BINARY_DIR}/sharedLibrary
+            ${CMAKE_SOURCE_DIR}/focus/lib;
     )
     add_executable(
             IPhysics
@@ -64,6 +66,7 @@ if (WIN32)
                 BulletCollision_Debug
                 LinearMath_Debug
                 sharedLibrary
+                focus
                 glfw3
                 opengl32.lib
                 gdi32.lib
@@ -77,6 +80,7 @@ if (WIN32)
                 BulletCollision_Debug
                 LinearMath_Debug
                 sharedLibrary
+                focus
                 glfw3
                 opengl32.lib
                 gdi32.lib

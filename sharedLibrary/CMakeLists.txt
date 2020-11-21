@@ -6,7 +6,6 @@ if (WIN32)
 else ()
     set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
 endif ()
-message(${CMAKE_BUILD_TYPE})
 
 # the source files for the shared libraries
 file(GLOB SRC_UTILS_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*")
