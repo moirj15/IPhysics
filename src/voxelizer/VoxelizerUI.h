@@ -7,10 +7,12 @@
 #include "VoxelizerParameters.h"
 
 #include <Common.h>
+#include <Window.hpp>
 #include <optional>
 #include <string>
 
 struct Window;
+
 
 namespace VoxGen
 {
@@ -35,7 +37,7 @@ public:
   ~VoxelizerUI();
 
   // TODO: these two functions should go in a base class
-  void Init(Window *window);
+  void Init(const renderer::Window &window);
 
   void Update();
 

@@ -23,6 +23,7 @@ struct Window;
 namespace Renderer
 {
 
+#if 0
 using MeshHandle = u32;
 
 enum class ShaderProgram : u32
@@ -54,5 +55,6 @@ void RemoveMesh(MeshHandle handle);
 void Draw(MeshHandle handle, const std::vector<ShaderData> &data, DrawMode drawMode);
 
 void SwapBuffers();
+#endif
 
 } // namespace Renderer

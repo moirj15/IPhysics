@@ -14,6 +14,7 @@
 namespace Renderer
 {
 
+#if 0
 constexpr u32 MAT4_SIZE = 16;
 constexpr u32 VEC3_SIZE = 3;
 constexpr u32 VEC2_SIZE = 2;
@@ -304,4 +305,5 @@ void SwapBuffers()
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+#endif
 } // namespace Renderer

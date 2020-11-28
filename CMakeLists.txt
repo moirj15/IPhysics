@@ -1,12 +1,17 @@
 cmake_minimum_required(VERSION 3.10)
 project(IPhysics)
 
-file(GLOB IMGUI_FILES CONFIGURE_DEPENDS "imgui/*")
-file(GLOB SRC_FILES CONFIGURE_DEPENDS "src/*")
+file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS 
+        "src/third_party/imgui/*"
+        "src/third_party/imgui/backends/imgui_impl_opengl3.h"
+        "src/third_party/imgui/backends/imgui_impl_opengl3.cpp"
+        "src/third_party/imgui/backends/imgui_impl_win32.h"
+        "src/third_party/imgui/backends/imgui_impl_win32.cpp"
+        )
 
 
 # the source files for the voxel generator app
-file(GLOB SRC_VOXEL_GENERATOR CONFIGURE_DEPENDS "src/voxelizer/voxelGenerator/*")
+file(GLOB SRC_VOXEL_GENERATOR CONFIGURE_DEPENDS "src/voxelizer/*")
 
 # the source files for the physics simulation app
 file(GLOB SRC_PHYSICS_SIMULATION_FILES CONFIGURE_DEPENDS "src/physics-sim/app/*")
@@ -14,14 +19,14 @@ file(GLOB SRC_PHYSICS_ENGINE_FILES CONFIGURE_DEPENDS "src/physics-sim/PhysicsEng
 
 
 set(SOURCE_LIST_MAIN_PROJECT
-        ${IMGUI_FILES}
+        ${THIRD_PARTY_SRC}
         ${SRC_PHYSICS_ENGINE_FILES}
         ${SRC_PHYSICS_SIMULATION_FILES}
         ${CMAKE_SOURCE_DIR}/glad/src/glad.c
         )
 
 set(SOURCE_LIST_VOXEL_GENERATOR
-        ${IMGUI_FILES}
+        ${THIRD_PARTY_SRC}
         ${SRC_VOXEL_GENERATOR}
         )
 
@@ -35,11 +40,11 @@ if (WIN32)
             ${CMAKE_SOURCE_DIR}/sharedLibrary/include;
             ${CMAKE_SOURCE_DIR}/glad/include;
             ${CMAKE_SOURCE_DIR}/focus/pub_include;
+#            ${CMAKE_SOURCE_DIR}/src/third_party;
     )
     link_directories(
             ${CMAKE_SOURCE_DIR}/libs/windows
             ${CMAKE_SOURCE_DIR}/libs/windows/bullet
-            ${CMAKE_BINARY_DIR}/sharedLibrary
             ${CMAKE_BINARY_DIR}/sharedLibrary
             ${CMAKE_SOURCE_DIR}/focus/lib;
     )
@@ -53,9 +58,21 @@ if (WIN32)
             ${SOURCE_LIST_VOXEL_GENERATOR}
     )
 
-    set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
-    set(CMAKE_CXX_FLAGS_DEBUG "/std:c++17 /MTd /MP /TP /W3 /DEBUG -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+    set(CMAKE_CXX_FLAGS "/std:c++latest /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:WinMainCRTStartup")
+    set(CompilerFlags
+            CMAKE_CXX_FLAGS
+            CMAKE_CXX_FLAGS_DEBUG
+            CMAKE_CXX_FLAGS_RELEASE
+            CMAKE_C_FLAGS
+            CMAKE_C_FLAGS_DEBUG
+            CMAKE_C_FLAGS_RELEASE
+            )
+    foreach(CompilerFlag ${CompilerFlags})
+        string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
+        string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
+    endforeach()
     message(${CMAKE_BUILD_TYPE})
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
         message("DEBUG YOU FOOL!!!")
@@ -76,12 +93,12 @@ if (WIN32)
         target_link_libraries(
                 VoxelGenerator
                 ${OPENGL_LIBRARY}
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
-                BulletCollision_Debug
-                LinearMath_Debug
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+#                BulletCollision_Debug
+#                LinearMath_Debug
                 sharedLibrary
                 focus
-                glfw3
+#                glfw3
                 opengl32.lib
                 gdi32.lib
                 user32.lib

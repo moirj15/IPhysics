@@ -7,13 +7,11 @@
 #ifndef IMGUI_IMPL_OPENGL_LOADER_GLAD
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #endif
-#include "../../../imgui/imgui.h"
-#include "../../../imgui/imgui_impl_glfw.h"
-#include "../../../imgui/imgui_impl_opengl3.h"
+#include "../third_party/imgui/imgui.h"
+#include "../third_party/imgui/backends/imgui_impl_win32.h"
+#include "../third_party/imgui/backends/imgui_impl_opengl3.h"
 
 #include <Common.h>
-//#include "../../imgui/cpp/imgui_stdlib.h"
-#include <Renderer/Window.h>
 
 namespace VoxGen
 {
@@ -21,16 +19,17 @@ namespace VoxGen
 VoxelizerUI::~VoxelizerUI()
 {
   ImGui_ImplOpenGL3_Shutdown();
-  ImGui_ImplGlfw_Shutdown();
+  ImGui_ImplWin32_Shutdown();
   ImGui::DestroyContext();
 }
 
-void VoxelizerUI::Init(Window *window)
+void VoxelizerUI::Init(const renderer::Window &window)
 {
   // TODO: put in base class
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
-  ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);
+  ImGui_ImplWin32_Init(window.mWindowHandle);
+//  ImGui_ImplWin32_InitForOpenGL(window->mGLWindow, true);
   ImGui_ImplOpenGL3_Init("#version 150");
   ImGui::StyleColorsClassic();
 }
@@ -38,7 +37,7 @@ void VoxelizerUI::Init(Window *window)
 void VoxelizerUI::Update()
 {
   ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplGlfw_NewFrame();
+  ImGui_ImplWin32_NewFrame();
   ImGui::NewFrame();
   // Define the UI layout
   ImGui::Begin("Hello boi", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
