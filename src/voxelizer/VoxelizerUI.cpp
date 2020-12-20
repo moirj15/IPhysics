@@ -23,7 +23,7 @@ VoxelizerUI::~VoxelizerUI()
   ImGui::DestroyContext();
 }
 
-void VoxelizerUI::Init(const renderer::Window &window)
+void VoxelizerUI::Init(const focus::Window &window)
 {
   // TODO: put in base class
   IMGUI_CHECKVERSION();

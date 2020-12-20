@@ -8,6 +8,8 @@
 #include <Renderer/Camera.h>
 #include <memory>
 #include <Window.hpp>
+#include "Voxelizer.h"
+#include "VoxelManager.h"
 
 struct Mesh;
 struct Window;
@@ -30,20 +32,22 @@ class Voxelizer;
 class System
 {
   Camera mCamera;
-  renderer::Window mWindow;
+  focus::Window mWindow;
 //  std::unique_ptr<Window> mWindow;
   std::unique_ptr<VoxelizerUI> mUI;
   //  std::unique_ptr<Renderer::RendererFrontend> mRenderer;
-  std::unique_ptr<Voxelizer> mVoxelizer;
-  std::unique_ptr<Mesh> mMesh;
+  Voxelizer mVoxelizer;
+  Mesh mMesh;
   std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;
   const glm::mat4 mProjectionMat;
+  VoxelManager mOriginalManager;
+  VoxelManager mMutableManager;
 
   u32 mCurrentMeshHandle;
   u32 mCurrentVoxelMeshHandle;
 
 public:
-  System(HINSTANCE hInstance);
+  explicit System(HINSTANCE hInstance);
   ~System();
 
   void Run();

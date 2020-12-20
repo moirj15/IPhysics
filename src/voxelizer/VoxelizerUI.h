@@ -37,7 +37,7 @@ public:
   ~VoxelizerUI();
 
   // TODO: these two functions should go in a base class
-  void Init(const renderer::Window &window);
+  void Init(const focus::Window &window);
 
   void Update();
 

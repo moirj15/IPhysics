@@ -15,11 +15,7 @@ struct Mesh
   std::vector<u32> mIndices;
 
   Mesh() = default;
-  explicit Mesh(const Mesh &m) :
-      mVertices(m.mVertices), mOffsets(m.mOffsets), mNormals(m.mNormals),
-      mTextureCoords(m.mTextureCoords), mIndices(m.mIndices)
-  {
-  }
+  Mesh(const Mesh &m) = default;
 
   void Clear()
   {

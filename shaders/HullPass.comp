@@ -1,0 +1,10 @@
+#version 460
+
+layout(std340, binding = 0) buffer
+{
+  bool VoxelExists[];
+};
+
+void main() {
+
+}

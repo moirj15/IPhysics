@@ -15,11 +15,9 @@ ObjReader::ObjReader() : mPresentBitSet(0), mDataLen(0), mPos(0), mMesh(new Mesh
 Mesh *ObjReader::Parse(const char *filename)
 {
   LoadOBJFile(filename);
-  while (mPos < mDataLen)
-  {
+  while (mPos < mDataLen) {
     auto dataType = ParseType();
-    switch (dataType)
-    {
+    switch (dataType) {
     case DataType::Vertex:
       ParseVertex();
       break;
@@ -107,8 +105,7 @@ void ObjReader::LoadOBJFile(const char *filename)
   len = ftell(fp);
   rewind(fp);
 
-  if (len == 0)
-  {
+  if (len == 0) {
     fprintf(stderr, "failed to get file size");
   }
 
@@ -123,50 +120,34 @@ void ObjReader::LoadOBJFile(const char *filename)
 // Private
 ObjReader::DataType ObjReader::ParseType()
 {
-  if (Token() == 'f')
-  {
+  if (Token() == 'f') {
     mPos += 2;
     return DataType::PolygonFace;
-  }
-  else if (Token() == 'l')
-  {
+  } else if (Token() == 'l') {
     mPos += 2;
     return DataType::LineElement;
-  }
-  else if (Token() == 'o')
-  {
+  } else if (Token() == 'o') {
     mPos += 2;
     return DataType::Object;
-  }
-  else if (Token() == 'v')
-  {
+  } else if (Token() == 'v') {
     mPos++;
-    if (Token() == ' ')
-    {
+    if (Token() == ' ') {
       mPos++;
       mPresentBitSet |= (u32)Present::Vertex;
       return DataType::Vertex;
-    }
-    else if (Token() == 't')
-    {
+    } else if (Token() == 't') {
       mPos += 2;
       mPresentBitSet |= (u32)Present::Texture;
       return DataType::TextureCoord;
-    }
-    else if (Token() == 'p')
-    {
+    } else if (Token() == 'p') {
       mPos += 2;
       return DataType::ParameterSpaceVertex;
-    }
-    else if (Token() == 'n')
-    {
+    } else if (Token() == 'n') {
       mPos += 2;
       mPresentBitSet |= (u32)Present::Normal;
       return DataType::VertexNormal;
     }
-  }
-  else if (Token() == '#')
-  {
+  } else if (Token() == '#') {
     return DataType::Comment;
   }
   fprintf(stderr, "Unrecognized OBJ datatype\n");
@@ -177,8 +158,7 @@ void ObjReader::ParseVertex()
 {
   std::stringstream line{ReadLine()};
   f32 val = 0.0f;
-  for (s32 i = 0; i < 3; i++)
-  {
+  for (s32 i = 0; i < 3; i++) {
     line >> val;
     mMesh->mVertices.BufferPushBack(val);
   }
@@ -189,8 +169,7 @@ void ObjReader::ParseNormal()
   std::stringstream line{ReadLine()};
   f32 val = 0.0f;
   glm::vec3 normal;
-  for (s32 i = 0; i < 3; i++)
-  {
+  for (s32 i = 0; i < 3; i++) {
     line >> normal[i];
   }
   mTempNormals.emplace_back(normal);
@@ -208,8 +187,7 @@ void ObjReader::ParseFace()
   //   u32 index = 0;
   //   u32 texCoord = 0;
   //   u32 normal = 0;
-  for (s32 i = 0; i < 3; i++)
-  {
+  for (s32 i = 0; i < 3; i++) {
     // NOTE: only indices are read in
     u32 index = 0.0;
     u32 normal = 0.0;
@@ -227,8 +205,7 @@ void ObjReader::ParseFace()
 std::string ObjReader::ReadLine()
 {
   std::string line = "";
-  while (Token() != '\n' && mPos < mDataLen)
-  {
+  while (Token() != '\n' && mPos < mDataLen) {
     line += Token();
     mPos++;
   }
@@ -238,8 +215,7 @@ std::string ObjReader::ReadLine()
 
 void ObjReader::SkipLine()
 {
-  while (Token() != '\n' && mPos < mDataLen)
-  {
+  while (Token() != '\n' && mPos < mDataLen) {
     mPos++;
   }
   mPos++;
@@ -247,10 +223,8 @@ void ObjReader::SkipLine()
 
 void ObjReader::ReplaceChars(std::string *str, char toReplace, char replacement)
 {
-  for (Size i = 0; i < str->length(); i++)
-  {
-    if ((*str)[i] == toReplace)
-    {
+  for (Size i = 0; i < str->length(); i++) {
+    if ((*str)[i] == toReplace) {
       (*str)[i] = replacement;
     }
   }
