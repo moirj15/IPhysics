@@ -1,15 +1,11 @@
-//
-// Created by Jimmy on 2/9/2020.
-//
-
 #include "VoxelizerUI.h"
 
 #ifndef IMGUI_IMPL_OPENGL_LOADER_GLAD
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #endif
-#include "../third_party/imgui/imgui.h"
-#include "../third_party/imgui/backends/imgui_impl_win32.h"
 #include "../third_party/imgui/backends/imgui_impl_opengl3.h"
+#include "../third_party/imgui/backends/imgui_impl_sdl.h"
+#include "../third_party/imgui/imgui.h"
 
 #include <Common.h>
 
@@ -19,7 +15,7 @@ namespace VoxGen
 VoxelizerUI::~VoxelizerUI()
 {
   ImGui_ImplOpenGL3_Shutdown();
-  ImGui_ImplWin32_Shutdown();
+  ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
 }
 
@@ -28,34 +24,31 @@ void VoxelizerUI::Init(const focus::Window &window)
   // TODO: put in base class
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
-  ImGui_ImplWin32_Init(window.mWindowHandle);
-//  ImGui_ImplWin32_InitForOpenGL(window->mGLWindow, true);
+  // the second parameter isn't used for initializing opengl for now
+  ImGui_ImplSDL2_InitForOpenGL(window.mSDLWindow, nullptr);
   ImGui_ImplOpenGL3_Init("#version 150");
   ImGui::StyleColorsClassic();
 }
 
-void VoxelizerUI::Update()
+void VoxelizerUI::Update(const focus::Window &window)
 {
   ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplWin32_NewFrame();
+  ImGui_ImplSDL2_NewFrame(window.mSDLWindow);
   ImGui::NewFrame();
   // Define the UI layout
   ImGui::Begin("Hello boi", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
   {
-    if (ImGui::Button("Load Mesh"))
-    {
+    if (ImGui::Button("Load Mesh")) {
       mLoadMeshClicked = true;
     }
     ImGui::SameLine();
     ImGui::InputText("Mesh File Name", mMeshFileName.data(), mMeshFileName.size());
     ImGui::InputFloat("Voxel Size", &mParameters.mVoxelSize);
     ImGui::Checkbox("Generate Hollow", &mParameters.mHollow);
-    if (ImGui::Button("Generate Voxels"))
-    {
+    if (ImGui::Button("Generate Voxels")) {
       mGenerateVoxelsClicked = true;
     }
-    if (ImGui::Button("Save"))
-    {
+    if (ImGui::Button("Save")) {
       mSaveClicked = true;
     }
     ImGui::SameLine();
@@ -74,8 +67,7 @@ void VoxelizerUI::Update()
 // TODO: might be a good idea to somehow register functions that occur when a ui element is clicked
 std::optional<std::string> VoxelizerUI::LoadMeshClicked()
 {
-  if (mLoadMeshClicked)
-  {
+  if (mLoadMeshClicked) {
     mLoadMeshClicked = false;
     return {mMeshFileName};
   }
@@ -84,8 +76,7 @@ std::optional<std::string> VoxelizerUI::LoadMeshClicked()
 
 std::optional<std::string> VoxelizerUI::SaveClicked()
 {
-  if (mSaveClicked)
-  {
+  if (mSaveClicked) {
     mSaveClicked = false;
     return {mVoxelMeshFileName};
   }
@@ -93,8 +84,7 @@ std::optional<std::string> VoxelizerUI::SaveClicked()
 }
 bool VoxelizerUI::GenerateVoxelsClicked()
 {
-  if (mGenerateVoxelsClicked)
-  {
+  if (mGenerateVoxelsClicked) {
     mGenerateVoxelsClicked = false;
     return true;
   }

@@ -13,7 +13,6 @@
 
 struct Window;
 
-
 namespace VoxGen
 {
 
@@ -28,32 +27,23 @@ class VoxelizerUI
 
 public:
   VoxelizerUI() :
-      mMeshFileName(256, 0), mVoxelMeshFileName(256, 0), mSaveClicked(false),
-      mGenerateVoxelsClicked(false), mLoadMeshClicked(false)
+      mMeshFileName(256, 0), mVoxelMeshFileName(256, 0), mSaveClicked(false), mGenerateVoxelsClicked(false),
+      mLoadMeshClicked(false)
   {
-    // mMeshFileName = "../testfiles/block.obj";
-    // mVoxelMeshFileName = "../test-out/bock-1.vmf";
   }
   ~VoxelizerUI();
 
   // TODO: these two functions should go in a base class
   void Init(const focus::Window &window);
 
-  void Update();
+  void Update(const focus::Window &window);
 
-  /**
-   * \brief:
-   * \return:
-   */
   NODISCARD std::optional<std::string> LoadMeshClicked();
 
   NODISCARD std::optional<std::string> SaveClicked();
 
   NODISCARD bool GenerateVoxelsClicked();
 
-  NODISCARD inline Parameters GetParameters() const
-  {
-    return mParameters;
-  }
+  NODISCARD inline Parameters GetParameters() const { return mParameters; }
 };
 } // namespace VoxGen

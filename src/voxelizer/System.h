@@ -3,13 +3,13 @@
 //
 
 #pragma once
-#include <windows.h>
+#include "VoxelManager.h"
+#include "Voxelizer.h"
+
 #include <Common.h>
 #include <Renderer/Camera.h>
-#include <memory>
 #include <Window.hpp>
-#include "Voxelizer.h"
-#include "VoxelManager.h"
+#include <memory>
 
 struct Mesh;
 struct Window;
@@ -33,7 +33,7 @@ class System
 {
   Camera mCamera;
   focus::Window mWindow;
-//  std::unique_ptr<Window> mWindow;
+  //  std::unique_ptr<Window> mWindow;
   std::unique_ptr<VoxelizerUI> mUI;
   //  std::unique_ptr<Renderer::RendererFrontend> mRenderer;
   Voxelizer mVoxelizer;
@@ -47,7 +47,7 @@ class System
   u32 mCurrentVoxelMeshHandle;
 
 public:
-  explicit System(HINSTANCE hInstance);
+  System();
   ~System();
 
   void Run();

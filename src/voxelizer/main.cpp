@@ -1,10 +1,9 @@
 
-#include <windows.h>
 #include "System.h"
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, int showCmd)
+int main(int argc, char **argv)
 {
-  VoxGen::System system(hInstance);
+  VoxGen::System system{};
   system.Run();
   return 0;
 }

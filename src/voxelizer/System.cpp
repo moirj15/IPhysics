@@ -12,32 +12,18 @@
 #include <Context.hpp>
 #include <GLFW/glfw3.h>
 #include <Renderer/Window.h>
+#include <SDL2/SDL.h>
 #include <Utils/Serialization.h>
-
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-LRESULT CALLBACK MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-  if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam)) {
-    return true;
-  }
-  switch (msg) {
-  case WM_CLOSE:
-    PostQuitMessage(0);
-    return 0;
-  }
-  return DefWindowProc(hWnd, msg, wParam, lParam);
-}
 
 namespace VoxGen
 {
 
-System::System(HINSTANCE hInstance) :
+System::System() :
     mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mUI(new VoxelizerUI()), mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f))
 //    mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
-  focus::gContext->Init(focus::RendererAPI::OpenGL, MessageHandler, hInstance);
+  focus::gContext->Init(focus::RendererAPI::OpenGL);
   mWindow = focus::gContext->MakeWindow(1980, 1080);
   mUI->Init(mWindow);
 }
@@ -45,12 +31,13 @@ System::~System() = default;
 
 void System::Run()
 {
-  MSG msg = {};
-  auto dc = GetDC(mWindow.mWindowHandle);
-  while (msg.message != WM_QUIT) {
-    if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
-      TranslateMessage(&msg);
-      DispatchMessage(&msg);
+  bool keepWindowOpen = true;
+  SDL_Event e;
+  while (keepWindowOpen) {
+    while (SDL_PollEvent(&e) > 0) {
+      if (e.type == SDL_QUIT) {
+        return;
+      }
     }
     CollectInput();
     LoadMesh();
@@ -58,7 +45,7 @@ void System::Run()
     Render();
     SaveVoxels();
 
-    SwapBuffers(dc);
+    focus::gContext->SwapBuffers(mWindow);
   }
 }
 
@@ -106,7 +93,7 @@ void System::LoadMesh()
     // Load our mesh if we got a good path
     if (fs::exists(*meshPath)) {
       ObjReader objReader;
-      //TODO: mem-leak, fix up the obj parser
+      // TODO: mem-leak, fix up the obj parser
       mCurrentMeshHandle = mOriginalManager.CreateMesh(std::move(*objReader.Parse(meshPath->c_str())));
 #if 0
       Renderer::RemoveMesh(mCurrentMeshHandle);
@@ -124,7 +111,7 @@ void System::GenerateVoxels()
   // TODO: compute shader voxel generation
   if (mCurrentMeshHandle != 0 && mUI->GenerateVoxelsClicked()) {
     mVoxelizer.SetParameters(mUI->GetParameters());
-//    mVoxelMesh = std::make_unique<VoxObj::VoxelMesh>(mVoxelizer.Voxelize(mMesh.get()));
+    //    mVoxelMesh = std::make_unique<VoxObj::VoxelMesh>(mVoxelizer.Voxelize(mMesh.get()));
 
 #if 0
     Renderer::RemoveMesh(mCurrentVoxelMeshHandle);
@@ -166,7 +153,7 @@ void System::Render()
 #endif
   }
   //  mRenderer->Draw();
-  mUI->Update();
+  mUI->Update(mWindow);
 #if 0
   Renderer::SwapBuffers();
 #endif
