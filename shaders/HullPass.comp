@@ -1,8 +1,54 @@
 #version 460
 
-layout(std340, binding = 0) buffer
+
+// input data
+struct Edge 
 {
-  bool VoxelExists[];
+  int a;
+  int b;
+}
+
+layout(std340, binding = 0) buffer EdgeData
+{
+  Edge edges[];
+}
+
+layout(std340, binding = 1) buffer VertexData
+{
+  vec3 vertices[];
+}
+
+// output data
+struct VertexVoxelInfo
+{
+  ivec3 voxel;
+  // 00 - neither are in the voxel, but the edge is
+  // 01 - a is in the voxel
+  // 10 - b is in the voxel
+  // 11 - both are in the voxel
+  int endpointInVoxel; 
+}
+
+
+layout(std340, binding = 2) buffer VertexVoxelData
+{
+  VertexVoxelInfo voxelizedVerts[];
+};
+
+struct VoxelData
+{
+  bool exists;
+  // 00000001 - top
+  // 00000010 - bottom
+  // 00000100 - left
+  // 00001000 - right
+  // 00010000 - front
+  // 00100000 - back
+  int neighbors;
+}
+layout(std340, binding = 3) buffer VoxelizedData
+{
+  VoxelData voxelData;
 };
 
 void main() {
