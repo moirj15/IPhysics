@@ -25,6 +25,7 @@ VoxObj::VoxelMesh Voxelizer::Voxelize(Mesh *mesh)
 // Private
 btAABB Voxelizer::FindMeshAABB(Mesh *mesh)
 {
+#if 0
   btVector3 min(0.0f, 0.0f, 0.0f);
   btVector3 max(0.0f, 0.0f, 0.0f);
   for (u64 i = 0; i < mesh->mIndices.size(); i++) {
@@ -37,6 +38,8 @@ btAABB Voxelizer::FindMeshAABB(Mesh *mesh)
     max.setMax(currentPoint);
   }
   return btAABB(min, max, min);
+#endif
+  return {};
 }
 
 std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(Mesh *mesh)
@@ -56,17 +59,23 @@ std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(Mesh *mesh)
 
 VoxObj::VoxelMesh Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, Mesh *mesh)
 {
+
+#if 0
   glm::vec3 min(meshAABB.m_min.x(), meshAABB.m_min.y(), meshAABB.m_min.z());
   glm::vec3 max(meshAABB.m_max.x(), meshAABB.m_max.y(), meshAABB.m_max.z());
   glm::vec3 extentsOffset(-meshAABB.m_min.x(), -meshAABB.m_min.y(), -meshAABB.m_min.z());
+#endif
   // move the min and max to be centered at the origin
+#if 0
   max += extentsOffset;
+#endif
 
   // use the max of the AABB as the extents
-  glm::vec3 aabbExtents(glm::ceil(max));
+  glm::vec3 aabbExtents;//(glm::ceil(max));
   // Calculate the extents of the voxel mesh in discrete voxel space
-  glm::uvec3 voxelMeshExtents(aabbExtents / mParameters.mVoxelSize);
+  glm::uvec3 voxelMeshExtents;//(aabbExtents / mParameters.mVoxelSize);
   VoxObj::VoxelMesh voxelMesh(voxelMeshExtents, aabbExtents, glm::vec3(mParameters.mVoxelSize), mesh);
+#if 0
   for (u32 x = 0; x < voxelMeshExtents.x; x++) {
     for (u32 y = 0; y < voxelMeshExtents.y; y++) {
       for (u32 z = 0; z < voxelMeshExtents.z; z++) {
@@ -116,6 +125,7 @@ VoxObj::VoxelMesh Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles
       }
     }
   }
+#endif
   return voxelMesh;
 }
 

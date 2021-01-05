@@ -3,7 +3,7 @@ project(IPhysics)
 set(CMAKE_UNITY_BUILD ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS 
+file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS
         "src/third_party/imgui/*"
         "src/third_party/imgui/backends/imgui_impl_opengl3.h"
         "src/third_party/imgui/backends/imgui_impl_opengl3.cpp"
@@ -50,8 +50,8 @@ include_directories(
 #)
 
 add_executable(
-    VoxelGenerator
-    ${SOURCE_LIST_VOXEL_GENERATOR}
+        VoxelGenerator
+        ${SOURCE_LIST_VOXEL_GENERATOR}
 )
 if (WIN32)
     message("WINDOWS")
@@ -73,10 +73,10 @@ if (WIN32)
             CMAKE_C_FLAGS_DEBUG
             CMAKE_C_FLAGS_RELEASE
             )
-    foreach(CompilerFlag ${CompilerFlags})
+    foreach (CompilerFlag ${CompilerFlags})
         string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
         string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
-    endforeach()
+    endforeach ()
     message(${CMAKE_BUILD_TYPE})
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
         message("DEBUG YOU FOOL!!!")
@@ -97,26 +97,43 @@ if (WIN32)
         target_link_libraries(
                 VoxelGenerator
                 ${OPENGL_LIBRARY}
-#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
-#                BulletCollision_Debug
-#                LinearMath_Debug
+                # TODO: hacky solution for linking in sdl and focus
+                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2-static.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2main.lib
+                #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath_Debug.lib
                 sharedLibrary
-                focus
-#                glfw3
+                #focus
+                #                glfw3
                 opengl32.lib
                 gdi32.lib
                 user32.lib
                 kernel32.lib
+                msvcrtd.lib
+                winmm.lib
+                imm32.lib
+                version.lib
+                d3d11.lib
+                d3d12.lib
+                libcmt.lib
+                dxgi.lib
+                d3dcompiler.lib
+                winmm.lib
+                gdi32
+                opengl32
+                Setupapi.lib
         )
     else ()
-      #target_link_libraries(
-      #IPhysics
-      #${OPENGL_LIBRARY}
-      #BulletDynamics.lib
-       #         BulletCollision.lib
-       #         LinearMath.lib
-       #
-       #         glfw3.lib
+        #target_link_libraries(
+        #IPhysics
+        #${OPENGL_LIBRARY}
+        #BulletDynamics.lib
+        #         BulletCollision.lib
+        #         LinearMath.lib
+        #
+        #         glfw3.lib
         #        opengl32.lib
         ##        gdi32.lib
         ##        user32.lib
@@ -131,16 +148,16 @@ else ()
             ${CMAKE_BINARY_DIR}/sharedLibrary
             ${CMAKE_SOURCE_DIR}/focus/lib;
     )
-  #target_link_libraries(
-   #         IPhysics
-   #         sharedLibrary
-   #         ${OPENGL_LIBRARY}
-   #         focus
-   #         libglfw3.a
-   #         dl
-   #         X11
-   #         pthread
-   # )
+    #target_link_libraries(
+    #         IPhysics
+    #         sharedLibrary
+    #         ${OPENGL_LIBRARY}
+    #         focus
+    #         libglfw3.a
+    #         dl
+    #         X11
+    #         pthread
+    # )
     target_link_libraries(
             VoxelGenerator
             sharedLibrary

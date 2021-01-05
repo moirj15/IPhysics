@@ -12,7 +12,7 @@
 #include <Context.hpp>
 #include <GLFW/glfw3.h>
 #include <Renderer/Window.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <Utils/Serialization.h>
 
 namespace VoxGen

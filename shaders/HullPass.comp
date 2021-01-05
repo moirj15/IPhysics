@@ -1,22 +1,32 @@
 #version 460
 
+// dispatch on the vertices
+layout(local_size_x = 32, local_size_y = 32) in;
 
 // input data
 struct Edge 
 {
   int a;
   int b;
-}
+};
 
-layout(std340, binding = 0) buffer EdgeData
+struct Aabb
 {
-  Edge edges[];
-}
+  vec3 minCorner;
+  vec3 maxCorner;
+};
 
-layout(std340, binding = 1) buffer VertexData
+layout(location = 0) uniform Constants
+{
+  Aabb meshAABB;
+};
+
+layout(std340, binding = 0) buffer InputData
 {
   vec3 vertices[];
-}
+  ivec3 dimmensions;
+};
+
 
 // output data
 struct VertexVoxelInfo
@@ -27,30 +37,35 @@ struct VertexVoxelInfo
   // 10 - b is in the voxel
   // 11 - both are in the voxel
   int endpointInVoxel; 
-}
-
-
-layout(std340, binding = 2) buffer VertexVoxelData
-{
-  VertexVoxelInfo voxelizedVerts[];
 };
 
-struct VoxelData
+
+layout(std340, binding = 1) buffer OutputData
 {
-  bool exists;
-  // 00000001 - top
-  // 00000010 - bottom
-  // 00000100 - left
-  // 00001000 - right
-  // 00010000 - front
-  // 00100000 - back
-  int neighbors;
-}
-layout(std340, binding = 3) buffer VoxelizedData
-{
-  VoxelData voxelData;
+  // Each element points to the voxel that owns the vertex with the same index
+  ivec3 verticesOwningVoxel[];
+  bool existingVoxel[];
 };
 
 void main() {
-
+  const vec3 voxelSize = vec3(1.0 / gl_NumWorkGroups);
+  const int threadID = (gl_GlobalInvocationID.x * gl_NumWorkGroups.x) + gl_GlobalInvocation.y;
+  const vec3 vertex = vertices[threadID];
+  for (int x = 0; x < dimmensions.x; x++) {
+    for (int y = 0; y < dimmensions.y; y++) {
+      for (int z = 0; z < dimmensions.z; z++) {
+        vec3 offset = vec3(float(x) * voxelSize.x, float(y) * voxelSize.y, float(z) * voxelSize.z);
+        // Calculate the AABB that will act as the voxel
+        Aabb voxel = Aabb(min(meshAABB.minCorner + offset, meshAABB.minCorner + offset + voxelSize), 
+            max(meshAABB.minCorner + offset, meshAABB.minCorner + offset + voxelSize));
+        // Calculate the voxel's center
+        vec3 voxelCenter = voxel.minCorner + ((voxel.maxCorner - voxel.minCorner) / 2.0);
+        // Check if the current voxel contains the vertex and update the existingVoxel array accordingly
+        bool voxelContainsVertex = greaterThanEqual(vertex, voxel.minCorner) && lessThan(vertex, voxel.maxCorner);
+        existingVoxel[x * y * z].exists |= voxelContainsVertex; // Use a bitwise-or so false is never assigned
+        // Store the voxel that the vertex belongs to in the OutputData
+        verticesOwningVoxel[threadID] = ivec3(x, y, z);
+      }
+    }
+  }
 }
