@@ -1,12 +1,9 @@
-//
-// Created by Jimmy on 2/9/2020.
-//
-
 #pragma once
 #include "VoxelManager.h"
 #include "Voxelizer.h"
 
 #include <Common.h>
+#include <Handles.hpp>
 #include <Renderer/Camera.h>
 #include <Window.hpp>
 #include <memory>
@@ -46,6 +43,12 @@ class System
   u32 mCurrentMeshHandle;
   u32 mCurrentVoxelMeshHandle;
 
+  focus::ShaderHandle mHullPass;
+  focus::BufferHandle mHullPassConstantBuffer = focus::INVALID_HANDLE;
+  focus::BufferHandle mHullPassInputData = focus::INVALID_HANDLE;
+  focus::BufferHandle mHullPassVertexOutput = focus::INVALID_HANDLE;
+  focus::BufferHandle mHullPassVoxelOutput = focus::INVALID_HANDLE;
+
 public:
   System();
   ~System();
@@ -58,6 +61,7 @@ private:
   void GenerateVoxels();
   void Render();
   void SaveVoxels();
+  void DebugDrawVoxels();
 };
 
 } // namespace VoxGen

@@ -1,0 +1,22 @@
+[
+{
+  "directory": "E:/projects/IPhysics/build",
+  "command": "C:\\PROGRA~2\\MICROS~1\\2019\\COMMUN~1\\VC\\Tools\\MSVC\\1428~1.293\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -IE:\\projects\\IPhysics\\focus\\include /std:c++latest /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLFW_INCLUDE_NONE -DRENDERER_OPENGL /MTd /Zi /Ob0 /Od /RTC1 -DGLFW_INCLUDE_NONE -D_DEBUG /FoCMakeFiles\\focus_main.dir\\Unity\\unity_0_cxx.cxx.obj /FdTARGET_COMPILE_PDB /FS -c E:\\projects\\IPhysics\\build\\CMakeFiles\\focus_main.dir\\Unity\\unity_0_cxx.cxx",
+  "file": "E:/projects/IPhysics/build/CMakeFiles/focus_main.dir/Unity/unity_0_cxx.cxx"
+},
+{
+  "directory": "E:/projects/IPhysics/build",
+  "command": "C:\\PROGRA~2\\MICROS~1\\2019\\COMMUN~1\\VC\\Tools\\MSVC\\1428~1.293\\bin\\HostX64\\x64\\cl.exe  /nologo -IE:\\projects\\IPhysics\\focus\\include /DWIN32 /D_WINDOWS /W3 /MTd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\focus_main.dir\\Unity\\unity_0_c.c.obj /FdTARGET_COMPILE_PDB /FS -c E:\\projects\\IPhysics\\build\\CMakeFiles\\focus_main.dir\\Unity\\unity_0_c.c",
+  "file": "E:/projects/IPhysics/build/CMakeFiles/focus_main.dir/Unity/unity_0_c.c"
+},
+{
+  "directory": "E:/projects/IPhysics/build",
+  "command": "C:\\PROGRA~2\\MICROS~1\\2019\\COMMUN~1\\VC\\Tools\\MSVC\\1428~1.293\\bin\\HostX64\\x64\\cl.exe  /nologo /TP -IE:\\projects\\IPhysics\\focus\\include -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Context.cpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Context.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Handles.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\IBuffer.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\IShader.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\RenderState.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Types.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Window.hpp /std:c++latest /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLEW_STATIC -DGLFW_INCLUDE_NONE -DRENDERER_OPENGL /MTd /Zi /Ob0 /Od /RTC1 -DGLFW_INCLUDE_NONE -D_DEBUG /FoCMakeFiles\\focus.dir\\Unity\\unity_0_cxx.cxx.obj /FdTARGET_COMPILE_PDB /FS -c E:\\projects\\IPhysics\\build\\CMakeFiles\\focus.dir\\Unity\\unity_0_cxx.cxx",
+  "file": "E:/projects/IPhysics/build/CMakeFiles/focus.dir/Unity/unity_0_cxx.cxx"
+},
+{
+  "directory": "E:/projects/IPhysics/build",
+  "command": "C:\\PROGRA~2\\MICROS~1\\2019\\COMMUN~1\\VC\\Tools\\MSVC\\1428~1.293\\bin\\HostX64\\x64\\cl.exe  /nologo -IE:\\projects\\IPhysics\\focus\\include -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Context.cpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Context.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Handles.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\IBuffer.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\IShader.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\RenderState.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Types.hpp -IE:\\projects\\IPhysics\\focus\\src\\renderer\\Interface\\Window.hpp /DWIN32 /D_WINDOWS /W3 /MTd /Zi /Ob0 /Od /RTC1 /FoCMakeFiles\\focus.dir\\Unity\\unity_0_c.c.obj /FdTARGET_COMPILE_PDB /FS -c E:\\projects\\IPhysics\\build\\CMakeFiles\\focus.dir\\Unity\\unity_0_c.c",
+  "file": "E:/projects/IPhysics/build/CMakeFiles/focus.dir/Unity/unity_0_c.c"
+}
+]

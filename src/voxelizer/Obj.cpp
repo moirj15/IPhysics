@@ -190,8 +190,8 @@ void ObjReader::ParseFace()
   for (s32 i = 0; i < 3; i++) {
     // NOTE: only indices are read in
     u32 index = 0.0;
-    u32 normal = 0.0;
-    line >> index >> normal;
+    //u32 normal = 0.0;
+    line >> index;// >> normal;
     index--;
     //     normal--;
     mMesh->mIndices.emplace_back(index);

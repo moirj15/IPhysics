@@ -23,16 +23,15 @@ namespace fs = std::filesystem;
 
 #define ArraySize(X) (sizeof(X) / sizeof(X[0]))
 #define NODISCARD    [[nodiscard]]
-#define IMPLEMENTME()                                                                              \
-  printf("IMPLEMENT %s %s %d\n", __FUNCTION__, __FILE__, __LINE__);                                \
+#define IMPLEMENTME()                                                                                                  \
+  printf("IMPLEMENT %s %s %d\n", __FUNCTION__, __FILE__, __LINE__);                                                    \
   assert(0);
 
 inline FILE *OpenFile(const char *file, const char *perm)
 {
   FILE *ret = NULL;
   ret = fopen(file, perm);
-  if (!ret)
-  {
+  if (!ret) {
     printf("FAILED TO OPEN FILE: %s\n", file);
     exit(EXIT_FAILURE);
   }
@@ -49,8 +48,7 @@ inline std::tuple<char *, Size> ReadFile(const char *filename)
   len = ftell(fp);
   rewind(fp);
 
-  if (len == 0)
-  {
+  if (len == 0) {
     printf("failed to get file size");
   }
 
