@@ -16,6 +16,7 @@
 #include <SDL.h>
 #include <Utils/Serialization.h>
 #include <glm/glm.hpp>
+#include <glm/vec3.hpp>
 
 namespace VoxGen
 {
@@ -25,10 +26,11 @@ System::System() :
     mUI(new VoxelizerUI()), mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f))
 //    mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
-  focus::Context::Init(focus::RendererAPI::OpenGL);
+  focus::Context::Init(focus::RendererAPI::DX11);
   mWindow = focus::gContext->MakeWindow(1980, 1080);
   mUI->Init(mWindow);
-  mHullPass = focus::gContext->CreateComputeShaderFromSource("HullPass", utils::ReadEntireFileAsString("shaders/HullPass.comp"));
+  mHullPass = focus::gContext->CreateComputeShaderFromSource(
+      "HullPass", utils::ReadEntireFileAsString("shaders/HullPassCS.hlsl"));
 }
 System::~System() = default;
 
@@ -174,9 +176,11 @@ void System::SaveVoxels()
     Utils::Serialize(mVoxelMesh.get(), *savePath);
   }
 }
+
 void System::DebugDrawVoxels()
 {
-  if (mMesh.mVertices.IsEmpty()) return;
+  if (mMesh.mVertices.IsEmpty())
+    return;
   static bool init = false;
   if (!init) {
     init = true;
@@ -190,38 +194,47 @@ void System::DebugDrawVoxels()
     }
     auto params = mUI->GetParameters();
     focus::ShaderBufferDescriptor inputDesc = {
-        .mName = "InputData",
-        .mSlot = 1,
+        .name = "InputData",
+        .slot = 0,
+        .accessMode = focus::AccessMode::ReadOnly,
+        .types = {focus::VarType::Vec3},
     };
-    glm::vec3 aabb[] = {minP, maxP};
-    focus::ConstantBufferDescriptor cbDesc = {
-        .mName = "Constants",
-        .mSlot = 0,
-    };
-    mHullPassConstantBuffer = focus::gContext->CreateConstantBuffer((void *)aabb, 32, cbDesc);
-
     glm::ivec3 dimmensions((s32)(1.0 / params.mVoxelSize));
-    u8 *data = new u8[sizeof(glm::ivec3) + mMesh.mVertices.GetBuffer().size() * sizeof(f32)];
-    memcpy(data, (void *)&dimmensions, sizeof(dimmensions));
-    memcpy(data + sizeof(u32) + sizeof(dimmensions), mMesh.mVertices.GetBuffer().data(), mMesh.mVertices.GetBuffer().size() * sizeof(f32));
+    struct {
+      glm::vec3 min;
+      float p0;
+      glm::vec3 max;
+      float p1;
+      glm::ivec3 dim;
+    } cb = {.min = minP, .max = maxP, .dim = dimmensions};
+    focus::ConstantBufferDescriptor cbDesc = {
+        .name = "Constants",
+        .slot = 0,
+    };
+    // TODO: need a buffer class
+    mHullPassConstantBuffer = focus::gContext->CreateConstantBuffer((void *)&cb, 48, cbDesc);
+
     mHullPassInputData = focus::gContext->CreateShaderBuffer(
-        (void *)data, sizeof(glm::ivec3) + mMesh.mVertices.BufferSizeBytes(), inputDesc);
+        (void *)mMesh.mVertices.BufferPtr(), mMesh.mVertices.BufferSizeBytes(), inputDesc);
 
     focus::ShaderBufferDescriptor vertexOutputDesc = {
-        .mName = "VertexOutput",
-        .mSlot = 2,
+        .name = "vertexOwner",
+        .slot = 0,
+        .accessMode = focus::AccessMode::WriteOnly,
+        .types = {focus::VarType::Int},
     };
     focus::ShaderBufferDescriptor voxelOutputDesc = {
-        .mName = "VoxelOutput",
-        .mSlot = 3,
+        .name = "existingVoxels",
+        .slot = 1,
+        .accessMode = focus::AccessMode::WriteOnly,
+        .types = {focus::VarType::UInt},
     };
 
-    u8 *tmp = new u8[sizeof(f32) * mMesh.mVertices.BufferSize()]();
     mHullPassVertexOutput =
-        focus::gContext->CreateShaderBuffer(tmp, sizeof(f32) * mMesh.mVertices.BufferSize(), vertexOutputDesc);
-    u8 *tmp2 = new u8[dimmensions.x * dimmensions.y * dimmensions.z * sizeof(u32)]();
-    mHullPassVoxelOutput =
-        focus::gContext->CreateShaderBuffer(tmp2, dimmensions.x * dimmensions.y * dimmensions.z * sizeof(u32), voxelOutputDesc);
+        focus::gContext->CreateShaderBuffer(nullptr, sizeof(f32) * mMesh.mVertices.BufferSize(), vertexOutputDesc);
+    // TODO: hard-coded temp
+    mHullPassVoxelOutput = focus::gContext->CreateShaderBuffer(
+        nullptr, 8 * sizeof(u32), voxelOutputDesc);
   }
   focus::ComputeState computeState = {
       .bufferHandles = {mHullPassInputData, mHullPassVertexOutput, mHullPassVoxelOutput},
@@ -230,8 +243,8 @@ void System::DebugDrawVoxels()
   focus::gContext->DispatchCompute(mMesh.mVertices.BufferSize() / 3, 1, 1, mHullPass, computeState);
   focus::gContext->WaitForMemory(0);
 
-  u32 *voxelOutput = (u32 *)focus::gContext->MapBufferPtr(mHullPassVoxelOutput, focus::AccessMode::ReadOnly);
-  focus::gContext->UnmapBufferPtr(mHullPassVoxelOutput);
+  s32 *voxelOutput = (s32 *)focus::gContext->MapBufferPtr(mHullPassVoxelOutput, focus::AccessMode::ReadOnly);
+  focus::gContext->UnmapBufferPtr(mHullPassVertexOutput);
 }
 
 } // namespace VoxGen

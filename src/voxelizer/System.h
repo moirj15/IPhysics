@@ -3,9 +3,8 @@
 #include "Voxelizer.h"
 
 #include <Common.h>
-#include <Handles.hpp>
+#include <Context.hpp>
 #include <Renderer/Camera.h>
-#include <Window.hpp>
 #include <memory>
 
 struct Mesh;

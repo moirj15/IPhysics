@@ -5,8 +5,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS
         "src/third_party/imgui/*"
-        "src/third_party/imgui/backends/imgui_impl_opengl3.h"
-        "src/third_party/imgui/backends/imgui_impl_opengl3.cpp"
+        "src/third_party/imgui/backends/imgui_impl_dx11.h"
+        "src/third_party/imgui/backends/imgui_impl_dx11.cpp"
         "src/third_party/imgui/backends/imgui_impl_sdl.h"
         "src/third_party/imgui/backends/imgui_impl_sdl.cpp"
         )
@@ -119,6 +119,7 @@ if (WIN32)
                 d3d12.lib
                 libcmt.lib
                 dxgi.lib
+                dxguid.lib
                 d3dcompiler.lib
                 winmm.lib
                 gdi32
@@ -140,6 +141,7 @@ if (WIN32)
         ##        kernel32.lib
         #)
     endif ()
+    set_target_properties(VoxelGenerator PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 else ()
     message("not windows hit me")
     set(CMAKE_CXX_FLAGS "-std=c++2a -g -Wall -Wextra -pedantic -D_DEBUG -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE -DIMGUI_IMPL_OPENGL_LOADER_GLAD")

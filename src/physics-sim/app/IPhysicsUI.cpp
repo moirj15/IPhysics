@@ -14,8 +14,8 @@ namespace IPhysics
 {
 IPhysicsUI::~IPhysicsUI()
 {
-  ImGui_ImplOpenGL3_Shutdown();
-  ImGui_ImplGlfw_Shutdown();
+//  ImGui_ImplOpenGL3_Shutdown();
+//  ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 }
 
@@ -23,15 +23,15 @@ void IPhysicsUI::Init(Window *window)
 {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
-  ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);
-  ImGui_ImplOpenGL3_Init("#version 150");
+//  ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);
+//  ImGui_ImplOpenGL3_Init("#version 150");
   ImGui::StyleColorsClassic();
 }
 
 void IPhysicsUI::Update()
 {
-  ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplGlfw_NewFrame();
+//  ImGui_ImplOpenGL3_NewFrame();
+//  ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
   // Define the UI layout
   ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
