@@ -5,11 +5,10 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "Objects.h"
 
-struct Mesh;
+//struct Mesh;
 
-namespace VoxGen
-{
 
 // Will only work with obj files that contain vertices and indices. No normals or uv coordinates
 class ObjReader
@@ -28,7 +27,7 @@ class ObjReader
 
   Size mPos;
 
-  Mesh *mMesh;
+  objs::Mesh *mMesh;
 
   enum class DataType
   {
@@ -51,7 +50,7 @@ public:
    */
   ObjReader();
   /// Parses the obj file and returns a mesh
-  Mesh *Parse(const char *filename);
+  objs::Mesh *Parse(const char *filename);
 
   /// Clears the parser.
   void Clear();
@@ -92,4 +91,3 @@ private:
   void ReplaceChars(std::string *str, char toReplace, char replacement);
 };
 
-} // namespace VoxGen

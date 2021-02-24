@@ -6,13 +6,11 @@
 #include <glm/gtx/normal.hpp>
 #include <sstream>
 
-namespace VoxGen
-{
-ObjReader::ObjReader() : mPresentBitSet(0), mDataLen(0), mPos(0), mMesh(new Mesh)
+ObjReader::ObjReader() : mPresentBitSet(0), mDataLen(0), mPos(0), mMesh(new objs::Mesh)
 {
 }
 
-Mesh *ObjReader::Parse(const char *filename)
+objs::Mesh *ObjReader::Parse(const char *filename)
 {
   LoadOBJFile(filename);
   while (mPos < mDataLen) {
@@ -160,7 +158,7 @@ void ObjReader::ParseVertex()
   f32 val = 0.0f;
   for (s32 i = 0; i < 3; i++) {
     line >> val;
-    mMesh->mVertices.BufferPushBack(val);
+    mMesh->vertices.push_back(val);
   }
 }
 
@@ -194,7 +192,7 @@ void ObjReader::ParseFace()
     line >> index;// >> normal;
     index--;
     //     normal--;
-    mMesh->mIndices.emplace_back(index);
+    mMesh->indices.emplace_back(index);
     //     mMesh->mNormals.AccessCastBuffer(index) = mTempNormals[normal];
     //     mMesh->mNormals.AccessBuffer((index * 3)) = mTempNormals[normal].x;
     //     mMesh->mNormals.AccessBuffer((index * 3) + 1) = mTempNormals[normal].y;
@@ -230,4 +228,3 @@ void ObjReader::ReplaceChars(std::string *str, char toReplace, char replacement)
   }
 }
 
-} // namespace VoxGen

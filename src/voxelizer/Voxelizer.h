@@ -1,65 +1,85 @@
 #pragma once
 
-#include "VoxelizerParameters.h"
-
-#include <BulletCollision/Gimpact/btBoxCollision.h>
+#include "Objects.h"
+#include <Context.hpp>
+// TODO: need to move the "shared library" stuff into different place
 #include <Common.h>
-#include <VoxelObjects/Box.h>
-#include <VoxelObjects/EdgeMesh.h>
-#include <VoxelObjects/Ray.h>
-#include <VoxelObjects/Voxel.h>
-#include <VoxelObjects/VoxelMesh.h>
-#include <array>
-#include <glm/vec3.hpp>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
 
-struct Mesh;
-
-namespace VoxGen
+namespace iphys
 {
+
 
 class Voxelizer
 {
-  Parameters mParameters;
+  // TODO: maybe useful for general buffer management
+  struct Buffer {
+    focus::BufferHandle handle = focus::INVALID_HANDLE;
+    const focus::ShaderBufferDescriptor descriptor;
+  };
+
+  /// Structure that will be used to populate the constant buffer for the shader
+  struct ConstantBuffer {
+    /// The minimum point of the bounding box
+    glm::vec3 min;
+    float pad0;
+    /// The maximum point of the bounding box
+    glm::vec3 max;
+    float pad1;
+    // TODO: better doc here
+    /// The voxel dimensions that we want to voxelize to
+    glm::ivec3 voxelDimensions;
+    /// The size of each individual voxel
+    float voxelSize;
+  };
+
+  focus::ShaderHandle mHullPass = focus::INVALID_HANDLE;
+  focus::ConstantBufferDescriptor mConstantDescriptor = {
+      .name = "Constants",
+      .slot = 0,
+  };
+
+  focus::ConstantBufferHandle mHullPassConstantBuffer = focus::INVALID_HANDLE;
+  Buffer mHullPassInputData = {
+      .descriptor = {
+          .name = "InputData",
+          .slot = 0,
+          .accessMode = focus::AccessMode::ReadOnly,
+          .types = {focus::VarType::Vec3},
+      },
+  };
+  Buffer mHullPassVertexOutput = {
+      .descriptor = {
+          .name = "vertexOwner",
+          .slot = 0,
+          .accessMode = focus::AccessMode::WriteOnly,
+          .types = {focus::VarType::Int},
+      },
+  };
+  Buffer mHullPassVoxelOutput = {
+      .descriptor = {
+          .name = "existingVoxels",
+          .slot = 1,
+          .accessMode = focus::AccessMode::WriteOnly,
+          .types = {focus::VarType::UInt},
+      },
+  };
 
 public:
-  NODISCARD VoxObj::VoxelMesh Voxelize(Mesh *mesh);
-
-  inline void SetParameters(const Parameters &parameters)
+  Voxelizer() :
+      mHullPass(focus::gContext->CreateComputeShaderFromSource(
+          "HullPass", std::get<0>(ReadFile("shaders/HullPassCS.hlsl")))),
+      mHullPassConstantBuffer(focus::gContext->CreateConstantBuffer(nullptr, 48, mConstantDescriptor))
   {
-    mParameters = parameters;
   }
-  inline void Reset()
+  ~Voxelizer()
   {
-    mParameters = Parameters();
+    focus::gContext->DestroyConstantBuffer(mHullPassConstantBuffer);
+    focus::gContext->DestroyShaderBuffer(mHullPassInputData.handle);
+    focus::gContext->DestroyShaderBuffer(mHullPassVertexOutput.handle);
+    focus::gContext->DestroyShaderBuffer(mHullPassVoxelOutput.handle);
   }
 
-private:
-  struct MeshInfo
-  {
-    btVector3 mPoints[3];
-    u32 mIndices[3];
-    bool mInVoxel[3];
-    MeshInfo(btVector3 points[3], u32 indices[3]) :
-        mPoints{points[0], points[1], points[2]}, mIndices{indices[0], indices[1], indices[2]},
-        mInVoxel{false, false, false}
-    {
-    }
-  };
-  NODISCARD btAABB FindMeshAABB(Mesh *mesh);
-
-  NODISCARD std::vector<MeshInfo> FindTriangleAABBs(Mesh *mesh);
-
-  NODISCARD VoxObj::VoxelMesh
-  GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, Mesh *mesh);
-  void FillVoxelMesh(VoxObj::VoxelMesh *voxelMesh);
-  void AddNeighbors(VoxObj::VoxelMesh *voxelMesh);
-  void AddBezierCurves(VoxObj::VoxelMesh *voxelMesh);
-  NODISCARD std::unordered_map<u32, std::unordered_set<Edge>>
-  CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh);
-  glm::vec3 CastRayInBox(const Ray &ray, const Box &box);
+  objs::VoxelMesh Voxelize(const objs::AABB &meshAABB, f32 voxelSize, const objs::Mesh &mesh);
 };
 
-} // namespace VoxGen
+} // namespace iphys

@@ -4,6 +4,7 @@
 #include "Mesh.h"
 
 #include <LinearMath/btIDebugDraw.h>
+#include <glm/mat4x4.hpp>
 
 namespace Renderer
 {

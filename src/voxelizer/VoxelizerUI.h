@@ -10,11 +10,10 @@
 #include <Window.hpp>
 #include <optional>
 #include <string>
+#include <Context.hpp>
 
-struct Window;
+//struct Window;
 
-namespace VoxGen
-{
 
 class VoxelizerUI
 {
@@ -46,4 +45,3 @@ public:
 
   NODISCARD inline Parameters GetParameters() const { return mParameters; }
 };
-} // namespace VoxGen

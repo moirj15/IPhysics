@@ -18,19 +18,16 @@
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
 
-namespace VoxGen
-{
 
 System::System() :
     mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mUI(new VoxelizerUI()), mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f))
 //    mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
-  focus::Context::Init(focus::RendererAPI::DX11);
   mWindow = focus::gContext->MakeWindow(1980, 1080);
   mUI->Init(mWindow);
-  mHullPass = focus::gContext->CreateComputeShaderFromSource(
-      "HullPass", utils::ReadEntireFileAsString("shaders/HullPassCS.hlsl"));
+//  mHullPass = focus::gContext->CreateComputeShaderFromSource(
+//      "HullPass", utils::ReadEntireFileAsString("shaders/HullPassCS.hlsl"));
 }
 System::~System() = default;
 
@@ -103,8 +100,9 @@ void System::LoadMesh()
       ObjReader objReader;
       // TODO: mem-leak, fix up the obj parser
       mMesh = *objReader.Parse(meshPath->c_str());
-      mCurrentMeshHandle = mOriginalManager.CreateMesh(std::move(*objReader.Parse(meshPath->c_str())));
+      mModelLoaded = true;
 #if 0
+      mCurrentMeshHandle = mOriginalManager.CreateMesh(std::move(*objReader.Parse(meshPath->c_str())));
       Renderer::RemoveMesh(mCurrentMeshHandle);
       mCurrentMeshHandle =
           Renderer::SubmitStaticMesh(mMesh.get(), Renderer::ShaderProgram::UniformColor);
@@ -118,8 +116,15 @@ void System::LoadMesh()
 void System::GenerateVoxels()
 {
   // TODO: compute shader voxel generation
-  if (mCurrentMeshHandle != 0 && mUI->GenerateVoxelsClicked()) {
-    mVoxelizer.SetParameters(mUI->GetParameters());
+  if (mModelLoaded && mUI->GenerateVoxelsClicked()) {
+    objs::AABB aabb;
+    for (auto i : mMesh.indices) {
+      aabb.min = glm::min(aabb.min, mMesh.GetVertex(i));
+      aabb.max = glm::max(aabb.max, mMesh.GetVertex(i));
+    }
+    auto params = mUI->GetParameters();
+    mVoxelMesh = mVoxelizer.Voxelize(aabb, params.mVoxelSize, mMesh);
+//    mVoxelizer.SetParameters(mUI->GetParameters());
     //    mVoxelMesh = std::make_unique<VoxObj::VoxelMesh>(mVoxelizer.Voxelize(mMesh.get()));
 
 #if 0
@@ -132,6 +137,7 @@ void System::GenerateVoxels()
 void System::Render()
 {
   focus::gContext->Clear();
+#if 0
   if (mVoxelMesh) {
     QuickCastBuffer<f32, glm::vec3> points;
     for (auto &[key, voxel] : mVoxelMesh->mVoxels) {
@@ -142,6 +148,7 @@ void System::Render()
     // TODO: add point drawing
     //    mRenderer->DrawPoints(points);
   }
+#endif
 
   if (mCurrentMeshHandle != 0) {
 #if 0
@@ -173,40 +180,43 @@ void System::SaveVoxels()
 {
   auto savePath = mUI->SaveClicked();
   if (savePath && mCurrentVoxelMeshHandle != 0) {
-    Utils::Serialize(mVoxelMesh.get(), *savePath);
+//    Utils::Serialize(mVoxelMesh.get(), *savePath);
   }
 }
 
 void System::DebugDrawVoxels()
 {
-  if (mMesh.mVertices.IsEmpty())
+#if 0
+  if (mMesh.vertices.empty())
     return;
   static bool init = false;
   if (!init) {
     init = true;
     // find the aabb real quick
     glm::vec3 minP((float)INFINITY, (float)INFINITY, (float)INFINITY), maxP(-INFINITY, -INFINITY, -INFINITY);
-    for (auto i : mMesh.mIndices) {
+    for (auto i : mMesh.indices) {
 #undef min
 #undef max
-      minP = glm::min(minP, mMesh.mVertices.AccessCastBuffer(i));
-      maxP = glm::max(maxP, mMesh.mVertices.AccessCastBuffer(i));
+      minP = glm::min(minP, mMesh.GetVertex(i));
+      maxP = glm::max(maxP, mMesh.GetVertex(i));
     }
     auto params = mUI->GetParameters();
+
     focus::ShaderBufferDescriptor inputDesc = {
         .name = "InputData",
         .slot = 0,
         .accessMode = focus::AccessMode::ReadOnly,
         .types = {focus::VarType::Vec3},
     };
-    glm::ivec3 dimmensions((s32)(1.0 / params.mVoxelSize));
+    glm::ivec3 voxelDimmensions = (maxP + (-minP)) / (1.0f / params.mVoxelSize);
     struct {
       glm::vec3 min;
       float p0;
       glm::vec3 max;
       float p1;
-      glm::ivec3 dim;
-    } cb = {.min = minP, .max = maxP, .dim = dimmensions};
+      glm::ivec3 voxelDimmensions;
+      float voxelSize;
+    } cb = {.min = minP, .max = maxP, .voxelDimmensions = voxelDimmensions, .voxelSize = params.mVoxelSize};
     focus::ConstantBufferDescriptor cbDesc = {
         .name = "Constants",
         .slot = 0,
@@ -232,9 +242,9 @@ void System::DebugDrawVoxels()
 
     mHullPassVertexOutput =
         focus::gContext->CreateShaderBuffer(nullptr, sizeof(f32) * mMesh.mVertices.BufferSize(), vertexOutputDesc);
+    std::vector<u32> voxelPassZeroed(8 * sizeof(u32));
     // TODO: hard-coded temp
-    mHullPassVoxelOutput = focus::gContext->CreateShaderBuffer(
-        nullptr, 8 * sizeof(u32), voxelOutputDesc);
+    mHullPassVoxelOutput = focus::gContext->CreateShaderBuffer(voxelPassZeroed.data(), 8 * sizeof(u32), voxelOutputDesc);
   }
   focus::ComputeState computeState = {
       .bufferHandles = {mHullPassInputData, mHullPassVertexOutput, mHullPassVoxelOutput},
@@ -242,9 +252,9 @@ void System::DebugDrawVoxels()
   };
   focus::gContext->DispatchCompute(mMesh.mVertices.BufferSize() / 3, 1, 1, mHullPass, computeState);
   focus::gContext->WaitForMemory(0);
+#endif
 
-  s32 *voxelOutput = (s32 *)focus::gContext->MapBufferPtr(mHullPassVoxelOutput, focus::AccessMode::ReadOnly);
-  focus::gContext->UnmapBufferPtr(mHullPassVertexOutput);
+//  s32 *voxelOutput = (s32 *)focus::gContext->MapBufferPtr(mHullPassVoxelOutput, focus::AccessMode::ReadOnly);
+//  focus::gContext->UnmapBufferPtr(mHullPassVoxelOutput);
 }
 
-} // namespace VoxGen

@@ -1,29 +1,29 @@
 #pragma once
-#include "VoxelManager.h"
+//#include "VoxelManager.h"
+//#include "Voxelizer_old.h"
+#include "Objects.h"
 #include "Voxelizer.h"
 
 #include <Common.h>
 #include <Context.hpp>
 #include <Renderer/Camera.h>
 #include <memory>
+#include "VoxelizerUI.h"
+#include <glm/mat4x4.hpp>
 
-struct Mesh;
-struct Window;
+//struct Mesh;
+//struct Window;
 
-namespace Renderer
-{
-class RendererFrontend;
-}
+//namespace Renderer
+//{
+//class RendererFrontend;
+//}
+//
+//namespace VoxObj
+//{
+//class VoxelMesh;
+//}
 
-namespace VoxObj
-{
-class VoxelMesh;
-}
-
-namespace VoxGen
-{
-class VoxelizerUI;
-class Voxelizer;
 
 class System
 {
@@ -32,21 +32,23 @@ class System
   //  std::unique_ptr<Window> mWindow;
   std::unique_ptr<VoxelizerUI> mUI;
   //  std::unique_ptr<Renderer::RendererFrontend> mRenderer;
-  Voxelizer mVoxelizer;
-  Mesh mMesh;
-  std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;
+  iphys::Voxelizer mVoxelizer;
+  objs::Mesh mMesh;
+  objs::VoxelMesh mVoxelMesh;
+//  std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;
   const glm::mat4 mProjectionMat;
-  VoxelManager mOriginalManager;
-  VoxelManager mMutableManager;
+//  VoxelManager mOriginalManager;
+//  VoxelManager mMutableManager;
 
   u32 mCurrentMeshHandle;
   u32 mCurrentVoxelMeshHandle;
+  bool mModelLoaded = false;
 
-  focus::ShaderHandle mHullPass;
-  focus::BufferHandle mHullPassConstantBuffer = focus::INVALID_HANDLE;
-  focus::BufferHandle mHullPassInputData = focus::INVALID_HANDLE;
-  focus::BufferHandle mHullPassVertexOutput = focus::INVALID_HANDLE;
-  focus::BufferHandle mHullPassVoxelOutput = focus::INVALID_HANDLE;
+//  focus::ShaderHandle mHullPass;
+//  focus::BufferHandle mHullPassConstantBuffer = focus::INVALID_HANDLE;
+//  focus::BufferHandle mHullPassInputData = focus::INVALID_HANDLE;
+//  focus::BufferHandle mHullPassVertexOutput = focus::INVALID_HANDLE;
+//  focus::BufferHandle mHullPassVoxelOutput = focus::INVALID_HANDLE;
 
 public:
   System();
@@ -63,4 +65,3 @@ private:
   void DebugDrawVoxels();
 };
 
-} // namespace VoxGen

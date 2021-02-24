@@ -11,8 +11,6 @@
 #include <Common.h>
 #include <Context.hpp>
 
-namespace VoxGen
-{
 
 VoxelizerUI::~VoxelizerUI()
 {
@@ -94,4 +92,3 @@ bool VoxelizerUI::GenerateVoxelsClicked()
   return false;
 }
 
-} // namespace VoxGen

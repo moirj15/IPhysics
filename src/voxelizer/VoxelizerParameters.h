@@ -2,8 +2,6 @@
 
 #include <Common.h>
 
-namespace VoxGen
-{
 
 struct Parameters
 {
@@ -14,4 +12,3 @@ struct Parameters
   {
   }
 };
-} // namespace VoxGen
