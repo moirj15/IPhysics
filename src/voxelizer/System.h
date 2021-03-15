@@ -2,14 +2,14 @@
 //#include "VoxelManager.h"
 //#include "Voxelizer_old.h"
 #include "Objects.h"
+#include "VoxelizerUI.h"
 #include "Voxelizer.h"
 
 #include <Common.h>
 #include <Context.hpp>
 #include <Renderer/Camera.h>
-#include <memory>
-#include "VoxelizerUI.h"
 #include <glm/mat4x4.hpp>
+#include <memory>
 
 //struct Mesh;
 //struct Window;
@@ -32,7 +32,7 @@ class System
   //  std::unique_ptr<Window> mWindow;
   std::unique_ptr<VoxelizerUI> mUI;
   //  std::unique_ptr<Renderer::RendererFrontend> mRenderer;
-  iphys::Voxelizer mVoxelizer;
+  VoxGen::Voxelizer mVoxelizer;
   objs::Mesh mMesh;
   objs::VoxelMesh mVoxelMesh;
 //  std::unique_ptr<VoxObj::VoxelMesh> mVoxelMesh;

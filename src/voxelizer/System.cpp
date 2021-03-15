@@ -18,7 +18,6 @@
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
 
-
 System::System() :
     mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mUI(new VoxelizerUI()), mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f))
@@ -26,8 +25,8 @@ System::System() :
 {
   mWindow = focus::gContext->MakeWindow(1980, 1080);
   mUI->Init(mWindow);
-//  mHullPass = focus::gContext->CreateComputeShaderFromSource(
-//      "HullPass", utils::ReadEntireFileAsString("shaders/HullPassCS.hlsl"));
+  //  mHullPass = focus::gContext->CreateComputeShaderFromSource(
+  //      "HullPass", utils::ReadEntireFileAsString("shaders/HullPassCS.hlsl"));
 }
 System::~System() = default;
 
@@ -123,9 +122,9 @@ void System::GenerateVoxels()
       aabb.max = glm::max(aabb.max, mMesh.GetVertex(i));
     }
     auto params = mUI->GetParameters();
-    mVoxelMesh = mVoxelizer.Voxelize(aabb, params.mVoxelSize, mMesh);
-//    mVoxelizer.SetParameters(mUI->GetParameters());
-    //    mVoxelMesh = std::make_unique<VoxObj::VoxelMesh>(mVoxelizer.Voxelize(mMesh.get()));
+    //    mVoxelMesh = mVoxelizer.Voxelize(aabb, params.mVoxelSize, mMesh);
+    mVoxelizer.SetParameters(mUI->GetParameters());
+    mVoxelMesh = mVoxelizer.Voxelize(&mMesh);
 
 #if 0
     Renderer::RemoveMesh(mCurrentVoxelMeshHandle);
@@ -180,7 +179,7 @@ void System::SaveVoxels()
 {
   auto savePath = mUI->SaveClicked();
   if (savePath && mCurrentVoxelMeshHandle != 0) {
-//    Utils::Serialize(mVoxelMesh.get(), *savePath);
+    //    Utils::Serialize(mVoxelMesh.get(), *savePath);
   }
 }
 
@@ -254,7 +253,6 @@ void System::DebugDrawVoxels()
   focus::gContext->WaitForMemory(0);
 #endif
 
-//  s32 *voxelOutput = (s32 *)focus::gContext->MapBufferPtr(mHullPassVoxelOutput, focus::AccessMode::ReadOnly);
-//  focus::gContext->UnmapBufferPtr(mHullPassVoxelOutput);
+  //  s32 *voxelOutput = (s32 *)focus::gContext->MapBufferPtr(mHullPassVoxelOutput, focus::AccessMode::ReadOnly);
+  //  focus::gContext->UnmapBufferPtr(mHullPassVoxelOutput);
 }
-

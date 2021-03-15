@@ -49,6 +49,7 @@ public:
    * @param filename: The obj filename that will be parsed.
    */
   ObjReader();
+  // TODO: returning a pointer is kinda dumb
   /// Parses the obj file and returns a mesh
   objs::Mesh *Parse(const char *filename);
 

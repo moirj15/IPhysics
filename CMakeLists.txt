@@ -5,15 +5,31 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS
         "src/third_party/imgui/*"
-        "src/third_party/imgui/backends/imgui_impl_dx11.h"
-        "src/third_party/imgui/backends/imgui_impl_dx11.cpp"
+        "src/third_party/imgui/backends/imgui_impl_opengl3.h"
+        "src/third_party/imgui/backends/imgui_impl_opengl3.cpp"
         "src/third_party/imgui/backends/imgui_impl_sdl.h"
         "src/third_party/imgui/backends/imgui_impl_sdl.cpp"
         )
 
 
 # the source files for the voxel generator app
-file(GLOB SRC_VOXEL_GENERATOR CONFIGURE_DEPENDS "src/voxelizer/*")
+set(VOXEL_GENERATOR_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/voxelizer)
+set(VOXEL_GENERATOR_SOURCE
+        ${VOXEL_GENERATOR_SOURCE_DIR}/main.cpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.cpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/System.cpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.cpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerUI.cpp
+        )
+set(VOXEL_GENERATOR_HEADERS
+        ${VOXEL_GENERATOR_SOURCE_DIR}/FileUtils.hpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.h
+        ${VOXEL_GENERATOR_SOURCE_DIR}/System.h
+        ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.h
+        ${VOXEL_GENERATOR_SOURCE_DIR}/Renderer.h
+        ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerParameters.h
+        )
+#file(GLOB SRC_VOXEL_GENERATOR CONFIGURE_DEPENDS "src/voxelizer/*")
 
 # the source files for the physics simulation app
 file(GLOB SRC_PHYSICS_SIMULATION_FILES CONFIGURE_DEPENDS "src/physics-sim/app/*")
@@ -29,7 +45,8 @@ set(SOURCE_LIST_MAIN_PROJECT
 
 set(SOURCE_LIST_VOXEL_GENERATOR
         ${THIRD_PARTY_SRC}
-        ${SRC_VOXEL_GENERATOR}
+        ${VOXEL_GENERATOR_SOURCE}
+        ${VOXEL_GENERATOR_HEADERS}
         )
 
 

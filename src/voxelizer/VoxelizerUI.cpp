@@ -4,7 +4,7 @@
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #endif
 #include "../third_party/imgui/backends/imgui_impl_opengl3.h"
-#include "../third_party/imgui/backends/imgui_impl_dx11.h"
+//#include "../third_party/imgui/backends/imgui_impl_dx11.h"
 #include "../third_party/imgui/backends/imgui_impl_sdl.h"
 #include "../third_party/imgui/imgui.h"
 
@@ -14,7 +14,7 @@
 
 VoxelizerUI::~VoxelizerUI()
 {
-  ImGui_ImplDX11_Shutdown();
+  ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
 }
@@ -25,15 +25,15 @@ void VoxelizerUI::Init(const focus::Window &window)
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
 
-  auto [device, context] = focus::GetDeviceAndContext();
+//  auto [device, context] = focus::GetDeviceAndContext();
   ImGui_ImplSDL2_InitForD3D(window.mSDLWindow);
-  ImGui_ImplDX11_Init(device, context);
+  ImGui_ImplOpenGL3_Init();
   ImGui::StyleColorsClassic();
 }
 
 void VoxelizerUI::Update(const focus::Window &window)
 {
-  ImGui_ImplDX11_NewFrame();
+  ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplSDL2_NewFrame(window.mSDLWindow);
   ImGui::NewFrame();
   // Define the UI layout
@@ -62,7 +62,7 @@ void VoxelizerUI::Update(const focus::Window &window)
   // Render the UI
   // glClear(GL_COLOR_BUFFER_BIT);
   ImGui::Render();
-  ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 // TODO: might be a good idea to somehow register functions that occur when a ui element is clicked
