@@ -38,7 +38,7 @@ inline FILE *OpenFile(const char *file, const char *perm)
   return ret;
 }
 
-inline std::tuple<char *, Size> ReadFile(const char *filename)
+inline std::string ReadFile(const char *filename)
 {
   FILE *fp = OpenFile(filename, "r");
   char *data = nullptr;

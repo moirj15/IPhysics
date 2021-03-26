@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <assert.h>
 
+#if 0
 Window::Window(s32 width, s32 height, const char *title) :
     mWidth(width), mHeight(height), mGLWindow(nullptr)
 {
@@ -26,3 +27,4 @@ bool Window::ShouldClose()
 {
   return glfwWindowShouldClose(mGLWindow);
 }
+#endif

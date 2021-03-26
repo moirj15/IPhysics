@@ -1,12 +1,7 @@
 
-#include <Renderer/RendererFrontend.h>
+#include <Renderer/Renderer.h>
 
-//#include "../../PhysicsEngine/Settings.h"
-//#include "../../voxelObjects/VoxelMesh.h"
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
 #include <Renderer/Mesh.h>
-#include <Renderer/RendererBackend.h>
 #include <Renderer/Shader.h>
 #include <Renderer/Window.h>
 #include <VoxelObjects/VoxelMesh.h>
@@ -307,3 +302,57 @@ void SwapBuffers()
 
 #endif
 } // namespace Renderer
+
+namespace shared
+{
+void Renderer::LoadMesh(MeshHandle handle)
+{
+  auto *mesh = mMeshManager->GetMesh(handle);
+  if (!mMeshes.contains(handle)) {
+    auto buffer = mesh->GetInterleved();
+    auto vbHandle = focus::gContext->CreateVertexBuffer((void*)buffer.data(), buffer.size() * sizeof(f32), {
+      .inputDescriptorName = {"vPosition", "vNormal"},
+      .bufferType = focus::BufferType::InterLeaved,// TODO: switch to interleved data
+      .types = {focus::VarType::Vec3, focus::VarType::Vec3},
+      .sizeInBytes = mesh->VerticesSizeInBytes(),
+      .usage = focus::BufferUsage::Static,
+    });
+    auto ibHandle = focus::gContext->CreateIndexBuffer((void*)mesh->indices.data(), mesh->IndicesSizeInBytes(), {
+      .type = focus::IndexBufferType::U32,
+      .sizeInBytes = mesh->IndicesSizeInBytes(),
+      .usage = focus::BufferUsage::Static,
+    });
+    mMeshes[handle] = {vbHandle, ibHandle};
+  } else {
+    auto [vbHandle, ibHandle] = mMeshes[handle];
+    focus::gContext->UpdateVertexBuffer(vbHandle, (void*)mesh->vertices.data(), mesh->VerticesSizeInBytes());
+    focus::gContext->UpdateIndexBuffer(vbHandle, (void*)mesh->indices.data(), mesh->IndicesSizeInBytes());
+  }
+}
+
+void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4 &model)
+{
+  auto cameraMat = camera.CalculateMatrix();
+  auto projection = glm::perspective(90.0f, 16.0f/ 9.0f, 0.1f, 100.0f);
+  auto modelView = cameraMat * model;
+  auto normalMat = glm::transpose(glm::inverse(modelView));
+  PhongConstants constants = {
+    .camera = cameraMat,
+    .mvp = projection * modelView,
+    .normalMat = normalMat,
+  };
+  focus::gContext->UpdateConstantBuffer(mPhongConstants, (void*)&constants, sizeof(PhongConstants));
+  auto [vbHandle, ibHandle] = mMeshes[handle];
+  focus::gContext->Draw(focus::Primitive::Triangles, {}, mPhongShader, {
+    .vbHandles = {vbHandle},
+    .cbHandles = {mPhongConstants},
+    .ibHandle = ibHandle,
+    .indexed = true,
+  });
+}
+
+void Renderer::DrawDebugVoxels(MeshHandle handle, const Camera &camera, const glm::mat4 &model)
+{
+}
+
+}

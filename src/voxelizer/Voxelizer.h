@@ -21,6 +21,8 @@ struct Mesh;
 namespace VoxGen
 {
 
+// TODO: consider refractoring into free functions
+
 class Voxelizer
 {
   Parameters mParameters;

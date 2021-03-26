@@ -28,7 +28,7 @@ void Camera::Rotate(glm::vec2 angle)
   mStrafe = glm::cross(mTarget, mUp);
 }
 
-glm::mat4 Camera::CalculateMatrix()
+glm::mat4 Camera::CalculateMatrix() const
 {
   if (mRecalculate)
   {

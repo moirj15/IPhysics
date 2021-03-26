@@ -27,21 +27,15 @@ objs::VoxelMesh Voxelizer::Voxelize(objs::Mesh *mesh)
 // Private
 btAABB Voxelizer::FindMeshAABB(objs::Mesh *mesh)
 {
-#if 0
   btVector3 min(0.0f, 0.0f, 0.0f);
   btVector3 max(0.0f, 0.0f, 0.0f);
-  for (u64 i = 0; i < mesh->mIndices.size(); i++) {
-    auto v = mesh->mVertices.AccessCastBuffer(mesh->mIndices[i]);
-    //     const f32 x = mesh->mVertices[(mesh->mIndices[i]) * 3];
-    //     const f32 y = mesh->mVertices[(mesh->mIndices[i] * 3) + 1];
-    //     const f32 z = mesh->mVertices[(mesh->mIndices[i] * 3) + 2];
+  for (u32 i : mesh->indices) {
+    const auto &v = mesh->GetVertex(mesh->indices[i]);
     btVector3 currentPoint(v.x, v.y, v.z);
     min.setMin(currentPoint);
     max.setMax(currentPoint);
   }
   return btAABB(min, max, min);
-#endif
-  return {};
 }
 
 std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(objs::Mesh *mesh)

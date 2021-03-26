@@ -1,47 +1,82 @@
 cmake_minimum_required(VERSION 3.10)
+set(CMAKE_UNITY_BUILD ON)
 project(sharedLibrary)
-if (WIN32)
-    set(CMAKE_CXX_FLAGS "/std:c++17 /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
-    set(CMAKE_CXX_FLAGS_DEBUG "/std:c++17 /MTd /MP /TP /W3 /DEBUG -D_DEBUG -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
-else ()
-    set(CMAKE_CXX_FLAGS "-std=c++17 -g -Wall -Wextra -pedantic -D_DEBUG")
-endif ()
 
 # the source files for the shared libraries
-file(GLOB SRC_UTILS_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*")
-file(GLOB SRC_RENDERER_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Renderer/*")
-file(GLOB SRC_VOXEL_OBJECTS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/VoxelObjects/*")
-file(GLOB SRC_INPUT_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/Input/*")
+set(SRC_FILE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(SHARED_LIBRARY_SOURCE
+        ${SRC_FILE_DIR}/Utils/Serialization.cpp
+        ${SRC_FILE_DIR}/Renderer/Camera.cpp
+        ${SRC_FILE_DIR}/Renderer/DebugDrawer.cpp
+        ${SRC_FILE_DIR}/Renderer/MeshLibrary.cpp
+        ${SRC_FILE_DIR}/Renderer/Renderer.cpp
+        ${SRC_FILE_DIR}/Renderer/Shader.cpp
+        ${SRC_FILE_DIR}/Renderer/ShaderLibrary.cpp
+        ${SRC_FILE_DIR}/Renderer/Window.cpp
+        ${SRC_FILE_DIR}/VoxelObjects/MeshManager.cpp
+        )
 
 # set the include files
-file(GLOB INCLUDE_UTILS_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/Utils/*")
-file(GLOB INCLUDE_RENDERER_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/Renderer/*")
-file(GLOB INCLUDE_VOXEL_OBJECTS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/VoxelObjects/*")
-file(GLOB INCLUDE_INPUT_FILES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/Input/*")
-
-set(SHARED_LIBRARY_SOURCES
-        ${SRC_UTILS_FILES}
-        ${SRC_RENDERER_FILES}
-        ${SRC_VOXEL_OBJECTS}
-        ${SRC_INPUT_FILES}
-        ${CMAKE_SOURCE_DIR}/glad/src/glad.c
+set(HEADER_FILE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(SHARED_LIBRARY_HEADERS
+        ${HEADER_FILE_DIR}/Utils/Serialization.h
+        ${HEADER_FILE_DIR}/Utils/MathCasts.h
+        ${HEADER_FILE_DIR}/Utils/VoxelSerializer.h
+        ${HEADER_FILE_DIR}/Renderer/Camera.h
+        ${HEADER_FILE_DIR}/Renderer/DebugDrawer.h
+        ${HEADER_FILE_DIR}/Renderer/MeshLibrary.h
+        ${HEADER_FILE_DIR}/Renderer/Renderer.h
+        ${HEADER_FILE_DIR}/Renderer/Shader.h
+        ${HEADER_FILE_DIR}/Renderer/ShaderLibrary.h
+        ${HEADER_FILE_DIR}/Renderer/Window.h
+        ${HEADER_FILE_DIR}/VoxelObjects/MeshManager.h
+        ${HEADER_FILE_DIR}/VoxelObjects/Objects.h
         )
 
-set(SHARED_LIBRARY_INCLUDE
-        ${INCLUDE_UTILS_FILES}
-        ${INCLUDE_RENDERER_FILES}
-        ${INCLUDE_VOXEL_OBJECTS}
-        ${INCLUDE_INPUT_FILES}
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/Common.h
-        )
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/glad/include)
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/include 
+    ${CMAKE_SOURCE_DIR}/include 
+    ${CMAKE_SOURCE_DIR}/glad/include
+    ${CMAKE_SOURCE_DIR}/focus/pub_include)
 
-add_library(sharedLibrary STATIC ${SHARED_LIBRARY_INCLUDE} ${SHARED_LIBRARY_SOURCES})
+add_library(sharedLibrary STATIC ${SHARED_LIBRARY_HEADERS} ${SHARED_LIBRARY_SOURCE})
 
 target_include_directories(sharedLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 if (WIN32)
+    set(CMAKE_CXX_FLAGS "/std:c++latest /MTd /MP /TP /W3 /DEBUG -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /std:c++latest /MTd /MP /TP /W3 /DEBUG -D_DEBUG -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
+        target_link_libraries(
+                sharedLibrary
+                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2-static.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2main.lib
+                #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath_Debug.lib
+                #focus
+                #                glfw3
+                opengl32.lib
+                gdi32.lib
+                user32.lib
+                kernel32.lib
+                msvcrtd.lib
+                winmm.lib
+                imm32.lib
+                version.lib
+                d3d11.lib
+                d3d12.lib
+                libcmt.lib
+                dxgi.lib
+                dxguid.lib
+                d3dcompiler.lib
+                winmm.lib
+                gdi32
+                opengl32
+                Setupapi.lib
+        )
     link_directories(${CMAKE_SOURCE_DIR}/libs/windows)
 else ()
+    set(CMAKE_CXX_FLAGS "-std=c++20 -g -Wall -Wextra -pedantic -D_DEBUG")
     link_directories(${CMAKE_SOURCE_DIR}/libs/linux)
 endif ()

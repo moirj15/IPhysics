@@ -7,7 +7,6 @@
 #include "VoxelizerParameters.h"
 
 #include <Common.h>
-#include <Window.hpp>
 #include <optional>
 #include <string>
 #include <Context.hpp>

@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "Objects.h"
+#include <VoxelObjects/Objects.h>
 
 //struct Mesh;
 

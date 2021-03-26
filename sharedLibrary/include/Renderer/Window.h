@@ -3,6 +3,7 @@
 
 struct GLFWwindow;
 
+#if 0
 struct Window
 {
   s32 mWidth;
@@ -28,3 +29,4 @@ struct Window
     return mHeight;
   }
 };
+#endif

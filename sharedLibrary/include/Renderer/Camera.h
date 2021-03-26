@@ -14,9 +14,9 @@ class Camera
   glm::vec3 mStrafe;
   glm::vec2 mAngles = {3.14f, 0.0f};
 
-  glm::mat4 mMatrix;
+  mutable glm::mat4 mMatrix;
 
-  bool mRecalculate;
+  mutable bool mRecalculate;
 
   const glm::vec3 X_AXIS = glm::vec3(1.0f, 0.0f, 0.0f);
   const glm::vec3 Y_AXIS = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -32,7 +32,7 @@ public:
   void Move(const glm::vec3 &velocity);
   void Rotate(glm::vec2 angle);
 
-  NODISCARD glm::mat4 CalculateMatrix();
+  NODISCARD glm::mat4 CalculateMatrix() const;
   NODISCARD inline const glm::vec3 &GetPosition() const
   {
     return mPosition;

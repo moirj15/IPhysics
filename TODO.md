@@ -2,17 +2,13 @@
 
 ### Voxelization
 
-- [ ] Update the `ShaderBufferManager` in focus to allow for updating of buffers (easily)
-- [ ] Finish testing voxelization on a few simple cases
 - [ ] Implement a simple renderer
+- [ ] Re-enable the original voxelizer
 - [ ] Implement the debug rendering for voxels (maybe compute shader?)
+- [ ] Finish improvements to serialization and document the serialization format
+- [ ] Check if normal calculation issues are still present
+- [ ] If time allows multithread voxelization and do other optimisations
 
-### Object Management
-
-- [ ] Implement some object manager for the objects being voxelized and run through the simulation
-  - [ ] Should have a "master" manager for restoring objects and so voxelization only has to happen once per object
-  - [ ] Should have a sub-manager for the actual simulation and positioning of the objects
-  
 ### Physics-sim
 
 - [ ] Should get the previous code working

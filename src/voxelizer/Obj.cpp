@@ -50,33 +50,30 @@ objs::Mesh *ObjReader::Parse(const char *filename)
       break;
     }
   }
-  //   mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
-  //   mMesh->mNormals.resize(mMesh->mIndecies.size() * 3);
-  //   for (u32 i = 0; i < mMesh->mIndecies.size(); i += 3)
-  //   {
-  //     u32 i0 = mMesh->mIndecies[i];
-  //     u32 i1 = mMesh->mIndecies[i + 1];
-  //     u32 i2 = mMesh->mIndecies[i + 2];
-  //     glm::vec3 t0(mMesh->mVertecies[i0], mMesh->mVertecies[i0 + 1], mMesh->mVertecies[i0 + 2]);
-  //     glm::vec3 t1(mMesh->mVertecies[i1], mMesh->mVertecies[i1 + 1], mMesh->mVertecies[i1 + 2]);
-  //     glm::vec3 t2(mMesh->mVertecies[i2], mMesh->mVertecies[i2 + 1], mMesh->mVertecies[i2 + 2]);
-  //     auto normal = glm::triangleNormal(t0, t1, t2);
-  //     mMesh->mNormals[i0] += normal.x;
-  //     mMesh->mNormals[i0 + 1] += normal.y;
-  //     mMesh->mNormals[i0 + 2] += normal.z;
-  //
-  //     mMesh->mNormals[i1] += normal.x;
-  //     mMesh->mNormals[i1 + 1] += normal.y;
-  //     mMesh->mNormals[i1 + 2] += normal.z;
-  //
-  //     mMesh->mNormals[i2] += normal.x;
-  //     mMesh->mNormals[i2 + 1] += normal.y;
-  //     mMesh->mNormals[i2 + 2] += normal.z;
-  //   }
-  //   for (u32 i = 0; i < mMesh->mNormals.size(); i++)
-  //   {
-  //     mMesh->mNormals[i] /= 3.0f;
-  //   }
+  mMesh->normals.resize(mMesh->indices.size() * 3);
+  for (u32 i = 0; i < mMesh->indices.size(); i += 3) {
+    u32 i0 = mMesh->indices[i];
+    u32 i1 = mMesh->indices[i + 1];
+    u32 i2 = mMesh->indices[i + 2];
+    auto t0 = mMesh->GetVertex(i0);
+    auto t1 = mMesh->GetVertex(i1);
+    auto t2 = mMesh->GetVertex(i2);
+    auto normal = glm::triangleNormal(t0, t1, t2);
+    mMesh->normals[i0] += normal.x;
+    mMesh->normals[i0 + 1] += normal.y;
+    mMesh->normals[i0 + 2] += normal.z;
+
+    mMesh->normals[i1] += normal.x;
+    mMesh->normals[i1 + 1] += normal.y;
+    mMesh->normals[i1 + 2] += normal.z;
+
+    mMesh->normals[i2] += normal.x;
+    mMesh->normals[i2 + 1] += normal.y;
+    mMesh->normals[i2 + 2] += normal.z;
+  }
+  for (u32 i = 0; i < mMesh->normals.size(); i++) {
+    mMesh->normals[i] /= 3.0f;
+  }
   Clear();
   // This should clear out mMesh
   return mMesh;
@@ -188,8 +185,8 @@ void ObjReader::ParseFace()
   for (s32 i = 0; i < 3; i++) {
     // NOTE: only indices are read in
     u32 index = 0.0;
-    //u32 normal = 0.0;
-    line >> index;// >> normal;
+    // u32 normal = 0.0;
+    line >> index; // >> normal;
     index--;
     //     normal--;
     mMesh->indices.emplace_back(index);
@@ -227,4 +224,3 @@ void ObjReader::ReplaceChars(std::string *str, char toReplace, char replacement)
     }
   }
 }
-
