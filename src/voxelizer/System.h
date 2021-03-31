@@ -4,6 +4,7 @@
 #include <VoxelObjects/Objects.h>
 #include "VoxelizerUI.h"
 #include "Voxelizer.h"
+#include <SDL.h>
 
 #include <Common.h>
 #include <Context.hpp>
@@ -38,7 +39,7 @@ public:
   void Run();
 
 private:
-  void CollectInput();
+  void CollectInput(const SDL_Event &e);
   void LoadMesh();
   void GenerateVoxels();
   void Render();

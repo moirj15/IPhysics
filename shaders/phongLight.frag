@@ -37,4 +37,5 @@ void main()
   vec4 color = vec4(ambient + diffuse + specular, 1.0);
 
   fragmentColor = clamp(color, vec4(0.0), vec4(1.0));
+  fragmentColor = vec4(1.0);
 }

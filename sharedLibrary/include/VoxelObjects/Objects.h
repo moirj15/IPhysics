@@ -42,22 +42,34 @@ struct Mesh {
     vertices.push_back(v[1]);
     vertices.push_back(v[2]);
   }
+  inline void SetVertex(u32 i, const glm::vec3 &v) {
+    SetVec3(&vertices, i, v);
+  }
+  inline void SetNormal(u32 i, const glm::vec3 &n) {
+    SetVec3(&normals, i, n);
+  }
   inline u32 VerticesSizeInBytes() { return vertices.size() * sizeof(f32); }
   inline u32 IndicesSizeInBytes() { return indices.size() * sizeof(u32); }
   inline std::vector<f32> GetInterleved() {
-    std::vector<f32> ret(vertices.size() + normals.size());
+    std::vector<f32> ret;
     for (u32 i = 0; i < (vertices.size() / 3); i++) {
       auto v = GetVertex(i);
       auto n = GetNormal(i);
-      ret[i] = v.x;
-      ret[i + 1] = v.y;
-      ret[i + 2] = v.z;
+      ret.push_back(v.x);
+      ret.push_back(v.y);
+      ret.push_back(v.z);
 
-      ret[i + 3] = n.x;
-      ret[i + 4] = n.y;
-      ret[i + 5] = n.z;
+      ret.push_back(n.x);
+      ret.push_back(n.y);
+      ret.push_back(n.z);
     }
     return ret;
+  }
+private:
+  inline void SetVec3(std::vector<f32> *data, u32 i, const glm::vec3 &v) {
+    (*data)[i * 3] = v.x;
+    (*data)[(i * 3) + 1] = v.x;
+    (*data)[(i * 3) + 1] = v.x;
   }
 };
 

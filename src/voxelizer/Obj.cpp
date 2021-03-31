@@ -51,29 +51,36 @@ objs::Mesh *ObjReader::Parse(const char *filename)
     }
   }
   mMesh->normals.resize(mMesh->indices.size() * 3);
-  for (u32 i = 0; i < mMesh->indices.size(); i += 3) {
-    u32 i0 = mMesh->indices[i];
-    u32 i1 = mMesh->indices[i + 1];
-    u32 i2 = mMesh->indices[i + 2];
-    auto t0 = mMesh->GetVertex(i0);
-    auto t1 = mMesh->GetVertex(i1);
-    auto t2 = mMesh->GetVertex(i2);
-    auto normal = glm::triangleNormal(t0, t1, t2);
-    mMesh->normals[i0] += normal.x;
-    mMesh->normals[i0 + 1] += normal.y;
-    mMesh->normals[i0 + 2] += normal.z;
-
-    mMesh->normals[i1] += normal.x;
-    mMesh->normals[i1 + 1] += normal.y;
-    mMesh->normals[i1 + 2] += normal.z;
-
-    mMesh->normals[i2] += normal.x;
-    mMesh->normals[i2 + 1] += normal.y;
-    mMesh->normals[i2 + 2] += normal.z;
+  // TODO: actually calculate surface normals or just use blender's normals
+  for (u32 i : mMesh->indices) {
+    auto v = mMesh->GetVertex(i);
+    auto n = glm::normalize(v);
+    mMesh->SetNormal(i, n);
   }
-  for (u32 i = 0; i < mMesh->normals.size(); i++) {
-    mMesh->normals[i] /= 3.0f;
-  }
+
+//  for (u32 i = 0; i < mMesh->indices.size(); i += 3) {
+//    u32 i0 = mMesh->indices[i];
+//    u32 i1 = mMesh->indices[i + 1];
+//    u32 i2 = mMesh->indices[i + 2];
+//    auto t0 = mMesh->GetVertex(i0);
+//    auto t1 = mMesh->GetVertex(i1);
+//    auto t2 = mMesh->GetVertex(i2);
+//    auto normal = glm::triangleNormal(t0, t1, t2);
+//    mMesh->normals[i0] += normal.x;
+//    mMesh->normals[i0 + 1] += normal.y;
+//    mMesh->normals[i0 + 2] += normal.z;
+//
+//    mMesh->normals[i1] += normal.x;
+//    mMesh->normals[i1 + 1] += normal.y;
+//    mMesh->normals[i1 + 2] += normal.z;
+//
+//    mMesh->normals[i2] += normal.x;
+//    mMesh->normals[i2 + 1] += normal.y;
+//    mMesh->normals[i2 + 2] += normal.z;
+//  }
+//  for (u32 i = 0; i < mMesh->normals.size(); i++) {
+//    mMesh->normals[i] /= 3.0f;
+//  }
   Clear();
   // This should clear out mMesh
   return mMesh;

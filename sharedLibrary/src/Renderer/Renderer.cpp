@@ -315,6 +315,7 @@ void Renderer::LoadMesh(MeshHandle handle)
       .bufferType = focus::BufferType::InterLeaved,// TODO: switch to interleved data
       .types = {focus::VarType::Vec3, focus::VarType::Vec3},
       .sizeInBytes = mesh->VerticesSizeInBytes(),
+      .elementSizeInBytes = 24,
       .usage = focus::BufferUsage::Static,
     });
     auto ibHandle = focus::gContext->CreateIndexBuffer((void*)mesh->indices.data(), mesh->IndicesSizeInBytes(), {

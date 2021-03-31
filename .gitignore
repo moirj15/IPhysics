@@ -15,3 +15,5 @@ cmake-build-debug-visual-studio/*
 /tbuild
 /build-release/*
 /testfiles/*
+imgui.ini
+compile_commands.json

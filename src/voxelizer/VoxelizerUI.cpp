@@ -24,6 +24,8 @@ void VoxelizerUI::Init(const focus::Window &window)
   // TODO: put in base class
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
+  auto &io = ImGui::GetIO();
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
 //  auto [device, context] = focus::GetDeviceAndContext();
   ImGui_ImplSDL2_InitForD3D(window.mSDLWindow);

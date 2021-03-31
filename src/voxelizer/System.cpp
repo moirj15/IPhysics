@@ -40,7 +40,8 @@ void System::Run()
         return;
       }
     }
-    CollectInput();
+    SDL_PumpEvents();
+    CollectInput(e);
     LoadMesh();
     GenerateVoxels();
     Render();
@@ -49,32 +50,37 @@ void System::Run()
 }
 
 // Private;
-void System::CollectInput()
+void System::CollectInput(const SDL_Event &e)
 {
 #if 0
   glfwPollEvents();
 #endif
   auto &io = ImGui::GetIO();
-  f32 boost = 1.0f;
-  if (io.KeysDown[GLFW_KEY_LEFT_SHIFT] && !io.WantCaptureKeyboard) {
-    boost = 5.0f;
+  auto *keys = SDL_GetKeyboardState(nullptr);
+  if (io.WantCaptureKeyboard) {
+    return;
   }
-  if (io.KeysDown[GLFW_KEY_W] && !io.WantCaptureKeyboard) {
+  f32 boost = 1.0f;
+  auto key = e.key.keysym.sym;
+  if ((SDL_GetModState() & SDLK_LSHIFT) && !io.WantCaptureKeyboard) {
+    boost = 10.0f;
+  }
+  if (keys[SDL_SCANCODE_W]) {
     mCamera.Move(glm::vec3(0.0f, 0.0f, 1.0f) * boost * io.DeltaTime);
   }
-  if (io.KeysDown[GLFW_KEY_S] && !io.WantCaptureKeyboard) {
+  if (keys[SDL_SCANCODE_S]) {
     mCamera.Move(glm::vec3(0.0f, 0.0f, -1.0f) * boost * io.DeltaTime);
   }
-  if (io.KeysDown[GLFW_KEY_A] && !io.WantCaptureKeyboard) {
+  if (keys[SDL_SCANCODE_A]) {
     mCamera.Move(glm::vec3(-1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
   }
-  if (io.KeysDown[GLFW_KEY_D] && !io.WantCaptureKeyboard) {
+  if (keys[SDL_SCANCODE_D]) {
     mCamera.Move(glm::vec3(1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
   }
-  if (io.KeysDown[GLFW_KEY_E] && !io.WantCaptureKeyboard) {
+  if (keys[SDL_SCANCODE_E]) {
     mCamera.Move(glm::vec3(0.0f, 1.0f, 0.0f) * boost * io.DeltaTime);
   }
-  if (io.KeysDown[GLFW_KEY_Q] && !io.WantCaptureKeyboard) {
+  if (keys[SDL_SCANCODE_Q]) {
     mCamera.Move(glm::vec3(0.0f, -1.0f, 0.0f) * boost * io.DeltaTime);
   }
   if (!io.WantCaptureMouse && io.MouseDown[0]) {
