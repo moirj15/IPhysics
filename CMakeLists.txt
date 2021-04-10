@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(IPhysics)
-set(CMAKE_UNITY_BUILD ON)
+#set(CMAKE_UNITY_BUILD ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS
@@ -26,7 +26,6 @@ set(VOXEL_GENERATOR_HEADERS
         ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.h
         ${VOXEL_GENERATOR_SOURCE_DIR}/System.h
         ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.h
-        ${VOXEL_GENERATOR_SOURCE_DIR}/Renderer.h
         ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerParameters.h
         )
 #file(GLOB SRC_VOXEL_GENERATOR CONFIGURE_DEPENDS "src/voxelizer/*")
@@ -34,6 +33,7 @@ set(VOXEL_GENERATOR_HEADERS
 # the source files for the physics simulation app
 file(GLOB SRC_PHYSICS_SIMULATION_FILES CONFIGURE_DEPENDS "src/physics-sim/app/*")
 file(GLOB SRC_PHYSICS_ENGINE_FILES CONFIGURE_DEPENDS "src/physics-sim/PhysicsEngine/*")
+
 
 
 set(SOURCE_LIST_MAIN_PROJECT

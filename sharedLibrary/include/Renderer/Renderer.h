@@ -10,15 +10,18 @@
 #include <memory>
 #include <unordered_map>
 #include <vector>
+#include <Renderer/Camera.h>
 
 namespace shared
 {
 
 class Renderer
 {
-  using MeshHandles = std::pair<focus::VertexBufferHandle, focus::IndexBufferHandle>;
-  std::unordered_map<u32, MeshHandles> mMeshes;
+  using BufferHandles = std::pair<focus::VertexBufferHandle, focus::IndexBufferHandle>;
+  std::unordered_map<MeshHandle, BufferHandles> mMeshes;
+  std::unordered_map<MeshHandle, BufferHandles> mDebugMeshes;
   MeshManager *mMeshManager;
+
   focus::ShaderHandle mPhongShader;
   focus::ConstantBufferHandle mPhongConstants;
   struct PhongConstants {
@@ -27,11 +30,16 @@ class Renderer
     glm::mat4 normalMat;
   };
 
+  focus::ShaderHandle mLineShader;
+  focus::ConstantBufferHandle mLineConstants;
+
 public:
   Renderer(MeshManager *meshManager) :
       mMeshManager(meshManager), 
     mPhongShader(focus::gContext->CreateShaderFromSource(
       "Phong", ReadFile("shaders/phongLight.vert"), ReadFile("shaders/phongLight.frag"))),
+    mLineConstants(focus::gContext->CreateShaderFromSource(
+      "Line", ReadFile("shaders/line.vert"), ReadFile("shaders/line.frag"))),
     mPhongConstants(focus::gContext->CreateConstantBuffer(nullptr, 3 * 16 * sizeof(f32), {
       .name = "constants",
       .types = {focus::VarType::Mat4, focus::VarType::Mat4, focus::VarType::Mat4}, // TODO: consider if this is necessary
@@ -41,47 +49,21 @@ public:
     }))
   {
   }
+
+  /**
+   * @brief Load the mesh with the given handle from the MeshManager into vertex buffers
+   *        for rendering. Will also load information into a debug vertex buffer for rendering
+   *        voxels.
+   * @param handle The handle of the mesh that will be loaded.
+  */
   void LoadMesh(MeshHandle handle);
-  // TODO: stick to phong lighting for now
-  // TODO: add version for textured models or other lighting models
+  void LoadDebugMesh(MeshHandle handle);
+
   void DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4 &model);
   void DrawDebugVoxels(MeshHandle handle, const Camera &camera, const glm::mat4 &model);
   void ClearScreen() { focus::gContext->Clear(); }
   void UpdateScreen(const focus::Window &window) { focus::gContext->SwapBuffers(window); }
+private:
 };
-
-#if 0
-using MeshHandle = u32;
-
-enum class ShaderProgram : u32
-{
-  UniformColor,
-  FlatLight,
-  PhongLight,
-  Point,
-};
-
-enum class DrawMode : u32
-{
-  TRIANGLES,
-  LINES,
-};
-
-Window *Init(s32 width, s32 height, const char *windowName, bool enableDebug);
-
-NODISCARD MeshHandle SubmitDynamicMesh(Mesh *mesh, ShaderProgram program);
-
-void UpdateDynamicMesh(MeshHandle handle, const std::vector<u32> &indices, Mesh *mesh);
-
-NODISCARD MeshHandle SubmitStaticMesh(Mesh *mesh, ShaderProgram program);
-
-NODISCARD MeshHandle SubmitVoxelMesh(const VoxObj::VoxelMesh &voxelMesh);
-
-void RemoveMesh(MeshHandle handle);
-
-void Draw(MeshHandle handle, const std::vector<ShaderData> &data, DrawMode drawMode);
-
-void SwapBuffers();
-#endif
 
 } // namespace shared

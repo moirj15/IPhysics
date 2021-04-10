@@ -20,6 +20,8 @@ class System
   focus::Window mWindow;
   std::unique_ptr<VoxelizerUI> mUI;
   VoxGen::Voxelizer mVoxelizer;
+
+  // TODO: remove since the meshmanager takes care of these
   objs::Mesh mMesh;
   objs::VoxelMesh mVoxelMesh;
   const glm::mat4 mProjectionMat;

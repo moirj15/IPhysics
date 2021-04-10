@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-set(CMAKE_UNITY_BUILD ON)
+#set(CMAKE_UNITY_BUILD ON)
 project(sharedLibrary)
 
 # the source files for the shared libraries

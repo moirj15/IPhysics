@@ -28,7 +28,7 @@ class Voxelizer
   Parameters mParameters;
 
 public:
-  NODISCARD objs::VoxelMesh Voxelize(objs::Mesh *mesh);
+  NODISCARD objs::VoxelMesh Voxelize(const objs::Mesh &mesh);
 
   inline void SetParameters(const Parameters &parameters)
   {
@@ -51,16 +51,16 @@ private:
     {
     }
   };
-  NODISCARD btAABB FindMeshAABB(objs::Mesh *mesh);
+  NODISCARD btAABB FindMeshAABB(const objs::Mesh &mesh);
 
-  NODISCARD std::vector<MeshInfo> FindTriangleAABBs(objs::Mesh *mesh);
+  NODISCARD std::vector<MeshInfo> FindTriangleAABBs(const objs::Mesh &mesh);
 
-  NODISCARD objs::VoxelMesh GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, objs::Mesh *mesh);
+  NODISCARD objs::VoxelMesh GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, const objs::Mesh &mesh);
   void FillVoxelMesh(objs::VoxelMesh *voxelMesh);
   void AddNeighbors(objs::VoxelMesh *voxelMesh);
-  void AddBezierCurves(objs::VoxelMesh *voxelMesh);
+  void AddBezierCurves(objs::VoxelMesh *voxelMesh, const objs::Mesh &mesh);
   NODISCARD std::unordered_map<u32, std::unordered_set<Edge>>
-  CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh);
+  CreateEdgeMap(objs::VoxelMesh *voxelMesh, const objs::Mesh &mesh);
   glm::vec3 CastRayInBox(const Ray &ray, const Box &box);
 };
 

@@ -1,22 +1,13 @@
 #pragma once
 
 #include <Common.h>
+#include <VoxelObjects/Objects.h>
 
 #include <string>
 
-namespace VoxObj
+namespace shared
 {
-class VoxelMesh;
-}
+void Serialize(const objs::Mesh &mesh, const objs::VoxelMesh &voxelMesh, const std::string &outputPath, const std::string &meshPath, float voxelSize, bool solid);
 
-namespace Utils
-{
-/**
- * \brief: Serializes the given VoxelMesh and stores it in the given file path.
- * \param voxelMesh: The VoxelMesh that will be serialized.
- * \param path: The path to the file that the VoxelMesh will be serialized to.
- */
-void Serialize(VoxObj::VoxelMesh *voxelMesh, const std::string &path);
-
-VoxObj::VoxelMesh *DeSerialize(const std::string &path);
+std::pair<objs::Mesh, objs::VoxelMesh> DeSerialize(const std::string &path);
 } // namespace Utils

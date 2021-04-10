@@ -18,8 +18,9 @@
 #include <glm/vec3.hpp>
 
 System::System() :
-    mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)), mWindow(focus::gContext->MakeWindow(1980, 1080)),
-    mUI(new VoxelizerUI()), mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)), mRenderer(&mMeshManager)
+    mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+    mWindow(focus::gContext->MakeWindow(1980, 1080)), mUI(new VoxelizerUI()),
+    mProjectionMat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)), mRenderer(&mMeshManager)
 //    mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
   mUI->Init(mWindow);
@@ -100,9 +101,11 @@ void System::LoadMesh()
       ObjReader objReader;
       // TODO: mem-leak, fix up the obj parser
       mMesh = *objReader.Parse(meshPath->c_str());
-      mModelLoaded = true;
       mCurrentMesh = mMeshManager.AddMesh(mMesh);
       mRenderer.LoadMesh(mCurrentMesh);
+
+      mModelLoaded = true;
+      mVoxelized = false;
     } else {
       // TODO: pop-up or something
     }
@@ -114,8 +117,9 @@ void System::GenerateVoxels()
   if (mModelLoaded && mUI->GenerateVoxelsClicked()) {
     auto params = mUI->GetParameters();
     mVoxelizer.SetParameters(mUI->GetParameters());
-    mVoxelMesh = mVoxelizer.Voxelize(&mMesh);
+    mVoxelMesh = mVoxelizer.Voxelize(mMesh);
     mMeshManager.AddVoxelMesh(mVoxelMesh, mCurrentMesh);
+    mVoxelized = true;
   }
 }
 
@@ -137,7 +141,8 @@ void System::SaveVoxels()
 {
   auto savePath = mUI->SaveClicked();
   if (savePath && mVoxelized) {
-    //    Utils::Serialize(mVoxelMesh.get(), *savePath);
+    auto params = mUI->GetParameters();
+    shared::Serialize(*mMeshManager.GetMesh(mCurrentMesh), *mMeshManager.GetVoxelMesh(mCurrentMesh), *savePath, "todo",
+        params.mVoxelSize, params.mHollow);
   }
 }
-

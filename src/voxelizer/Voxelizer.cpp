@@ -9,7 +9,7 @@
 
 namespace VoxGen
 {
-objs::VoxelMesh Voxelizer::Voxelize(objs::Mesh *mesh)
+objs::VoxelMesh Voxelizer::Voxelize(const objs::Mesh &mesh)
 {
   auto meshAABB = FindMeshAABB(mesh);
   auto triangleAABBs = FindTriangleAABBs(mesh);
@@ -19,18 +19,18 @@ objs::VoxelMesh Voxelizer::Voxelize(objs::Mesh *mesh)
   }
   AddNeighbors(&voxelMesh);
   // TODO: add check to see if extension is enabled
-  AddBezierCurves(&voxelMesh);
+  AddBezierCurves(&voxelMesh, mesh);
 
   return voxelMesh;
 }
 
 // Private
-btAABB Voxelizer::FindMeshAABB(objs::Mesh *mesh)
+btAABB Voxelizer::FindMeshAABB(const objs::Mesh &mesh)
 {
   btVector3 min(0.0f, 0.0f, 0.0f);
   btVector3 max(0.0f, 0.0f, 0.0f);
-  for (u32 i : mesh->indices) {
-    const auto &v = mesh->GetVertex(mesh->indices[i]);
+  for (u32 i : mesh.indices) {
+    const auto &v = mesh.GetVertex(mesh.indices[i]);
     btVector3 currentPoint(v.x, v.y, v.z);
     min.setMin(currentPoint);
     max.setMax(currentPoint);
@@ -38,40 +38,35 @@ btAABB Voxelizer::FindMeshAABB(objs::Mesh *mesh)
   return btAABB(min, max, min);
 }
 
-std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(objs::Mesh *mesh)
+std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(const objs::Mesh &mesh)
 {
   std::vector<MeshInfo> meshInfos;
-  for (u64 i = 0; i < mesh->indices.size(); i += 3) {
-    auto v0 = mesh->GetVertex(mesh->indices[i]);
-    auto v1 = mesh->GetVertex(mesh->indices[i + 1]);
-    auto v2 = mesh->GetVertex(mesh->indices[i + 2]);
+  for (u64 i = 0; i < mesh.indices.size(); i += 3) {
+    auto v0 = mesh.GetVertex(mesh.indices[i]);
+    auto v1 = mesh.GetVertex(mesh.indices[i + 1]);
+    auto v2 = mesh.GetVertex(mesh.indices[i + 2]);
     btVector3 points[] = {btVector3(v0.x, v0.y, v0.z), btVector3(v1.x, v1.y, v1.z), btVector3(v2.x, v2.y, v2.z)};
-    u32 indices[] = {mesh->indices[i], mesh->indices[i + 1], mesh->indices[i + 2]};
+    u32 indices[] = {mesh.indices[i], mesh.indices[i + 1], mesh.indices[i + 2]};
     meshInfos.push_back(MeshInfo(points, indices));
     // Add the indices to the points
   }
   return meshInfos;
 }
 
-objs::VoxelMesh Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, objs::Mesh *mesh)
+objs::VoxelMesh Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, const objs::Mesh &mesh)
 {
 
-#if 0
   glm::vec3 min(meshAABB.m_min.x(), meshAABB.m_min.y(), meshAABB.m_min.z());
   glm::vec3 max(meshAABB.m_max.x(), meshAABB.m_max.y(), meshAABB.m_max.z());
   glm::vec3 extentsOffset(-meshAABB.m_min.x(), -meshAABB.m_min.y(), -meshAABB.m_min.z());
-#endif
   // move the min and max to be centered at the origin
-#if 0
   max += extentsOffset;
-#endif
 
   // use the max of the AABB as the extents
-  glm::vec3 aabbExtents;//(glm::ceil(max));
+  glm::vec3 aabbExtents(glm::ceil(max));
   // Calculate the extents of the voxel mesh in discrete voxel space
-  glm::uvec3 voxelMeshExtents;//(aabbExtents / mParameters.mVoxelSize);
-#if 0
-  VoxObj::VoxelMesh voxelMesh(voxelMeshExtents, aabbExtents, glm::vec3(mParameters.mVoxelSize), mesh);
+  glm::uvec3 voxelMeshExtents(aabbExtents / mParameters.mVoxelSize);
+  objs::VoxelMesh voxelMesh(voxelMeshExtents, aabbExtents, mParameters.mVoxelSize);
   for (u32 x = 0; x < voxelMeshExtents.x; x++) {
     for (u32 y = 0; y < voxelMeshExtents.y; y++) {
       for (u32 z = 0; z < voxelMeshExtents.z; z++) {
@@ -83,12 +78,12 @@ objs::VoxelMesh Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, 
             btMin + (offset + btVector3(mParameters.mVoxelSize, mParameters.mVoxelSize, mParameters.mVoxelSize)),
             btMin + offset, mParameters.mVoxelSize / 100.0f);
         // Find the triangles that the voxel intersects
-        glm::ivec3 key(x, y, z);
+        glm::uvec3 key(x, y, z);
         auto minToMaxVec = voxel.m_max - voxel.m_min;
         auto length = minToMaxVec.length();
         btVector3 voxelCenter(voxel.m_min + ((voxel.m_max - voxel.m_min) / 2.0f));
         glm::vec3 position(voxelCenter.x(), voxelCenter.y(), voxelCenter.z());
-        VoxObj::Voxel generatedVoxel(mParameters.mVoxelSize, position);
+        objs::Voxel generatedVoxel = {.size = glm::vec3(mParameters.mVoxelSize), .position = position};
         std::unordered_set<u32> voxelVertices;
         bool keep = false;
         for (auto &triangle : meshTriangles) {
@@ -114,23 +109,20 @@ objs::VoxelMesh Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, 
         }
         if (keep) {
           for (u32 v : voxelVertices) {
-            generatedVoxel.mMeshVertices.emplace_back(v);
+            generatedVoxel.meshVertices.push_back(v);
           }
-          voxelMesh.SetVoxel(key, generatedVoxel);
+          voxelMesh.voxels.insert({key, generatedVoxel});
         }
       }
     }
   }
   return voxelMesh;
-#endif
-  return {};
 }
 
 void Voxelizer::FillVoxelMesh(objs::VoxelMesh *voxelMesh)
 {
-#if 0
   std::vector<std::pair<glm::uvec3, glm::uvec3>> fillList;
-  const auto &extents = voxelMesh->GetExtentsVoxelSpace();
+  const auto &extents = voxelMesh->dimensionsVoxelSpace;
   for (u32 z = 0; z < extents.z; z++) {
     for (u32 y = 0; y < extents.y; y++) {
       glm::uvec3 start(0, 0, z);
@@ -139,11 +131,11 @@ void Voxelizer::FillVoxelMesh(objs::VoxelMesh *voxelMesh)
         glm::uvec3 position(x, y, z);
         glm::uvec3 prevPosition(x - 1, y, z);
         // Check if this position is the start of a gap that needs to be filled
-        if (voxelMesh->IsVoxelPresent(prevPosition) && !voxelMesh->IsVoxelPresent(position)) {
+        if (voxelMesh->voxels.contains(prevPosition) && !voxelMesh->voxels.contains(position)) {
           start = position;
         }
         // Check if this position is the end of a gap that needs to be filled
-        else if (!voxelMesh->IsVoxelPresent(prevPosition) && voxelMesh->IsVoxelPresent(position)) {
+        else if (!voxelMesh->voxels.contains(prevPosition) && voxelMesh->voxels.contains(position)) {
           end = position;
           fillList.emplace_back(start, end);
         }
@@ -154,16 +146,14 @@ void Voxelizer::FillVoxelMesh(objs::VoxelMesh *voxelMesh)
   for (const auto &[start, end] : fillList) {
     for (u32 x = start.x; x < end.x; x++) {
       // TODO: should also update the voxel neighbors.
-      voxelMesh->SetVoxel(glm::uvec3(x, start.y, start.z), VoxObj::Voxel());
+      voxelMesh->voxels.insert({glm::uvec3(x, start.y, start.z), objs::Voxel()});
     }
   }
-#endif
 }
 
 void Voxelizer::AddNeighbors(objs::VoxelMesh *voxelMesh)
 {
-#if 0
-  for (auto &[key, voxel] : voxelMesh->mVoxels) {
+  for (auto &[key, voxel] : voxelMesh->voxels) {
     glm::uvec3 keys[] = {
         glm::uvec3(key.x - 1, key.y, key.z),
         glm::uvec3(key.x + 1, key.y, key.z),
@@ -174,34 +164,30 @@ void Voxelizer::AddNeighbors(objs::VoxelMesh *voxelMesh)
         glm::uvec3(key.x, key.y, key.z - 1),
         glm::uvec3(key.x, key.y, key.z + 1),
     };
-    for (const auto &k : keys) {
-      if (voxelMesh->mVoxels.find(k) != voxelMesh->mVoxels.end()) {
-        voxel.mNeighbors.emplace_back(k);
-      }
+    for (u32 i = 0; i < 6; i++) {
+      voxel.neighbors[i] = voxelMesh->voxels.contains(keys[i]);
     }
   }
-#endif
 }
 
-void Voxelizer::AddBezierCurves(objs::VoxelMesh *voxelMesh)
+void Voxelizer::AddBezierCurves(objs::VoxelMesh *voxelMesh, const objs::Mesh &mesh)
 {
-#if 0
-  auto edgeMap = CreateEdgeMap(voxelMesh);
-  for (const auto &[key, voxel] : voxelMesh->mVoxels) {
-    for (u32 index : voxel.mMeshVertices) {
+  auto edgeMap = CreateEdgeMap(voxelMesh, mesh);
+  for (const auto &[key, voxel] : voxelMesh->voxels) {
+    for (u32 index : voxel.meshVertices) {
       for (const auto &edge : edgeMap[index]) {
 
-        const auto &startVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mStartVert);
-        const auto &endVert = voxelMesh->mMesh->mVertices.AccessCastBuffer(edge.mEndVert);
-        const auto ap = voxel.mPosition - startVert;
+        const auto &startVert = mesh.GetVertex(edge.mStartVert);
+        const auto &endVert = mesh.GetVertex(edge.mEndVert);
+        const auto ap = voxel.position - startVert;
         const auto ab = endVert - startVert;
         const auto voxelCenterOnEdge = startVert + ((glm::dot(ap, ab) / glm::dot(ab, ab)) * ab);
         const f32 scale = 100.0f;
         auto origin = (ab / 2.0f) + startVert;
         Ray startToEnd(origin, endVert);
         Ray startToExtendedStart(origin, startVert);
-        auto firstIntersection = CastRayInBox(startToEnd, Box(voxel.mPosition, voxel.mDimensions));
-        auto secondIntersection = CastRayInBox(startToExtendedStart, Box(voxel.mPosition, voxel.mDimensions));
+        auto firstIntersection = CastRayInBox(startToEnd, Box(voxel.position, voxel.dimmensions));
+        auto secondIntersection = CastRayInBox(startToExtendedStart, Box(voxel.position, voxel.dimmensions));
 
         std::vector<u32> effectedPoints;
         std::vector<glm::vec3> controlPoints;
@@ -215,16 +201,13 @@ void Voxelizer::AddBezierCurves(objs::VoxelMesh *voxelMesh)
 
         controlPoints.emplace_back(secondIntersection);
 
-        voxelMesh->mVoxels[key].mBezierCurves.emplace_back(controlPoints, effectedPoints);
-        //       printf("first: %s\n", glm::to_string(firstIntersection).c_str());
-        //       printf("second: %s\n\n", glm::to_string(secondIntersection).c_str());
+        voxelMesh->voxels[key].bezierCurves.push_back({.controlPoints = controlPoints, .effectedPoints = effectedPoints});
       }
     }
   }
-#endif
 }
 
-std::unordered_map<u32, std::unordered_set<Edge>> Voxelizer::CreateEdgeMap(VoxObj::VoxelMesh *voxelMesh)
+std::unordered_map<u32, std::unordered_set<Edge>> Voxelizer::CreateEdgeMap(objs::VoxelMesh *voxelMesh, const objs::Mesh &mesh)
 {
   std::unordered_map<u32, std::unordered_set<Edge>> edgeMap;
   const auto &AddEdgeNoDuplicates = [&edgeMap](const u32 v0, const u32 v1) {
@@ -236,10 +219,10 @@ std::unordered_map<u32, std::unordered_set<Edge>> Voxelizer::CreateEdgeMap(VoxOb
       edgeMap[v0].emplace(v0, v1);
     }
   };
-  for (u64 i = 0; i < voxelMesh->mMesh->mIndices.size(); i += 3) {
-    u32 v0 = voxelMesh->mMesh->mIndices[i];
-    u32 v1 = voxelMesh->mMesh->mIndices[i + 1];
-    u32 v2 = voxelMesh->mMesh->mIndices[i + 2];
+  for (u64 i = 0; i < mesh.indices.size(); i += 3) {
+    u32 v0 = mesh.indices[i];
+    u32 v1 = mesh.indices[i + 1];
+    u32 v2 = mesh.indices[i + 2];
 
     AddEdgeNoDuplicates(v0, v1);
     AddEdgeNoDuplicates(v1, v2);
