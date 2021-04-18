@@ -38,13 +38,21 @@ objs::VoxelMesh *MeshManager::GetVoxelMesh(MeshHandle handle)
   return &mVoxelMeshes[handle];
 }
 
-std::vector<objs::Mesh> MeshManager::GetAllMeshes()
+std::vector<objs::Mesh*> MeshManager::GetAllMeshes()
 {
-  assert(0);
-  return {};
+  std::vector<objs::Mesh*> ret;
+  ret.reserve(mMeshes.size());
+  for (auto& [_, mesh] : mMeshes) {
+    ret.push_back(&mesh);
+  }
+  return ret;
 }
-std::vector<objs::VoxelMesh> MeshManager::GetVoxelAllMeshes()
+std::vector<objs::VoxelMesh*> MeshManager::GetVoxelAllMeshes()
 {
-  assert(0);
-  return {};
+  std::vector<objs::VoxelMesh*> ret;
+  ret.reserve(mVoxelMeshes.size());
+  for (auto& [_, voxelMesh] : mVoxelMeshes) {
+    ret.push_back(&voxelMesh);
+  }
+  return ret;
 }

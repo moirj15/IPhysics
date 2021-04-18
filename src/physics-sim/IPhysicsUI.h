@@ -1,9 +1,10 @@
 #pragma once
 
 #include <Common.h>
-#include "../PhysicsEngine/Settings.h"
+#include "Settings.h"
+#include <Context.hpp>
 
-#include <optional>
+//#include <optional>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -31,10 +32,10 @@ public:
   }
   ~IPhysicsUI();
 
-  void Init(Window *window);
-  void Update();
+  void Init(const focus::Window &window);
+  void Update(const focus::Window &window);
 
-  NODISCARD std::optional<std::string> LoadObjectClicked();
+  NODISCARD std::string* LoadObjectClicked();
   NODISCARD bool StartSimulationClicked();
   NODISCARD bool StopSimulationClicked();
   NODISCARD bool ResetSimulationClicked();
@@ -71,10 +72,9 @@ public:
     return mPhysicsSettings;
   }
 
-  NODISCARD inline std::vector<std::pair<u32, Physics::ObjectSettings>> GetAllObjectSettings() const
+  NODISCARD inline std::unordered_map<u32, Physics::ObjectSettings> GetAllObjectSettings() const
   {
-    return std::vector<std::pair<u32, Physics::ObjectSettings>>(
-        mObjectSettings.begin(), mObjectSettings.end());
+    return mObjectSettings;
   }
 };
 

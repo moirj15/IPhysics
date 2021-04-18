@@ -2,7 +2,7 @@
 
 #include <Common.h>
 #include <Renderer/DebugDrawer.h>
-#include "../app/VoxelMeshManager.h"
+#include <VoxelObjects/Objects.h>
 #include "Settings.h"
 #include "btBulletCollisionCommon.h"
 
@@ -21,22 +21,25 @@
 #include <memory>
 // #include <reactphysics3d.h>
 #include <vector>
+#include <VoxelObjects/MeshManager.h>
 
 class Object;
-namespace VoxObj
-{
-class Voxel;
-}
 
 namespace Physics
 {
 
 class PhysicsEngine
 {
-  std::vector<VMeshHandle> mObjectHandles;
+  MeshManager mPhysicsMeshManager;
 
-  std::unordered_map<VMeshHandle, std::unique_ptr<btRigidBody>> mObjects;
-  std::unordered_map<VMeshHandle, std::vector<std::unique_ptr<btRigidBody>>> mVoxels;
+
+  std::unordered_map<MeshHandle, ObjectSettings> mObjectSettings;
+  std::vector<MeshHandle> mObjectHandles;
+
+  // Shared position of the mesh and voxel-mesh
+  std::unordered_map<MeshHandle, glm::vec3> mObjectPositions;
+  std::unordered_map<MeshHandle, std::unique_ptr<btRigidBody>> mObjects;
+  std::unordered_map<MeshHandle, std::vector<std::unique_ptr<btRigidBody>>> mVoxels;
   Renderer::DebugDrawer *mDebugDrawer;
 
   // TODO: Do i really need two Dynamics worlds?
@@ -87,8 +90,16 @@ public:
 
   void Update(f32 t);
 
-  void SubmitObject(const VMeshHandle handle);
-  void RemoveObject(const VMeshHandle handle);
+  inline void SetInitialWorldState(const MeshManager& meshManager, const std::unordered_map<MeshHandle, ObjectSettings> &settings)
+  {
+    mPhysicsMeshManager = meshManager;
+    mObjectSettings = settings;
+    // TODO: doing this the lazy way, clean up later
+    
+  }
+
+  void SubmitObject(MeshHandle handle);
+  void RemoveObject(MeshHandle handle);
 
   void CastRayWithForce(
       const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace,
@@ -99,12 +110,16 @@ public:
     mSettings = engineSettings;
   }
 
+  inline const std::unordered_map<MeshHandle, glm::vec3>& GetPositions() {
+    return mObjectPositions;
+  }
+
 private:
   void Init();
-  void AddObject(const VMeshHandle handle, btCompoundShape *collisionShape);
-  btCompoundShape *AddVoxels(const VMeshHandle handle);
+  void AddObject(MeshHandle handle, btCompoundShape *collisionShape);
+  btCompoundShape *AddVoxels(MeshHandle handle);
   void AdjustVoxelSizeFromImpulse(
-      VoxObj::Voxel *voxel, f32 impulse, u32 modifiedDimm, u32 unchangedDimm0, u32 unchangedDimm1);
+      objs::Voxel *voxel, f32 impulse, u32 modifiedDimm, u32 unchangedDimm0, u32 unchangedDimm1);
 };
 
 } // namespace Physics

@@ -31,16 +31,31 @@ set(VOXEL_GENERATOR_HEADERS
 #file(GLOB SRC_VOXEL_GENERATOR CONFIGURE_DEPENDS "src/voxelizer/*")
 
 # the source files for the physics simulation app
-file(GLOB SRC_PHYSICS_SIMULATION_FILES CONFIGURE_DEPENDS "src/physics-sim/app/*")
-file(GLOB SRC_PHYSICS_ENGINE_FILES CONFIGURE_DEPENDS "src/physics-sim/PhysicsEngine/*")
+#file(GLOB SRC_PHYSICS_SIMULATION_FILES CONFIGURE_DEPENDS "src/physics-sim/app/*")
+#file(GLOB SRC_PHYSICS_ENGINE_FILES CONFIGURE_DEPENDS "src/physics-sim/PhysicsEngine/*")
+
+set(PHYSICS_SIM_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/physics-sim)
+
+set(PHYSICS_SIM_SOURCE
+        ${PHYSICS_SIM_SOURCE_DIR}/main.cpp
+        ${PHYSICS_SIM_SOURCE_DIR}/IphysicsUI.cpp
+        ${PHYSICS_SIM_SOURCE_DIR}/Physics.cpp
+        ${PHYSICS_SIM_SOURCE_DIR}/PhysicsSimulationApp.cpp
+        )
+set(PHYSICS_SIM_HEADERS
+        ${PHYSICS_SIM_SOURCE_DIR}/IphysicsUI.h
+        ${PHYSICS_SIM_SOURCE_DIR}/Physics.h
+        ${PHYSICS_SIM_SOURCE_DIR}/PhysicsSimulationApp.h
+        ${PHYSICS_SIM_SOURCE_DIR}/collidable.h
+        ${PHYSICS_SIM_SOURCE_DIR}/settings.h
+        )
 
 
 
-set(SOURCE_LIST_MAIN_PROJECT
+set(SOURCE_LIST_PHYSICS_SIM
         ${THIRD_PARTY_SRC}
-        ${SRC_PHYSICS_ENGINE_FILES}
-        ${SRC_PHYSICS_SIMULATION_FILES}
-        ${CMAKE_SOURCE_DIR}/glad/src/glad.c
+        ${PHYSICS_SIM_SOURCE}
+        ${PHYSICS_SIM_HEADERS}
         )
 
 set(SOURCE_LIST_VOXEL_GENERATOR
@@ -60,15 +75,6 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/src/third_party/imgui;
         # TODO: this is just a temp fix for imgui requiring sdl headers to be included
         ${CMAKE_SOURCE_DIR}/focus/include/SDL2
-)
-#add_executable(
-#    IPhysics
-#    ${SOURCE_LIST_MAIN_PROJECT}
-#)
-
-add_executable(
-        VoxelGenerator
-        ${SOURCE_LIST_VOXEL_GENERATOR}
 )
 if (WIN32)
     message("WINDOWS")
@@ -94,6 +100,15 @@ if (WIN32)
         string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
         string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
     endforeach ()
+    add_executable(
+        PhysicsSim
+        ${SOURCE_LIST_PHYSICS_SIM}
+    )
+
+    add_executable(
+            VoxelGenerator
+            ${SOURCE_LIST_VOXEL_GENERATOR}
+    )
     message(${CMAKE_BUILD_TYPE})
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
         message("DEBUG YOU FOOL!!!")
@@ -113,6 +128,41 @@ if (WIN32)
         #)
         target_link_libraries(
                 VoxelGenerator
+                ${OPENGL_LIBRARY}
+                # TODO: hacky solution for linking in sdl and focus
+                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2-static.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2main.lib
+                #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath_Debug.lib
+                sharedLibrary
+                #focus
+                #                glfw3
+                opengl32.lib
+                gdi32.lib
+                user32.lib
+                kernel32.lib
+                msvcrtd.lib
+                winmm.lib
+                imm32.lib
+                version.lib
+                d3d11.lib
+                d3d12.lib
+                libcmt.lib
+                dxgi.lib
+                dxguid.lib
+                d3dcompiler.lib
+                winmm.lib
+                gdi32
+                opengl32
+                Setupapi.lib
+        )
+        target_link_libraries(
+                PhysicsSim
+                BulletDynamics_Debug
+                BulletCollision_Debug
+                LinearMath_Debug
                 ${OPENGL_LIBRARY}
                 # TODO: hacky solution for linking in sdl and focus
                 ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib

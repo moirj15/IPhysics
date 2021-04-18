@@ -154,15 +154,16 @@ void Voxelizer::FillVoxelMesh(objs::VoxelMesh *voxelMesh)
 void Voxelizer::AddNeighbors(objs::VoxelMesh *voxelMesh)
 {
   for (auto &[key, voxel] : voxelMesh->voxels) {
+    // TODO: Refractor using Voxel::NEIGHBOR_OFFSETS
     glm::uvec3 keys[] = {
-        glm::uvec3(key.x - 1, key.y, key.z),
-        glm::uvec3(key.x + 1, key.y, key.z),
+        glm::uvec3(key.x - 1, key.y, key.z), // left
+        glm::uvec3(key.x + 1, key.y, key.z), // right
 
-        glm::uvec3(key.x, key.y - 1, key.z),
-        glm::uvec3(key.x, key.y + 1, key.z),
+        glm::uvec3(key.x, key.y - 1, key.z), // bottom
+        glm::uvec3(key.x, key.y + 1, key.z), // top
 
-        glm::uvec3(key.x, key.y, key.z - 1),
-        glm::uvec3(key.x, key.y, key.z + 1),
+        glm::uvec3(key.x, key.y, key.z - 1), // front
+        glm::uvec3(key.x, key.y, key.z + 1), // back
     };
     for (u32 i = 0; i < 6; i++) {
       voxel.neighbors[i] = voxelMesh->voxels.contains(keys[i]);

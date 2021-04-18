@@ -2,36 +2,39 @@
 #ifndef IMGUI_IMPL_OPENGL_LOADER_GLAD
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #endif
-#include "../../../imgui/imgui.h"
-#include "../../../imgui/imgui_impl_glfw.h"
-#include "../../../imgui/imgui_impl_opengl3.h"
-#include <Renderer/Window.h>
+#include "../third_party/imgui/backends/imgui_impl_opengl3.h"
+//#include "../third_party/imgui/backends/imgui_impl_dx11.h"
+#include "../third_party/imgui/backends/imgui_impl_sdl.h"
+#include "../third_party/imgui/imgui.h"
 
-#include <glad/glad.h>
+#include <SDL.h>
+#include <Common.h>
 #include <glm/gtc/type_ptr.hpp>
 
 namespace IPhysics
 {
 IPhysicsUI::~IPhysicsUI()
 {
-//  ImGui_ImplOpenGL3_Shutdown();
-//  ImGui_ImplGlfw_Shutdown();
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui_ImplSDL2_Shutdown();
   ImGui::DestroyContext();
 }
 
-void IPhysicsUI::Init(Window *window)
+void IPhysicsUI::Init(const focus::Window &window)
 {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
-//  ImGui_ImplGlfw_InitForOpenGL(window->mGLWindow, true);
-//  ImGui_ImplOpenGL3_Init("#version 150");
+  auto &io = ImGui::GetIO();
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+  ImGui_ImplSDL2_InitForOpenGL(window.mSDLWindow, SDL_GL_GetCurrentContext());
+  ImGui_ImplOpenGL3_Init();
   ImGui::StyleColorsClassic();
 }
 
-void IPhysicsUI::Update()
+void IPhysicsUI::Update(const focus::Window &window)
 {
-//  ImGui_ImplOpenGL3_NewFrame();
-//  ImGui_ImplGlfw_NewFrame();
+  ImGui_ImplOpenGL3_NewFrame();
+  ImGui_ImplSDL2_NewFrame(window.mSDLWindow);
   ImGui::NewFrame();
   // Define the UI layout
   ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
@@ -92,14 +95,14 @@ void IPhysicsUI::Update()
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-std::optional<std::string> IPhysicsUI::LoadObjectClicked()
+std::string *IPhysicsUI::LoadObjectClicked()
 {
   if (mLoadObjectClicked)
   {
     mLoadObjectClicked = false;
-    return mObjectPath;
+    return &mObjectPath;
   }
-  return {};
+  return nullptr;
 }
 
 bool IPhysicsUI::StartSimulationClicked()

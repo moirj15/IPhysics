@@ -14,6 +14,7 @@ class MeshManager
 
 public:
   MeshManager() = default;
+  MeshManager &operator=(const MeshManager &) = default;
   MeshHandle AddMeshes(objs::Mesh mesh, objs::VoxelMesh voxelMesh);
   MeshHandle AddMesh(objs::Mesh mesh);
   void AddVoxelMesh(objs::VoxelMesh mesh, MeshHandle handle);
@@ -28,8 +29,8 @@ public:
    */
   // Physics::ObjectSettings *GetSettings(VMeshHandle handle);
 
-  std::vector<objs::Mesh> GetAllMeshes();
-  std::vector<objs::VoxelMesh> GetVoxelAllMeshes();
+  std::vector<objs::Mesh*> GetAllMeshes();
+  std::vector<objs::VoxelMesh*> GetVoxelAllMeshes();
 
   /**
    * \brief: Updates the original settings with the given handle to the contents of the given
@@ -43,5 +44,4 @@ public:
 
   // Delete these to prevent copies
   MeshManager(MeshManager &&) = delete;
-  MeshManager &operator=(const MeshManager &) = delete;
 };
