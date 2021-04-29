@@ -14,6 +14,7 @@
 namespace VoxObj
 {
 
+#if 0
 struct Voxel
 {
   glm::vec3 mDimensions{0.0f};
@@ -81,5 +82,6 @@ struct Voxel
     return false;
   }
 };
+#endif
 
 } // namespace VoxObj

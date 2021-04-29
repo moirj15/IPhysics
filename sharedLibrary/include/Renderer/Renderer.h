@@ -30,22 +30,34 @@ class Renderer
     glm::mat4 normalMat;
   };
 
+  struct LineConstants {
+    glm::mat4 mvp;
+    glm::vec3 color;
+  };
+
   focus::ShaderHandle mLineShader;
   focus::ConstantBufferHandle mLineConstants;
 
 public:
-  Renderer(MeshManager *meshManager) :
+  explicit Renderer(MeshManager *meshManager) :
       mMeshManager(meshManager), 
     mPhongShader(focus::gContext->CreateShaderFromSource(
       "Phong", ReadFile("shaders/phongLight.vert"), ReadFile("shaders/phongLight.frag"))),
-    mLineConstants(focus::gContext->CreateShaderFromSource(
+    mLineShader(focus::gContext->CreateShaderFromSource(
       "Line", ReadFile("shaders/line.vert"), ReadFile("shaders/line.frag"))),
     mPhongConstants(focus::gContext->CreateConstantBuffer(nullptr, 3 * 16 * sizeof(f32), {
       .name = "constants",
-      .types = {focus::VarType::Mat4, focus::VarType::Mat4, focus::VarType::Mat4}, // TODO: consider if this is necessary
+      .types = {focus::VarType::Mat4, focus::VarType::Mat4, focus::VarType::Mat4},
       .slot = 0,
       .usage = focus::BufferUsage::Static,
       .sizeInBytes = 3 * 16 * sizeof(f32),
+    })),
+    mLineConstants(focus::gContext->CreateConstantBuffer(nullptr, sizeof(LineConstants), {
+      .name = "constants",
+      .types = {focus::VarType::Mat4, focus::VarType::Vec3},
+      .slot = 0,
+      .usage = focus::BufferUsage::Static,
+      .sizeInBytes = sizeof(LineConstants),
     }))
   {
   }
@@ -63,7 +75,6 @@ public:
   void DrawDebugVoxels(MeshHandle handle, const Camera &camera, const glm::mat4 &model);
   void ClearScreen() { focus::gContext->Clear(); }
   void UpdateScreen(const focus::Window &window) { focus::gContext->SwapBuffers(window); }
-private:
 };
 
 } // namespace shared

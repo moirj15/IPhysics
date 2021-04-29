@@ -19,7 +19,7 @@ void Renderer::LoadMesh(MeshHandle handle)
       .inputDescriptorName = {"vPosition", "vNormal"},
       .bufferType = focus::BufferType::InterLeaved,// TODO: switch to interleved data
       .types = {focus::VarType::Vec3, focus::VarType::Vec3},
-      .sizeInBytes = mesh->VerticesSizeInBytes(),
+      .sizeInBytes = (u32)(buffer.size() * sizeof(f32)),
       .elementSizeInBytes = 24,
       .usage = focus::BufferUsage::Static,
     });
@@ -32,8 +32,11 @@ void Renderer::LoadMesh(MeshHandle handle)
     mMeshes[handle] = {vbHandle, ibHandle};
   } else {
     auto [vbHandle, ibHandle] = mMeshes[handle];
-    focus::gContext->UpdateVertexBuffer(vbHandle, (void *)mesh->vertices.data(), mesh->VerticesSizeInBytes());
-    focus::gContext->UpdateIndexBuffer(vbHandle, (void *)mesh->indices.data(), mesh->IndicesSizeInBytes());
+    auto buffer = mesh->GetInterleved();
+
+    // TODO: implement Update*Buffer() methods
+    focus::gContext->UpdateVertexBuffer(vbHandle, (void*)buffer.data(), buffer.size() * sizeof(f32));
+    focus::gContext->UpdateIndexBuffer(ibHandle, (void *)mesh->indices.data(), mesh->IndicesSizeInBytes());
   }
 }
 
@@ -58,20 +61,6 @@ void Renderer::LoadDebugMesh(MeshHandle handle)
       2, 6, // top back right - bottom back right
       3, 7, // top front right - bottom front right
   };
-
-  // clang-format off
-  glm::vec3 baseVertices[] = {
-      glm::vec3(-1.0f,  1.0f,  1.0f), // top front left
-      glm::vec3(-1.0f,  1.0f, -1.0f), // top back left
-      glm::vec3( 1.0f,  1.0f, -1.0f), // top back right
-      glm::vec3( 1.0f,  1.0f,  1.0f), // top front right
-
-      glm::vec3(-1.0f, -1.0f,  1.0f), // top front left
-      glm::vec3(-1.0f, -1.0f, -1.0f), // top back left
-      glm::vec3( 1.0f, -1.0f, -1.0f), // top back right
-      glm::vec3( 1.0f, -1.0f,  1.0f), // top front right
-  };
-  // clang-format on
 
   std::vector<u32> indices;
   std::vector<f32> vertices;
@@ -106,28 +95,28 @@ void Renderer::LoadDebugMesh(MeshHandle handle)
         .inputDescriptorName = {"vPosition"},
         .bufferType = focus::BufferType::SingleType, 
         .types = {focus::VarType::Vec3},
-        .sizeInBytes = (u32)vertices.size() * sizeof(f32),
+        .sizeInBytes = (u32)(vertices.size() * sizeof(f32)),
         .elementSizeInBytes = 12,
         .usage = focus::BufferUsage::Static,
     });
     auto ibHandle = focus::gContext->CreateIndexBuffer((void *)indices.data(), indices.size() * sizeof(u32), {
         .type = focus::IndexBufferType::U32,
-        .sizeInBytes = (u32)indices.size() * sizeof(u32),
+        .sizeInBytes = (u32)(indices.size() * sizeof(u32)),
         .usage = focus::BufferUsage::Static,
     });
     mDebugMeshes[handle] = {vbHandle, ibHandle};
     // clang-format on
   } else {
-    auto [vbHandle, ibHandle] = mMeshes[handle];
+    auto [vbHandle, ibHandle] = mDebugMeshes[handle];
     focus::gContext->UpdateVertexBuffer(vbHandle, (void *)vertices.data(), vertices.size() * sizeof(f32));
-    focus::gContext->UpdateIndexBuffer(vbHandle, (void *)indices.data(), indices.size() * sizeof(u32));
+    focus::gContext->UpdateIndexBuffer(ibHandle, (void *)indices.data(), indices.size() * sizeof(u32));
   }
 }
 
 void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4 &model)
 {
   auto cameraMat = camera.CalculateMatrix();
-  auto projection = glm::perspective(90.0f, 16.0f / 9.0f, 0.1f, 100.0f);
+  auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
   auto modelView = cameraMat * model;
   auto normalMat = glm::transpose(glm::inverse(modelView));
   // clang-format off
@@ -149,6 +138,23 @@ void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4
 
 void Renderer::DrawDebugVoxels(MeshHandle handle, const Camera &camera, const glm::mat4 &model)
 {
+  auto cameraMat = camera.CalculateMatrix();
+  auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
+  auto modelView = cameraMat * model;
+  // clang-format off
+  LineConstants constants = {
+      .mvp = projection * modelView,
+      .color = glm::vec3(1.0, 0.0, 0.0),
+  };
+  focus::gContext->UpdateConstantBuffer(mLineConstants, (void*)&constants, sizeof(LineConstants));
+  const auto &[vbHandle, ibHandle] = mDebugMeshes[handle];
+  focus::gContext->Draw(focus::Primitive::Lines, {}, mLineShader, {
+      .vbHandles = {vbHandle},
+      .cbHandles = {mLineConstants},
+      .ibHandle = ibHandle,
+      .indexed = true,
+  });
+  // clang-format on
 }
 
 } // namespace shared

@@ -9,6 +9,7 @@
 
 #include "Physics.h"
 #include "IPhysicsUI.h"
+#include "DebugRenderer.h"
 #include <Context.hpp>
 #include <Renderer/Renderer.h>
 #include <SDL.h>
@@ -26,7 +27,7 @@ class PhysicsSimulationApp
   glm::mat4 mProjection;
   focus::Window mWindow;
   IPhysicsUI mUI;
-  Renderer::DebugDrawer *mDB;
+  DebugRenderer *mDebugRenderer;
   Physics::PhysicsEngine mPhysicsEngine;
   bool mPhysicsSimulationRunning = false;
 

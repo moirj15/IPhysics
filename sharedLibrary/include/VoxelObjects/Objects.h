@@ -153,6 +153,7 @@ struct Voxel {
   glm::vec3 dimmensions{0.0f};
   glm::vec3 position{0.0f};
   glm::vec3 positionRelativeToCenter{0.0f};
+  glm::vec3 relativePositionDelta{0.0f};
 
   // 0 left, 1 right, 2 bottom, 3 top, 4 front, 5 back
   std::array<bool, 6> neighbors;
@@ -160,15 +161,15 @@ struct Voxel {
   std::vector<u32> meshVertices;
   std::vector<BezierCurve> bezierCurves;
 
-  static constexpr glm::uvec3 NEIGHBOR_OFFSETS[] = {
-      glm::uvec3(-1, 0, 0), // left
-      glm::uvec3(1, 0, 0),  // right
+  static constexpr glm::ivec3 NEIGHBOR_OFFSETS[] = {
+      glm::vec3(-1, 0, 0), // left
+      glm::vec3(1, 0, 0),  // right
 
-      glm::uvec3(0, -1, 0), // bottom
-      glm::uvec3(0, 1, 0),  // top
+      glm::vec3(0, -1, 0), // bottom
+      glm::vec3(0, 1, 0),  // top
 
-      glm::uvec3(0, 0, -1), // front
-      glm::uvec3(0, 0, 1),  // back
+      glm::vec3(0, 0, -1), // front
+      glm::vec3(0, 0, 1),  // back
   };
 
   NODISCARD inline bool InVoxel(const u32 vert) const
@@ -209,6 +210,12 @@ struct Mesh {
   inline void SetNormal(u32 i, const glm::vec3 &n) { SetVec3(&normals, i, n); }
   inline u32 VerticesSizeInBytes() const { return (u32)vertices.size() * sizeof(f32); }
   inline u32 IndicesSizeInBytes() const { return (u32)indices.size() * sizeof(u32); }
+
+  // TODO: only create buffer once and update
+  /**
+   * @brief Creates a vector of interleaved vertex data (position and normal)
+   * @return The vector of interleaved vertex data
+   */
   inline std::vector<f32> GetInterleved() const
   {
     std::vector<f32> ret;
@@ -230,8 +237,8 @@ private:
   inline void SetVec3(std::vector<f32> *data, u32 i, const glm::vec3 &v)
   {
     (*data)[i * 3] = v.x;
-    (*data)[(i * 3) + 1] = v.x;
-    (*data)[(i * 3) + 1] = v.x;
+    (*data)[(i * 3) + 1] = v.y;
+    (*data)[(i * 3) + 2] = v.z;
   }
 };
 

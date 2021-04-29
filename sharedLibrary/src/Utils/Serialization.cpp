@@ -53,9 +53,16 @@ void from_json(const json &j, BezierCurve &b)
 
 void to_json(json &j, const Voxel &v)
 {
-  j = json{{"size", v.size}, {"dimmensions", v.dimmensions},
-      {"position_relative_to_center", v.positionRelativeToCenter}, {"neighbors", v.neighbors},
+  // clang-format off
+  j = json{
+      {"size", v.size},
+      {"dimmensions", v.dimmensions},
+      {"position", v.position},
+      {"position_relative_to_center", v.positionRelativeToCenter},
+      {"neighbors", v.neighbors},
+      {"mesh_vertices", v.meshVertices},
       {"bezier_curves", v.bezierCurves}};
+  // clang-format on
 }
 
 void from_json(const json &j, Voxel &v)
@@ -63,8 +70,10 @@ void from_json(const json &j, Voxel &v)
   v = {
       .size = j["size"].get<glm::vec3>(),
       .dimmensions = j["dimmensions"].get<glm::vec3>(),
+      .position = j["position"].get<glm::vec3>(),
       .positionRelativeToCenter = j["position_relative_to_center"].get<glm::vec3>(),
       .neighbors = j["neighbors"],
+      .meshVertices = j["mesh_vertices"],
       .bezierCurves = j["bezier_curves"],
   };
 }

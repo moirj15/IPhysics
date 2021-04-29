@@ -31,6 +31,7 @@ public:
 
   std::vector<objs::Mesh*> GetAllMeshes();
   std::vector<objs::VoxelMesh*> GetVoxelAllMeshes();
+  std::vector<MeshHandle> GetAllHandles();
 
   /**
    * \brief: Updates the original settings with the given handle to the contents of the given

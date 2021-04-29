@@ -13,6 +13,7 @@
 namespace VoxObj
 {
 
+#if 0
 // TODO: Refactor, since the accessors aren't needed anymore
 struct VoxelMesh
 {
@@ -77,5 +78,6 @@ struct VoxelMesh
     return mVoxels.size();
   }
 };
+#endif
 
 } // namespace VoxObj

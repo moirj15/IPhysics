@@ -56,3 +56,13 @@ std::vector<objs::VoxelMesh*> MeshManager::GetVoxelAllMeshes()
   }
   return ret;
 }
+
+std::vector<MeshHandle> MeshManager::GetAllHandles()
+{
+  std::vector<MeshHandle> ret;
+  ret.reserve(mVoxelMeshes.size());
+  for (auto& [handle, _] : mVoxelMeshes) {
+    ret.push_back(handle);
+  }
+  return ret;
+}

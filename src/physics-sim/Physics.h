@@ -5,6 +5,7 @@
 #include <VoxelObjects/Objects.h>
 #include "Settings.h"
 #include "btBulletCollisionCommon.h"
+#include "DebugRenderer.h"
 
 #include <BulletDynamics/ConstraintSolver/btConeTwistConstraint.h>
 #include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
@@ -33,14 +34,14 @@ class PhysicsEngine
   MeshManager mPhysicsMeshManager;
 
 
-  std::unordered_map<MeshHandle, ObjectSettings> mObjectSettings;
-  std::vector<MeshHandle> mObjectHandles;
 
   // Shared position of the mesh and voxel-mesh
-  std::unordered_map<MeshHandle, glm::vec3> mObjectPositions;
+  //std::unordered_map<MeshHandle, glm::vec3> mObjectPositions;
+  std::unordered_map<MeshHandle, ObjectSettings> mObjectSettings;
+  std::vector<MeshHandle> mObjectHandles;
   std::unordered_map<MeshHandle, std::unique_ptr<btRigidBody>> mObjects;
   std::unordered_map<MeshHandle, std::vector<std::unique_ptr<btRigidBody>>> mVoxels;
-  Renderer::DebugDrawer *mDebugDrawer;
+  std::unique_ptr<DebugRenderer> mDebugDrawer;
 
   // TODO: Do i really need two Dynamics worlds?
   // may be possible to do everything with only one world and it may be faster
@@ -81,7 +82,7 @@ class PhysicsEngine
   EngineSettings mSettings;
 
 public:
-  PhysicsEngine(Renderer::DebugDrawer *db) : mDebugDrawer(db)
+  PhysicsEngine(DebugRenderer *db) : mDebugDrawer(db)
   {
     Init();
   }
@@ -94,12 +95,17 @@ public:
   {
     mPhysicsMeshManager = meshManager;
     mObjectSettings = settings;
+
+    for (auto handle : mPhysicsMeshManager.GetAllHandles()) {
+      SubmitObject(handle);
+    }
     // TODO: doing this the lazy way, clean up later
     
   }
 
   void SubmitObject(MeshHandle handle);
   void RemoveObject(MeshHandle handle);
+  void UpdateObject(MeshHandle handle, const glm::vec3 &position);
 
   void CastRayWithForce(
       const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace,
@@ -110,9 +116,13 @@ public:
     mSettings = engineSettings;
   }
 
-  inline const std::unordered_map<MeshHandle, glm::vec3>& GetPositions() {
-    return mObjectPositions;
+  inline const std::unordered_map<MeshHandle, ObjectSettings>& GetObjectSettings() {
+    return mObjectSettings;
   }
+
+  //inline const std::unordered_map<MeshHandle, glm::vec3>& GetPositions() {
+  //  return mObjectPositions;
+  //}
 
 private:
   void Init();

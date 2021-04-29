@@ -17,17 +17,10 @@ PhysicsSimulationApp::PhysicsSimulationApp() :
     /*mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator", false)),*/ mUI(),
     /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/
     /*mDB(new Renderer::DebugDrawer(mRenderer->GetBackend())),*/
-    mPhysicsEngine(mDB), mRenderer(&mMeshManager)
+    mDebugRenderer(new DebugRenderer()),
+    mPhysicsEngine(mDebugRenderer), mRenderer(&mMeshManager)
 {
   mUI.Init(mWindow);
-  //   mRenderer->SetProjection(mProjection);
-  int n = 0;
-  //   glGetIntegerv(GL_NUM_EXTENSIONS, &n);
-  //   for (int i = 0; i < n;  i++)
-  //   {
-  //     auto tmp = glGetStringi(GL_EXTENSIONS, i);
-  //     printf("%s\n", tmp);
-  //   }
 }
 
 PhysicsSimulationApp::~PhysicsSimulationApp() = default;
@@ -64,15 +57,11 @@ void PhysicsSimulationApp::LoadObject()
   if (optionalPath && fs::exists(*optionalPath))
   {
     auto [mesh, voxelMesh] = shared::DeSerialize(*optionalPath);
-#if 0
-    voxelMesh->mMesh->mOffsets.SetBufferSize(voxelMesh->mMesh->mVertices.BufferSize());
-    u32 handle = VoxelMeshManager::Get().SubmitMesh(voxelMesh);
-#endif
     auto handle = mMeshManager.AddMeshes(mesh, voxelMesh);
     mRenderer.LoadMesh(handle);
 
     // TODO: Modify the physics engine so it takes object setting modifications into account
-    //     mPhysicsEngine->SubmitObject(handle);
+    //mPhysicsEngine.SubmitObject(handle);
     //     mRenderer->RegisterMeshHandle(handle);
     mUI.SetCurrentObject(handle);
   }
@@ -85,10 +74,12 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
   // Check if we want to apply a force with the mouse
   if (!io.WantCaptureMouse && io.MouseReleased[0] && SDL_GetModState() & SDLK_LSHIFT)
   {
+    s32 x = 0, y = 0;
+    SDL_GetMouseState(&x, &y);
     // Calculate the mouse position in normalized device coordinates
     const glm::vec2 mouseNDC(
         ((io.MousePos.x / mWindow.mWidth) - 0.5f) * 2.0f,
-        -((io.MousePos.y / mWindow.mHeight) - 0.5f) * 2.0f);
+        -(((mWindow.mHeight - io.MousePos.y) / mWindow.mHeight) - 0.5f) * 2.0f);
     glm::vec3 rayStartNDC(mouseNDC, 0.0);
     glm::vec3 rayEndNDC(mouseNDC, 1.0);
 
@@ -142,10 +133,14 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
 void PhysicsSimulationApp::CollectUIInput()
 {
   auto handle = mUI.CurrentObject();
+  if (handle == 0) {
+    return;
+  }
   //if (handle != 0 && mUI.SettingsFieldModified())
   //{
   //  VoxelMeshManager::Get().UpdateOriginalSettings(handle, mUI->GetCurrentObjectsSettings());
   //}
+  //mPhysicsEngine.UpdateObject(handle, mUI.GetCurrentObjectsSettings().mPosition);
   if (mUI.StartSimulationClicked())
   {
     mPhysicsSimulationRunning = true;
@@ -186,12 +181,15 @@ void PhysicsSimulationApp::CollectUIInput()
 
 void PhysicsSimulationApp::ApplyDeformations()
 {
-  for (const auto *vMesh : mMeshManager.GetVoxelAllMeshes())
+  for (auto handle : mMeshManager.GetAllHandles())
   {
+    auto *vMesh = mMeshManager.GetVoxelMesh(handle);
+    auto *mesh = mMeshManager.GetMesh(handle);
     for (const auto &[key, voxel] : vMesh->voxels)
     {
       for (auto index : voxel.meshVertices)
       {
+        mesh->SetVertex(index, mesh->GetVertex(index) + voxel.relativePositionDelta);
         // this is the good one
         // TODO: maybe doing this on the gpu isn't a good idea?
 #if 0
@@ -201,8 +199,10 @@ void PhysicsSimulationApp::ApplyDeformations()
 
         //         vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
         //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
+
       }
     }
+    mRenderer.LoadMesh(handle);
 #if 0
     mRenderer->UpdateMesh(handle);
 #endif
@@ -211,15 +211,25 @@ void PhysicsSimulationApp::ApplyDeformations()
 
 void PhysicsSimulationApp::Render()
 {
-#if 0
-  mRenderer->Clear();
-#endif
   mRenderer.ClearScreen();
+  if (mPhysicsSimulationRunning) {
+    // TODO: refactor
+    for (const auto &[handle, settings] : mPhysicsEngine.GetObjectSettings()) {
+      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+      mRenderer.LoadDebugMesh(handle);
+//      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+    }
+    mDebugRenderer->Draw(mCamera.CalculateMatrix(), mProjection);
+  } else {
+    for (const auto &[handle, settings] : mUI.GetAllObjectSettings()) {
+      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+      mRenderer.LoadDebugMesh(handle);
+//      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+    }
+  }
+
   if (mPhysicsSimulationRunning && mUI.GetPhysicsSettings().mEnableExtension)
   {
-    for (const auto &[handle, position] : mPhysicsEngine.GetPositions()) {
-      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), position));
-    }
 
 #if 0
     for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
