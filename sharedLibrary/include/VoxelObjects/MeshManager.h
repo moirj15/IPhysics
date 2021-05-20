@@ -14,7 +14,7 @@ class MeshManager
 
 public:
   MeshManager() = default;
-  MeshManager &operator=(const MeshManager &) = default;
+  MeshManager &operator=(const MeshManager &other);
   MeshHandle AddMeshes(objs::Mesh mesh, objs::VoxelMesh voxelMesh);
   MeshHandle AddMesh(objs::Mesh mesh);
   void AddVoxelMesh(objs::VoxelMesh mesh, MeshHandle handle);

@@ -50,7 +50,7 @@ objs::Mesh *ObjReader::Parse(const char *filename)
       break;
     }
   }
-  mMesh->normals.resize(mMesh->indices.size() * 3);
+  mMesh->normals.resize(mMesh->vertices.size());
   // TODO: actually calculate surface normals or just use blender's normals
   for (u32 i : mMesh->indices) {
     auto v = mMesh->GetVertex(i);

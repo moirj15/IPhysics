@@ -8,6 +8,17 @@
 
 MeshHandle MeshManager::sCurrentHandle = 0;
 
+MeshManager &MeshManager::operator=(const MeshManager &other)
+{
+  for (const auto &pair : other.mVoxelMeshes) {
+    mVoxelMeshes.emplace(pair);
+  }
+  for (const auto &pair : other.mMeshes) {
+    mMeshes.emplace(pair);
+  }
+  return *this;
+}
+
 MeshHandle MeshManager::AddMeshes(objs::Mesh mesh, objs::VoxelMesh voxelMesh)
 {
   sCurrentHandle++;

@@ -31,7 +31,7 @@ namespace Physics
 
 class PhysicsEngine
 {
-  MeshManager mPhysicsMeshManager;
+  MeshManager *mMeshManager;
 
 
 
@@ -91,12 +91,12 @@ public:
 
   void Update(f32 t);
 
-  inline void SetInitialWorldState(const MeshManager& meshManager, const std::unordered_map<MeshHandle, ObjectSettings> &settings)
+  inline void SetInitialWorldState(MeshManager* meshManager, const std::unordered_map<MeshHandle, ObjectSettings> &settings)
   {
-    mPhysicsMeshManager = meshManager;
+    mMeshManager = meshManager;
     mObjectSettings = settings;
 
-    for (auto handle : mPhysicsMeshManager.GetAllHandles()) {
+    for (auto handle : mMeshManager->GetAllHandles()) {
       SubmitObject(handle);
     }
     // TODO: doing this the lazy way, clean up later

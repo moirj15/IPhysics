@@ -9,9 +9,9 @@ layout(std140, binding = 0) uniform constants {
   mat4 camera;
   mat4 mvp;
   mat4 normalMat;
+  vec4 lightPosition;
 };
 
-uniform vec3 lightPosition;
 
 out vec3 eye_vPosition;
 out vec3 eye_LightPosition;
@@ -22,8 +22,8 @@ void main()
   vec4 position = vec4(vPosition, 1.0);//vec4(vPosition + vOffset, 1.0);
   gl_Position = mvp * position;
   eye_vPosition = vec3(camera * position);
-  eye_LightPosition = vec3(camera * vec4(lightPosition, 1.0));
+  eye_LightPosition = vec3(camera * lightPosition);
   // TODO: might need 1.0 as the w component
-  eye_normal = vec3(normalMat * normalize(vec4(vNormal, 0.0)));
+  eye_normal = vec3(normalMat * normalize(vec4(vNormal, 1.0)));
 
 }

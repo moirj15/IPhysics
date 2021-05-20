@@ -18,7 +18,7 @@ PhysicsSimulationApp::PhysicsSimulationApp() :
     /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/
     /*mDB(new Renderer::DebugDrawer(mRenderer->GetBackend())),*/
     mDebugRenderer(new DebugRenderer()),
-    mPhysicsEngine(mDebugRenderer), mRenderer(&mMeshManager)
+    mPhysicsEngine(mDebugRenderer), mRenderer(&mInitialMeshManager)
 {
   mUI.Init(mWindow);
 }
@@ -57,7 +57,7 @@ void PhysicsSimulationApp::LoadObject()
   if (optionalPath && fs::exists(*optionalPath))
   {
     auto [mesh, voxelMesh] = shared::DeSerialize(*optionalPath);
-    auto handle = mMeshManager.AddMeshes(mesh, voxelMesh);
+    auto handle = mInitialMeshManager.AddMeshes(mesh, voxelMesh);
     mRenderer.LoadMesh(handle);
 
     // TODO: Modify the physics engine so it takes object setting modifications into account
@@ -78,8 +78,8 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
     SDL_GetMouseState(&x, &y);
     // Calculate the mouse position in normalized device coordinates
     const glm::vec2 mouseNDC(
-        ((io.MousePos.x / mWindow.mWidth) - 0.5f) * 2.0f,
-        -(((mWindow.mHeight - io.MousePos.y) / mWindow.mHeight) - 0.5f) * 2.0f);
+        ((io.MousePos.x / (f32)mWindow.mWidth) - 0.5f) * 2.0f,
+        -((io.MousePos.y / (f32)mWindow.mHeight) - 0.5f) * 2.0f);
     glm::vec3 rayStartNDC(mouseNDC, 0.0);
     glm::vec3 rayEndNDC(mouseNDC, 1.0);
 
@@ -144,8 +144,9 @@ void PhysicsSimulationApp::CollectUIInput()
   if (mUI.StartSimulationClicked())
   {
     mPhysicsSimulationRunning = true;
+    mDeformationMeshManager = mInitialMeshManager;
     mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
-    mPhysicsEngine.SetInitialWorldState(mMeshManager, mUI.GetAllObjectSettings());
+    mPhysicsEngine.SetInitialWorldState(&mInitialMeshManager, mUI.GetAllObjectSettings());
 #if 0
     for (auto &[handle, setting] : mUI.GetAllObjectSettings())
     {
@@ -181,10 +182,10 @@ void PhysicsSimulationApp::CollectUIInput()
 
 void PhysicsSimulationApp::ApplyDeformations()
 {
-  for (auto handle : mMeshManager.GetAllHandles())
+  for (auto handle : mInitialMeshManager.GetAllHandles())
   {
-    auto *vMesh = mMeshManager.GetVoxelMesh(handle);
-    auto *mesh = mMeshManager.GetMesh(handle);
+    auto *vMesh = mInitialMeshManager.GetVoxelMesh(handle);
+    auto *mesh = mInitialMeshManager.GetMesh(handle);
     for (const auto &[key, voxel] : vMesh->voxels)
     {
       for (auto index : voxel.meshVertices)

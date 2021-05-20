@@ -28,6 +28,7 @@ void Renderer::LoadMesh(MeshHandle handle)
       .sizeInBytes = mesh->IndicesSizeInBytes(),
       .usage = focus::BufferUsage::Static,
     });
+
     // clang-format on
     mMeshes[handle] = {vbHandle, ibHandle};
   } else {
@@ -129,7 +130,7 @@ void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4
   const auto &[vbHandle, ibHandle] = mMeshes[handle];
   focus::gContext->Draw(focus::Primitive::Triangles, {}, mPhongShader, {
     .vbHandles = {vbHandle},
-    .cbHandles = {mPhongConstants},
+    .cbHandles = {mPhongConstants, mPhongFragmentConstants},
     .ibHandle = ibHandle,
     .indexed = true,
   });

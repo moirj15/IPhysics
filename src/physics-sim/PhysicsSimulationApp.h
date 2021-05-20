@@ -31,7 +31,8 @@ class PhysicsSimulationApp
   Physics::PhysicsEngine mPhysicsEngine;
   bool mPhysicsSimulationRunning = false;
 
-  MeshManager mMeshManager;
+  MeshManager mInitialMeshManager;
+  MeshManager mDeformationMeshManager;
   shared::Renderer mRenderer;
 
 public:
