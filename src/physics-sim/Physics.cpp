@@ -85,27 +85,16 @@ void PhysicsEngine::Update(f32 t)
       auto toNewPosition = voxel->position - orignalPosition;
       // TODO: may have to move this to before the dimensions of the voxel are changed.
       // voxel->UpdateBezierCurves(toNewPosition);
-#if 0
-      voxel->mRelativePositionDelta +=
-          (voxel->mPosition - objectSettings->mPosition) - voxel->mPositionRelativeToCenter;
-      voxel->mPositionRelativeToCenter = voxel->mPosition - objectSettings->mPosition;
-#endif
       voxel->relativePositionDelta = (voxel->position - position) - voxel->positionRelativeToCenter;
       voxel->positionRelativeToCenter = voxel->position - position;
     }
   }
   for (const auto handle : mObjectHandles) {
     // Update our object position in its settings, so we can render it in the right spot
-#if 0
-    auto *objectSettings = VoxelMeshManager::Get().GetSettings(handle);
-#endif
     auto &objectPosition = mObjectSettings[handle].mPosition;
     auto *rb = (btRigidBody *)mObjects[handle].get();
     const auto &transform = rb->getWorldTransform();
     const auto &position = transform.getOrigin();
-#if 0
-    objectSettings->mPosition = glm::vec3(position.x(), position.y(), position.z());
-#endif
     objectPosition = ToGLM(position);
     auto *collisionShape = (btCompoundShape *)rb->getCollisionShape();
     for (s32 i = 0; i < collisionShape->getNumChildShapes(); i++) {
@@ -190,7 +179,7 @@ void PhysicsEngine::AddObject(MeshHandle handle, btCompoundShape *collisionShape
   btRigidBody::btRigidBodyConstructionInfo rigidBodyInfo(1.0f, motionState, collisionShape);
 
   auto rigidBody = new btRigidBody(rigidBodyInfo);
-  rigidBody->setUserIndex(handle);
+  rigidBody->setUserIndex((s32)handle);
 
   mObjectWorld.mDynamicsWorld->addRigidBody(rigidBody);
   mObjects.emplace(handle, rigidBody);

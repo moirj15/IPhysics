@@ -1,24 +1,22 @@
 #include "PhysicsSimulationApp.h"
 
-
-#include <SDL.h>
 #include "../third_party/imgui/backends/imgui_impl_sdl.h"
 #include "../third_party/imgui/backends/imgui_impl_win32.h"
 
+#include <SDL.h>
 #include <Utils/Serialization.h>
 #include <VoxelObjects/VoxelMesh.h>
 
 namespace IPhysics
 {
 PhysicsSimulationApp::PhysicsSimulationApp() :
-    mCamera(
-        glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
-    mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)), mWindow(focus::gContext->MakeWindow(1920, 1080)),
+    mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+    mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
+    mWindow(focus::gContext->MakeWindow(1920, 1080)),
     /*mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator", false)),*/ mUI(),
     /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/
     /*mDB(new Renderer::DebugDrawer(mRenderer->GetBackend())),*/
-    mDebugRenderer(new DebugRenderer()),
-    mPhysicsEngine(mDebugRenderer), mRenderer(&mInitialMeshManager)
+    mDebugRenderer(new DebugRenderer()), mPhysicsEngine(mDebugRenderer), mRenderer(&mInitialMeshManager)
 {
   mUI.Init(mWindow);
 }
@@ -42,8 +40,7 @@ void PhysicsSimulationApp::Run()
     CollectInput(e);
     LoadObject();
     CollectUIInput();
-    if (mPhysicsSimulationRunning)
-    {
+    if (mPhysicsSimulationRunning) {
       mPhysicsEngine.Update(ImGui::GetIO().DeltaTime);
       ApplyDeformations();
     }
@@ -54,14 +51,13 @@ void PhysicsSimulationApp::Run()
 void PhysicsSimulationApp::LoadObject()
 {
   auto optionalPath = mUI.LoadObjectClicked();
-  if (optionalPath && fs::exists(*optionalPath))
-  {
+  if (optionalPath && fs::exists(*optionalPath)) {
     auto [mesh, voxelMesh] = shared::DeSerialize(*optionalPath);
     auto handle = mInitialMeshManager.AddMeshes(mesh, voxelMesh);
     mRenderer.LoadMesh(handle);
 
     // TODO: Modify the physics engine so it takes object setting modifications into account
-    //mPhysicsEngine.SubmitObject(handle);
+    // mPhysicsEngine.SubmitObject(handle);
     //     mRenderer->RegisterMeshHandle(handle);
     mUI.SetCurrentObject(handle);
   }
@@ -72,14 +68,12 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
   auto *keys = SDL_GetKeyboardState(nullptr);
 
   // Check if we want to apply a force with the mouse
-  if (!io.WantCaptureMouse && io.MouseReleased[0] && SDL_GetModState() & SDLK_LSHIFT)
-  {
+  if (!io.WantCaptureMouse && io.MouseReleased[0] && SDL_GetModState() & SDLK_LSHIFT) {
     s32 x = 0, y = 0;
     SDL_GetMouseState(&x, &y);
     // Calculate the mouse position in normalized device coordinates
     const glm::vec2 mouseNDC(
-        ((io.MousePos.x / (f32)mWindow.mWidth) - 0.5f) * 2.0f,
-        -((io.MousePos.y / (f32)mWindow.mHeight) - 0.5f) * 2.0f);
+        ((io.MousePos.x / (f32)mWindow.mWidth) - 0.5f) * 2.0f, -((io.MousePos.y / (f32)mWindow.mHeight) - 0.5f) * 2.0f);
     glm::vec3 rayStartNDC(mouseNDC, 0.0);
     glm::vec3 rayEndNDC(mouseNDC, 1.0);
 
@@ -91,41 +85,32 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
   if (io.WantCaptureKeyboard) {
     return;
   }
-  if (!io.WantCaptureMouse && io.MouseDown[0] && (SDL_GetModState() & SDLK_LSHIFT) == 0)
-  {
+  if (!io.WantCaptureMouse && io.MouseDown[0] && (SDL_GetModState() & SDLK_LSHIFT) == 0) {
     f32 screenWidth = f32(mWindow.mWidth);
     f32 screenHeight = f32(mWindow.mHeight);
-    glm::vec2 mouseDelta(
-        (screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
+    glm::vec2 mouseDelta((screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
     mCamera.Rotate(mouseDelta * 10.0f * io.DeltaTime);
   }
   f32 boost = 1.0f;
-  if (keys[SDL_SCANCODE_LSHIFT] && !io.WantCaptureKeyboard)
-  {
+  if (keys[SDL_SCANCODE_LSHIFT] && !io.WantCaptureKeyboard) {
     boost = 5.0f;
   }
-  if (keys[SDL_SCANCODE_W] && !io.WantCaptureKeyboard)
-  {
+  if (keys[SDL_SCANCODE_W] && !io.WantCaptureKeyboard) {
     mCamera.Move(glm::vec3(0.0f, 0.0f, 1.0f) * boost * io.DeltaTime);
   }
-  if (keys[SDL_SCANCODE_S] && !io.WantCaptureKeyboard)
-  {
+  if (keys[SDL_SCANCODE_S] && !io.WantCaptureKeyboard) {
     mCamera.Move(glm::vec3(0.0f, 0.0f, -1.0f) * boost * io.DeltaTime);
   }
-  if (keys[SDL_SCANCODE_A] && !io.WantCaptureKeyboard)
-  {
+  if (keys[SDL_SCANCODE_A] && !io.WantCaptureKeyboard) {
     mCamera.Move(glm::vec3(-1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
   }
-  if (keys[SDL_SCANCODE_D] && !io.WantCaptureKeyboard)
-  {
+  if (keys[SDL_SCANCODE_D] && !io.WantCaptureKeyboard) {
     mCamera.Move(glm::vec3(1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
   }
-  if (keys[SDL_SCANCODE_E] && !io.WantCaptureKeyboard)
-  {
+  if (keys[SDL_SCANCODE_E] && !io.WantCaptureKeyboard) {
     mCamera.Move(glm::vec3(0.0f, 1.0f, 0.0f) * boost * io.DeltaTime);
   }
-  if (keys[SDL_SCANCODE_Q] && !io.WantCaptureKeyboard)
-  {
+  if (keys[SDL_SCANCODE_Q] && !io.WantCaptureKeyboard) {
     mCamera.Move(glm::vec3(0.0f, -1.0f, 0.0f) * boost * io.DeltaTime);
   }
 }
@@ -136,13 +121,12 @@ void PhysicsSimulationApp::CollectUIInput()
   if (handle == 0) {
     return;
   }
-  //if (handle != 0 && mUI.SettingsFieldModified())
+  // if (handle != 0 && mUI.SettingsFieldModified())
   //{
-  //  VoxelMeshManager::Get().UpdateOriginalSettings(handle, mUI->GetCurrentObjectsSettings());
-  //}
-  //mPhysicsEngine.UpdateObject(handle, mUI.GetCurrentObjectsSettings().mPosition);
-  if (mUI.StartSimulationClicked())
-  {
+  //   VoxelMeshManager::Get().UpdateOriginalSettings(handle, mUI->GetCurrentObjectsSettings());
+  // }
+  // mPhysicsEngine.UpdateObject(handle, mUI.GetCurrentObjectsSettings().mPosition);
+  if (mUI.StartSimulationClicked()) {
     mPhysicsSimulationRunning = true;
     mDeformationMeshManager = mInitialMeshManager;
     mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
@@ -162,12 +146,10 @@ void PhysicsSimulationApp::CollectUIInput()
     }
 #endif
   }
-  if (mUI.StopSimulationClicked())
-  {
+  if (mUI.StopSimulationClicked()) {
     mPhysicsSimulationRunning = false;
   }
-  if (mUI.ResetSimulationClicked())
-  {
+  if (mUI.ResetSimulationClicked()) {
     mPhysicsSimulationRunning = false;
     mPhysicsEngine.Reset();
 #if 0
@@ -182,14 +164,11 @@ void PhysicsSimulationApp::CollectUIInput()
 
 void PhysicsSimulationApp::ApplyDeformations()
 {
-  for (auto handle : mInitialMeshManager.GetAllHandles())
-  {
+  for (auto handle : mInitialMeshManager.GetAllHandles()) {
     auto *vMesh = mInitialMeshManager.GetVoxelMesh(handle);
     auto *mesh = mInitialMeshManager.GetMesh(handle);
-    for (const auto &[key, voxel] : vMesh->voxels)
-    {
-      for (auto index : voxel.meshVertices)
-      {
+    for (const auto &[key, voxel] : vMesh->voxels) {
+      for (auto index : voxel.meshVertices) {
         mesh->SetVertex(index, mesh->GetVertex(index) + voxel.relativePositionDelta);
         // this is the good one
         // TODO: maybe doing this on the gpu isn't a good idea?
@@ -200,13 +179,9 @@ void PhysicsSimulationApp::ApplyDeformations()
 
         //         vMesh->mMesh->mVertices.AccessCastBuffer(index) += voxel.mRelativePositionDelta;
         //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
-
       }
     }
     mRenderer.LoadMesh(handle);
-#if 0
-    mRenderer->UpdateMesh(handle);
-#endif
   }
 }
 
@@ -218,38 +193,42 @@ void PhysicsSimulationApp::Render()
     for (const auto &[handle, settings] : mPhysicsEngine.GetObjectSettings()) {
       mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
       mRenderer.LoadDebugMesh(handle);
-//      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+      //      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(),
+      //      settings.mPosition));
     }
     mDebugRenderer->Draw(mCamera.CalculateMatrix(), mProjection);
   } else {
     for (const auto &[handle, settings] : mUI.GetAllObjectSettings()) {
       mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
       mRenderer.LoadDebugMesh(handle);
-//      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+      //      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(),
+      //      settings.mPosition));
     }
   }
 
-  if (mPhysicsSimulationRunning && mUI.GetPhysicsSettings().mEnableExtension)
-  {
+  if (mPhysicsSimulationRunning && mUI.GetPhysicsSettings().mEnableExtension) {
 
-#if 0
-    for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
-    {
-      auto *mesh = vMesh->mMesh;
-      for (auto &[key, voxel] : vMesh->mVoxels)
-      {
+    for (auto handle : mDeformationMeshManager.GetAllHandles()) {
+      auto *mesh = mDeformationMeshManager.GetMesh(handle);
+      auto *vMesh = mDeformationMeshManager.GetVoxelMesh(handle);
+      auto *originalMesh = mInitialMeshManager.GetMesh(handle);
+      for (auto &[key, voxel] : vMesh->voxels) {
         std::unordered_map<u32, bool> alreadyCalculated;
-        for (auto &bezierCurve : voxel.mBezierCurves)
-        {
-          if (bezierCurve.mControlPoints.size() == 3)
-          {
-            if (alreadyCalculated[bezierCurve.mEffectedPoints[0]])
-            {
+        for (auto &bezierCurve : voxel.bezierCurves) {
+          if (bezierCurve.controlPoints.size() == 3) {
+            if (alreadyCalculated[bezierCurve.effectedPoints[0]]) {
               continue;
             }
-            alreadyCalculated[bezierCurve.mEffectedPoints[0]] = true;
+            alreadyCalculated[bezierCurve.effectedPoints[0]] = true;
+            u32 effectedPointIndex = bezierCurve.effectedPoints[0];
+            mesh->SetVertex(
+                effectedPointIndex, originalMesh->GetVertex(effectedPointIndex)
+                                        + voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.firstT));
+
+#if 0
             mesh->mOffsets.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
                 voxel.CalculateFrom3Points(bezierCurve.mControlPoints, bezierCurve.mFirstT);
+#endif
 
             //////////////////////////////////////////////////////////////////////////
             //             auto p = bezierCurve.mControlPoints;
@@ -272,23 +251,23 @@ void PhysicsSimulationApp::Render()
             //             }
             //////////////////////////////////////////////////////////////////////////
             //             auto tmp = voxel.CalculateFrom3Points(bezierCurve.mControlPoints, best);
-          }
-          else // if (bezierCurve.mControlPoints.size() == 4)
+          } else // if (bezierCurve.mControlPoints.size() == 4)
           {
-            if (alreadyCalculated[bezierCurve.mEffectedPoints[0]]
-                && alreadyCalculated[bezierCurve
-                                         .mEffectedPoints[bezierCurve.mEffectedPoints.size() - 1]])
-            {
+            if (alreadyCalculated[bezierCurve.effectedPoints[0]]
+                && alreadyCalculated[bezierCurve.effectedPoints[bezierCurve.effectedPoints.size() - 1]]) {
               continue;
             }
-            u32 effectedPoint = alreadyCalculated[bezierCurve.mEffectedPoints[0]]
-                                    ? bezierCurve.mEffectedPoints[1]
-                                    : bezierCurve.mEffectedPoints[0];
+            u32 effectedPoint = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.effectedPoints[1]
+                                                                                 : bezierCurve.effectedPoints[0];
             alreadyCalculated[effectedPoint] = true;
-            f32 t = alreadyCalculated[bezierCurve.mEffectedPoints[0]] ? bezierCurve.mSecondT
-                                                                      : bezierCurve.mFirstT;
+            f32 t = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.secondT : bezierCurve.firstT;
+
+            mesh->SetVertex(effectedPoint,
+                originalMesh->GetVertex(effectedPoint) + voxel.CalculateFrom4Points(bezierCurve.controlPoints, t));
+#if 0
             mesh->mOffsets.AccessCastBuffer(effectedPoint) =
                 voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t);
+#endif
             //////////////////////////////////////////////////////////////////////////
             //             auto points = bezierCurve.mControlPoints;
             //             f32 bestT = 0.0f;
@@ -330,7 +309,6 @@ void PhysicsSimulationApp::Render()
         }
       }
     }
-#endif
   }
   mUI.Update(mWindow);
   mRenderer.UpdateScreen(mWindow);
