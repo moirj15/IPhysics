@@ -10,12 +10,14 @@ MeshHandle MeshManager::sCurrentHandle = 0;
 
 MeshManager &MeshManager::operator=(const MeshManager &other)
 {
-  for (const auto &pair : other.mVoxelMeshes) {
-    mVoxelMeshes.emplace(pair);
-  }
-  for (const auto &pair : other.mMeshes) {
-    mMeshes.emplace(pair);
-  }
+  mMeshes = std::unordered_map<MeshHandle, objs::Mesh>(other.mMeshes.begin(), other.mMeshes.end());
+  mVoxelMeshes = std::unordered_map<MeshHandle, objs::VoxelMesh>(other.mVoxelMeshes.begin(), other.mVoxelMeshes.end());
+//  for (const auto &pair : other.mVoxelMeshes) {
+//    mVoxelMeshes.emplace(pair);
+//  }
+//  for (const auto &pair : other.mMeshes) {
+//    mMeshes.emplace(pair);
+//  }
   return *this;
 }
 
@@ -76,4 +78,8 @@ std::vector<MeshHandle> MeshManager::GetAllHandles()
     ret.push_back(handle);
   }
   return ret;
+}
+bool MeshManager::operator!=(const MeshManager &o)
+{
+  return mMeshes.size() != o.mMeshes.size() || mVoxelMeshes.size() != o.mVoxelMeshes.size();
 }

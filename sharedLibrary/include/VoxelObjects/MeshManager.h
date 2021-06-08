@@ -34,6 +34,13 @@ public:
   std::vector<MeshHandle> GetAllHandles();
 
   /**
+   * In-equality operator. For now it only compares the sizes of the `mMeshes` and `mVoxelMeshes`.
+   * @param o The other `MeshManager` that we're comparing.
+   * @return True if the two objects are not equal, False otherwise.
+   */
+  bool operator !=(const MeshManager &o);
+
+  /**
    * \brief: Updates the original settings with the given handle to the contents of the given
    * settings object.
    */

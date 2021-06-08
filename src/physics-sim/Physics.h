@@ -1,11 +1,8 @@
 #pragma once
 
-#include <Common.h>
-#include <Renderer/DebugDrawer.h>
-#include <VoxelObjects/Objects.h>
+#include "DebugRenderer.h"
 #include "Settings.h"
 #include "btBulletCollisionCommon.h"
-#include "DebugRenderer.h"
 
 #include <BulletDynamics/ConstraintSolver/btConeTwistConstraint.h>
 #include <BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.h>
@@ -15,14 +12,17 @@
 #include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Dynamics/btSimpleDynamicsWorld.h>
+#include <Common.h>
+#include <Renderer/DebugDrawer.h>
+#include <VoxelObjects/Objects.h>
 
 /// Vehicle simulation, with wheel contact simulated by raycasts
 #include "BulletDynamics/Vehicle/btRaycastVehicle.h"
 
 #include <memory>
 // #include <reactphysics3d.h>
-#include <vector>
 #include <VoxelObjects/MeshManager.h>
+#include <vector>
 
 class Object;
 
@@ -33,10 +33,8 @@ class PhysicsEngine
 {
   MeshManager *mMeshManager;
 
-
-
   // Shared position of the mesh and voxel-mesh
-  //std::unordered_map<MeshHandle, glm::vec3> mObjectPositions;
+  // std::unordered_map<MeshHandle, glm::vec3> mObjectPositions;
   std::unordered_map<MeshHandle, ObjectSettings> mObjectSettings;
   std::vector<MeshHandle> mObjectHandles;
   std::unordered_map<MeshHandle, std::unique_ptr<btRigidBody>> mObjects;
@@ -45,8 +43,7 @@ class PhysicsEngine
 
   // TODO: Do i really need two Dynamics worlds?
   // may be possible to do everything with only one world and it may be faster
-  struct PhysicsWorld
-  {
+  struct PhysicsWorld {
     std::unique_ptr<btDefaultCollisionConfiguration> mCollisionConfig;
     std::unique_ptr<btCollisionDispatcher> mCollisionDispatcher;
     std::unique_ptr<btBroadphaseInterface> mOverlappingPairCache;
@@ -56,11 +53,9 @@ class PhysicsEngine
     PhysicsWorld() :
         mCollisionConfig(new btDefaultCollisionConfiguration),
         mCollisionDispatcher(new btCollisionDispatcher(mCollisionConfig.get())),
-        mOverlappingPairCache(new btDbvtBroadphase()),
-        mSolver(new btSequentialImpulseConstraintSolver()),
+        mOverlappingPairCache(new btDbvtBroadphase()), mSolver(new btSequentialImpulseConstraintSolver()),
         mDynamicsWorld(new btDiscreteDynamicsWorld(
-            mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(),
-            mCollisionConfig.get()))
+            mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(), mCollisionConfig.get()))
     {
     }
     ~PhysicsWorld() = default;
@@ -73,8 +68,7 @@ class PhysicsEngine
       mCollisionDispatcher.reset(new btCollisionDispatcher(mCollisionConfig.get()));
       mOverlappingPairCache.reset(new btDbvtBroadphase());
       mDynamicsWorld.reset(new btDiscreteDynamicsWorld(
-          mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(),
-          mCollisionConfig.get()));
+          mCollisionDispatcher.get(), mOverlappingPairCache.get(), mSolver.get(), mCollisionConfig.get()));
     }
 
   } mObjectWorld, mVoxelWorld;
@@ -82,25 +76,23 @@ class PhysicsEngine
   EngineSettings mSettings;
 
 public:
-  PhysicsEngine(DebugRenderer *db) : mDebugDrawer(db)
-  {
-    Init();
-  }
+  PhysicsEngine(DebugRenderer *db) : mDebugDrawer(db) { Init(); }
 
   void Reset();
 
   void Update(f32 t);
 
-  inline void SetInitialWorldState(MeshManager* meshManager, const std::unordered_map<MeshHandle, ObjectSettings> &settings)
+  inline void SetObjectSettings(const std::unordered_map<MeshHandle, ObjectSettings> &settings)
+  {
+    mObjectSettings = settings;
+  }
+
+  inline void SetMeshManager(MeshManager *meshManager)
   {
     mMeshManager = meshManager;
-    mObjectSettings = settings;
-
     for (auto handle : mMeshManager->GetAllHandles()) {
       SubmitObject(handle);
     }
-    // TODO: doing this the lazy way, clean up later
-    
   }
 
   void SubmitObject(MeshHandle handle);
@@ -108,21 +100,15 @@ public:
   void UpdateObject(MeshHandle handle, const glm::vec3 &position);
 
   void CastRayWithForce(
-      const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace,
-      f32 force);
+      const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace, f32 force);
 
-  inline void SetEngineSettings(EngineSettings engineSettings)
-  {
-    mSettings = engineSettings;
-  }
+  inline void SetEngineSettings(EngineSettings engineSettings) { mSettings = engineSettings; }
 
-  inline const std::unordered_map<MeshHandle, ObjectSettings>& GetObjectSettings() {
-    return mObjectSettings;
-  }
+  inline const std::unordered_map<MeshHandle, ObjectSettings> &GetObjectSettings() { return mObjectSettings; }
 
-  //inline const std::unordered_map<MeshHandle, glm::vec3>& GetPositions() {
-  //  return mObjectPositions;
-  //}
+  // inline const std::unordered_map<MeshHandle, glm::vec3>& GetPositions() {
+  //   return mObjectPositions;
+  // }
 
 private:
   void Init();

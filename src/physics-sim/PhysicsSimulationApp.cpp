@@ -25,10 +25,8 @@ PhysicsSimulationApp::~PhysicsSimulationApp() = default;
 
 void PhysicsSimulationApp::Run()
 {
-
-  bool keepWindowOpen = true;
   SDL_Event e;
-  while (keepWindowOpen) {
+  while (true) {
     while (SDL_PollEvent(&e) > 0) {
       // TODO: put into UI code
       ImGui_ImplSDL2_ProcessEvent(&e);
@@ -128,9 +126,15 @@ void PhysicsSimulationApp::CollectUIInput()
   // mPhysicsEngine.UpdateObject(handle, mUI.GetCurrentObjectsSettings().mPosition);
   if (mUI.StartSimulationClicked()) {
     mPhysicsSimulationRunning = true;
-    mDeformationMeshManager = mInitialMeshManager;
+    mPhysicsEngine.Reset();
     mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
-    mPhysicsEngine.SetInitialWorldState(&mInitialMeshManager, mUI.GetAllObjectSettings());
+    mPhysicsEngine.SetObjectSettings(mUI.GetAllObjectSettings());
+    // Only update the physics-engine's mesh manager if a new object has been added to the initial-meshmanager.
+    // Otherwise, duplicate objects get added causing some interesting glitches to occur when the simulation restarts.
+//    if (mDeformationMeshManager != mInitialMeshManager) {
+      mDeformationMeshManager = mInitialMeshManager;
+      mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
+//    }
 #if 0
     for (auto &[handle, setting] : mUI.GetAllObjectSettings())
     {
