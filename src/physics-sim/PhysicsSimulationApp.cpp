@@ -12,11 +12,8 @@ namespace IPhysics
 PhysicsSimulationApp::PhysicsSimulationApp() :
     mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
-    mWindow(focus::gContext->MakeWindow(1920, 1080)),
-    /*mWindow(Renderer::InitAPI(1980, 1080, "Voxel Generator", false)),*/ mUI(),
-    /*mRenderer(new Renderer::RendererFrontend(mWindow.get(), &mCamera)),*/
-    /*mDB(new Renderer::DebugDrawer(mRenderer->GetBackend())),*/
-    mDebugRenderer(new DebugRenderer()), mPhysicsEngine(mDebugRenderer), mRenderer(&mInitialMeshManager)
+    mWindow(focus::gContext->MakeWindow(1920, 1080)), mUI(),
+    mDebugRenderer(new DebugRenderer()), mPhysicsEngine(mDebugRenderer), mRenderer(&mDeformationMeshManager)
 {
   mUI.Init(mWindow);
 }
@@ -51,7 +48,10 @@ void PhysicsSimulationApp::LoadObject()
   auto optionalPath = mUI.LoadObjectClicked();
   if (optionalPath && fs::exists(*optionalPath)) {
     auto [mesh, voxelMesh] = shared::DeSerialize(*optionalPath);
-    auto handle = mInitialMeshManager.AddMeshes(mesh, voxelMesh);
+    // Have to add meshes to the mDeformationMeshManager otherwise their deformations won't appear when rendering.
+    // So I'll just copy values over to the mInitialMeshManager everytime an object is added.
+    auto handle = mDeformationMeshManager.AddMeshes(mesh, voxelMesh);
+    mInitialMeshManager = mDeformationMeshManager;
     mRenderer.LoadMesh(handle);
 
     // TODO: Modify the physics engine so it takes object setting modifications into account
@@ -131,9 +131,9 @@ void PhysicsSimulationApp::CollectUIInput()
     mPhysicsEngine.SetObjectSettings(mUI.GetAllObjectSettings());
     // Only update the physics-engine's mesh manager if a new object has been added to the initial-meshmanager.
     // Otherwise, duplicate objects get added causing some interesting glitches to occur when the simulation restarts.
-//    if (mDeformationMeshManager != mInitialMeshManager) {
-      mDeformationMeshManager = mInitialMeshManager;
-      mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
+    //    if (mDeformationMeshManager != mInitialMeshManager) {
+    mDeformationMeshManager = mInitialMeshManager;
+    mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
 //    }
 #if 0
     for (auto &[handle, setting] : mUI.GetAllObjectSettings())
@@ -156,6 +156,7 @@ void PhysicsSimulationApp::CollectUIInput()
   if (mUI.ResetSimulationClicked()) {
     mPhysicsSimulationRunning = false;
     mPhysicsEngine.Reset();
+    mDeformationMeshManager = mInitialMeshManager;
 #if 0
     VoxelMeshManager::Get().RestoreSettings();
 #endif
@@ -168,9 +169,9 @@ void PhysicsSimulationApp::CollectUIInput()
 
 void PhysicsSimulationApp::ApplyDeformations()
 {
-  for (auto handle : mInitialMeshManager.GetAllHandles()) {
-    auto *vMesh = mInitialMeshManager.GetVoxelMesh(handle);
-    auto *mesh = mInitialMeshManager.GetMesh(handle);
+  for (auto handle : mDeformationMeshManager.GetAllHandles()) {
+    auto *vMesh = mDeformationMeshManager.GetVoxelMesh(handle);
+    auto *mesh = mDeformationMeshManager.GetMesh(handle);
     for (const auto &[key, voxel] : vMesh->voxels) {
       for (auto index : voxel.meshVertices) {
         mesh->SetVertex(index, mesh->GetVertex(index) + voxel.relativePositionDelta);
