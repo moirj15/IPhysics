@@ -29,11 +29,16 @@ class PhysicsSimulationApp
   IPhysicsUI mUI;
   DebugRenderer *mDebugRenderer;
   Physics::PhysicsEngine mPhysicsEngine;
-  bool mPhysicsSimulationRunning = false;
 
   MeshManager mInitialMeshManager;
   MeshManager mDeformationMeshManager;
   shared::Renderer mRenderer;
+
+  enum class State {
+    Running,
+    Stopped,
+    Paused,
+  } mCurrentState = State::Stopped;
 
 public:
   PhysicsSimulationApp();

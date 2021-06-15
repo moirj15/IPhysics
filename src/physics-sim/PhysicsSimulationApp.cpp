@@ -12,8 +12,8 @@ namespace IPhysics
 PhysicsSimulationApp::PhysicsSimulationApp() :
     mCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     mProjection(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
-    mWindow(focus::gContext->MakeWindow(1920, 1080)), mUI(),
-    mDebugRenderer(new DebugRenderer()), mPhysicsEngine(mDebugRenderer), mRenderer(&mDeformationMeshManager)
+    mWindow(focus::gContext->MakeWindow(1920, 1080)), mUI(), mDebugRenderer(new DebugRenderer()),
+    mPhysicsEngine(mDebugRenderer), mRenderer(&mDeformationMeshManager)
 {
   mUI.Init(mWindow);
 }
@@ -35,7 +35,7 @@ void PhysicsSimulationApp::Run()
     CollectInput(e);
     LoadObject();
     CollectUIInput();
-    if (mPhysicsSimulationRunning) {
+    if (mCurrentState == State::Running) {
       mPhysicsEngine.Update(ImGui::GetIO().DeltaTime);
       ApplyDeformations();
     }
@@ -55,8 +55,6 @@ void PhysicsSimulationApp::LoadObject()
     mRenderer.LoadMesh(handle);
 
     // TODO: Modify the physics engine so it takes object setting modifications into account
-    // mPhysicsEngine.SubmitObject(handle);
-    //     mRenderer->RegisterMeshHandle(handle);
     mUI.SetCurrentObject(handle);
   }
 }
@@ -119,51 +117,22 @@ void PhysicsSimulationApp::CollectUIInput()
   if (handle == 0) {
     return;
   }
-  // if (handle != 0 && mUI.SettingsFieldModified())
-  //{
-  //   VoxelMeshManager::Get().UpdateOriginalSettings(handle, mUI->GetCurrentObjectsSettings());
-  // }
-  // mPhysicsEngine.UpdateObject(handle, mUI.GetCurrentObjectsSettings().mPosition);
-  if (mUI.StartSimulationClicked()) {
-    mPhysicsSimulationRunning = true;
-    mPhysicsEngine.Reset();
-    mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
-    mPhysicsEngine.SetObjectSettings(mUI.GetAllObjectSettings());
-    // Only update the physics-engine's mesh manager if a new object has been added to the initial-meshmanager.
-    // Otherwise, duplicate objects get added causing some interesting glitches to occur when the simulation restarts.
-    //    if (mDeformationMeshManager != mInitialMeshManager) {
-    mDeformationMeshManager = mInitialMeshManager;
-    mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
-//    }
-#if 0
-    for (auto &[handle, setting] : mUI.GetAllObjectSettings())
-    {
-      auto *voxelMesh = VoxelMeshManager::Get().GetMesh(handle);
-      //       for (auto &[key, voxel] : voxelMesh->mVoxels)
-      //       {
-      //         voxel.UpdateBezierCurves(setting.mPosition);
-      //       }
-#if 0
-      VoxelMeshManager::Get().UpdateOriginalSettings(handle, setting);
-#endif
-      mPhysicsEngine.SubmitObject(handle);
+  if (mUI.StartSimulationClicked() && mCurrentState != State::Running) {
+    if (mCurrentState == State::Stopped) {
+      mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
+      mPhysicsEngine.SetObjectSettings(mUI.GetAllObjectSettings());
+      mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
+//      mDeformationMeshManager = mInitialMeshManager;
     }
-#endif
+    mCurrentState = State::Running;
   }
-  if (mUI.StopSimulationClicked()) {
-    mPhysicsSimulationRunning = false;
+  if (mUI.StopSimulationClicked() && mCurrentState != State::Paused) {
+    mCurrentState = State::Paused;
   }
-  if (mUI.ResetSimulationClicked()) {
-    mPhysicsSimulationRunning = false;
+  if (mUI.ResetSimulationClicked() && mCurrentState != State::Stopped) {
+    mCurrentState = State::Stopped;
     mPhysicsEngine.Reset();
     mDeformationMeshManager = mInitialMeshManager;
-#if 0
-    VoxelMeshManager::Get().RestoreSettings();
-#endif
-    //     for (auto &[handle, _] : mUI->GetAllObjectSettings())
-    //     {
-    //       mPhysicsEngine->SubmitObject(handle);
-    //     }
   }
 }
 
@@ -193,25 +162,15 @@ void PhysicsSimulationApp::ApplyDeformations()
 void PhysicsSimulationApp::Render()
 {
   mRenderer.ClearScreen();
-  if (mPhysicsSimulationRunning) {
-    // TODO: refactor
-    for (const auto &[handle, settings] : mPhysicsEngine.GetObjectSettings()) {
-      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
-      mRenderer.LoadDebugMesh(handle);
-      //      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(),
-      //      settings.mPosition));
-    }
-    mDebugRenderer->Draw(mCamera.CalculateMatrix(), mProjection);
-  } else {
-    for (const auto &[handle, settings] : mUI.GetAllObjectSettings()) {
-      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
-      mRenderer.LoadDebugMesh(handle);
-      //      mRenderer.DrawDebugVoxels(handle, mCamera, glm::translate(glm::identity<glm::mat4>(),
-      //      settings.mPosition));
-    }
+  const auto &handleSettingsPair =
+      (mCurrentState == State::Stopped) ? mUI.GetAllObjectSettings() : mPhysicsEngine.GetObjectSettings();
+  for (const auto &[handle, settings] : handleSettingsPair) {
+    mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+    mRenderer.LoadDebugMesh(handle);
   }
+  mDebugRenderer->Draw(mCamera.CalculateMatrix(), mProjection);
 
-  if (mPhysicsSimulationRunning && mUI.GetPhysicsSettings().mEnableExtension) {
+  if (mCurrentState == State::Running && mUI.GetPhysicsSettings().mEnableExtension) {
 
     for (auto handle : mDeformationMeshManager.GetAllHandles()) {
       auto *mesh = mDeformationMeshManager.GetMesh(handle);
@@ -229,11 +188,6 @@ void PhysicsSimulationApp::Render()
             mesh->SetVertex(
                 effectedPointIndex, originalMesh->GetVertex(effectedPointIndex)
                                         + voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.firstT));
-
-#if 0
-            mesh->mOffsets.AccessCastBuffer(bezierCurve.mEffectedPoints[0]) =
-                voxel.CalculateFrom3Points(bezierCurve.mControlPoints, bezierCurve.mFirstT);
-#endif
 
             //////////////////////////////////////////////////////////////////////////
             //             auto p = bezierCurve.mControlPoints;
@@ -269,10 +223,6 @@ void PhysicsSimulationApp::Render()
 
             mesh->SetVertex(effectedPoint,
                 originalMesh->GetVertex(effectedPoint) + voxel.CalculateFrom4Points(bezierCurve.controlPoints, t));
-#if 0
-            mesh->mOffsets.AccessCastBuffer(effectedPoint) =
-                voxel.CalculateFrom4Points(bezierCurve.mControlPoints, t);
-#endif
             //////////////////////////////////////////////////////////////////////////
             //             auto points = bezierCurve.mControlPoints;
             //             f32 bestT = 0.0f;
@@ -317,31 +267,5 @@ void PhysicsSimulationApp::Render()
   }
   mUI.Update(mWindow);
   mRenderer.UpdateScreen(mWindow);
-
-  // TODO: add debug check
-  //   QuickCastBuffer<f32, glm::vec3> points;
-  //   for (auto &[handle, vMesh, settings] : VoxelMeshManager::Get().GetAllMeshes())
-  //   {
-  //     for (const auto &[key, voxel] : vMesh->mVoxels)
-  //     {
-  //       for (const auto &bezierCurve : voxel.mBezierCurves)
-  //       {
-  //         for (const auto &cp : bezierCurve.mControlPoints)
-  //         {
-  //           points.CastBufferPushBack(cp);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   mRenderer->DrawPoints(points);
-
-#if 0
-  mRenderer->Draw();
-  glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-  mDB->Draw(mCamera.CalculateMatrix(), mProjection);
-  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-  mUI->Update();
-  glfwSwapBuffers(mWindow->mGLWindow);
-#endif
 }
 } // namespace IPhysics
