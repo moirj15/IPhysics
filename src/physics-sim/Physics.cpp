@@ -120,14 +120,12 @@ void PhysicsEngine::SubmitObject(MeshHandle handle)
   AddObject(handle, collisionShape);
 }
 
-void PhysicsEngine::RemoveObject(MeshHandle handle)
-{
-  IMPLEMENTME();
-}
-
 void PhysicsEngine::UpdateObject(MeshHandle handle, const glm::vec3 &position)
 {
   mObjectSettings[handle].mPosition = position;
+  btTransform transform;
+  transform.setOrigin(ToBullet(position));
+  mObjects[handle]->setWorldTransform(transform);
 }
 
 void PhysicsEngine::CastRayWithForce(
@@ -157,6 +155,28 @@ void PhysicsEngine::CastRayWithForce(
       //       voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
       voxelRB->activate(true);
     }
+  }
+}
+
+std::optional<MeshHandle> PhysicsEngine::SelectObjectWithRayCast(
+    const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace) const
+{
+  auto rayStartWorld = NDCToWorldSpace * glm::vec4(rayStartNDC, 1.0f);
+  rayStartWorld /= rayStartWorld.w;
+
+  auto rayEndWorld = NDCToWorldSpace * glm::vec4(rayEndNDC, 1.0f);
+  rayEndWorld /= rayEndWorld.w;
+
+  auto rayDirWorld = glm::normalize(rayEndWorld - rayStartWorld);
+  btVector3 rayOrigin(rayStartWorld.x, rayStartWorld.y, rayStartWorld.z);
+  btVector3 rayDirection(rayEndWorld.x, rayEndWorld.y, rayEndWorld.z);
+  auto rayEnd = rayOrigin + rayDirection * 1000.0f;
+  btCollisionWorld::ClosestRayResultCallback rayCallback(rayOrigin, rayEnd);
+  mObjectWorld.mDynamicsWorld->rayTest(rayOrigin, rayEnd, rayCallback);
+  if (rayCallback.hasHit()) {
+    return {rayCallback.m_collisionObject->getUserIndex()};
+  } else {
+    return {};
   }
 }
 

@@ -76,7 +76,7 @@ class PhysicsEngine
   EngineSettings mSettings;
 
 public:
-  PhysicsEngine(DebugRenderer *db) : mDebugDrawer(db) { Init(); }
+  explicit PhysicsEngine(DebugRenderer *db) : mDebugDrawer(db) { Init(); }
 
   void Reset();
 
@@ -90,17 +90,19 @@ public:
   inline void SetMeshManager(MeshManager *meshManager)
   {
     mMeshManager = meshManager;
-    for (auto handle : mMeshManager->GetAllHandles()) {
-      SubmitObject(handle);
-    }
+//    for (auto handle : mMeshManager->GetAllHandles()) {
+//      SubmitObject(handle);
+//    }
   }
 
   void SubmitObject(MeshHandle handle);
-  void RemoveObject(MeshHandle handle);
   void UpdateObject(MeshHandle handle, const glm::vec3 &position);
 
   void CastRayWithForce(
       const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace, f32 force);
+
+  std::optional<MeshHandle> SelectObjectWithRayCast(
+      const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace) const;
 
   inline void SetEngineSettings(EngineSettings engineSettings) { mSettings = engineSettings; }
 

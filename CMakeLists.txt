@@ -42,6 +42,7 @@ set(PHYSICS_SIM_SOURCE
         ${PHYSICS_SIM_SOURCE_DIR}/Physics.cpp
         ${PHYSICS_SIM_SOURCE_DIR}/PhysicsSimulationApp.cpp
         ${PHYSICS_SIM_SOURCE_DIR}/DebugRenderer.cpp
+        ${PHYSICS_SIM_SOURCE_DIR}/Scene.cpp
         )
 set(PHYSICS_SIM_HEADERS
         ${PHYSICS_SIM_SOURCE_DIR}/IphysicsUI.h
@@ -50,6 +51,7 @@ set(PHYSICS_SIM_HEADERS
         ${PHYSICS_SIM_SOURCE_DIR}/collidable.h
         ${PHYSICS_SIM_SOURCE_DIR}/settings.h
         ${PHYSICS_SIM_SOURCE_DIR}/DebugRenderer.h
+        ${PHYSICS_SIM_SOURCE_DIR}/Scene.h
         )
 
 

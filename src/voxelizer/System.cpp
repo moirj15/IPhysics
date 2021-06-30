@@ -120,6 +120,7 @@ void System::GenerateVoxels()
     mVoxelMesh = mVoxelizer.Voxelize(mMesh);
     mMeshManager.AddVoxelMesh(mVoxelMesh, mCurrentMesh);
     mVoxelized = true;
+    mRenderer.LoadDebugMesh(mCurrentMesh);
   }
 }
 
@@ -129,7 +130,7 @@ void System::Render()
   if (mCurrentMesh != 0) {
     mRenderer.DrawMesh(mCurrentMesh, mCamera, glm::identity<glm::mat4>());
   }
-  if (mVoxelized && mEnableDebugDraw) {
+  if (mVoxelized /*&& mEnableDebugDraw*/) {
     mRenderer.DrawDebugVoxels(mCurrentMesh, mCamera, glm::identity<glm::mat4>());
   }
 

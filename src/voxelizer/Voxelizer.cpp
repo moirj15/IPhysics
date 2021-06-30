@@ -146,7 +146,8 @@ void Voxelizer::FillVoxelMesh(objs::VoxelMesh *voxelMesh)
   for (const auto &[start, end] : fillList) {
     for (u32 x = start.x; x < end.x; x++) {
       // TODO: should also update the voxel neighbors.
-      voxelMesh->voxels.insert({glm::uvec3(x, start.y, start.z), objs::Voxel()});
+      glm::uvec3 position(x, start.y, start.z);
+      voxelMesh->voxels.insert({position, objs::Voxel{.size = glm::vec3(voxelMesh->initialVoxelSize), .position = position}});
     }
   }
 }

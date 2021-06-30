@@ -1,18 +1,18 @@
 #pragma once
 
-#include <VoxelObjects/MeshManager.h>
+#include "DebugRenderer.h"
+#include "IPhysicsUI.h"
+#include "Physics.h"
+#include "Scene.h"
 
 #include <Common.h>
-#include <Renderer/Camera.h>
-#include <glm/mat4x4.hpp>
-#include <memory>
-
-#include "Physics.h"
-#include "IPhysicsUI.h"
-#include "DebugRenderer.h"
 #include <Context.hpp>
+#include <Renderer/Camera.h>
 #include <Renderer/Renderer.h>
 #include <SDL.h>
+#include <VoxelObjects/MeshManager.h>
+#include <glm/mat4x4.hpp>
+#include <memory>
 
 struct Window;
 
@@ -32,6 +32,7 @@ class PhysicsSimulationApp
 
   MeshManager mInitialMeshManager;
   MeshManager mDeformationMeshManager;
+  std::unordered_map<MeshHandle, SceneMember> mSceneMembers;
   shared::Renderer mRenderer;
 
   enum class State {

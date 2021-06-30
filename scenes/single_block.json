@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Block",
+    "object_file_path": "test.json",
+    "position": {"x": 3.0, "y": 0.0, "z": 0.0},
+    "force_direction": {"x": 0.0, "y": 0.0, "z": 1.0},
+    "force": 1.0
+  },
+  {
+    "name": "Block_2",
+    "object_file_path": "test.json",
+    "position": {"x": -3.0, "y": 0.0, "z": 0.0},
+    "force_direction": {"x": 0.0, "y": 0.0, "z": 1.0},
+    "force": 1.0
+  }
+]

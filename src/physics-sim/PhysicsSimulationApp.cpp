@@ -16,6 +16,7 @@ PhysicsSimulationApp::PhysicsSimulationApp() :
     mPhysicsEngine(mDebugRenderer), mRenderer(&mDeformationMeshManager)
 {
   mUI.Init(mWindow);
+  mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
 }
 
 PhysicsSimulationApp::~PhysicsSimulationApp() = default;
@@ -56,6 +57,23 @@ void PhysicsSimulationApp::LoadObject()
 
     // TODO: Modify the physics engine so it takes object setting modifications into account
     mUI.SetCurrentObject(handle);
+    //    mPhysicsEngine.Reset();
+    mPhysicsEngine.SubmitObject(handle);
+  }
+  static bool done = false;
+  if (!done) {
+    done = true;
+    auto sceneMembers = ReadSceneFile("scenes/single_block.json");
+    for (const auto &sceneMember : sceneMembers) {
+      auto [mesh, voxelMesh] = shared::DeSerialize(sceneMember.voxelMeshPath);
+      auto handle = mDeformationMeshManager.AddMeshes(mesh, voxelMesh);
+      mRenderer.LoadMesh(handle);
+      mPhysicsEngine.SubmitObject(handle);
+      mSceneMembers.emplace(handle, sceneMember);
+    }
+    mInitialMeshManager = mDeformationMeshManager;
+    // Have to add meshes to the mDeformationMeshManager otherwise their deformations won't appear when rendering.
+    // So I'll just copy values over to the mInitialMeshManager everytime an object is added.
   }
 }
 void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
@@ -64,7 +82,7 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
   auto *keys = SDL_GetKeyboardState(nullptr);
 
   // Check if we want to apply a force with the mouse
-  if (!io.WantCaptureMouse && io.MouseReleased[0] && SDL_GetModState() & SDLK_LSHIFT) {
+  if (!io.WantCaptureMouse && io.MouseReleased[0] && SDL_GetModState() == KMOD_LSHIFT) {
     s32 x = 0, y = 0;
     SDL_GetMouseState(&x, &y);
     // Calculate the mouse position in normalized device coordinates
@@ -78,10 +96,26 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
 
     mPhysicsEngine.CastRayWithForce(rayStartNDC, rayEndNDC, invProjCamera, 1.0f);
   }
+  if (!io.WantCaptureMouse && io.MouseReleased[0] && SDL_GetModState() == KMOD_LCTRL) {
+    s32 x = 0, y = 0;
+    SDL_GetMouseState(&x, &y);
+    // Calculate the mouse position in normalized device coordinates
+    const glm::vec2 mouseNDC(
+        ((io.MousePos.x / (f32)mWindow.mWidth) - 0.5f) * 2.0f, -((io.MousePos.y / (f32)mWindow.mHeight) - 0.5f) * 2.0f);
+    glm::vec3 rayStartNDC(mouseNDC, 0.0);
+    glm::vec3 rayEndNDC(mouseNDC, 1.0);
+
+    // Convert the ray start and end from NDC to world space
+    auto invProjCamera = glm::inverse(mProjection * mCamera.CalculateMatrix());
+    auto handle = mPhysicsEngine.SelectObjectWithRayCast(rayStartNDC, rayEndNDC, invProjCamera);
+    if (handle) {
+      mUI.SetCurrentObject(*handle);
+    }
+  }
   if (io.WantCaptureKeyboard) {
     return;
   }
-  if (!io.WantCaptureMouse && io.MouseDown[0] && (SDL_GetModState() & SDLK_LSHIFT) == 0) {
+  if (!io.WantCaptureMouse && io.MouseDown[0] && SDL_GetModState() == KMOD_LSHIFT) {
     f32 screenWidth = f32(mWindow.mWidth);
     f32 screenHeight = f32(mWindow.mHeight);
     glm::vec2 mouseDelta((screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
@@ -117,12 +151,15 @@ void PhysicsSimulationApp::CollectUIInput()
   if (handle == 0) {
     return;
   }
+  if (mCurrentState == State::Stopped && mUI.SettingsFieldModified()) {
+    mPhysicsEngine.UpdateObject(mUI.CurrentObject(), mUI.GetCurrentObjectsSettings().mPosition);
+  }
   if (mUI.StartSimulationClicked() && mCurrentState != State::Running) {
     if (mCurrentState == State::Stopped) {
       mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
       mPhysicsEngine.SetObjectSettings(mUI.GetAllObjectSettings());
       mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
-//      mDeformationMeshManager = mInitialMeshManager;
+      //      mDeformationMeshManager = mInitialMeshManager;
     }
     mCurrentState = State::Running;
   }
@@ -162,11 +199,18 @@ void PhysicsSimulationApp::ApplyDeformations()
 void PhysicsSimulationApp::Render()
 {
   mRenderer.ClearScreen();
-  const auto &handleSettingsPair =
-      (mCurrentState == State::Stopped) ? mUI.GetAllObjectSettings() : mPhysicsEngine.GetObjectSettings();
-  for (const auto &[handle, settings] : handleSettingsPair) {
-    mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
-    mRenderer.LoadDebugMesh(handle);
+
+  // It might be better to just put the object positions in the mesh manager, but that can be experimented with later
+  if (mCurrentState == State::Stopped) {
+    for (const auto &[handle, member] : mSceneMembers) {
+      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), member.position));
+      mRenderer.LoadDebugMesh(handle);
+    }
+  } else {
+    for (const auto &[handle, settings] : mPhysicsEngine.GetObjectSettings()) {
+      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
+      mRenderer.LoadDebugMesh(handle);
+    }
   }
   mDebugRenderer->Draw(mCamera.CalculateMatrix(), mProjection);
 
