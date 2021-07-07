@@ -40,40 +40,12 @@ void IPhysicsUI::Update(const focus::Window &window)
   ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
   {
     ImGui::Text("FPS: %f", ImGui::GetIO().Framerate);
-    mLoadObjectClicked = ImGui::Button("Load Object");
+    mLoadObjectClicked = ImGui::Button("Load Scene");
     ImGui::SameLine();
-    ImGui::InputText("Object File Name", mObjectPath.data(), mObjectPath.size());
+    ImGui::InputText("Scene File Name", mObjectPath.data(), mObjectPath.size());
     ImGui::BeginGroup();
     {
-      Physics::ObjectSettings objectSettings;
-      if (mObjectSettings.find(mCurrentObjectSettingsHandle) != mObjectSettings.end())
-      {
-        objectSettings = mObjectSettings[mCurrentObjectSettingsHandle];
-      }
-      mSettingsFieldModified |=
-          ImGui::InputFloat3("Position", glm::value_ptr(objectSettings.mPosition));
-
-      //       mSettingsFieldModified |=
-      //           ImGui::InputFloat3("Velocity", glm::value_ptr(objectSettings.mInitialVelocity));
-      //
-      //       mSettingsFieldModified |=
-      //           ImGui::InputFloat3("Acceleration",
-      //           glm::value_ptr(objectSettings.mInitialAccleration));
-
-      //       mSettingsFieldModified |= ImGui::InputFloat("Mass", &objectSettings.mMass);
-      //       mSettingsFieldModified |= ImGui::Checkbox("Treat as rigid",
-      //       &objectSettings.mTreatAsRigid);
-      if (mObjectSettings.find(mCurrentObjectSettingsHandle) != mObjectSettings.end())
-      {
-        mObjectSettings[mCurrentObjectSettingsHandle] = objectSettings;
-      }
-    }
-    ImGui::EndGroup();
-    ImGui::BeginGroup();
-    {
-      //            ImGui::Checkbox("Enable Gravity", &mPhysicsSettings.mEnableGravity);
       ImGui::Checkbox("Enable Extension", &mPhysicsSettings.mEnableExtension);
-      //            ImGui::InputFloat("Mouse Force", &mPhysicsSettings.mMouseForce);
     }
     ImGui::EndGroup();
     ImGui::BeginGroup();

@@ -10,7 +10,7 @@ class MeshManager
 {
   std::unordered_map<MeshHandle, objs::Mesh> mMeshes;
   std::unordered_map<MeshHandle, objs::VoxelMesh> mVoxelMeshes;
-  static MeshHandle sCurrentHandle;
+  MeshHandle sCurrentHandle = 0;
 
 public:
   MeshManager() = default;

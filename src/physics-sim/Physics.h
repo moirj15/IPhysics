@@ -23,6 +23,7 @@
 // #include <reactphysics3d.h>
 #include <VoxelObjects/MeshManager.h>
 #include <vector>
+#include "Scene.h"
 
 class Object;
 
@@ -35,7 +36,7 @@ class PhysicsEngine
 
   // Shared position of the mesh and voxel-mesh
   // std::unordered_map<MeshHandle, glm::vec3> mObjectPositions;
-  std::unordered_map<MeshHandle, ObjectSettings> mObjectSettings;
+  std::unordered_map<MeshHandle, SceneMember> mObjectSettings;
   std::vector<MeshHandle> mObjectHandles;
   std::unordered_map<MeshHandle, std::unique_ptr<btRigidBody>> mObjects;
   std::unordered_map<MeshHandle, std::vector<std::unique_ptr<btRigidBody>>> mVoxels;
@@ -82,9 +83,9 @@ public:
 
   void Update(f32 t);
 
-  inline void SetObjectSettings(const std::unordered_map<MeshHandle, ObjectSettings> &settings)
+  inline void SetObjectSettings(const std::unordered_map<MeshHandle, SceneMember> &sceneMembers)
   {
-    mObjectSettings = settings;
+    mObjectSettings = sceneMembers;
   }
 
   inline void SetMeshManager(MeshManager *meshManager)
@@ -95,18 +96,15 @@ public:
 //    }
   }
 
-  void SubmitObject(MeshHandle handle);
+  void SubmitObject(MeshHandle handle, const SceneMember &sceneMember);
   void UpdateObject(MeshHandle handle, const glm::vec3 &position);
 
   void CastRayWithForce(
       const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace, f32 force);
 
-  std::optional<MeshHandle> SelectObjectWithRayCast(
-      const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace) const;
-
   inline void SetEngineSettings(EngineSettings engineSettings) { mSettings = engineSettings; }
 
-  inline const std::unordered_map<MeshHandle, ObjectSettings> &GetObjectSettings() { return mObjectSettings; }
+  inline const std::unordered_map<MeshHandle, SceneMember> &GetObjectSettings() { return mObjectSettings; }
 
   // inline const std::unordered_map<MeshHandle, glm::vec3>& GetPositions() {
   //   return mObjectPositions;

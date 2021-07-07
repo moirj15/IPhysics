@@ -6,8 +6,6 @@
 
 //#include "../PhysicsEngine/Settings.h"
 
-MeshHandle MeshManager::sCurrentHandle = 0;
-
 MeshManager &MeshManager::operator=(const MeshManager &other)
 {
   mMeshes = std::unordered_map<MeshHandle, objs::Mesh>(other.mMeshes.begin(), other.mMeshes.end());

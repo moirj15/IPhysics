@@ -48,32 +48,16 @@ void PhysicsSimulationApp::LoadObject()
 {
   auto optionalPath = mUI.LoadObjectClicked();
   if (optionalPath && fs::exists(*optionalPath)) {
-    auto [mesh, voxelMesh] = shared::DeSerialize(*optionalPath);
-    // Have to add meshes to the mDeformationMeshManager otherwise their deformations won't appear when rendering.
-    // So I'll just copy values over to the mInitialMeshManager everytime an object is added.
-    auto handle = mDeformationMeshManager.AddMeshes(mesh, voxelMesh);
-    mInitialMeshManager = mDeformationMeshManager;
-    mRenderer.LoadMesh(handle);
-
-    // TODO: Modify the physics engine so it takes object setting modifications into account
-    mUI.SetCurrentObject(handle);
-    //    mPhysicsEngine.Reset();
-    mPhysicsEngine.SubmitObject(handle);
-  }
-  static bool done = false;
-  if (!done) {
-    done = true;
-    auto sceneMembers = ReadSceneFile("scenes/single_block.json");
+    auto sceneMembers = ReadSceneFile(*optionalPath);
     for (const auto &sceneMember : sceneMembers) {
       auto [mesh, voxelMesh] = shared::DeSerialize(sceneMember.voxelMeshPath);
       auto handle = mDeformationMeshManager.AddMeshes(mesh, voxelMesh);
+      mInitialMeshManager.AddMeshes(mesh, voxelMesh);
       mRenderer.LoadMesh(handle);
-      mPhysicsEngine.SubmitObject(handle);
+      mPhysicsEngine.SubmitObject(handle, sceneMember);
       mSceneMembers.emplace(handle, sceneMember);
     }
-    mInitialMeshManager = mDeformationMeshManager;
-    // Have to add meshes to the mDeformationMeshManager otherwise their deformations won't appear when rendering.
-    // So I'll just copy values over to the mInitialMeshManager everytime an object is added.
+//    mInitialMeshManager = mDeformationMeshManager;
   }
 }
 void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
@@ -95,22 +79,6 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
     auto invProjCamera = glm::inverse(mProjection * mCamera.CalculateMatrix());
 
     mPhysicsEngine.CastRayWithForce(rayStartNDC, rayEndNDC, invProjCamera, 1.0f);
-  }
-  if (!io.WantCaptureMouse && io.MouseReleased[0] && SDL_GetModState() == KMOD_LCTRL) {
-    s32 x = 0, y = 0;
-    SDL_GetMouseState(&x, &y);
-    // Calculate the mouse position in normalized device coordinates
-    const glm::vec2 mouseNDC(
-        ((io.MousePos.x / (f32)mWindow.mWidth) - 0.5f) * 2.0f, -((io.MousePos.y / (f32)mWindow.mHeight) - 0.5f) * 2.0f);
-    glm::vec3 rayStartNDC(mouseNDC, 0.0);
-    glm::vec3 rayEndNDC(mouseNDC, 1.0);
-
-    // Convert the ray start and end from NDC to world space
-    auto invProjCamera = glm::inverse(mProjection * mCamera.CalculateMatrix());
-    auto handle = mPhysicsEngine.SelectObjectWithRayCast(rayStartNDC, rayEndNDC, invProjCamera);
-    if (handle) {
-      mUI.SetCurrentObject(*handle);
-    }
   }
   if (io.WantCaptureKeyboard) {
     return;
@@ -147,17 +115,9 @@ void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
 
 void PhysicsSimulationApp::CollectUIInput()
 {
-  auto handle = mUI.CurrentObject();
-  if (handle == 0) {
-    return;
-  }
-  if (mCurrentState == State::Stopped && mUI.SettingsFieldModified()) {
-    mPhysicsEngine.UpdateObject(mUI.CurrentObject(), mUI.GetCurrentObjectsSettings().mPosition);
-  }
   if (mUI.StartSimulationClicked() && mCurrentState != State::Running) {
     if (mCurrentState == State::Stopped) {
       mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
-      mPhysicsEngine.SetObjectSettings(mUI.GetAllObjectSettings());
       mPhysicsEngine.SetMeshManager(&mDeformationMeshManager);
       //      mDeformationMeshManager = mInitialMeshManager;
     }
@@ -170,6 +130,9 @@ void PhysicsSimulationApp::CollectUIInput()
     mCurrentState = State::Stopped;
     mPhysicsEngine.Reset();
     mDeformationMeshManager = mInitialMeshManager;
+    for (const auto &[handle, sceneMember] : mSceneMembers) {
+      mPhysicsEngine.SubmitObject(handle, sceneMember);
+    }
   }
 }
 
@@ -201,16 +164,10 @@ void PhysicsSimulationApp::Render()
   mRenderer.ClearScreen();
 
   // It might be better to just put the object positions in the mesh manager, but that can be experimented with later
-  if (mCurrentState == State::Stopped) {
-    for (const auto &[handle, member] : mSceneMembers) {
-      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), member.position));
-      mRenderer.LoadDebugMesh(handle);
-    }
-  } else {
-    for (const auto &[handle, settings] : mPhysicsEngine.GetObjectSettings()) {
-      mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), settings.mPosition));
-      mRenderer.LoadDebugMesh(handle);
-    }
+  const auto &sceneMembers = (mCurrentState == State::Stopped) ? mSceneMembers : mPhysicsEngine.GetObjectSettings();
+  for (const auto &[handle, member] : sceneMembers) {
+    mRenderer.DrawMesh(handle, mCamera, glm::translate(glm::identity<glm::mat4>(), member.position));
+    mRenderer.LoadDebugMesh(handle);
   }
   mDebugRenderer->Draw(mCamera.CalculateMatrix(), mProjection);
 

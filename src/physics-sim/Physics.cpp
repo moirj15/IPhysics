@@ -75,7 +75,7 @@ void PhysicsEngine::Update(f32 t)
 #if 0
     auto *objectSettings = VoxelMeshManager::Get().GetSettings(key);
 #endif
-    auto &position = mObjectSettings[handle].mPosition;
+    auto &position = mObjectSettings[handle].position;
     for (auto &voxelRB : voxelRBs) {
 
       const auto &origin = voxelRB->getWorldTransform().getOrigin();
@@ -92,7 +92,7 @@ void PhysicsEngine::Update(f32 t)
   }
   for (const auto handle : mObjectHandles) {
     // Update our object position in its settings, so we can render it in the right spot
-    auto &objectPosition = mObjectSettings[handle].mPosition;
+    auto &objectPosition = mObjectSettings[handle].position;
     auto *rb = (btRigidBody *)mObjects[handle].get();
     const auto &transform = rb->getWorldTransform();
     const auto &position = transform.getOrigin();
@@ -112,9 +112,10 @@ void PhysicsEngine::Update(f32 t)
   mVoxelWorld.mDynamicsWorld->debugDrawWorld();
 }
 
-void PhysicsEngine::SubmitObject(MeshHandle handle)
+void PhysicsEngine::SubmitObject(MeshHandle handle, const SceneMember &sceneMember)
 {
   mObjectHandles.emplace_back(handle);
+  mObjectSettings[handle] = sceneMember;
   // mObjectPositions.emplace(handle, glm::vec3(0.0f, 0.0f, 0.0f));
   auto *collisionShape = AddVoxels(handle);
   AddObject(handle, collisionShape);
@@ -122,7 +123,7 @@ void PhysicsEngine::SubmitObject(MeshHandle handle)
 
 void PhysicsEngine::UpdateObject(MeshHandle handle, const glm::vec3 &position)
 {
-  mObjectSettings[handle].mPosition = position;
+  mObjectSettings[handle].position = position;
   btTransform transform;
   transform.setOrigin(ToBullet(position));
   mObjects[handle]->setWorldTransform(transform);
@@ -158,28 +159,6 @@ void PhysicsEngine::CastRayWithForce(
   }
 }
 
-std::optional<MeshHandle> PhysicsEngine::SelectObjectWithRayCast(
-    const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace) const
-{
-  auto rayStartWorld = NDCToWorldSpace * glm::vec4(rayStartNDC, 1.0f);
-  rayStartWorld /= rayStartWorld.w;
-
-  auto rayEndWorld = NDCToWorldSpace * glm::vec4(rayEndNDC, 1.0f);
-  rayEndWorld /= rayEndWorld.w;
-
-  auto rayDirWorld = glm::normalize(rayEndWorld - rayStartWorld);
-  btVector3 rayOrigin(rayStartWorld.x, rayStartWorld.y, rayStartWorld.z);
-  btVector3 rayDirection(rayEndWorld.x, rayEndWorld.y, rayEndWorld.z);
-  auto rayEnd = rayOrigin + rayDirection * 1000.0f;
-  btCollisionWorld::ClosestRayResultCallback rayCallback(rayOrigin, rayEnd);
-  mObjectWorld.mDynamicsWorld->rayTest(rayOrigin, rayEnd, rayCallback);
-  if (rayCallback.hasHit()) {
-    return {rayCallback.m_collisionObject->getUserIndex()};
-  } else {
-    return {};
-  }
-}
-
 void PhysicsEngine::Init()
 {
   mObjectWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
@@ -190,7 +169,7 @@ void PhysicsEngine::Init()
 
 void PhysicsEngine::AddObject(MeshHandle handle, btCompoundShape *collisionShape)
 {
-  auto &position = mObjectSettings[handle].mPosition;
+  auto &position = mObjectSettings[handle].position;
 
   btTransform transform = btTransform::getIdentity();
   transform.setOrigin(ToBullet(position));
@@ -209,7 +188,7 @@ void PhysicsEngine::AddObject(MeshHandle handle, btCompoundShape *collisionShape
 btCompoundShape *PhysicsEngine::AddVoxels(MeshHandle handle)
 {
   auto *vMesh = mMeshManager->GetVoxelMesh(handle);
-  auto &position = mObjectSettings[handle].mPosition;
+  auto &position = mObjectSettings[handle].position;
   mVoxels.emplace(handle, std::vector<std::unique_ptr<btRigidBody>>());
   std::unordered_map<glm::uvec3, btRigidBody *> voxelNeighbors;
   auto *collisionShape = new btCompoundShape(true, (int)vMesh->voxels.size());
