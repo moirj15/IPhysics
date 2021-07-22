@@ -21,9 +21,10 @@
 
 #include <memory>
 // #include <reactphysics3d.h>
+#include "Scene.h"
+
 #include <VoxelObjects/MeshManager.h>
 #include <vector>
-#include "Scene.h"
 
 class Object;
 
@@ -83,18 +84,12 @@ public:
 
   void Update(f32 t);
 
-  inline void SetObjectSettings(const std::unordered_map<MeshHandle, SceneMember> &sceneMembers)
+  void SetObjectSettings(const std::unordered_map<MeshHandle, SceneMember> &sceneMembers)
   {
     mObjectSettings = sceneMembers;
   }
 
-  inline void SetMeshManager(MeshManager *meshManager)
-  {
-    mMeshManager = meshManager;
-//    for (auto handle : mMeshManager->GetAllHandles()) {
-//      SubmitObject(handle);
-//    }
-  }
+  void SetMeshManager(MeshManager *meshManager) { mMeshManager = meshManager; }
 
   void SubmitObject(MeshHandle handle, const SceneMember &sceneMember);
   void UpdateObject(MeshHandle handle, const glm::vec3 &position);
@@ -102,13 +97,9 @@ public:
   void CastRayWithForce(
       const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace, f32 force);
 
-  inline void SetEngineSettings(EngineSettings engineSettings) { mSettings = engineSettings; }
+  void SetEngineSettings(EngineSettings engineSettings) { mSettings = engineSettings; }
 
-  inline const std::unordered_map<MeshHandle, SceneMember> &GetObjectSettings() { return mObjectSettings; }
-
-  // inline const std::unordered_map<MeshHandle, glm::vec3>& GetPositions() {
-  //   return mObjectPositions;
-  // }
+  const std::unordered_map<MeshHandle, SceneMember> &GetObjectSettings() { return mObjectSettings; }
 
 private:
   void Init();

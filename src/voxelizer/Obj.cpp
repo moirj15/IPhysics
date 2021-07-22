@@ -6,11 +6,11 @@
 #include <glm/gtx/normal.hpp>
 #include <sstream>
 
-ObjReader::ObjReader() : mPresentBitSet(0), mDataLen(0), mPos(0), mMesh(new objs::Mesh)
+ObjParser::ObjParser() : mPresentBitSet(0), mDataLen(0), mPos(0), mMesh(new objs::Mesh)
 {
 }
 
-objs::Mesh *ObjReader::Parse(const char *filename)
+objs::Mesh *ObjParser::Parse(const char *filename)
 {
   LoadOBJFile(filename);
   while (mPos < mDataLen) {
@@ -50,43 +50,13 @@ objs::Mesh *ObjReader::Parse(const char *filename)
       break;
     }
   }
-  mMesh->normals.resize(mMesh->vertices.size());
-  // TODO: actually calculate surface normals or just use blender's normals
-  for (u32 i : mMesh->indices) {
-    auto v = mMesh->GetVertex(i);
-    auto n = glm::normalize(v);
-    mMesh->SetNormal(i, n);
-  }
 
-//  for (u32 i = 0; i < mMesh->indices.size(); i += 3) {
-//    u32 i0 = mMesh->indices[i];
-//    u32 i1 = mMesh->indices[i + 1];
-//    u32 i2 = mMesh->indices[i + 2];
-//    auto t0 = mMesh->GetVertex(i0);
-//    auto t1 = mMesh->GetVertex(i1);
-//    auto t2 = mMesh->GetVertex(i2);
-//    auto normal = glm::triangleNormal(t0, t1, t2);
-//    mMesh->normals[i0] += normal.x;
-//    mMesh->normals[i0 + 1] += normal.y;
-//    mMesh->normals[i0 + 2] += normal.z;
-//
-//    mMesh->normals[i1] += normal.x;
-//    mMesh->normals[i1 + 1] += normal.y;
-//    mMesh->normals[i1 + 2] += normal.z;
-//
-//    mMesh->normals[i2] += normal.x;
-//    mMesh->normals[i2 + 1] += normal.y;
-//    mMesh->normals[i2 + 2] += normal.z;
-//  }
-//  for (u32 i = 0; i < mMesh->normals.size(); i++) {
-//    mMesh->normals[i] /= 3.0f;
-//  }
   Clear();
   // This should clear out mMesh
   return mMesh;
 }
 
-void ObjReader::Clear()
+void ObjParser::Clear()
 {
   mPresentBitSet = 0;
   mTempNormals.clear();
@@ -96,7 +66,7 @@ void ObjReader::Clear()
   mFilename.clear();
 }
 
-void ObjReader::LoadOBJFile(const char *filename)
+void ObjParser::LoadOBJFile(const char *filename)
 {
   mFilename = filename;
   FILE *fp = OpenFile(filename, "rb");
@@ -120,7 +90,7 @@ void ObjReader::LoadOBJFile(const char *filename)
 }
 
 // Private
-ObjReader::DataType ObjReader::ParseType()
+ObjParser::DataType ObjParser::ParseType()
 {
   if (Token() == 'f') {
     mPos += 2;
@@ -156,7 +126,7 @@ ObjReader::DataType ObjReader::ParseType()
   return DataType::Unknown;
 }
 
-void ObjReader::ParseVertex()
+void ObjParser::ParseVertex()
 {
   std::stringstream line{ReadLine()};
   f32 val = 0.0f;
@@ -166,7 +136,7 @@ void ObjReader::ParseVertex()
   }
 }
 
-void ObjReader::ParseNormal()
+void ObjParser::ParseNormal()
 {
   std::stringstream line{ReadLine()};
   f32 val = 0.0f;
@@ -177,34 +147,27 @@ void ObjReader::ParseNormal()
   mTempNormals.emplace_back(normal);
 }
 
-void ObjReader::ParseFace()
+void ObjParser::ParseFace()
 {
-  //   if (mMesh->mNormals.IsEmpty())
-  //   {
-  //     mMesh->mNormals.SetBufferSize(mTempNormals.size() * 3);
-  //   }
   std::string lineStr{ReadLine()};
   ReplaceChars(&lineStr, '/', ' ');
   std::stringstream line{lineStr};
-  //   u32 index = 0;
-  //   u32 texCoord = 0;
-  //   u32 normal = 0;
   for (s32 i = 0; i < 3; i++) {
-    // NOTE: only indices are read in
-    u32 index = 0.0;
-    // u32 normal = 0.0;
-    line >> index; // >> normal;
+    u32 index = 0;
+    u32 texCoord = 0; // unused for now
+    u32 normal = 0;
+    if (mPresentBitSet & (u32)Present::Texture) {
+      line >> index >> texCoord >> normal;
+    } else {
+      line >> index >> normal;
+    }
     index--;
-    //     normal--;
+    normal--;
     mMesh->indices.emplace_back(index);
-    //     mMesh->mNormals.AccessCastBuffer(index) = mTempNormals[normal];
-    //     mMesh->mNormals.AccessBuffer((index * 3)) = mTempNormals[normal].x;
-    //     mMesh->mNormals.AccessBuffer((index * 3) + 1) = mTempNormals[normal].y;
-    //     mMesh->mNormals.AccessBuffer((index * 3) + 2) = mTempNormals[normal].z;
   }
 }
 
-std::string ObjReader::ReadLine()
+std::string ObjParser::ReadLine()
 {
   std::string line = "";
   while (Token() != '\n' && mPos < mDataLen) {
@@ -215,7 +178,7 @@ std::string ObjReader::ReadLine()
   return line;
 }
 
-void ObjReader::SkipLine()
+void ObjParser::SkipLine()
 {
   while (Token() != '\n' && mPos < mDataLen) {
     mPos++;
@@ -223,7 +186,7 @@ void ObjReader::SkipLine()
   mPos++;
 }
 
-void ObjReader::ReplaceChars(std::string *str, char toReplace, char replacement)
+void ObjParser::ReplaceChars(std::string *str, char toReplace, char replacement)
 {
   for (Size i = 0; i < str->length(); i++) {
     if ((*str)[i] == toReplace) {

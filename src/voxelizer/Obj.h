@@ -6,12 +6,13 @@
 #include <string>
 #include <vector>
 #include <VoxelObjects/Objects.h>
+#include <unordered_set>
 
 //struct Mesh;
 
 
 // Will only work with obj files that contain vertices and indices. No normals or uv coordinates
-class ObjReader
+class ObjParser
 {
   enum class Present : u32
   {
@@ -23,6 +24,12 @@ class ObjReader
   std::string mFilename;
   std::unique_ptr<char[]> mData;
   std::vector<glm::vec3> mTempNormals;
+  std::vector<glm::vec3> mTempVertices;
+  struct Index {
+    u32 vertex;
+    u32 normal;
+  };
+  std::vector<Index> mIndices;
   Size mDataLen;
 
   Size mPos;
@@ -48,7 +55,7 @@ public:
    * Constructor.
    * @param filename: The obj filename that will be parsed.
    */
-  ObjReader();
+  ObjParser();
   // TODO: returning a pointer is kinda dumb
   /// Parses the obj file and returns a mesh
   objs::Mesh *Parse(const char *filename);

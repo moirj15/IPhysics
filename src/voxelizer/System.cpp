@@ -92,15 +92,44 @@ void System::CollectInput(const SDL_Event &e)
   }
 }
 
+#include "tiny_obj_loader.h"
+
 void System::LoadMesh()
 {
   auto meshPath = mUI->LoadMeshClicked();
   if (meshPath) {
     // Load our mesh if we got a good path
     if (fs::exists(*meshPath)) {
+      #if 0
       ObjReader objReader;
       // TODO: mem-leak, fix up the obj parser
       mMesh = *objReader.Parse(meshPath->c_str());
+      #endif
+
+      
+      mMesh.Clear();
+      tinyobj::ObjReader reader;
+      reader.ParseFromFile(*meshPath);
+      auto attrib = reader.GetAttrib();
+      // assuming one shape for now
+      auto shape = reader.GetShapes()[0];
+      // TODO: calculate a better index buffer
+      u32 index = 0;
+      for (auto indices : shape.mesh.indices) {
+        mMesh.vertices.push_back(attrib.vertices[indices.vertex_index * 3]);
+        mMesh.vertices.push_back(attrib.vertices[(indices.vertex_index * 3) + 1]);
+        mMesh.vertices.push_back(attrib.vertices[(indices.vertex_index * 3) + 2]);
+
+        u32 normalIndex = indices.normal_index != -1 ? indices.normal_index : indices.vertex_index;
+        mMesh.normals.push_back(attrib.normals[normalIndex * 3]);
+        mMesh.normals.push_back(attrib.normals[(normalIndex * 3) + 1]);
+        mMesh.normals.push_back(attrib.normals[(normalIndex * 3) + 2]);
+
+        mMesh.indices.push_back(index);
+        index++;
+      }
+
+
       mCurrentMesh = mMeshManager.AddMesh(mMesh);
       mRenderer.LoadMesh(mCurrentMesh);
 

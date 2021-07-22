@@ -184,8 +184,7 @@ struct Voxel {
   // TODO: clean-up
   inline glm::vec3 CalculateFrom3Points(const std::vector<glm::vec3> &points, f32 t)
   {
-    return points[1] + powf(1.0f - t, 2.0f) * (points[0] - points[1])
-           + powf(t, 2.0f) * (points[2] - points[1]);
+    return points[1] + powf(1.0f - t, 2.0f) * (points[0] - points[1]) + powf(t, 2.0f) * (points[2] - points[1]);
     //     auto q0 = glm::mix(points[0], points[1], t);
     //     auto q1 = glm::mix(points[1], points[2], t);
     //     return glm::mix(q0, q1, t);
@@ -210,6 +209,13 @@ struct Mesh {
   std::vector<f32> normals;
 
   std::vector<u32> indices;
+
+  void Clear() {
+    vertices.clear();
+    normals.clear();
+    indices.clear();
+  }
+
   inline glm::vec3 GetVertex(u32 i) const
   {
     assert(i < vertices.size() / 3);
@@ -226,8 +232,8 @@ struct Mesh {
     vertices.push_back(v[1]);
     vertices.push_back(v[2]);
   }
-  inline void SetVertex(u32 i, const glm::vec3 &v) { SetVec3(&vertices, i, v); }
-  inline void SetNormal(u32 i, const glm::vec3 &n) { SetVec3(&normals, i, n); }
+  inline void SetVertex(u32 i, const glm::vec3 &v) { SetVec3(vertices, i, v); }
+  inline void SetNormal(u32 i, const glm::vec3 &n) { SetVec3(normals, i, n); }
   inline u32 VerticesSizeInBytes() const { return (u32)vertices.size() * sizeof(f32); }
   inline u32 IndicesSizeInBytes() const { return (u32)indices.size() * sizeof(u32); }
 
@@ -254,11 +260,11 @@ struct Mesh {
   }
 
 private:
-  inline void SetVec3(std::vector<f32> *data, u32 i, const glm::vec3 &v)
+  inline void SetVec3(std::vector<f32> &data, u32 i, const glm::vec3 &v)
   {
-    (*data)[i * 3] = v.x;
-    (*data)[(i * 3) + 1] = v.y;
-    (*data)[(i * 3) + 2] = v.z;
+    data[i * 3] = v.x;
+    data[(i * 3) + 1] = v.y;
+    data[(i * 3) + 2] = v.z;
   }
 };
 

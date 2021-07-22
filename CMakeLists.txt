@@ -20,6 +20,7 @@ set(VOXEL_GENERATOR_SOURCE
         ${VOXEL_GENERATOR_SOURCE_DIR}/System.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerUI.cpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/tiny_obj_loader.cpp
         )
 set(VOXEL_GENERATOR_HEADERS
         ${VOXEL_GENERATOR_SOURCE_DIR}/FileUtils.hpp

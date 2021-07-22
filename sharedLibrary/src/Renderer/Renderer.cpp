@@ -117,7 +117,8 @@ void Renderer::LoadDebugMesh(MeshHandle handle)
 void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4 &model)
 {
   auto cameraMat = camera.CalculateMatrix();
-  auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
+  auto projection = glm::infinitePerspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f);
+  //auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
   auto modelView = cameraMat * model;
   auto normalMat = glm::transpose(glm::inverse(modelView));
   // clang-format off
@@ -140,7 +141,8 @@ void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4
 void Renderer::DrawDebugVoxels(MeshHandle handle, const Camera &camera, const glm::mat4 &model)
 {
   auto cameraMat = camera.CalculateMatrix();
-  auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
+  auto projection = glm::infinitePerspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f);
+  //auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
   auto modelView = cameraMat * model;
   // clang-format off
   LineConstants constants = {
