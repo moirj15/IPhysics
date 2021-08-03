@@ -48,6 +48,7 @@ void PhysicsSimulationApp::LoadObject()
 {
   auto optionalPath = mUI.LoadObjectClicked();
   if (optionalPath && fs::exists(*optionalPath)) {
+    mPhysicsEngine.SetEngineSettings(mUI.GetPhysicsSettings());
     auto sceneMembers = ReadSceneFile(*optionalPath);
     for (const auto &sceneMember : sceneMembers) {
       auto [mesh, voxelMesh] = shared::DeSerialize(sceneMember.voxelMeshPath);
@@ -57,7 +58,7 @@ void PhysicsSimulationApp::LoadObject()
       mPhysicsEngine.SubmitObject(handle, sceneMember);
       mSceneMembers.emplace(handle, sceneMember);
     }
-//    mInitialMeshManager = mDeformationMeshManager;
+    //    mInitialMeshManager = mDeformationMeshManager;
   }
 }
 void PhysicsSimulationApp::CollectInput(const SDL_Event &e)
@@ -186,33 +187,14 @@ void PhysicsSimulationApp::Render()
             }
             alreadyCalculated[bezierCurve.effectedPoints[0]] = true;
             u32 effectedPointIndex = bezierCurve.effectedPoints[0];
-            mesh->SetVertex(
-                effectedPointIndex, originalMesh->GetVertex(effectedPointIndex)
-                                        + voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.firstT));
+            //bezierCurve.CalculateQuadraticTValue();
+            bezierCurve.Calc();
+            auto p = voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.firstT);
+            auto p2 = voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.secondT);
+            auto p3 = voxel.CalculateFrom3Points(bezierCurve.controlPoints, 0.25f);
+            mesh->SetVertex(effectedPointIndex, /*originalMesh->GetVertex(effectedPointIndex) +*/ p);
 
-            //////////////////////////////////////////////////////////////////////////
-            //             auto p = bezierCurve.mControlPoints;
-            //             auto a = p[0] - 2.0f * p[1] + p[2];
-            //             auto b = -2.0f * p[0] + 2.0f * p[1];
-            //             auto c = -p[1] + p[0];
-            //             auto posT = (-b + glm::sqrt(glm::pow(b, glm::vec3(2.0f)) - 4.0f * a * c))
-            //             / (2.0f * a); auto negT = (-b - glm::sqrt(glm::pow(b, glm::vec3(2.0f))
-            //             - 4.0f * a * c)) / (2.0f * a); f32 best = posT.x; for (u32 i = 0; i < 3;
-            //             i++)
-            //             {
-            //               if (posT[i] <= 1.0f && posT[i] >= 0.0f)
-            //               {
-            //                 best = posT[i];
-            //               }
-            //               if (negT[i] <= 1.0f && negT[i] >= 0.0f)
-            //               {
-            //                 best = posT[i];
-            //               }
-            //             }
-            //////////////////////////////////////////////////////////////////////////
-            //             auto tmp = voxel.CalculateFrom3Points(bezierCurve.mControlPoints, best);
-          } else // if (bezierCurve.mControlPoints.size() == 4)
-          {
+          } else {
             if (alreadyCalculated[bezierCurve.effectedPoints[0]]
                 && alreadyCalculated[bezierCurve.effectedPoints[bezierCurve.effectedPoints.size() - 1]]) {
               continue;
@@ -224,43 +206,6 @@ void PhysicsSimulationApp::Render()
 
             mesh->SetVertex(effectedPoint,
                 originalMesh->GetVertex(effectedPoint) + voxel.CalculateFrom4Points(bezierCurve.controlPoints, t));
-            //////////////////////////////////////////////////////////////////////////
-            //             auto points = bezierCurve.mControlPoints;
-            //             f32 bestT = 0.0f;
-            //             for (u32 i = 0; i < 3; i++)
-            //             {
-            //
-            //               std::complex<f32> a =
-            //                   -points[0][i] + (3.0f * points[1][i]) - (3.0f * points[2][i]) +
-            //                   points[3][i];
-            //               std::complex<f32> b = 3.0f * points[0][i] - 6.0f * points[1][i] + 3.0f
-            //               * points[2][i]; std::complex<f32> c = -3.0f * points[0][i] + 3.0f *
-            //               points[1][i]; std::complex<f32> d = points[0][i] - points[index][i];
-            //
-            //               auto p = -b / (3.0f * a);
-            //               auto q = pow(p, 3.0f) + (b * c - 3.0f * a * d) / (6.0f * pow(a, 2.0f));
-            //               auto r = c / (3.0f * a);
-            //
-            //               auto t = pow(q + pow(q * q + pow(r - (p * p), 3.0f), 1.0f / 2.0f), 1.0f
-            //               / 3.0f)
-            //                        + pow(q - pow((q * q) + pow(r - (p * p), 3.0f), 1.0f
-            //                        / 2.0f), 1.0f / 3.0f)
-            //                        + p;
-            //               if (!isnan(t.real()))
-            //               {
-            //                 bestT = t.real();
-            //               }
-            //               //               for (u32 i = 0; i < 3; i++)
-            //               //               {
-            //               auto tn = voxel.CalculateFrom4Points(points, t.real());
-            //               //               printf("tn[%d] = %s\n", i,
-            //               glm::to_string(tn).c_str());
-            //               //               }
-            //             }
-            //             auto tmp = voxel.CalculateFrom4Points(bezierCurve.mControlPoints, bestT);
-            //////////////////////////////////////////////////////////////////////////
-            //             printf("actual = %s\n", glm::to_string(points[index]).c_str());
-            //             printf("\n");
           }
         }
       }

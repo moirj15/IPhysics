@@ -53,7 +53,8 @@ std::vector<Voxelizer::MeshInfo> Voxelizer::FindTriangleAABBs(const objs::Mesh &
   return meshInfos;
 }
 
-objs::VoxelMesh Voxelizer::GenerateVoxels(std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, const objs::Mesh &mesh)
+objs::VoxelMesh Voxelizer::GenerateVoxels(
+    std::vector<MeshInfo> &meshTriangles, const btAABB &meshAABB, const objs::Mesh &mesh)
 {
 
   glm::vec3 min(meshAABB.m_min.x(), meshAABB.m_min.y(), meshAABB.m_min.z());
@@ -147,7 +148,8 @@ void Voxelizer::FillVoxelMesh(objs::VoxelMesh *voxelMesh)
     for (u32 x = start.x; x < end.x; x++) {
       // TODO: should also update the voxel neighbors.
       glm::uvec3 position(x, start.y, start.z);
-      voxelMesh->voxels.insert({position, objs::Voxel{.size = glm::vec3(voxelMesh->initialVoxelSize), .position = position}});
+      voxelMesh->voxels.insert(
+          {position, objs::Voxel{.size = glm::vec3(voxelMesh->initialVoxelSize), .position = position}});
     }
   }
 }
@@ -201,15 +203,20 @@ void Voxelizer::AddBezierCurves(objs::VoxelMesh *voxelMesh, const objs::Mesh &me
           effectedPoints.push_back(edge.mEndVert);
         }
 
-        controlPoints.emplace_back(secondIntersection);
+        if (secondIntersection == firstIntersection) {
+          controlPoints.emplace_back(startVert);
+        } else {
+          controlPoints.emplace_back(secondIntersection);
+        }
 
-        voxelMesh->voxels[key].bezierCurves.push_back({.controlPoints = controlPoints, .effectedPoints = effectedPoints});
+        voxelMesh->voxels[key].bezierCurves.emplace_back(controlPoints, effectedPoints);
       }
     }
   }
 }
 
-std::unordered_map<u32, std::unordered_set<Edge>> Voxelizer::CreateEdgeMap(objs::VoxelMesh *voxelMesh, const objs::Mesh &mesh)
+std::unordered_map<u32, std::unordered_set<Edge>> Voxelizer::CreateEdgeMap(
+    objs::VoxelMesh *voxelMesh, const objs::Mesh &mesh)
 {
   std::unordered_map<u32, std::unordered_set<Edge>> edgeMap;
   const auto &AddEdgeNoDuplicates = [&edgeMap](const u32 v0, const u32 v1) {

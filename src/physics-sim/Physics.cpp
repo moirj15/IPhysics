@@ -22,9 +22,17 @@ void PhysicsEngine::Reset()
 void PhysicsEngine::Update(f32 t)
 {
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
+#if 0
   mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
+#endif
   // TODO: add a bool to make this optional
   auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
+  if (mSettings.mEnableExtension) {
+    mSoftBodyWorld->stepSimulation(t, 10);
+  } else {
+    mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
+  }
+#if 0
   if (mSettings.mEnableExtension) {
     s32 numManifolds = voxelDispatcher->getNumManifolds();
     for (s32 i = 0; i < numManifolds; i++) {
@@ -71,23 +79,47 @@ void PhysicsEngine::Update(f32 t)
       }
     }
   }
-  for (const auto &[handle, voxelRBs] : mVoxels) {
-#if 0
-    auto *objectSettings = VoxelMeshManager::Get().GetSettings(key);
 #endif
-    auto &position = mObjectSettings[handle].position;
-    for (auto &voxelRB : voxelRBs) {
+  if (mSettings.mEnableExtension) {
+    for (const auto &[handle, voxelRBs] : mSoftVoxels) {
+      auto &position = mObjectSettings[handle].position;
+      for (auto &voxelRB : voxelRBs) {
 
-      const auto &origin = voxelRB->getWorldTransform().getOrigin();
-      glm::vec3 voxelCurrPosition(origin.x(), origin.y(), origin.z());
-      auto *voxel = (objs::Voxel *)voxelRB->getUserPointer();
-      auto orignalPosition = voxel->position;
-      voxel->position = voxelCurrPosition;
-      auto toNewPosition = voxel->position - orignalPosition;
-      // TODO: may have to move this to before the dimensions of the voxel are changed.
-      // voxel->UpdateBezierCurves(toNewPosition);
-      voxel->relativePositionDelta = (voxel->position - position) - voxel->positionRelativeToCenter;
-      voxel->positionRelativeToCenter = voxel->position - position;
+
+        auto *voxel = (objs::Voxel *)voxelRB->getUserPointer();
+        for (auto &curve : voxel->bezierCurves) {
+          for (u32 controlPointIndex = 0; controlPointIndex < curve.controlPoints.size(); controlPointIndex++) {
+            u32 nodeIndex = curve.controlPointBulletNodeIndices[controlPointIndex];
+            curve.controlPoints[controlPointIndex] = ToGLM(voxelRB->m_nodes[nodeIndex].m_x);
+          }
+        }
+        const auto &origin = voxelRB->getWorldTransform().getOrigin();
+        glm::vec3 voxelCurrPosition(origin.x(), origin.y(), origin.z());
+        auto orignalPosition = voxel->position;
+        voxel->position = voxelCurrPosition;
+        auto toNewPosition = voxel->position - orignalPosition;
+        // TODO: may have to move this to before the dimensions of the voxel are changed.
+        // voxel->UpdateBezierCurves(toNewPosition);
+        voxel->relativePositionDelta = (voxel->position - position) - voxel->positionRelativeToCenter;
+        voxel->positionRelativeToCenter = voxel->position - position;
+      }
+    }
+  } else {
+    for (const auto &[handle, voxelRBs] : mVoxels) {
+      auto &position = mObjectSettings[handle].position;
+      for (auto &voxelRB : voxelRBs) {
+
+        const auto &origin = voxelRB->getWorldTransform().getOrigin();
+        glm::vec3 voxelCurrPosition(origin.x(), origin.y(), origin.z());
+        auto *voxel = (objs::Voxel *)voxelRB->getUserPointer();
+        auto orignalPosition = voxel->position;
+        voxel->position = voxelCurrPosition;
+        auto toNewPosition = voxel->position - orignalPosition;
+        // TODO: may have to move this to before the dimensions of the voxel are changed.
+        // voxel->UpdateBezierCurves(toNewPosition);
+        voxel->relativePositionDelta = (voxel->position - position) - voxel->positionRelativeToCenter;
+        voxel->positionRelativeToCenter = voxel->position - position;
+      }
     }
   }
   for (const auto handle : mObjectHandles) {
@@ -151,10 +183,18 @@ void PhysicsEngine::CastRayWithForce(
     //     rigidBody->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
 
     auto handle = (MeshHandle)rigidBody->getUserIndex();
-    for (auto &voxelRB : mVoxels[handle]) {
-      voxelRB->applyCentralImpulse(rayDirection.normalize() * force);
-      //       voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
-      voxelRB->activate(true);
+    if (mSettings.mEnableExtension) {
+      for (auto &voxelRB : mSoftVoxels[handle]) {
+        voxelRB->addForce(rayDirection.normalize() * force);
+        //       voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
+        voxelRB->activate(true);
+      }
+    } else {
+      for (auto &voxelRB : mVoxels[handle]) {
+        voxelRB->applyCentralImpulse(rayDirection.normalize() * force);
+        //       voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
+        voxelRB->activate(true);
+      }
     }
   }
 }
@@ -163,8 +203,34 @@ void PhysicsEngine::Init()
 {
   mObjectWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
   mVoxelWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
-  mVoxelWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
-  mObjectWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
+  //mVoxelWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
+  //mObjectWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
+
+  // All initialization for soft bodies was takin from the bullet3 soft-body demo
+  // https://github.com/bulletphysics/bullet3/blob/master/examples/SoftDemo/SoftDemo.cpp
+  auto collisionConfiguration = new btSoftBodyRigidBodyCollisionConfiguration();
+  auto collisionDispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+  mSoftBodyWorldInfo.m_dispatcher = collisionDispatcher;
+  btVector3 worldMin(-1000, -1000, -1000);
+  btVector3 worldMax(1000, 1000, 1000);
+
+  const int maxProxies = 32766;
+  auto broadPhase = new btAxisSweep3(worldMin, worldMax, maxProxies);
+  mSoftBodyWorldInfo.m_broadphase = broadPhase;
+  mSoftBodyWorldInfo.m_gravity.setValue(0, 0, 0);
+  mSoftBodyWorldInfo.m_sparsesdf.Initialize();
+  auto constraintSolver = new btSequentialImpulseConstraintSolver();
+  mSoftBodyWorld =
+      new btSoftRigidDynamicsWorld(collisionDispatcher, broadPhase, constraintSolver, collisionConfiguration);
+  mSoftBodyWorld->setDebugDrawer((btIDebugDraw*)mDebugDrawer.get());
+  //mSoftBodyWorld->setGravity(btVector3(0, 0, 0));
+
+  // mSoftBodyWorldInfo.m_broadphase = mVoxelWorld.mOverlappingPairCache.get();
+  // mSoftBodyWorldInfo.m_dispatcher = mVoxelWorld.mCollisionDispatcher.get();
+  // mSoftBodyWorld =
+  //    new btSoftRigidDynamicsWorld(mVoxelWorld.mCollisionDispatcher.get(), mVoxelWorld.mOverlappingPairCache.get(),
+  //        mVoxelWorld.mSolver.get(), mVoxelWorld.mCollisionConfig.get()/*, new btDefaultSoftBodySolver()*/);
 }
 
 void PhysicsEngine::AddObject(MeshHandle handle, btCompoundShape *collisionShape)
@@ -197,12 +263,46 @@ btCompoundShape *PhysicsEngine::AddVoxels(MeshHandle handle)
   // Loop through the voxels and create the corresponding bullet physics objects
   for (auto &[key, voxel] : vMesh->voxels) {
     voxel.dimmensions = glm::vec3(vMesh->initialVoxelSize);
+    // Update the initial voxel position
+    voxel.position += position;
+    const f32 scale = voxel.size.x;
+    const btVector3 hull[] = {
+        ToBullet(voxel.position + (scale * glm::vec3(1.0f, 1.0f, 1.0f))),
+        ToBullet(voxel.position + (scale * glm::vec3(1.0f, 1.0f, -1.0f))),
+        ToBullet(voxel.position + (scale * glm::vec3(1.0f, -1.0f, 1.0f))),
+        ToBullet(voxel.position + (scale * glm::vec3(1.0f, -1.0f, -1.0f))),
+        ToBullet(voxel.position + (scale * glm::vec3(-1.0f, 1.0f, 1.0f))),
+        ToBullet(voxel.position + (scale * glm::vec3(-1.0f, 1.0f, -1.0f))),
+        ToBullet(voxel.position + (scale * glm::vec3(-1.0f, -1.0f, 1.0f))),
+        ToBullet(voxel.position + (scale * glm::vec3(-1.0f, -1.0f, -1.0f))),
+    };
+    #if 0
+    for (auto &bezierCurve : voxel.bezierCurves) {
+      for (const auto &controlPoint : bezierCurve.controlPoints) {
+        bezierCurve.controlPointBulletNodeIndices.push_back(hull.size());
+        hull.emplace_back(ToBullet(controlPoint + voxel.position));
+      }
+    }
+    #endif
+    u32 nodeCount = 8;
+    auto *softBody = btSoftBodyHelpers::CreateFromConvexHull(mSoftBodyWorldInfo, hull, nodeCount);
+    for (auto &bezierCurve : voxel.bezierCurves) {
+      for (const auto &controlPoint : bezierCurve.controlPoints) {
+        bezierCurve.controlPointBulletNodeIndices.push_back(nodeCount);
+        nodeCount++;
+        softBody->appendNode(ToBullet(controlPoint + voxel.position), 1.0);
+      }
+    }
+    softBody->setUserPointer((void *)&vMesh->voxels[key]);
+    softBody->setWorldTransform(btTransform(btQuaternion(), ToBullet(voxel.position)));
+    softBody->generateBendingConstraints(2, softBody->m_materials[0]);
+    mSoftBodyWorld->addSoftBody(softBody);
+    mSoftVoxels[handle].emplace_back(softBody);
+    // TODO rest
     // Do all the bullet object creation stuff
     btCollisionShape *voxelCollisionShape = new btBoxShape(ToBullet(voxel.dimmensions / 2.0f));
     // Add the voxel to the btCompundShape
     voxelCollisionShape->setUserPointer((void *)&vMesh->voxels[key]);
-    // Update the initial voxel position
-    voxel.position += position;
 
     f32 mass = 1.0f;
     btVector3 localInteria(0.0f, 0.0f, 0.0f);

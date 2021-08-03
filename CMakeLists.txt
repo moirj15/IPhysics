@@ -90,8 +90,8 @@ if (WIN32)
             ${CMAKE_SOURCE_DIR}/focus/lib;
     )
 
-    set(CMAKE_CXX_FLAGS "/std:c++latest /MTd /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
+    set(CMAKE_CXX_FLAGS "/std:c++latest /MT /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:WinMainCRTStartup")
     set(CompilerFlags
             CMAKE_CXX_FLAGS
@@ -165,9 +165,6 @@ if (WIN32)
         )
         target_link_libraries(
                 PhysicsSim
-                BulletDynamics_Debug
-                BulletCollision_Debug
-                LinearMath_Debug
                 ${OPENGL_LIBRARY}
                 # TODO: hacky solution for linking in sdl and focus
                 ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
@@ -176,6 +173,12 @@ if (WIN32)
                 #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
                 ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
                 ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletSoftBody_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletInverseDynamicsUtils.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletInverseDynamics.lib
                 sharedLibrary
                 #focus
                 #                glfw3
@@ -199,6 +202,7 @@ if (WIN32)
                 Setupapi.lib
         )
     else ()
+        message("RELEASE YOU FOOL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         #target_link_libraries(
         #IPhysics
         #${OPENGL_LIBRARY}
@@ -212,6 +216,73 @@ if (WIN32)
         ##        user32.lib
         ##        kernel32.lib
         #)
+         target_link_libraries(
+                VoxelGenerator
+                ${OPENGL_LIBRARY}
+                # TODO: hacky solution for linking in sdl and focus
+                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2-static.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2main.lib
+                #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath.lib
+                sharedLibrary
+                #focus
+                #                glfw3
+                opengl32.lib
+                gdi32.lib
+                user32.lib
+                kernel32.lib
+                msvcrtd.lib
+                winmm.lib
+                imm32.lib
+                version.lib
+                d3d11.lib
+                d3d12.lib
+                libcmt.lib
+                dxgi.lib
+                dxguid.lib
+                d3dcompiler.lib
+                winmm.lib
+                gdi32
+                opengl32
+                Setupapi.lib
+        )
+        target_link_libraries(
+                PhysicsSim
+                #BulletDynamics_Debug
+                #BulletCollision_Debug
+                #LinearMath_Debug
+                ${OPENGL_LIBRARY}
+                # TODO: hacky solution for linking in sdl and focus
+                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2-static.lib
+                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2main.lib
+                #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath.lib
+                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletSoftBody.lib
+                sharedLibrary
+                #focus
+                #                glfw3
+                opengl32.lib
+                gdi32.lib
+                user32.lib
+                kernel32.lib
+                msvcrtd.lib
+                winmm.lib
+                imm32.lib
+                version.lib
+                d3d11.lib
+                d3d12.lib
+                libcmt.lib
+                dxgi.lib
+                dxguid.lib
+                d3dcompiler.lib
+                winmm.lib
+                gdi32
+                opengl32
+                Setupapi.lib)
     endif ()
     set_target_properties(VoxelGenerator PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}")
 else ()

@@ -12,6 +12,11 @@
 #include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
 #include <BulletDynamics/Dynamics/btRigidBody.h>
 #include <BulletDynamics/Dynamics/btSimpleDynamicsWorld.h>
+#include <BulletSoftBody/btSoftBody.h>
+#include <BulletSoftBody/btSoftBodyHelpers.h>
+#include <BulletSoftBody/btSoftRigidDynamicsWorld.h>
+#include <BulletSoftBody/btDefaultSoftBodySolver.h>
+#include <BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h>
 #include <Common.h>
 #include <Renderer/DebugDrawer.h>
 #include <VoxelObjects/Objects.h>
@@ -41,6 +46,7 @@ class PhysicsEngine
   std::vector<MeshHandle> mObjectHandles;
   std::unordered_map<MeshHandle, std::unique_ptr<btRigidBody>> mObjects;
   std::unordered_map<MeshHandle, std::vector<std::unique_ptr<btRigidBody>>> mVoxels;
+  std::unordered_map<MeshHandle, std::vector<std::unique_ptr<btSoftBody>>> mSoftVoxels;
   std::unique_ptr<DebugRenderer> mDebugDrawer;
 
   // TODO: Do i really need two Dynamics worlds?
@@ -75,11 +81,14 @@ class PhysicsEngine
 
   } mObjectWorld, mVoxelWorld;
 
+  btSoftBodyWorldInfo mSoftBodyWorldInfo;
+  btSoftRigidDynamicsWorld *mSoftBodyWorld;
+
   EngineSettings mSettings;
 
 public:
-  explicit PhysicsEngine(DebugRenderer *db) : mDebugDrawer(db) { Init(); }
-
+  explicit PhysicsEngine(DebugRenderer *db) : mDebugDrawer(db) { 
+    Init(); } 
   void Reset();
 
   void Update(f32 t);
@@ -97,7 +106,12 @@ public:
   void CastRayWithForce(
       const glm::vec3 &rayStartNDC, const glm::vec3 &rayEndNDC, const glm::mat4 &NDCToWorldSpace, f32 force);
 
-  void SetEngineSettings(EngineSettings engineSettings) { mSettings = engineSettings; }
+  void SetEngineSettings(EngineSettings engineSettings)
+  {
+    mSettings = engineSettings;
+    if (mSettings.mEnableExtension) {
+    }
+  }
 
   const std::unordered_map<MeshHandle, SceneMember> &GetObjectSettings() { return mObjectSettings; }
 

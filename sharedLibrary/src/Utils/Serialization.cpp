@@ -43,12 +43,10 @@ void to_json(json &j, const BezierCurve &b)
 
 void from_json(const json &j, BezierCurve &b)
 {
-  b = {
-      .controlPoints = j["control_points"],
-      .firstT = j["first_t"],
-      .secondT = j["second_t"],
-      .effectedPoints = j["effected_points"],
-  };
+  b.controlPoints = j["control_points"].get<std::vector<glm::vec3>>();
+  b.firstT = j["first_t"];
+  b.secondT = j["second_t"];
+  b.effectedPoints = j["effected_points"].get<std::vector<u32>>();
 }
 
 void to_json(json &j, const Voxel &v)

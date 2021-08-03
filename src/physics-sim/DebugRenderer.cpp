@@ -72,5 +72,5 @@ void DebugRenderer::setDebugMode(int debugMode)
 
 int DebugRenderer::getDebugMode() const
 {
-  return btIDebugDraw::DBG_DrawWireframe;
+  return btIDebugDraw::DBG_DrawWireframe | btIDebugDraw::DBG_NoDeactivation;
 }
