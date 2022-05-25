@@ -57,6 +57,16 @@ void PhysicsSimulationApp::LoadObject()
       mRenderer.LoadMesh(handle);
       mPhysicsEngine.SubmitObject(handle, sceneMember);
       mSceneMembers.emplace(handle, sceneMember);
+
+      std::unordered_map<glm::vec3, std::vector<u32>> duplicatePoints;
+      for (u32 index : mesh.indices) {
+        const auto &point = mesh.GetVertex(index);
+        if (duplicatePoints.contains(point)) {
+          duplicatePoints[point] = std::vector<u32>();
+        }
+        duplicatePoints[point].push_back(index);
+      }
+      mDuplicatePoints[handle] = duplicatePoints;
     }
     //    mInitialMeshManager = mDeformationMeshManager;
   }
@@ -142,9 +152,47 @@ void PhysicsSimulationApp::ApplyDeformations()
   for (auto handle : mDeformationMeshManager.GetAllHandles()) {
     auto *vMesh = mDeformationMeshManager.GetVoxelMesh(handle);
     auto *mesh = mDeformationMeshManager.GetMesh(handle);
-    for (const auto &[key, voxel] : vMesh->voxels) {
+        auto *originalMesh = mInitialMeshManager.GetMesh(handle);
+    for (auto &[key, voxel] : vMesh->voxels) {
       for (auto index : voxel.meshVertices) {
+
+        if (mCurrentState == State::Running && mUI.GetPhysicsSettings().mEnableExtension) {
+          std::unordered_map<u32, bool> alreadyCalculated;
+          for (auto &bezierCurve : voxel.bezierCurves) {
+            if (!bezierCurve.needsUpdate) {
+              continue;
+            }
+            bezierCurve.needsUpdate = false;
+            if (bezierCurve.controlPoints.size() == 3) {
+              if (alreadyCalculated[bezierCurve.effectedPoints[0]]) {
+                continue;
+              }
+              alreadyCalculated[bezierCurve.effectedPoints[0]] = true;
+              u32 effectedPointIndex = bezierCurve.effectedPoints[0];
+              // bezierCurve.CalculateQuadraticTValue();
+              bezierCurve.Calc();
+              auto p = voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.firstT);
+              auto og = originalMesh->GetVertex(effectedPointIndex);
+              auto delta = og - p;
+              mesh->SetVertex(effectedPointIndex, /*mesh->GetVertex(effectedPointIndex) +*/ p);
+
+            } else {
+              if (alreadyCalculated[bezierCurve.effectedPoints[0]]
+                  && alreadyCalculated[bezierCurve.effectedPoints[bezierCurve.effectedPoints.size() - 1]]) {
+                continue;
+              }
+              u32 effectedPoint = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.effectedPoints[1]
+                                                                                   : bezierCurve.effectedPoints[0];
+              alreadyCalculated[effectedPoint] = true;
+              f32 t = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.secondT : bezierCurve.firstT;
+
+              mesh->SetVertex(effectedPoint,
+                  /*mesh->GetVertex(effectedPoint) +*/ voxel.CalculateFrom4Points(bezierCurve.controlPoints, t));
+            }
+          }
+        }
         mesh->SetVertex(index, mesh->GetVertex(index) + voxel.relativePositionDelta);
+
         // this is the good one
         // TODO: maybe doing this on the gpu isn't a good idea?
 #if 0
@@ -156,6 +204,47 @@ void PhysicsSimulationApp::ApplyDeformations()
         //         vMesh->mMesh->mOffsets.AccessCastBuffer(index) = voxel.mPositionRelativeToCenter;
       }
     }
+    #if 0
+    if (mCurrentState == State::Running && mUI.GetPhysicsSettings().mEnableExtension) {
+
+      for (auto handle : mDeformationMeshManager.GetAllHandles()) {
+        auto *mesh = mDeformationMeshManager.GetMesh(handle);
+        auto *vMesh = mDeformationMeshManager.GetVoxelMesh(handle);
+        auto *originalMesh = mInitialMeshManager.GetMesh(handle);
+        for (auto &[key, voxel] : vMesh->voxels) {
+          std::unordered_map<u32, bool> alreadyCalculated;
+          for (auto &bezierCurve : voxel.bezierCurves) {
+            if (bezierCurve.controlPoints.size() == 3) {
+              if (alreadyCalculated[bezierCurve.effectedPoints[0]]) {
+                continue;
+              }
+              alreadyCalculated[bezierCurve.effectedPoints[0]] = true;
+              u32 effectedPointIndex = bezierCurve.effectedPoints[0];
+              // bezierCurve.CalculateQuadraticTValue();
+              bezierCurve.Calc();
+              auto p = voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.firstT);
+              auto p2 = voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.secondT);
+              auto p3 = voxel.CalculateFrom3Points(bezierCurve.controlPoints, 0.25f);
+              mesh->SetVertex(effectedPointIndex, /*originalMesh->GetVertex(effectedPointIndex) +*/ p);
+
+            } else {
+              if (alreadyCalculated[bezierCurve.effectedPoints[0]]
+                  && alreadyCalculated[bezierCurve.effectedPoints[bezierCurve.effectedPoints.size() - 1]]) {
+                continue;
+              }
+              u32 effectedPoint = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.effectedPoints[1]
+                                                                                   : bezierCurve.effectedPoints[0];
+              alreadyCalculated[effectedPoint] = true;
+              f32 t = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.secondT : bezierCurve.firstT;
+
+              mesh->SetVertex(effectedPoint,
+                  originalMesh->GetVertex(effectedPoint) + voxel.CalculateFrom4Points(bezierCurve.controlPoints, t));
+            }
+          }
+        }
+      }
+    }
+    #endif
     mRenderer.LoadMesh(handle);
   }
 }
@@ -172,45 +261,6 @@ void PhysicsSimulationApp::Render()
   }
   mDebugRenderer->Draw(mCamera.CalculateMatrix(), mProjection);
 
-  if (mCurrentState == State::Running && mUI.GetPhysicsSettings().mEnableExtension) {
-
-    for (auto handle : mDeformationMeshManager.GetAllHandles()) {
-      auto *mesh = mDeformationMeshManager.GetMesh(handle);
-      auto *vMesh = mDeformationMeshManager.GetVoxelMesh(handle);
-      auto *originalMesh = mInitialMeshManager.GetMesh(handle);
-      for (auto &[key, voxel] : vMesh->voxels) {
-        std::unordered_map<u32, bool> alreadyCalculated;
-        for (auto &bezierCurve : voxel.bezierCurves) {
-          if (bezierCurve.controlPoints.size() == 3) {
-            if (alreadyCalculated[bezierCurve.effectedPoints[0]]) {
-              continue;
-            }
-            alreadyCalculated[bezierCurve.effectedPoints[0]] = true;
-            u32 effectedPointIndex = bezierCurve.effectedPoints[0];
-            //bezierCurve.CalculateQuadraticTValue();
-            bezierCurve.Calc();
-            auto p = voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.firstT);
-            auto p2 = voxel.CalculateFrom3Points(bezierCurve.controlPoints, bezierCurve.secondT);
-            auto p3 = voxel.CalculateFrom3Points(bezierCurve.controlPoints, 0.25f);
-            mesh->SetVertex(effectedPointIndex, /*originalMesh->GetVertex(effectedPointIndex) +*/ p);
-
-          } else {
-            if (alreadyCalculated[bezierCurve.effectedPoints[0]]
-                && alreadyCalculated[bezierCurve.effectedPoints[bezierCurve.effectedPoints.size() - 1]]) {
-              continue;
-            }
-            u32 effectedPoint = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.effectedPoints[1]
-                                                                                 : bezierCurve.effectedPoints[0];
-            alreadyCalculated[effectedPoint] = true;
-            f32 t = alreadyCalculated[bezierCurve.effectedPoints[0]] ? bezierCurve.secondT : bezierCurve.firstT;
-
-            mesh->SetVertex(effectedPoint,
-                originalMesh->GetVertex(effectedPoint) + voxel.CalculateFrom4Points(bezierCurve.controlPoints, t));
-          }
-        }
-      }
-    }
-  }
   mUI.Update(mWindow);
   mRenderer.UpdateScreen(mWindow);
 }

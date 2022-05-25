@@ -129,7 +129,9 @@ void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4
   };
   focus::gContext->UpdateConstantBuffer(mPhongConstants, (void*)&constants, sizeof(PhongConstants));
   const auto &[vbHandle, ibHandle] = mMeshes[handle];
-  focus::gContext->Draw(focus::Primitive::Triangles, {}, mPhongShader, {
+  focus::RenderState state;
+  state.cullState.mFrontFace = focus::WindingOrder::Clockwise;
+  focus::gContext->Draw(focus::Primitive::Triangles, state, mPhongShader, {
     .vbHandles = {vbHandle},
     .cbHandles = {mPhongConstants, mPhongFragmentConstants},
     .ibHandle = ibHandle,

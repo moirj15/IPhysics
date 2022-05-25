@@ -1,6 +1,7 @@
 #pragma once
 #include <Common.h>
 #include <array>
+#include <complex>
 #include <glm/gtx/hash.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
@@ -10,45 +11,57 @@ namespace objs
 {
 struct BezierCurve {
   std::vector<glm::vec3> controlPoints;
+  std::vector<u32> controlPointBulletNodeIndices;
   // The value of t where the line starts
   f32 firstT = 0.0f;
   // The value of t where the line ends
   f32 secondT = 1.0f;
+  bool needsUpdate = false;
+
+
 
   std::vector<u32> effectedPoints;
-#if 0
-  //BezierCurve() = default;
+  std::vector<f32> effectedPointsTValue;
+  BezierCurve() = default;
 
-  ///**
-  // * \brief: Constructor for the BezierCurve.
-  // *
-  // * \param controlPoints: The control points of the bezier curves. This array will contain
-  // * either 3 or 4 points. If the size is 3, then we'll assume that the first control point lies on
-  // * the edge that intersects the voxel hull and that the last control point results from
-  // * casting a ray to the opposite voxel hull. If the size is 4, then the starting and final
-  // * control points come from ray casts. The points that aren't the starting or final control points
-  // * come from the vertices of the edge that this BezierCurve will represent.
-  // */
-  //BezierCurve(const std::vector<glm::vec3> &controlPoints, const std::vector<u32> &effectedPoints) :
-  //    controlPoints(controlPoints), effectedPoints(effectedPoints)
-  //{
-  //  assert((controlPoints.size() == 3) || (controlPoints.size() == 4));
-  //  if (controlPoints.size() == 3)
-  //  {
-  //    CalculateQuadraticTValue();
-  //  }
-  //  else
-  //  {
-  //    CalculateCubicTValues();
-  //  }
-  //}
+  /**
+   * \brief: Constructor for the BezierCurve.
+   *
+   * \param controlPoints: The control points of the bezier curves. This array will contain
+   * either 3 or 4 points. If the size is 3, then we'll assume that the first control point lies on
+   * the edge that intersects the voxel hull and that the last control point results from
+   * casting a ray to the opposite voxel hull. If the size is 4, then the starting and final
+   * control points come from ray casts. The points that aren't the starting or final control points
+   * come from the vertices of the edge that this BezierCurve will represent.
+   */
+  BezierCurve(const std::vector<glm::vec3> &controlPoints, const std::vector<u32> &effectedPoints) :
+      controlPoints(controlPoints), effectedPoints(effectedPoints)
+  {
+    assert((controlPoints.size() == 3) || (controlPoints.size() == 4));
+    if (controlPoints.size() == 3)
+    {
+      CalculateQuadraticTValue();
+    }
+    else
+    {
+      CalculateCubicTValues();
+    }
+  }
 
-  //BezierCurve(const BezierCurve &b) :
-  //    controlPoints(b.controlPoints), firstT(b.firstT), secondT(b.secondT),
-  //    effectedPoints(b.effectedPoints)
-  //{
-  //}
+  BezierCurve(const BezierCurve &b) :
+      controlPoints(b.controlPoints), firstT(b.firstT), secondT(b.secondT),
+      effectedPoints(b.effectedPoints)
+  {
+  }
 
+  void Calc()
+  {
+    if (controlPoints.size() == 3) {
+      CalculateQuadraticTValue();
+    } else {
+      CalculateCubicTValues();
+    }
+  }
   // TODO: Cleanup
   void CalculateQuadraticTValue()
   {
@@ -58,8 +71,7 @@ struct BezierCurve {
     auto c = -p[1] + p[0];
     glm::vec3 posT(0.0f);
     glm::vec3 negT(0.0f);
-    for (u32 i = 0; i < 3; i++)
-    {
+    for (u32 i = 0; i < 3; i++) {
       std::complex<f32> ca(a[i]);
       std::complex<f32> cb(b[i]);
       std::complex<f32> cc(c[i]);
@@ -70,20 +82,17 @@ struct BezierCurve {
     f32 bestDistance = INFINITY;
     f32 best = 1.0f; // posT.x;
 
-    for (u32 i = 0; i < 3; i++)
-    {
+    for (u32 i = 0; i < 3; i++) {
 
       if (posT[i] <= 1.0f && posT[i] >= 0.0f
-          && glm::length(EvaluateQuadraticCurve(posT[i]) - controlPoints[1]) < bestDistance)
-      {
+          && glm::length(EvaluateQuadraticCurve(posT[i]) - controlPoints[1]) < bestDistance) {
         bestDistance = glm::length(EvaluateQuadraticCurve(posT[i]) - controlPoints[1]);
         best = posT[i];
       }
       if (negT[i] <= 1.0f && negT[i] >= 0.0f
-          && glm::length(EvaluateQuadraticCurve(negT[i]) - controlPoints[1]) < bestDistance)
-      {
+          && glm::length(EvaluateQuadraticCurve(negT[i]) - controlPoints[1]) < bestDistance) {
         bestDistance = glm::length(EvaluateQuadraticCurve(negT[i]) - controlPoints[1]);
-        best = posT[i];
+        best = negT[i];
       }
     }
     assert(!isnan(best) || !isnan(-best));
@@ -97,11 +106,9 @@ struct BezierCurve {
       auto points = controlPoints;
       f32 bestDistance = INFINITY;
       f32 bestT = 0.0f;
-      for (u32 i = 0; i < 3; i++)
-      {
+      for (u32 i = 0; i < 3; i++) {
 
-        std::complex<f32> a =
-            -points[0][i] + (3.0f * points[1][i]) - (3.0f * points[2][i]) + points[3][i];
+        std::complex<f32> a = -points[0][i] + (3.0f * points[1][i]) - (3.0f * points[2][i]) + points[3][i];
         std::complex<f32> b = 3.0f * points[0][i] - 6.0f * points[1][i] + 3.0f * points[2][i];
         std::complex<f32> c = -3.0f * points[0][i] + 3.0f * points[1][i];
         std::complex<f32> d = points[0][i] - points[index][i];
@@ -112,8 +119,7 @@ struct BezierCurve {
 
         auto t = pow(q + pow(q * q + pow(r - (p * p), 3.0f), 1.0f / 2.0f), 1.0f / 3.0f)
                  + pow(q - pow((q * q) + pow(r - (p * p), 3.0f), 1.0f / 2.0f), 1.0f / 3.0f) + p;
-        if (glm::length(EvaluateCubicCurve(t.real()) - points[index]) < bestDistance)
-        {
+        if (glm::length(EvaluateCubicCurve(t.real()) - points[index]) < bestDistance) {
           bestDistance = glm::length(EvaluateCubicCurve(t.real()) - points[index]);
           bestT = t.real();
         }
@@ -145,7 +151,6 @@ struct BezierCurve {
     //     auto r1 = glm::mix(q1, q2, t);
     //     return glm::mix(r0, r1, t);
   }
-#endif
 };
 
 struct Voxel {
@@ -210,7 +215,8 @@ struct Mesh {
 
   std::vector<u32> indices;
 
-  void Clear() {
+  void Clear()
+  {
     vertices.clear();
     normals.clear();
     indices.clear();

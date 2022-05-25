@@ -34,6 +34,7 @@ class PhysicsSimulationApp
   MeshManager mDeformationMeshManager;
   std::unordered_map<MeshHandle, SceneMember> mSceneMembers;
   shared::Renderer mRenderer;
+  std::unordered_map<MeshHandle, std::unordered_map<glm::vec3, std::vector<u32>>> mDuplicatePoints;
 
   enum class State {
     Running,

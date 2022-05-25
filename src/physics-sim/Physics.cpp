@@ -22,30 +22,23 @@ void PhysicsEngine::Reset()
 void PhysicsEngine::Update(f32 t)
 {
   mObjectWorld.mDynamicsWorld->stepSimulation(t, 10);
-#if 0
   mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
-#endif
   // TODO: add a bool to make this optional
   auto &voxelDispatcher = mVoxelWorld.mCollisionDispatcher;
-  if (mSettings.mEnableExtension) {
-    mSoftBodyWorld->stepSimulation(t, 10);
-  } else {
-    mVoxelWorld.mDynamicsWorld->stepSimulation(t, 10);
-  }
-#if 0
   if (mSettings.mEnableExtension) {
     s32 numManifolds = voxelDispatcher->getNumManifolds();
     for (s32 i = 0; i < numManifolds; i++) {
       auto *contactManifold = voxelDispatcher->getManifoldByIndexInternal(i);
       s32 numContacts = contactManifold->getNumContacts();
       for (s32 j = 0; j < numContacts; j++) {
-        auto contactPoint = contactManifold->getContactPoint(j);
+        auto &contactPoint = contactManifold->getContactPoint(j);
         f32 impulse = contactPoint.getAppliedImpulse();
         auto *voxelRB = contactManifold->getBody1();
         auto *voxel = (objs::Voxel *)voxelRB->getUserPointer();
         // TODO: store the mass of the voxel, since we can't get this from bullet
         f32 density = glm::compMul(voxel->dimmensions) * 1.0f;
-        const f32 impulseThreshold = density; // * 10.0f;
+        //const f32 impulseThreshold = density; // * 10.0f;
+        const f32 impulseThreshold = 0.01; // * 10.0f;
         if (impulse > impulseThreshold) {
           // Use the contactPoint's B normal to determine which voxel face to adjust
           auto contactNormal = ToGLM(contactPoint.m_normalWorldOnB);
@@ -66,6 +59,7 @@ void PhysicsEngine::Update(f32 t)
             // direction
             if (glm::dot(firstCPNormal, contactNormal) > 0.0f) {
               firstCP += (-contactNormal * impulse) * t; // * t;
+              bezierCurve.needsUpdate = true;
             }
             if (glm::dot(secondCPNormal, contactNormal) > 0.0f) {
               secondCP += (-contactNormal * impulse) * t; // * t;
@@ -79,7 +73,7 @@ void PhysicsEngine::Update(f32 t)
       }
     }
   }
-#endif
+#if 0
   if (mSettings.mEnableExtension) {
     for (const auto &[handle, voxelRBs] : mSoftVoxels) {
       auto &position = mObjectSettings[handle].position;
@@ -105,6 +99,7 @@ void PhysicsEngine::Update(f32 t)
       }
     }
   } else {
+#endif
     for (const auto &[handle, voxelRBs] : mVoxels) {
       auto &position = mObjectSettings[handle].position;
       for (auto &voxelRB : voxelRBs) {
@@ -121,7 +116,9 @@ void PhysicsEngine::Update(f32 t)
         voxel->positionRelativeToCenter = voxel->position - position;
       }
     }
+#if 0
   }
+#endif
   for (const auto handle : mObjectHandles) {
     // Update our object position in its settings, so we can render it in the right spot
     auto &objectPosition = mObjectSettings[handle].position;
@@ -183,6 +180,7 @@ void PhysicsEngine::CastRayWithForce(
     //     rigidBody->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
 
     auto handle = (MeshHandle)rigidBody->getUserIndex();
+#if 0
     if (mSettings.mEnableExtension) {
       for (auto &voxelRB : mSoftVoxels[handle]) {
         voxelRB->addForce(rayDirection.normalize() * force);
@@ -190,12 +188,15 @@ void PhysicsEngine::CastRayWithForce(
         voxelRB->activate(true);
       }
     } else {
+#endif
       for (auto &voxelRB : mVoxels[handle]) {
         voxelRB->applyCentralImpulse(rayDirection.normalize() * force);
         //       voxelRB->applyCentralImpulse(btVector3(1.0, 0.0, 0.0) * force);
         voxelRB->activate(true);
       }
+#if 0
     }
+#endif
   }
 }
 
@@ -203,8 +204,8 @@ void PhysicsEngine::Init()
 {
   mObjectWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
   mVoxelWorld.mDynamicsWorld->setGravity(btVector3(0.0f, 0.0f, 0.0f));
-  //mVoxelWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
-  //mObjectWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
+  mVoxelWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
+  mObjectWorld.mDynamicsWorld->setDebugDrawer((btIDebugDraw *)mDebugDrawer.get());
 
   // All initialization for soft bodies was takin from the bullet3 soft-body demo
   // https://github.com/bulletphysics/bullet3/blob/master/examples/SoftDemo/SoftDemo.cpp
@@ -266,6 +267,7 @@ btCompoundShape *PhysicsEngine::AddVoxels(MeshHandle handle)
     // Update the initial voxel position
     voxel.position += position;
     const f32 scale = voxel.size.x;
+    #if 0
     const btVector3 hull[] = {
         ToBullet(voxel.position + (scale * glm::vec3(1.0f, 1.0f, 1.0f))),
         ToBullet(voxel.position + (scale * glm::vec3(1.0f, 1.0f, -1.0f))),
@@ -298,6 +300,7 @@ btCompoundShape *PhysicsEngine::AddVoxels(MeshHandle handle)
     softBody->generateBendingConstraints(2, softBody->m_materials[0]);
     mSoftBodyWorld->addSoftBody(softBody);
     mSoftVoxels[handle].emplace_back(softBody);
+    #endif
     // TODO rest
     // Do all the bullet object creation stuff
     btCollisionShape *voxelCollisionShape = new btBoxShape(ToBullet(voxel.dimmensions / 2.0f));

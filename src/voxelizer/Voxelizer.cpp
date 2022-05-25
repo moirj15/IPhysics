@@ -177,6 +177,7 @@ void Voxelizer::AddNeighbors(objs::VoxelMesh *voxelMesh)
 void Voxelizer::AddBezierCurves(objs::VoxelMesh *voxelMesh, const objs::Mesh &mesh)
 {
   auto edgeMap = CreateEdgeMap(voxelMesh, mesh);
+  std::unordered_set<u32> existingEffectedPoints;
   for (const auto &[key, voxel] : voxelMesh->voxels) {
     for (u32 index : voxel.meshVertices) {
       for (const auto &edge : edgeMap[index]) {
@@ -198,10 +199,16 @@ void Voxelizer::AddBezierCurves(objs::VoxelMesh *voxelMesh, const objs::Mesh &me
         controlPoints.emplace_back(firstIntersection);
         controlPoints.emplace_back(startVert);
         effectedPoints.push_back(edge.mStartVert);
+        if (existingEffectedPoints.contains(edge.mStartVert)) {
+          continue;
+        }
+        existingEffectedPoints.emplace(edge.mStartVert);
         if (voxel.InVoxel(edge.mEndVert)) {
           controlPoints.emplace_back(endVert);
           effectedPoints.push_back(edge.mEndVert);
+          existingEffectedPoints.emplace(edge.mEndVert);
         }
+
 
         if (secondIntersection == firstIntersection) {
           controlPoints.emplace_back(startVert);
