@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 project(IPhysics)
-#set(CMAKE_UNITY_BUILD ON)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS
@@ -72,6 +72,7 @@ set(SOURCE_LIST_VOXEL_GENERATOR
 
 find_package(OpenGL REQUIRED)
 add_subdirectory(sharedLibrary)
+add_subdirectory(focus)
 include_directories(
         ${CMAKE_SOURCE_DIR}/include;
         ${CMAKE_SOURCE_DIR}/sharedLibrary/include;
@@ -87,11 +88,11 @@ if (WIN32)
             ${CMAKE_SOURCE_DIR}/libs/windows
             ${CMAKE_SOURCE_DIR}/libs/windows/bullet
             ${CMAKE_BINARY_DIR}/sharedLibrary
-            ${CMAKE_SOURCE_DIR}/focus/lib;
+            #${CMAKE_SOURCE_DIR}/focus/lib;
     )
 
-    set(CMAKE_CXX_FLAGS "/std:c++latest /MT /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /TP /W3 -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG -D_CRT_SECURE_NO_WARNINGS -DGLM_ENABLE_EXPERIMENTAL -DGLFW_INCLUDE_NONE")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:CONSOLE /ENTRY:WinMainCRTStartup")
     set(CompilerFlags
             CMAKE_CXX_FLAGS
@@ -101,19 +102,21 @@ if (WIN32)
             CMAKE_C_FLAGS_DEBUG
             CMAKE_C_FLAGS_RELEASE
             )
-    foreach (CompilerFlag ${CompilerFlags})
-        string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
-        string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
-    endforeach ()
+    #foreach (CompilerFlag ${CompilerFlags})
+    #    string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
+    #    string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
+    #endforeach ()
     add_executable(
         PhysicsSim
         ${SOURCE_LIST_PHYSICS_SIM}
     )
+    set_property(TARGET PhysicsSim PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:DEBUG>:Debug>")
 
     add_executable(
             VoxelGenerator
             ${SOURCE_LIST_VOXEL_GENERATOR}
     )
+    set_property(TARGET VoxelGenerator PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:DEBUG>:Debug>")
     message(${CMAKE_BUILD_TYPE})
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
         message("DEBUG YOU FOOL!!!")

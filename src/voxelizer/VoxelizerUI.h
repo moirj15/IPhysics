@@ -9,8 +9,8 @@
 #include <Common.h>
 #include <optional>
 #include <string>
-#include <Context.hpp>
 
+namespace focus { struct Window; }
 //struct Window;
 
 

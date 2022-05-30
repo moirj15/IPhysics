@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.10)
-#set(CMAKE_UNITY_BUILD ON)
+cmake_minimum_required(VERSION 3.20)
+set(CMAKE_CXX_STANDARD 20)
 project(sharedLibrary)
 
 # the source files for the shared libraries
@@ -8,7 +8,6 @@ set(SHARED_LIBRARY_SOURCE
         ${SRC_FILE_DIR}/Utils/Serialization.cpp
         ${SRC_FILE_DIR}/Renderer/Camera.cpp
         ${SRC_FILE_DIR}/Renderer/DebugDrawer.cpp
-        ${SRC_FILE_DIR}/Renderer/MeshLibrary.cpp
         ${SRC_FILE_DIR}/Renderer/Renderer.cpp
         ${SRC_FILE_DIR}/Renderer/Shader.cpp
         ${SRC_FILE_DIR}/Renderer/ShaderLibrary.cpp
@@ -26,7 +25,6 @@ set(SHARED_LIBRARY_HEADERS
         ${HEADER_FILE_DIR}/Utils/VoxelSerializer.h
         ${HEADER_FILE_DIR}/Renderer/Camera.h
         ${HEADER_FILE_DIR}/Renderer/DebugDrawer.h
-        ${HEADER_FILE_DIR}/Renderer/MeshLibrary.h
         ${HEADER_FILE_DIR}/Renderer/Renderer.h
         ${HEADER_FILE_DIR}/Renderer/Shader.h
         ${HEADER_FILE_DIR}/Renderer/ShaderLibrary.h
@@ -42,21 +40,23 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include 
     ${CMAKE_SOURCE_DIR}/include 
     #${CMAKE_SOURCE_DIR}/glad/include
-    ${CMAKE_SOURCE_DIR}/focus/pub_include
+    #${CMAKE_SOURCE_DIR}/focus/pub_include
     )
 
 add_library(sharedLibrary STATIC ${SHARED_LIBRARY_HEADERS} ${SHARED_LIBRARY_SOURCE})
 
 target_include_directories(sharedLibrary PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 if (WIN32)
+    set_property(TARGET sharedLibrary PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:DEBUG>:Debug>")
 
-    set(CMAKE_CXX_FLAGS "/std:c++latest /MT /MP /TP /W3 /DEBUG -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /std:c++latest /MTd /MP /TP /W3 /DEBUG -D_DEBUG -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP /TP /W3 /DEBUG -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MP /TP /W3 /DEBUG -D_DEBUG -D_CRT_SECURE_NO_WARNINGS  -DGLM_ENABLE_EXPERIMENTAL")
     link_directories(${CMAKE_SOURCE_DIR}/libs/windows)
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
         target_link_libraries(
                 sharedLibrary
-                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+                #${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+				focus
                 ${CMAKE_SOURCE_DIR}/libs/windows/SDL2-static.lib
                 ${CMAKE_SOURCE_DIR}/libs/windows/SDL2main.lib
                 #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
@@ -69,7 +69,7 @@ if (WIN32)
                 gdi32.lib
                 user32.lib
                 kernel32.lib
-                msvcrtd.lib
+                #msvcrtd.lib
                 winmm.lib
                 imm32.lib
                 version.lib
@@ -100,7 +100,7 @@ if (WIN32)
                 gdi32.lib
                 user32.lib
                 kernel32.lib
-                msvcrtd.lib
+                #msvcrtd.lib
                 winmm.lib
                 imm32.lib
                 version.lib

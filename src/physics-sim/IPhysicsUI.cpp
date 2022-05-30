@@ -26,7 +26,7 @@ void IPhysicsUI::Init(const focus::Window &window)
   ImGui::CreateContext();
   auto &io = ImGui::GetIO();
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-  ImGui_ImplSDL2_InitForOpenGL(window.mSDLWindow, SDL_GL_GetCurrentContext());
+  ImGui_ImplSDL2_InitForOpenGL(window.sdl_window, SDL_GL_GetCurrentContext());
   ImGui_ImplOpenGL3_Init();
   ImGui::StyleColorsClassic();
 }
@@ -34,7 +34,7 @@ void IPhysicsUI::Init(const focus::Window &window)
 void IPhysicsUI::Update(const focus::Window &window)
 {
   ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplSDL2_NewFrame(window.mSDLWindow);
+  ImGui_ImplSDL2_NewFrame(window.sdl_window);
   ImGui::NewFrame();
   // Define the UI layout
   ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
