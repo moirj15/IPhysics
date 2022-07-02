@@ -65,14 +65,14 @@ class Renderer
             "Phong", ReadFile("shaders/phongLight.vert"), ReadFile("shaders/phongLight.frag"))),
         m_phong_pipeline(m_device->CreatePipeline({.shader = mPhongShader}))
     {
-        focus::ConstantBufferLayout phong_vertex_constants("constants");
+        focus::ConstantBufferLayout phong_vertex_constants(0, focus::BufferUsage::Static, "constants");
         phong_vertex_constants.Add("camera", focus::VarType::Float4x4)
             .Add("mvp", focus::VarType::Float4x4)
             .Add("normalMat", focus::VarType::Float4x4)
             .Add("lightPosition", focus::VarType::Float4);
         mPhongConstants = m_device->CreateConstantBuffer(phong_vertex_constants, nullptr, sizeof(PhongConstants));
 
-        focus::ConstantBufferLayout phong_fragment_constants("fragConstants");
+        focus::ConstantBufferLayout phong_fragment_constants(1, focus::BufferUsage::Static, "fragConstants");
         phong_fragment_constants.Add("lightColor", focus::VarType::Float4)
             .Add("ambientLight", focus::VarType::Float4)
             .Add("ambientColor", focus::VarType::Float4)

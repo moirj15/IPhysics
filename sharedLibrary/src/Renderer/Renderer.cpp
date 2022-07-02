@@ -14,7 +14,7 @@ void Renderer::LoadMesh(MeshHandle handle)
     auto *mesh = mMeshManager->GetMesh(handle);
     if (!mMeshes.contains(handle)) {
         auto buffer = mesh->GetInterleved();
-        const auto vb_layout = focus::VertexBufferLayout("vertex_input")
+        const auto vb_layout = focus::VertexBufferLayout(0, focus::BufferUsage::Default, "vertex_input")
                                    .Add("vPosition", focus::VarType::Float3)
                                    .Add("vNormal", focus::VarType::Float3);
         auto vbHandle = m_device->CreateVertexBuffer(vb_layout, buffer.data(), buffer.size() * sizeof(f32));
@@ -108,8 +108,8 @@ void Renderer::LoadDebugMesh(MeshHandle handle)
 void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4 &model)
 {
     auto cameraMat = camera.CalculateMatrix();
-    auto projection = glm::infinitePerspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f);
-    // auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
+//    auto projection = glm::infinitePerspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f);
+     auto projection = glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f);
     auto modelView = cameraMat * model;
     auto normalMat = glm::transpose(glm::inverse(modelView));
     PhongConstants constants = {
@@ -127,7 +127,7 @@ void Renderer::DrawMesh(MeshHandle handle, const Camera &camera, const glm::mat4
         .indexed = true});
     m_device->BindPipeline(m_phong_pipeline);
 
-    m_device->Draw(focus::Primitive::Triangles, 0, mMeshManager->GetMesh(handle)->indices.size() / 3);
+    m_device->Draw(focus::Primitive::Triangles, 0, mMeshManager->GetMesh(handle)->indices.size());
 
     m_device->EndPass();
 }

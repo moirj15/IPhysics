@@ -17,7 +17,7 @@ set(VOXEL_GENERATOR_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/voxelizer)
 set(VOXEL_GENERATOR_SOURCE
         ${VOXEL_GENERATOR_SOURCE_DIR}/main.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.cpp
-        ${VOXEL_GENERATOR_SOURCE_DIR}/System.cpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/HeadSystem.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerUI.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/tiny_obj_loader.cpp
@@ -25,7 +25,7 @@ set(VOXEL_GENERATOR_SOURCE
 set(VOXEL_GENERATOR_HEADERS
         ${VOXEL_GENERATOR_SOURCE_DIR}/FileUtils.hpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.h
-        ${VOXEL_GENERATOR_SOURCE_DIR}/System.h
+        ${VOXEL_GENERATOR_SOURCE_DIR}/HeadSystem.h
         ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.h
         ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerParameters.h
         )
@@ -67,7 +67,7 @@ set(SOURCE_LIST_VOXEL_GENERATOR
         ${THIRD_PARTY_SRC}
         ${VOXEL_GENERATOR_SOURCE}
         ${VOXEL_GENERATOR_HEADERS}
-        )
+         src/voxelizer/System.hpp src/voxelizer/InputSystem.cpp src/voxelizer/InputSystem.hpp)
 
 
 find_package(OpenGL REQUIRED)
