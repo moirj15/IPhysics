@@ -1,9 +1,9 @@
 #include "InputSystem.hpp"
 
-#include "../third_party/imgui/backends/imgui_impl_sdl.h"
+#include "../third_party/imgui/imgui.h"
 
 #include <Common.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 void InputSystem::BuildEvents()
 {
