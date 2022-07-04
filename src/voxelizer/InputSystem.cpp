@@ -1,47 +1,52 @@
 #include "InputSystem.hpp"
 
+#include "../third_party/imgui/backends/imgui_impl_sdl.h"
 #include "../third_party/imgui/imgui.h"
+#include "System.hpp"
 
 #include <Common.h>
 #include <SDL2/SDL.h>
 
 void InputSystem::BuildEvents()
 {
-#if 0
-    glfwPollEvents();
-#endif
-    auto &io = ImGui::GetIO();
-    auto *keys = SDL_GetKeyboardState(nullptr);
-    if (io.WantCaptureKeyboard) {
-        return;
+    std::vector<System::Event> event_queue;
+    SDL_Event event;
+    while (SDL_PollEvent(&event) > 0) {
+        ImGui_ImplSDL2_ProcessEvent(&event);
+        auto &io = ImGui::GetIO();
+        auto *keys = SDL_GetKeyboardState(nullptr);
+        if (io.WantCaptureKeyboard) {
+            return;
+        }
+        if (event.type == SDL_QUIT) {
+            return;
+        }
+        if ((SDL_GetModState() & KMOD_LSHIFT) && !io.WantCaptureKeyboard) {
+            event_queue.emplace_back(System::Event::MoveBoost);
+        }
+        if (keys[SDL_SCANCODE_W]) {
+            event_queue.emplace_back(System::Event::MoveForward);
+        }
+        if (keys[SDL_SCANCODE_S]) {
+            event_queue.emplace_back(System::Event::MoveBackwards);
+        }
+        if (keys[SDL_SCANCODE_A]) {
+            event_queue.emplace_back(System::Event::MoveLeft);
+        }
+        if (keys[SDL_SCANCODE_D]) {
+            event_queue.emplace_back(System::Event::MoveRight);
+        }
+        if (keys[SDL_SCANCODE_E]) {
+            event_queue.emplace_back(System::Event::MoveUp);
+        }
+        if (keys[SDL_SCANCODE_Q]) {
+            event_queue.emplace_back(System::Event::MoveDown);
+        }
+        if (!io.WantCaptureMouse && io.MouseDown[0]) {
+            event_queue.emplace_back(System::Event::LeftClick);
+        }
     }
-    f32 boost = 1.0f;
-    auto key = e.key.keysym.sym;
-    if ((SDL_GetModState() & SDLK_LSHIFT) && !io.WantCaptureKeyboard) {
-        boost = 10.0f;
-    }
-    if (keys[SDL_SCANCODE_W]) {
-        m_camera.Move(glm::vec3(0.0f, 0.0f, 1.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_S]) {
-        m_camera.Move(glm::vec3(0.0f, 0.0f, -1.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_A]) {
-        m_camera.Move(glm::vec3(-1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_D]) {
-        m_camera.Move(glm::vec3(1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_E]) {
-        m_camera.Move(glm::vec3(0.0f, 1.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_Q]) {
-        m_camera.Move(glm::vec3(0.0f, -1.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (!io.WantCaptureMouse && io.MouseDown[0]) {
-        f32 screenWidth = f32(m_window.width);
-        f32 screenHeight = f32(m_window.height);
-        glm::vec2 mouseDelta((screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
-        m_camera.Rotate(mouseDelta * io.DeltaTime * 10.0f);
+    for (auto *subscriber : m_subscribers) {
+        subscriber->EnqueueEvents(event_queue);
     }
 }

@@ -29,6 +29,8 @@ HeadSystem::HeadSystem() :
 
 void HeadSystem::Run()
 {
+    m_input_system.BuildEvents();
+    /*
     bool keepWindowOpen = true;
     SDL_Event e;
     while (keepWindowOpen) {
@@ -40,55 +42,58 @@ void HeadSystem::Run()
             }
         }
         SDL_PumpEvents();
-        CollectInput(e);
+        //CollectInput(e);
         LoadMesh();
         GenerateVoxels();
         Render();
         SaveVoxels();
     }
+    */
 }
 
+/*
 // Private;
 void HeadSystem::CollectInput(const SDL_Event &e)
 {
 #if 0
-  glfwPollEvents();
+glfwPollEvents();
 #endif
-    auto &io = ImGui::GetIO();
-    auto *keys = SDL_GetKeyboardState(nullptr);
-    if (io.WantCaptureKeyboard) {
-        return;
-    }
-    f32 boost = 1.0f;
-    auto key = e.key.keysym.sym;
-    if ((SDL_GetModState() & SDLK_LSHIFT) && !io.WantCaptureKeyboard) {
-        boost = 10.0f;
-    }
-    if (keys[SDL_SCANCODE_W]) {
-        m_camera.Move(glm::vec3(0.0f, 0.0f, 1.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_S]) {
-        m_camera.Move(glm::vec3(0.0f, 0.0f, -1.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_A]) {
-        m_camera.Move(glm::vec3(-1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_D]) {
-        m_camera.Move(glm::vec3(1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_E]) {
-        m_camera.Move(glm::vec3(0.0f, 1.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (keys[SDL_SCANCODE_Q]) {
-        m_camera.Move(glm::vec3(0.0f, -1.0f, 0.0f) * boost * io.DeltaTime);
-    }
-    if (!io.WantCaptureMouse && io.MouseDown[0]) {
-        f32 screenWidth = f32(m_window.width);
-        f32 screenHeight = f32(m_window.height);
-        glm::vec2 mouseDelta((screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
-        m_camera.Rotate(mouseDelta * io.DeltaTime * 10.0f);
-    }
+auto &io = ImGui::GetIO();
+auto *keys = SDL_GetKeyboardState(nullptr);
+if (io.WantCaptureKeyboard) {
+    return;
 }
+f32 boost = 1.0f;
+auto key = e.key.keysym.sym;
+if ((SDL_GetModState() & SDLK_LSHIFT) && !io.WantCaptureKeyboard) {
+    boost = 10.0f;
+}
+if (keys[SDL_SCANCODE_W]) {
+    m_camera.Move(glm::vec3(0.0f, 0.0f, 1.0f) * boost * io.DeltaTime);
+}
+if (keys[SDL_SCANCODE_S]) {
+    m_camera.Move(glm::vec3(0.0f, 0.0f, -1.0f) * boost * io.DeltaTime);
+}
+if (keys[SDL_SCANCODE_A]) {
+    m_camera.Move(glm::vec3(-1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
+}
+if (keys[SDL_SCANCODE_D]) {
+    m_camera.Move(glm::vec3(1.0f, 0.0f, 0.0f) * boost * io.DeltaTime);
+}
+if (keys[SDL_SCANCODE_E]) {
+    m_camera.Move(glm::vec3(0.0f, 1.0f, 0.0f) * boost * io.DeltaTime);
+}
+if (keys[SDL_SCANCODE_Q]) {
+    m_camera.Move(glm::vec3(0.0f, -1.0f, 0.0f) * boost * io.DeltaTime);
+}
+if (!io.WantCaptureMouse && io.MouseDown[0]) {
+    f32 screenWidth = f32(m_window.width);
+    f32 screenHeight = f32(m_window.height);
+    glm::vec2 mouseDelta((screenWidth / 2.0f) - io.MousePos.x, (screenHeight / 2.0f) - io.MousePos.y);
+    m_camera.Rotate(mouseDelta * io.DeltaTime * 10.0f);
+}
+}
+*/
 
 #include "tiny_obj_loader.h"
 
@@ -160,7 +165,7 @@ void HeadSystem::SaveVoxels()
     auto savePath = m_ui->SaveClicked();
     if (savePath && m_voxelized) {
         auto params = m_ui->GetParameters();
-        shared::Serialize(*m_mesh_manager.GetMesh(m_current_mesh), *m_mesh_manager.GetVoxelMesh(m_current_mesh), *savePath,
-            "todo", params.mVoxelSize, params.mHollow);
+        shared::Serialize(*m_mesh_manager.GetMesh(m_current_mesh), *m_mesh_manager.GetVoxelMesh(m_current_mesh),
+            *savePath, "todo", params.mVoxelSize, params.mHollow);
     }
 }

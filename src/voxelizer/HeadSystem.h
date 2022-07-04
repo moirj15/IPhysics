@@ -1,6 +1,7 @@
 #pragma once
 //#include "VoxelManager.h"
 //#include "Voxelizer_old.h"
+#include "InputSystem.hpp"
 #include "Voxelizer.h"
 #include "VoxelizerUI.h"
 
@@ -16,6 +17,7 @@
 
 class HeadSystem
 {
+    InputSystem m_input_system;
     Camera m_camera;
     focus::Device *m_device;
     focus::Window m_window;
@@ -35,13 +37,13 @@ class HeadSystem
     bool m_voxelized = false;
     bool m_enable_debug_draw = false;
 
-  public:
-      HeadSystem();
+public:
+    HeadSystem();
 
     void Run();
 
-  private:
-    void CollectInput(const SDL_Event &e);
+private:
+    // void CollectInput(const SDL_Event &e);
     void LoadMesh();
     void GenerateVoxels();
     void Render();
