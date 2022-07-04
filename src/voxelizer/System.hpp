@@ -2,22 +2,27 @@
 
 #include <vector>
 
-class System {
-protected:
-    enum class EventType {
+class System
+{
+public:
+    enum class Event {
         MoveForward,
         MoveBackwards,
         MoveLeft,
         MoveRight,
+        MoveUp,
+        MoveDown,
+        MoveBoost,
         LeftClick,
         RightClick,
-        CtrlLeftClick
+        CtrlLeftClick,
     };
-    std::vector<EventType> m_event_queue;
+
+protected:
+    std::vector<Event> m_event_queue;
+
 public:
     virtual ~System() = default;
-    void EnqueueEvents(const std::vector<EventType> &event_queue) {
-        m_event_queue = event_queue;
-    }
+    void EnqueueEvents(const std::vector<Event> &event_queue) { m_event_queue = event_queue; }
     virtual void Step() = 0;
 };
