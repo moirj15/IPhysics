@@ -2,34 +2,27 @@
 
 #include "../third_party/imgui/backends/imgui_impl_sdl.h"
 #include "../third_party/imgui/backends/imgui_impl_win32.h"
-#include "FileUtils.hpp"
-#include "Obj.h"
-#include "VoxelizerParameters.h"
+#include "PhysicsSystem.hpp"
+#include "RenderSystem.hpp"
 #include "VoxelizerUI.h"
-#include "focus.hpp"
-#include "tiny_obj_loader.h"
 
 #include <Common.h>
-#include <GLFW/glfw3.h>
-#include <Renderer/Window.h>
-#include <SDL.h>
-#include <Utils/Serialization.h>
-#include <glm/glm.hpp>
-#include <glm/vec3.hpp>
 
 HeadSystem::HeadSystem() :
-    m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
-    m_device(focus::Device::Init(focus::RendererAPI::OpenGL)), m_window(m_device->MakeWindow(1980, 1080)),
-    m_ui(new VoxelizerUI()), m_projection_mat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
-    m_renderer(m_device, &m_mesh_manager)
+    // m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+    //  m_device(focus::Device::Init(focus::RendererAPI::OpenGL)), m_window(m_device->MakeWindow(1980, 1080)),
+    m_ui(new VoxelizerUI()) //, m_projection_mat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
+// m_renderer(m_device, &m_mesh_manager)
 //    mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
 {
-    m_ui->Init(m_window);
+    // m_ui->Init(m_window);
 }
 
 void HeadSystem::Run()
 {
     while (m_input_system.BuildEvents()) {
+        m_render_system->Step();
+        m_physics_system->Step();
     }
 }
 
@@ -77,6 +70,7 @@ if (!io.WantCaptureMouse && io.MouseDown[0]) {
 }
 */
 
+/*
 void HeadSystem::LoadMesh()
 {
     auto meshPath = m_ui->LoadMeshClicked();
@@ -132,12 +126,13 @@ void HeadSystem::Render()
     if (m_current_mesh != 0) {
         m_renderer.DrawMesh(m_current_mesh, m_camera, glm::identity<glm::mat4>());
     }
-    if (m_voxelized /*&& mEnableDebugDraw*/) {
-        m_renderer.DrawDebugVoxels(m_current_mesh, m_camera, glm::identity<glm::mat4>());
-    }
+    if (m_voxelized && mEnableDebugDraw)
+{
+    m_renderer.DrawDebugVoxels(m_current_mesh, m_camera, glm::identity<glm::mat4>());
+}
 
-    m_ui->Update(m_window);
-    m_renderer.UpdateScreen(m_window);
+m_ui->Update(m_window);
+m_renderer.UpdateScreen(m_window);
 }
 
 void HeadSystem::SaveVoxels()
@@ -149,3 +144,5 @@ void HeadSystem::SaveVoxels()
             *savePath, "todo", params.mVoxelSize, params.mHollow);
     }
 }
+
+*/
