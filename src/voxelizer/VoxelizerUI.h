@@ -10,37 +10,39 @@
 #include <optional>
 #include <string>
 
-namespace focus { struct Window; }
-//struct Window;
-
+namespace focus
+{
+struct Window;
+}
+// struct Window;
 
 class VoxelizerUI
 {
-  std::string mMeshFileName;
-  std::string mVoxelMeshFileName;
-  Parameters mParameters;
-  bool mSaveClicked;
-  bool mGenerateVoxelsClicked;
-  bool mLoadMeshClicked;
+    std::string mMeshFileName;
+    std::string mVoxelMeshFileName;
+    Parameters mParameters;
+    bool mSaveClicked;
+    bool mGenerateVoxelsClicked;
+    bool mLoadMeshClicked;
 
 public:
-  VoxelizerUI() :
-      mMeshFileName(256, 0), mVoxelMeshFileName(256, 0), mSaveClicked(false), mGenerateVoxelsClicked(false),
-      mLoadMeshClicked(false)
-  {
-  }
-  ~VoxelizerUI();
+    VoxelizerUI() :
+        mMeshFileName(256, 0), mVoxelMeshFileName(256, 0), mSaveClicked(false), mGenerateVoxelsClicked(false),
+        mLoadMeshClicked(false)
+    {
+    }
+    ~VoxelizerUI();
 
-  // TODO: these two functions should go in a base class
-  void Init(const focus::Window &window);
+    // TODO: these two functions should go in a base class
+    void Init(const focus::Window &window);
 
-  void Update(const focus::Window &window);
+    void Update(const focus::Window &window);
 
-  NODISCARD std::optional<std::string> LoadMeshClicked();
+    NODISCARD std::optional<std::string> LoadMeshClicked();
 
-  NODISCARD std::optional<std::string> SaveClicked();
+    NODISCARD std::optional<std::string> SaveClicked();
 
-  NODISCARD bool GenerateVoxelsClicked();
+    NODISCARD bool GenerateVoxelsClicked();
 
-  NODISCARD inline Parameters GetParameters() const { return mParameters; }
+    NODISCARD inline Parameters GetParameters() const { return mParameters; }
 };

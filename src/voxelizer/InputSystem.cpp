@@ -7,7 +7,7 @@
 #include <Common.h>
 #include <SDL2/SDL.h>
 
-void InputSystem::BuildEvents()
+bool InputSystem::BuildEvents()
 {
     std::vector<System::Event> event_queue;
     SDL_Event event;
@@ -16,10 +16,10 @@ void InputSystem::BuildEvents()
         auto &io = ImGui::GetIO();
         auto *keys = SDL_GetKeyboardState(nullptr);
         if (io.WantCaptureKeyboard) {
-            return;
+            return true;
         }
         if (event.type == SDL_QUIT) {
-            return;
+            return false;
         }
         if ((SDL_GetModState() & KMOD_LSHIFT) && !io.WantCaptureKeyboard) {
             event_queue.emplace_back(System::Event::MoveBoost);
@@ -49,4 +49,5 @@ void InputSystem::BuildEvents()
     for (auto *subscriber : m_subscribers) {
         subscriber->EnqueueEvents(event_queue);
     }
+    return true;
 }

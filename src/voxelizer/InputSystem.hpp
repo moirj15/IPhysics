@@ -10,6 +10,5 @@ class InputSystem
 
 public:
     void Subscribe(System *subscriber) { m_subscribers.emplace_back(subscriber); }
-    void BuildEvents();
+    bool BuildEvents();
 };
-

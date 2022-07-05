@@ -29,26 +29,8 @@ HeadSystem::HeadSystem() :
 
 void HeadSystem::Run()
 {
-    m_input_system.BuildEvents();
-    /*
-    bool keepWindowOpen = true;
-    SDL_Event e;
-    while (keepWindowOpen) {
-        while (SDL_PollEvent(&e) > 0) {
-            // TODO: put into UI code
-            ImGui_ImplSDL2_ProcessEvent(&e);
-            if (e.type == SDL_QUIT) {
-                return;
-            }
-        }
-        SDL_PumpEvents();
-        //CollectInput(e);
-        LoadMesh();
-        GenerateVoxels();
-        Render();
-        SaveVoxels();
+    while (m_input_system.BuildEvents()) {
     }
-    */
 }
 
 /*
@@ -94,8 +76,6 @@ if (!io.WantCaptureMouse && io.MouseDown[0]) {
 }
 }
 */
-
-#include "tiny_obj_loader.h"
 
 void HeadSystem::LoadMesh()
 {

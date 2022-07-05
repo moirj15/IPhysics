@@ -72,7 +72,7 @@ set(SOURCE_LIST_VOXEL_GENERATOR
 
 find_package(OpenGL REQUIRED)
 add_subdirectory(sharedLibrary)
-add_subdirectory(focus)
+#add_subdirectory(focus)
 include_directories(
         ${CMAKE_SOURCE_DIR}/include;
         ${CMAKE_SOURCE_DIR}/sharedLibrary/include;
