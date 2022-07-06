@@ -1,8 +1,10 @@
 #pragma once
 #include "InputSystem.hpp"
 #include "VoxelizerUI.h"
+#include "PhysicsSystem.hpp"
+#include "RenderSystem.hpp"
 
-#include <Common.h>
+#include "Common.h"
 #include <memory>
 
 class RenderSystem;

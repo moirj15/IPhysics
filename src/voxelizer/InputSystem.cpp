@@ -4,7 +4,7 @@
 #include "../third_party/imgui/imgui.h"
 #include "System.hpp"
 
-#include <Common.h>
+#include "Common.h"
 #include <SDL2/SDL.h>
 
 bool InputSystem::BuildEvents()

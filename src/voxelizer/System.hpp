@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Common.h"
 
 class System
 {
@@ -24,5 +25,5 @@ protected:
 public:
     virtual ~System() = default;
     void EnqueueEvents(const std::vector<Event> &event_queue) { m_event_queue = event_queue; }
-    virtual void Step() = 0;
+    virtual void Step(f32 delta) = 0;
 };

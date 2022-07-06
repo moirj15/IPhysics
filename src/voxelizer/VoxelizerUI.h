@@ -6,7 +6,7 @@
 
 #include "VoxelizerParameters.h"
 
-#include <Common.h>
+#include "Common.h"
 #include <optional>
 #include <string>
 
@@ -34,9 +34,9 @@ public:
     ~VoxelizerUI();
 
     // TODO: these two functions should go in a base class
-    void Init(const focus::Window &window);
+    void Init(/*const focus::Window &window*/);
 
-    void Update(const focus::Window &window);
+    void Update(/*const focus::Window &window*/);
 
     NODISCARD std::optional<std::string> LoadMeshClicked();
 

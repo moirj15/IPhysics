@@ -4,7 +4,7 @@
 #include "VoxelizerParameters.h"
 
 #include <BulletCollision/Gimpact/btBoxCollision.h>
-#include <Common.h>
+#include "Common.h"
 #include <VoxelObjects/Box.h>
 #include <VoxelObjects/EdgeMesh.h>
 #include <VoxelObjects/Ray.h>

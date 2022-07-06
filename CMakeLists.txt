@@ -16,17 +16,17 @@ file(GLOB THIRD_PARTY_SRC CONFIGURE_DEPENDS
 set(VOXEL_GENERATOR_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/voxelizer)
 set(VOXEL_GENERATOR_SOURCE
         ${VOXEL_GENERATOR_SOURCE_DIR}/main.cpp
-        ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.cpp
+#        ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/HeadSystem.cpp
-        ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.cpp
+#        ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerUI.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/tiny_obj_loader.cpp
         )
 set(VOXEL_GENERATOR_HEADERS
         ${VOXEL_GENERATOR_SOURCE_DIR}/FileUtils.hpp
-        ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.h
+#        ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.h
         ${VOXEL_GENERATOR_SOURCE_DIR}/HeadSystem.h
-        ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.h
+#        ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.h
         ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerParameters.h
         )
 #file(GLOB SRC_VOXEL_GENERATOR CONFIGURE_DEPENDS "src/voxelizer/*")
@@ -35,33 +35,33 @@ set(VOXEL_GENERATOR_HEADERS
 #file(GLOB SRC_PHYSICS_SIMULATION_FILES CONFIGURE_DEPENDS "src/physics-sim/app/*")
 #file(GLOB SRC_PHYSICS_ENGINE_FILES CONFIGURE_DEPENDS "src/physics-sim/PhysicsEngine/*")
 
-set(PHYSICS_SIM_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/physics-sim)
-
-set(PHYSICS_SIM_SOURCE
-        ${PHYSICS_SIM_SOURCE_DIR}/main.cpp
-        ${PHYSICS_SIM_SOURCE_DIR}/IphysicsUI.cpp
-        ${PHYSICS_SIM_SOURCE_DIR}/Physics.cpp
-        ${PHYSICS_SIM_SOURCE_DIR}/PhysicsSimulationApp.cpp
-        ${PHYSICS_SIM_SOURCE_DIR}/DebugRenderer.cpp
-        ${PHYSICS_SIM_SOURCE_DIR}/Scene.cpp
-        )
-set(PHYSICS_SIM_HEADERS
-        ${PHYSICS_SIM_SOURCE_DIR}/IphysicsUI.h
-        ${PHYSICS_SIM_SOURCE_DIR}/Physics.h
-        ${PHYSICS_SIM_SOURCE_DIR}/PhysicsSimulationApp.h
-        ${PHYSICS_SIM_SOURCE_DIR}/collidable.h
-        ${PHYSICS_SIM_SOURCE_DIR}/settings.h
-        ${PHYSICS_SIM_SOURCE_DIR}/DebugRenderer.h
-        ${PHYSICS_SIM_SOURCE_DIR}/Scene.h
-        )
-
-
-
-set(SOURCE_LIST_PHYSICS_SIM
-        ${THIRD_PARTY_SRC}
-        ${PHYSICS_SIM_SOURCE}
-        ${PHYSICS_SIM_HEADERS}
-        )
+#set(PHYSICS_SIM_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/physics-sim)
+#
+#set(PHYSICS_SIM_SOURCE
+#        ${PHYSICS_SIM_SOURCE_DIR}/main.cpp
+#        ${PHYSICS_SIM_SOURCE_DIR}/IphysicsUI.cpp
+#        ${PHYSICS_SIM_SOURCE_DIR}/Physics.cpp
+#        ${PHYSICS_SIM_SOURCE_DIR}/PhysicsSimulationApp.cpp
+#        ${PHYSICS_SIM_SOURCE_DIR}/DebugRenderer.cpp
+#        ${PHYSICS_SIM_SOURCE_DIR}/Scene.cpp
+#        )
+#set(PHYSICS_SIM_HEADERS
+#        ${PHYSICS_SIM_SOURCE_DIR}/IphysicsUI.h
+#        ${PHYSICS_SIM_SOURCE_DIR}/Physics.h
+#        ${PHYSICS_SIM_SOURCE_DIR}/PhysicsSimulationApp.h
+#        ${PHYSICS_SIM_SOURCE_DIR}/collidable.h
+#        ${PHYSICS_SIM_SOURCE_DIR}/settings.h
+#        ${PHYSICS_SIM_SOURCE_DIR}/DebugRenderer.h
+#        ${PHYSICS_SIM_SOURCE_DIR}/Scene.h
+#        )
+#
+#
+#
+#set(SOURCE_LIST_PHYSICS_SIM
+#        ${THIRD_PARTY_SRC}
+#        ${PHYSICS_SIM_SOURCE}
+#        ${PHYSICS_SIM_HEADERS}
+#        )
 
 set(SOURCE_LIST_VOXEL_GENERATOR
         ${THIRD_PARTY_SRC}
@@ -71,13 +71,13 @@ set(SOURCE_LIST_VOXEL_GENERATOR
 
 
 find_package(OpenGL REQUIRED)
-add_subdirectory(sharedLibrary)
+#add_subdirectory(sharedLibrary)
 #add_subdirectory(focus)
 include_directories(
         ${CMAKE_SOURCE_DIR}/include;
-        ${CMAKE_SOURCE_DIR}/sharedLibrary/include;
+#        ${CMAKE_SOURCE_DIR}/sharedLibrary/include;
         ${CMAKE_SOURCE_DIR}/glad/include;
-        ${CMAKE_SOURCE_DIR}/focus/pub_include;
+#        ${CMAKE_SOURCE_DIR}/focus/pub_include;
         ${CMAKE_SOURCE_DIR}/src/third_party/imgui;
         # TODO: this is just a temp fix for imgui requiring sdl headers to be included
         ${CMAKE_SOURCE_DIR}/focus/include/SDL2
@@ -106,11 +106,11 @@ if (WIN32)
     #    string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
     #    string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
     #endforeach ()
-    add_executable(
-        PhysicsSim
-        ${SOURCE_LIST_PHYSICS_SIM}
-    )
-    set_property(TARGET PhysicsSim PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:DEBUG>:Debug>")
+#    add_executable(
+#        PhysicsSim
+#        ${SOURCE_LIST_PHYSICS_SIM}
+#    )
+#    set_property(TARGET PhysicsSim PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:DEBUG>:Debug>")
 
     add_executable(
             VoxelGenerator
@@ -166,44 +166,44 @@ if (WIN32)
                 opengl32
                 Setupapi.lib
         )
-        target_link_libraries(
-                PhysicsSim
-                ${OPENGL_LIBRARY}
-                # TODO: hacky solution for linking in sdl and focus
-                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
-                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2-static.lib
-                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2main.lib
-                #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath_Debug.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletSoftBody_Debug.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletInverseDynamicsUtils.lib
-                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletInverseDynamics.lib
-                sharedLibrary
-                #focus
-                #                glfw3
-                opengl32.lib
-                gdi32.lib
-                user32.lib
-                kernel32.lib
-                msvcrtd.lib
-                winmm.lib
-                imm32.lib
-                version.lib
-                d3d11.lib
-                d3d12.lib
-                libcmt.lib
-                dxgi.lib
-                dxguid.lib
-                d3dcompiler.lib
-                winmm.lib
-                gdi32
-                opengl32
-                Setupapi.lib
-        )
+#        target_link_libraries(
+#                PhysicsSim
+#                ${OPENGL_LIBRARY}
+#                # TODO: hacky solution for linking in sdl and focus
+#                ${CMAKE_SOURCE_DIR}/focus/lib/focus.lib
+#                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2-static.lib
+#                ${CMAKE_SOURCE_DIR}/focus/libs/windows/SDL2main.lib
+#                #                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/LinearMath_Debug.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletSoftBody_Debug.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletDynamics_Debug.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletCollision_Debug.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletInverseDynamicsUtils.lib
+#                ${CMAKE_SOURCE_DIR}/libs/windows/bullet/BulletInverseDynamics.lib
+#                sharedLibrary
+#                #focus
+#                #                glfw3
+#                opengl32.lib
+#                gdi32.lib
+#                user32.lib
+#                kernel32.lib
+#                msvcrtd.lib
+#                winmm.lib
+#                imm32.lib
+#                version.lib
+#                d3d11.lib
+#                d3d12.lib
+#                libcmt.lib
+#                dxgi.lib
+#                dxguid.lib
+#                d3dcompiler.lib
+#                winmm.lib
+#                gdi32
+#                opengl32
+#                Setupapi.lib
+#        )
     else ()
         message("RELEASE YOU FOOL!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         #target_link_libraries(

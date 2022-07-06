@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Common.h>
-#include <VoxelObjects/Objects.h>
+#include "Common.h"
+#include "Objects.h"
 #include <cassert>
 #include <string>
 #include <unordered_map>
@@ -13,11 +13,23 @@ class Handle
     u32 m_handle = 0;
 
 public:
-    explicit Handle(u32 handle) : m_handle(handle) { asseret(handle != 0); }
+    Handle() = default;
+    explicit Handle(u32 handle) : m_handle(handle) { assert(handle != 0); }
 
-    u32 Data() const { return m_handle; }
-    bool IsValid() const { return m_handle != 0; }
+    [[nodiscard]] u32 Data() const { return m_handle; }
+    [[nodiscard]] bool IsValid() const { return m_handle != 0; }
 };
+
+namespace std {
+
+template<typename T>
+struct hash<Handle<T>> {
+    size_t operator()(const Handle<T> &handle) const {
+        return hash<u32>()(handle.Data());
+    }
+};
+
+}
 
 class System;
 

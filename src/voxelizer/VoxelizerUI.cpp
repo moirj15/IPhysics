@@ -1,7 +1,5 @@
 #include "VoxelizerUI.h"
 
-#include <focus.hpp>
-
 #ifndef IMGUI_IMPL_OPENGL_LOADER_GLAD
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 #endif
@@ -10,7 +8,7 @@
 #include "../third_party/imgui/backends/imgui_impl_sdl.h"
 #include "../third_party/imgui/imgui.h"
 
-#include <Common.h>
+#include "Common.h"
 
 VoxelizerUI::~VoxelizerUI()
 {
@@ -19,7 +17,7 @@ VoxelizerUI::~VoxelizerUI()
     ImGui::DestroyContext();
 }
 
-void VoxelizerUI::Init(const focus::Window &window)
+void VoxelizerUI::Init(/*const focus::Window &window*/)
 {
     // TODO: put in base class
     IMGUI_CHECKVERSION();
@@ -28,15 +26,14 @@ void VoxelizerUI::Init(const focus::Window &window)
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
     //  auto [device, context] = focus::GetDeviceAndContext();
-    ImGui_ImplSDL2_InitForD3D(window.sdl_window);
     ImGui_ImplOpenGL3_Init();
     ImGui::StyleColorsClassic();
 }
 
-void VoxelizerUI::Update(const focus::Window &window)
+void VoxelizerUI::Update(/*const focus::Window &window*/)
 {
     ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplSDL2_NewFrame(window.sdl_window);
+//    ImGui_ImplSDL2_NewFrame(window.sdl_window);
     ImGui::NewFrame();
     // Define the UI layout
     ImGui::Begin("Hello boi", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);

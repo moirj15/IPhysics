@@ -2,7 +2,7 @@
 
 #include "ResourceSystem.hpp"
 #include "System.hpp"
-#include "VoxelObjects/Objects.h"
+#include "Objects.h"
 
 #include <unordered_map>
 #include <vector>
@@ -37,14 +37,23 @@ public:
     NODISCARD inline const glm::vec3 &GetPosition() const { return m_position; }
 };
 
+struct SDL_Window;
+
 class RenderSystem : public System
 {
-    std::vector<Handle<objs::Mesh>> m_meshes;
+    struct RenderData {
+        u32 vertex_buffer_offset;
+        u32 index_buffer_offset;
+    };
+    std::unordered_map<Handle<objs::Mesh>, RenderData> m_meshes;
     Camera m_camera;
+
+    u32 m_vao = 0;
+    SDL_Window *m_window = nullptr;
 
     static constexpr f32 SPEED = 5.0f;
 
 public:
     RenderSystem();
-    void Step() override;
+    void Step(f32 delta) override;
 };

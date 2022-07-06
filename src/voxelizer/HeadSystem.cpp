@@ -2,11 +2,7 @@
 
 #include "../third_party/imgui/backends/imgui_impl_sdl.h"
 #include "../third_party/imgui/backends/imgui_impl_win32.h"
-#include "PhysicsSystem.hpp"
-#include "RenderSystem.hpp"
 #include "VoxelizerUI.h"
-
-#include <Common.h>
 
 HeadSystem::HeadSystem() :
     // m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
@@ -21,8 +17,8 @@ HeadSystem::HeadSystem() :
 void HeadSystem::Run()
 {
     while (m_input_system.BuildEvents()) {
-        m_render_system->Step();
-        m_physics_system->Step();
+        m_render_system->Step(0);
+        m_physics_system->Step(0);
     }
 }
 

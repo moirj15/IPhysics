@@ -17,3 +17,13 @@ cmake-build-debug-visual-studio/*
 /testfiles/*
 imgui.ini
 compile_commands.json
+/.cache/clangd/index/
+/.vscode/
+/libs/windows/
+/voxel_meshes/
+/voxel_objects/
+/.nvim.json
+/Etest.json
+/neovim.json
+/parameters_file
+/test.json

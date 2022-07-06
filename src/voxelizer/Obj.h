@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Common.h>
+#include "Common.h"
 #include <glm/vec3.hpp>
 #include <memory>
 #include <string>
 #include <vector>
-#include <VoxelObjects/Objects.h>
+#include "Objects.h"
 #include <unordered_set>
 
 //struct Mesh;
