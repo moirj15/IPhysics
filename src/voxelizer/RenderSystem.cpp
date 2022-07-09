@@ -103,4 +103,7 @@ void RenderSystem::Step(f32 delta)
         } else if (event == Event::MoveBoost) {
         }
     }
+
+    SDL_GL_SwapWindow(m_window);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

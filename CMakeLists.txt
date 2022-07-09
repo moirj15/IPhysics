@@ -19,7 +19,7 @@ set(VOXEL_GENERATOR_SOURCE
 #        ${VOXEL_GENERATOR_SOURCE_DIR}/Obj.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/HeadSystem.cpp
 #        ${VOXEL_GENERATOR_SOURCE_DIR}/Voxelizer.cpp
-        ${VOXEL_GENERATOR_SOURCE_DIR}/VoxelizerUI.cpp
+        ${VOXEL_GENERATOR_SOURCE_DIR}/UISystem.cpp
         ${VOXEL_GENERATOR_SOURCE_DIR}/tiny_obj_loader.cpp
         )
 set(VOXEL_GENERATOR_HEADERS
@@ -67,7 +67,10 @@ set(SOURCE_LIST_VOXEL_GENERATOR
         ${THIRD_PARTY_SRC}
         ${VOXEL_GENERATOR_SOURCE}
         ${VOXEL_GENERATOR_HEADERS}
-         src/voxelizer/System.hpp src/voxelizer/InputSystem.cpp src/voxelizer/InputSystem.hpp)
+        src/voxelizer/InputSystem.cpp
+        src/voxelizer/RenderSystem.cpp
+        src/voxelizer/PhysicsSystem.cpp
+        )
 
 
 find_package(OpenGL REQUIRED)

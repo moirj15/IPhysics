@@ -56,4 +56,5 @@ class RenderSystem : public System
 public:
     RenderSystem();
     void Step(f32 delta) override;
+    SDL_Window *GetWindow() const { return m_window; }
 };

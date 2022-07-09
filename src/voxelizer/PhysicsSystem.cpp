@@ -1,5 +1,5 @@
 #include "PhysicsSystem.hpp"
 
-void PhysicsSystem::Step()
+void PhysicsSystem::Step(f32 delta)
 {
 }

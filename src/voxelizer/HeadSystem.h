@@ -1,25 +1,25 @@
 #pragma once
+#include "Common.h"
 #include "InputSystem.hpp"
-#include "VoxelizerUI.h"
 #include "PhysicsSystem.hpp"
 #include "RenderSystem.hpp"
+#include "UISystem.hpp"
+#include "ResourceSystem.hpp"
 
-#include "Common.h"
 #include <memory>
 
-class RenderSystem;
-class PhysicsSystem;
 
 class HeadSystem
 {
     InputSystem m_input_system;
+    ResourceSystem m_resource_system;
     std::unique_ptr<RenderSystem> m_render_system;
     std::unique_ptr<PhysicsSystem> m_physics_system;
 
     // Camera m_camera;
     //  focus::Device *m_device;
     //  focus::Window m_window;
-    std::unique_ptr<VoxelizerUI> m_ui;
+    UISystem m_ui_system;
     // VoxGen::Voxelizer m_voxelizer;
 
     // TODO: remove since the meshmanager takes care of these

@@ -2,21 +2,25 @@
 
 #include "../third_party/imgui/backends/imgui_impl_sdl.h"
 #include "../third_party/imgui/backends/imgui_impl_win32.h"
-#include "VoxelizerUI.h"
+#include "UISystem.hpp"
 
 HeadSystem::HeadSystem() :
     // m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
     //  m_device(focus::Device::Init(focus::RendererAPI::OpenGL)), m_window(m_device->MakeWindow(1980, 1080)),
-    m_ui(new VoxelizerUI()) //, m_projection_mat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
+//    m_ui(new UISystem()) //, m_projection_mat(glm::perspective(glm::radians(90.0f), 16.0f / 9.0f, 0.1f, 100.0f)),
 // m_renderer(m_device, &m_mesh_manager)
 //    mCurrentMeshHandle(0), mCurrentVoxelMeshHandle(0)
+    m_render_system(new RenderSystem()), m_physics_system(new PhysicsSystem()), m_ui_system(m_render_system->GetWindow(), &m_resource_system)
 {
     // m_ui->Init(m_window);
+    m_input_system.Subscribe(m_render_system.get());
+    m_input_system.Subscribe(m_physics_system.get());
 }
 
 void HeadSystem::Run()
 {
     while (m_input_system.BuildEvents()) {
+        m_ui_system.Update();
         m_render_system->Step(0);
         m_physics_system->Step(0);
     }
