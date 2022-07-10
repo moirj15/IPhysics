@@ -6,7 +6,10 @@ Handle<objs::Mesh> ResourceSystem::LoadMesh(const std::string &path)
 {
     objs::Mesh mesh;
     // Load our mesh if we got a good path
-    if (std::filesystem::exists(path)) {
+    if (m_mesh_cache.contains(path)) {
+        return m_mesh_cache[path];
+    }
+    else if (std::filesystem::exists(path)) {
         tinyobj::ObjReader reader;
         reader.ParseFromFile(path);
         auto attrib = reader.GetAttrib();
@@ -25,7 +28,12 @@ Handle<objs::Mesh> ResourceSystem::LoadMesh(const std::string &path)
 
             mesh.indices.push_back(mesh.indices.size());
         }
+        m_next_handle++;
+        Handle<objs::Mesh> handle(m_next_handle);
+        m_mesh_cache.emplace(path, handle);
+        m_meshes.emplace(handle, mesh);
+        return handle;
     } else {
-        // TODO: pop-up or something
+        return Handle<objs::Mesh>::Invalid();
     }
 }

@@ -14,10 +14,18 @@ class Handle
 
 public:
     Handle() = default;
-    explicit Handle(u32 handle) : m_handle(handle) { assert(handle != 0); }
+    explicit Handle(u32 handle) : m_handle(handle) { assert(m_handle != 0); }
+    Handle(const Handle &o) : m_handle(o.m_handle) { assert(m_handle != 0); }
+    Handle(Handle &&o) noexcept : m_handle(o.m_handle) { assert(m_handle != 0); }
+
+    bool operator==(const Handle &o) const { return m_handle == o.m_handle;}
+
+    static Handle Invalid() { return Handle(); }
 
     [[nodiscard]] u32 Data() const { return m_handle; }
     [[nodiscard]] bool IsValid() const { return m_handle != 0; }
+
+
 };
 
 namespace std {
@@ -35,10 +43,12 @@ class System;
 
 class ResourceSystem
 {
-    std::unordered_map<std::string, objs::Mesh> m_mesh_cache;
+    std::unordered_map<std::string, Handle<objs::Mesh>> m_mesh_cache;
     std::unordered_map<Handle<objs::Mesh>, objs::Mesh> m_meshes;
 
     std::vector<System *> m_mesh_listeners;
+
+    u32 m_next_handle = 0;
 
 public:
     ResourceSystem() = default;
