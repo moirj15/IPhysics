@@ -1,18 +1,15 @@
 #version 450
 
-layout(std140, binding = 1) uniform fragConstants {
-  vec4 lightColor;
-  vec4 ambientLight;
-
-  vec4 ambientColor;
-  vec4 diffuseColor;
-  vec4 specularColor;
-// x: ambient coeff
-// y: diffuse coeff
-// z: specular coeff
-// w: specular exp
-  vec4 coeff;
-};
+layout (location = 4) uniform vec4 lightColor;
+layout (location = 5) uniform vec4 ambientLight;
+layout (location = 6) uniform vec4 ambientColor;
+layout (location = 7) uniform vec4 diffuseColor;
+layout (location = 8) uniform vec4 specularColor;
+ // x: ambient coeff
+ // y: diffuse coeff
+ // z: specular coeff
+ // w: specular exp
+layout (location = 9) uniform vec4 coeff;
 
 
 

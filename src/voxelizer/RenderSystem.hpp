@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ResourceSystem.hpp"
 #include "System.hpp"
 #include "Objects.h"
+#include "glad.h"
 
 #include <unordered_map>
 #include <vector>
@@ -43,18 +43,27 @@ class RenderSystem : public System
 {
     struct RenderData {
         u32 vertex_buffer_offset;
+        u32 vertex_buffer_size;
         u32 index_buffer_offset;
+        u32 index_buffer_size;
     };
     std::unordered_map<Handle<objs::Mesh>, RenderData> m_meshes;
     Camera m_camera;
 
-    u32 m_vao = 0;
+    GLuint m_vao = GL_NONE;
+    struct MainBuffer {
+        GLuint vertex_buffer = GL_NONE;
+        GLuint vb_size = 0;
+        GLuint index_buffer = GL_NONE;
+        GLuint ib_size = 0;
+    } m_main_buffer;
     SDL_Window *m_window = nullptr;
 
     static constexpr f32 SPEED = 5.0f;
 
 public:
-    RenderSystem();
-    void Step(f32 delta) override;
+    explicit RenderSystem(ResourceSystem *resource_system);
+    void Step(f32 delta, const std::vector<Entity> &entities) override;
+    void MeshLoaded(const Handle<objs::Mesh> &handle) override;
     SDL_Window *GetWindow() const { return m_window; }
 };

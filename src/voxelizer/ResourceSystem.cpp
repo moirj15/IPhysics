@@ -1,15 +1,16 @@
 #include "ResourceSystem.hpp"
 
+#include "System.hpp"
 #include "tiny_obj_loader.h"
 
-Handle<objs::Mesh> ResourceSystem::LoadMesh(const std::string &path)
+MeshHandle ResourceSystem::LoadMesh(const std::string &path)
 {
     objs::Mesh mesh;
+    auto handle = MeshHandle::Invalid();
     // Load our mesh if we got a good path
     if (m_mesh_cache.contains(path)) {
-        return m_mesh_cache[path];
-    }
-    else if (std::filesystem::exists(path)) {
+        handle = m_mesh_cache[path];
+    } else if (std::filesystem::exists(path)) {
         tinyobj::ObjReader reader;
         reader.ParseFromFile(path);
         auto attrib = reader.GetAttrib();
@@ -29,11 +30,14 @@ Handle<objs::Mesh> ResourceSystem::LoadMesh(const std::string &path)
             mesh.indices.push_back(mesh.indices.size());
         }
         m_next_handle++;
-        Handle<objs::Mesh> handle(m_next_handle);
+        handle = MeshHandle(m_next_handle);
         m_mesh_cache.emplace(path, handle);
         m_meshes.emplace(handle, mesh);
-        return handle;
-    } else {
-        return Handle<objs::Mesh>::Invalid();
     }
+    if (handle) {
+        for (auto *listener : m_mesh_listeners) {
+            listener->MeshLoaded(handle);
+        }
+    }
+    return handle;
 }

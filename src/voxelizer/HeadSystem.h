@@ -7,6 +7,7 @@
 #include "ResourceSystem.hpp"
 
 #include <memory>
+#include "Entity.hpp"
 
 
 class HeadSystem
@@ -15,6 +16,7 @@ class HeadSystem
     ResourceSystem m_resource_system;
     std::unique_ptr<RenderSystem> m_render_system;
     std::unique_ptr<PhysicsSystem> m_physics_system;
+    std::vector<Entity> m_entities;
 
     // Camera m_camera;
     //  focus::Device *m_device;

@@ -5,12 +5,10 @@ layout (location = 1) in vec3 vNormal;
 //layout (location = 2) in vec3 vOffset;
 
 
-layout(std140, binding = 0) uniform constants {
-  mat4 camera;
-  mat4 mvp;
-  mat4 normalMat;
-  vec4 lightPosition;
-};
+layout (location = 0) uniform mat4 camera;
+layout (location = 1) uniform mat4 mvp;
+layout (location = 2) uniform mat4 normalMat;
+layout (location = 3) uniform vec4 lightPosition;
 
 
 out vec3 eye_vPosition;

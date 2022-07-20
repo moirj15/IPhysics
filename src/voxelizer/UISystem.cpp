@@ -43,7 +43,17 @@ void UISystem::Update()
     ImGui::Begin("Hello boi", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize);
     {
         if (ImGui::Button("Load Mesh")) {
-            m_resource_system->LoadMesh(m_mesh_file_name);
+            auto mesh_handle = m_resource_system->LoadMesh(m_mesh_file_name);
+            if (!mesh_handle) {
+                ImGui::OpenPopup("bad_mesh_path");
+            }
+        }
+        if (ImGui::BeginPopupModal("bad_mesh_path", nullptr, ImGuiWindowFlags_AlwaysAutoResize)) {
+            ImGui::Text("Unable to load mesh: %s", m_mesh_file_name.c_str());
+            if (ImGui::Button("OK")) {
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::EndPopup();
         }
         ImGui::SameLine();
         ImGui::InputText("Mesh File Name", m_mesh_file_name.data(), m_mesh_file_name.size());
