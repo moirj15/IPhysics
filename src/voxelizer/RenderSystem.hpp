@@ -1,9 +1,10 @@
 #pragma once
 
-#include "System.hpp"
 #include "Objects.h"
+#include "System.hpp"
 #include "glad.h"
 
+#include <glm/gtc/type_ptr.hpp>
 #include <unordered_map>
 #include <vector>
 
@@ -25,8 +26,7 @@ class Camera
 
 public:
     explicit Camera(const glm::vec3 &position, const glm::vec3 &target, const glm::vec3 &up) :
-        m_position(position), mTarget(target), mUp(up), mStrafe(glm::normalize(glm::cross(mTarget, mUp))),
-        mMatrix(1.0f), mRecalculate(true)
+        m_position(position), mTarget(target), mUp(up), mStrafe(glm::normalize(glm::cross(mTarget, mUp))), mMatrix(1.0f), mRecalculate(true)
     {
     }
 
@@ -39,8 +39,40 @@ public:
 
 struct SDL_Window;
 
+class Shader
+{
+    GLuint m_program_handle;
+
+public:
+    explicit Shader(const std::vector<std::string> &filePaths) : m_program_handle(CompileShader(filePaths)) {}
+
+    void SetUniform(GLint location, const f32 value) { glUniform1f(location, value); }
+
+    void SetUniform(GLint location, const glm::vec2 &value) { glUniform2fv(location, 1, glm::value_ptr(value)); }
+
+    void SetUniform(GLint location, const glm::vec3 &value) { glUniform3fv(location, 1, glm::value_ptr(value)); }
+
+    void SetUniform(GLint location, const glm::vec4 &value) { glUniform4fv(location, 1, glm::value_ptr(value)); }
+
+    void SetUniform(GLint location, const glm::mat3 &value) { glUniformMatrix3fv(location, 1, false, glm::value_ptr(value)); }
+
+    void SetUniform(GLint location, const glm::mat4 &value) { glUniformMatrix4fv(location, 1, false, glm::value_ptr(value)); }
+    void Bind() const { glUseProgram(m_program_handle); }
+
+private:
+    GLuint CompileShader(const std::vector<std::string> &file_paths);
+
+    std::vector<GLenum> DetermineShaderTypes(const std::vector<std::string> &file_paths);
+
+    static char *readFile(const char *name);
+    static void printShaderInfo(u32 shader);
+
+    static void printProgramProgramInfo(const u32 shader);
+};
+
 class RenderSystem : public System
 {
+    // TODO: the Offset buffer should also be one large buffer with offsets
     struct RenderData {
         u32 vertex_buffer_offset;
         u32 vertex_buffer_size;
@@ -60,6 +92,9 @@ class RenderSystem : public System
     SDL_Window *m_window = nullptr;
 
     static constexpr f32 SPEED = 5.0f;
+    inline static const glm::mat4 PROJECTION = glm::infinitePerspective(90.0f, 16.0f / 9.0f, 0.01f);
+
+    Shader m_phong{{"shaders/phong.vert", "shaders/phong.frag"}};
 
 public:
     explicit RenderSystem(ResourceSystem *resource_system);
