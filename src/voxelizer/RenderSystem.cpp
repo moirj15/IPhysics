@@ -5,8 +5,8 @@
 #include "glm/gtc/type_ptr.hpp"
 
 #include <SDL2/SDL.h>
-#include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_inverse.hpp>
+#include <glm/gtx/quaternion.hpp>
 #include <glm/vec3.hpp>
 
 void Camera::Move(const glm::vec3 &velocity)
@@ -67,8 +67,8 @@ struct MeshBuffer {
     glm::vec3 normal;
 
     static constexpr GLuint Size() { return sizeof(MeshBuffer); }
-    static constexpr const void *VertexOffset() { return reinterpret_cast<const void *>(offsetof(MeshBuffer, vertex)); }
-    static constexpr const void *NormalOffset() { return reinterpret_cast<const void *>(offsetof(MeshBuffer, normal)); }
+    static constexpr GLintptr VertexOffset() { return static_cast<GLintptr>(offsetof(MeshBuffer, vertex)); }
+    static constexpr GLintptr NormalOffset() { return static_cast<GLintptr>(offsetof(MeshBuffer, normal)); }
 };
 
 namespace MeshBufferLayout
@@ -263,13 +263,11 @@ void RenderSystem::Step(f32 delta, const std::vector<Entity> &entities)
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
 
-    glVertexAttribPointer(MeshBufferLayout::Vertices, 3, GL_FLOAT, false, MeshBuffer::Size(), MeshBuffer::VertexOffset());
-    glVertexAttribPointer(MeshBufferLayout::Normals, 3, GL_FLOAT, false, MeshBuffer::Size(), MeshBuffer::NormalOffset());
+    glVertexAttribPointer(MeshBufferLayout::Vertices, 3, GL_FLOAT, false, MeshBuffer::Size(), (const void *)MeshBuffer::VertexOffset());
+    glVertexAttribPointer(MeshBufferLayout::Normals, 3, GL_FLOAT, false, MeshBuffer::Size(), (const void *)MeshBuffer::NormalOffset());
     // TODO: bind deformation buffer
 
     m_phong.Bind();
-constexpr GLuint mvp = 1;
-constexpr GLuint normalMat = 2;
 
     const auto camera = m_camera.CalculateMatrix();
     m_phong.SetUniform(PhongUniform::Camera, camera);
@@ -281,19 +279,19 @@ constexpr GLuint normalMat = 2;
     m_phong.SetUniform(PhongUniform::SpecularColor, glm::vec4(0.5f, 0.3f, 0.2f, 0.0f));
     m_phong.SetUniform(PhongUniform::Coeff, glm::vec4(1.0f, 1.0f, 1.0f, 10.0f));
 
-
     for (const auto &entity : entities) {
         // TODO: scale and rotate
         const auto model = glm::translate(glm::mat4(1.0), entity.physical_properties.pos);
         const auto mvp = PROJECTION * camera * model;
-        const auto normal_mat = glm::inverseTranspose(camera * model);   
+        const auto normal_mat = glm::inverseTranspose(camera * model);
 
         m_phong.SetUniform(PhongUniform::Mvp, mvp);
         m_phong.SetUniform(PhongUniform::NormalMat, normal_mat);
 
         const auto render_data = m_meshes[entity.mesh];
 
-        glDrawElementsBaseVertex(GL_TRIANGLES, render_data.index_buffer_size, GL_UNSIGNED_INT, reinterpret_cast<const void *>(render_data.index_buffer_offset));
+        glDrawElementsBaseVertex(GL_TRIANGLES, render_data.index_buffer_size, GL_UNSIGNED_INT, reinterpret_cast<const void *>(render_data.index_buffer_offset),
+            render_data.vertex_buffer_offset);
     }
 
     SDL_GL_SwapWindow(m_window);
